@@ -37,9 +37,9 @@ class Common extends Controller
     //获取当前登录人的权限
     public function init($controller,$action){
         // $time = time();
-        if(Session::get('login_id','lf_b2b')){
+        if(Session::get('login_id','forum_home')){
 
-            $account = Account::get(['id' => Session::get('login_id','lf_b2b')]);
+            $account = Account::get(['id' => Session::get('login_id','forum_home')]);
             if(empty($account)){
                 // 找不到用户报错页面
                 $this->error('找不到用户,联系管理员！', 'login/index');
