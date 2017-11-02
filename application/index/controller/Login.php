@@ -6,19 +6,16 @@ use think\Log;
 use app\index\model\Common as modelCommon;
 use think\Loader;
 
-class Index extends Common
+class Login extends Common
 {
 	public function __construct(){
 		parent::__construct();
 		
-        if(!Session::get('login_id','forum_home')){
-        	$this->redirect('login/index');
-        }
 	}
 
 
     public function index()
     {
-        return '12';
+        return 'login';
     }
 }

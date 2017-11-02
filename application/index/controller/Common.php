@@ -7,10 +7,6 @@ use think\Session;
 use think\Controller;
 use think\Log;
 
-use app\index\model\Account;
-use app\index\model\Power_group;
-use app\index\model\Power;
-use app\index\model\Lforders;
 use app\index\model\Common as modelCommon;
 
 
@@ -27,43 +23,12 @@ class Common extends Controller
         $this->assign('controller',$request->controller());
         $this->assign('action',$request->action());
 
-        if(Session::get('login_id','lf_b2b')){
-        	$this->assign('adminId',Session::get('login_id','lf_b2b'));
-        	$this->assign('adminEmail',Session::get('email','lf_b2b'));
+        if(Session::get('login_id','forum_home')){
+        	$this->assign('adminId',Session::get('login_id','forum_home'));
+        	$this->assign('adminEmail',Session::get('email','forum_home'));
             // 记录每个人都干什么了 暂时不加日志
             // Log::log();
         }
-
-        
-        //判断id归属
-        $actionName =  request()-> action();
-        //判断的 action
-        if(in_array($actionName,array('order_detail','get_travelitinerary','pay_order','pay_finish')))
-        {
-            if(in_array($actionName,array('pay_order','pay_finish')))
-            {
-                $id = request()->only(['id'])['id'];
-                $lforderOne = Lforders::where(['id'=>base64_decode($id)])->field('platform')->find();
-            } 
-            else
-            {
-                $id = request()->only(['id'])['id'];
-                $lforderOne = Lforders::where(['id'=>$id])->field('platform')->find();
-            }    
-
-             
-            $loginId = Session::get('login_id');
-            $vestOrderPlatNameOne = modelCommon::get_query("SELECT v.`name` FROM lf_b2b_account a LEFT JOIN `lf_b2b_vest` v ON a.vest_id=v.id WHERE a.id='".$loginId."'");
-             
-            if($vestOrderPlatNameOne[0]['name']!=$lforderOne['platform']||!$lforderOne)
-            {
-                $this->error('请求订单错误!', 'lfhotel/index');
-            }
-             
-
-        }
-
-        
 
         $this->init($request->controller(),$request->action());
         // echo Power_group::getLastSql();
@@ -77,7 +42,7 @@ class Common extends Controller
             $account = Account::get(['id' => Session::get('login_id','lf_b2b')]);
             if(empty($account)){
                 // 找不到用户报错页面
-                $this->error('找不到用户,联系管理员！', 'login/login');
+                $this->error('找不到用户,联系管理员！', 'login/index');
             }
 
             $this->assign('vest_user',$account);
@@ -110,7 +75,7 @@ class Common extends Controller
             if($controller=='Index' && $action=='index'){
 
             }else if(empty($powers)){
-                $this->error('权限已经不启用了,联系管理员！', 'login/login');
+                $this->error('权限已经不启用了,联系管理员！', 'login/index');
             }else if(!isset($user_power[$controller])){
                 $this->error('没有权限', '/');
             }else if(!in_array($action,$user_power[$controller])){
