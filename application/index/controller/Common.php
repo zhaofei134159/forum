@@ -24,8 +24,8 @@ class Common extends Controller
         $this->assign('action',$request->action());
 
         if(Session::get('login_id','forum_home')){
-        	$this->assign('adminId',Session::get('login_id','forum_home'));
-        	$this->assign('adminEmail',Session::get('email','forum_home'));
+        	$this->assign('userid',Session::get('login_id','forum_home'));
+        	$this->assign('username',Session::get('name','forum_home'));
             // 记录每个人都干什么了 暂时不加日志
             // Log::log();
         }
