@@ -6,7 +6,7 @@ use app\index\model\User;
 
 use think\Session;
 use think\Config;
-use extend\smtp;
+use \extend\smtp;
 
 
 class Login extends Common
