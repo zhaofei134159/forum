@@ -5,7 +5,7 @@ $conf['website']['web_name'] = 'fangforum';
 $conf['website']['web_top_name'] = '<span>fang<span>forum</span></span>';
 
 //邮箱回调
-$conf['website']['email_callback'] = 'forum.my.com';
+$conf['website']['email_callback'] = 'forum.myfeiyou.com';
 
 
 
