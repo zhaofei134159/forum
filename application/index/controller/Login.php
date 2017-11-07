@@ -24,7 +24,7 @@ class Login extends Common
 	public function __construct(){
 		parent::__construct();
 		
-	    $login = read_conf('login');
+	    $this->login = read_conf('login');
 	}
 
     
