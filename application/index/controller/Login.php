@@ -45,7 +45,7 @@ class Login extends Common
 		}
 
 		//判断密码是否正确
-		if($user['password']!=md5($post['password'])){
+		if($user['password'] != md5(md5($post['password']) . $user['login_stat'])){
 			return json(['flog'=>0, 'msg'=>'密码错误！']);
 		}
 
