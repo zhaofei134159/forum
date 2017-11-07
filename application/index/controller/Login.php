@@ -69,7 +69,7 @@ class Login extends Common
     	$accountArr = array(
             'name' => $post['email'],
 			'email' => $post['email'],
-            'headimg'=> '/resource/images/user.png',
+            'headimg'=> 'resource/images/user.png',
             'login_stat' => $login_salt,
             'password' => md5(md5($post['password']) . $login_salt),
 			'is_del' => 0,
