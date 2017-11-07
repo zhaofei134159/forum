@@ -42,11 +42,7 @@ class Common extends Controller
         if(Session::get('login_id','forum_home')){
 
             $account = User::get(['id' => Session::get('login_id','forum_home')]);
-            if(empty($account)){
-                // 找不到用户报错页面
-                $this->error('找不到用户,联系管理员！', 'login/index');
-            }
-
+            
             $this->assign('user',$account);
             
         }

@@ -125,21 +125,21 @@ class Login extends Common
         $start = base64_decode($get['start']);
         $token = $get['token'];
 
-        if($start!='blogfamily'||$token!=base64_encode($email.'zhaofei')){
-            show_error('请点击邮箱中的邮件链接进行激活邮箱！',500,'激活邮箱错误');
+        if($start!='forum'||$token!=base64_encode($email.'zhaofei')){
+            $this->error('请点击邮箱中的邮件链接进行激活邮箱！', 'index/index');
         }
 
-        $where = 'email="'.$email.'"';
-        $user = $this->zf_user_model->select_one($where);
+        $user = User::get(['email' => $email]);
 
         if(empty($user)){
-            show_error('找不到对应的邮箱信息，请重新确认下邮箱信息，亦可以给我发送邮件，我们会在三个工作日内与您联系,谢谢合作！',500,'邮箱信息错误');
+            $this->error('找不到对应的邮箱信息，请重新确认下邮箱信息，亦可以给我发送邮件，我们会在三个工作日内与您联系,谢谢合作！', 'index/index');
         }
 
+        $res = array();
         $res['is_activate'] = 1;
         $res['user_type'] = 2;
 
-        $this->zf_user_model->update($res,'id='.$user['id']);
+        User::where('email',$email)->update($res);
 
         $this->redirect('index/index');
     }
