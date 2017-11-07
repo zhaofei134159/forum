@@ -159,11 +159,16 @@
             var email = $('input[name="reg_email"]').val();
             var password = $('input[name="reg_password"]').val();
             var re_password = $('input[name="reg_password2"]').val();
-            
+
+            console.log(email);
+            console.log(password);
+            console.log(re_password);
+
             if(email==''){
                 alertFun('注册错误','注册邮箱不能为空!',false);
                 return false; 
             }
+            console.log(123);
 
             var myema =  /^[_\.0-9a-z-]+@([0-9a-z][0-9a-z-]+\.){1,4}[a-z]{2,3}$/i;
             if(!myema.test(email)) 
@@ -193,20 +198,16 @@
                  success: function(res){
                     if(res.flog!=1){
                        
-                		alertFun('注册错误','res.msg!',false);
+                		alertFun('注册错误',res.msg,false);
 
                         return false;
                     }else{
-                        alert.html(res.msg);
-                        alert.removeClass('alert-danger');
-                        alert.addClass('alert-success');
-                        alert.css('display','block');
-                        setTimeout(function(){
-                            window.location.href = '/';
-                        },2000)
+                    	//注册成功  激活邮箱
+                        window.location.href = "{:url('/')}";
                     }
                  }
             });
+
         }
     </script>
 

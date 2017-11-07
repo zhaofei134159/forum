@@ -6,6 +6,7 @@ use app\index\model\User;
 
 use think\Session;
 use think\Config;
+use extend\smtp;
 
 
 class Login extends Common
@@ -36,7 +37,7 @@ class Login extends Common
     	//获取post的值
     	$post = input('post.');
 
-		$user = Chart_user::get(['email' => $post['email']]);
+		$user = User::get(['email' => $post['email']]);
 
 		if(empty($user)){
 			return json(['flog'=>0, 'msg'=>'没有该账户,请注册！']);
@@ -58,41 +59,104 @@ class Login extends Common
     	//获取post的值
     	$post = input('post.');
 
-		$account = Chart_user::get(['email' => $post['email']]);
+		$account = User::get(['email' => $post['email']]);
 		if(!empty($account)){
 			return json(['flog'=>0, 'msg'=>'登录账号已存在，可直接登录！']);
 		}
 
+        $login_salt = rand(11111, 99999);
 		// 创建用户
     	$accountArr = array(
+            'name' => $post['email'],
 			'email' => $post['email'],
-			'password' => md5($post['password']),
-			'is_del' => 1,
-			'state' => 0,
-			'create_time'=>time(),
-			'update_time'=>time(),
+            'headimg'=> '/resource/images/user.png',
+            'login_stat' => $login_salt,
+            'password' => md5(md5($post['password']) . $login_salt),
+			'is_del' => 0,
+			'ctime'=>time(),
+			'utime'=>time(),
     	);
-		$accountData = Chart_user::create($accountArr);
+		$accountData = User::create($accountArr);
 
+        //给注册的邮箱发邮件
+        $this->register_email($post['email']);
+
+        //登录
 		$this->session_login($accountData);
-		
+
 		return json(['flog'=>1, 'msg'=>'注册成功']);
     }
+
+
+    //发邮件
+    public function register_email($email){
+       
+        // 配置信息
+        $smtp = read_conf('smtp');
+
+        $smtpserver = $smtp['smtpserver'];
+        $smtpserverport = $smtp['smtpserverport'];
+        $smtpusermail = $smtp['smtpusermail'];
+        $smtpuser = $smtp['smtpuser'];
+        $smtppass = $smtp['smtppass'];
+        $mailtype = $smtp['mailtype'];
+        
+
+        $smtpemailto = $email;//发送给谁
+        $mailtitle = read_conf('website')['web_name'].' , 注册成功';//邮件主题
+        //邮件内容
+        $mailcontent = "<h2> ".read_conf('website')['web_name']." , 注册成功</h2>";
+        $mailcontent .= "<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击 <a href='http://".read_conf('website')['email_callback']."/login/activate_email?addr=".base64_encode($email)."&start=".base64_encode('forum')."&token=".base64_encode($email.'zhaofei')."'>链接</a> 激活邮箱成为博主，就可以发表属于自己的文章。（如果不是本人操作，请忽略本条信息）</h3>";
+        
+        //************************ 配置信息 ****************************
+        $smtp = new smtp($smtpserver,$smtpserverport,true,$smtpuser,$smtppass);//这里面的一个true是表示使用身份验证,否则不使用身份验证.
+        $smtp->debug = false;//是否显示发送的调试信息
+        $state = @$smtp->sendmail($smtpemailto, $smtpusermail, $mailtitle, $mailcontent, $mailtype);
+
+        //这儿 默认都发送成功了  没有记录没发成功的状态 以后再说
+    }
+
+
+    function activate_email(){
+        $get = input('get.');
+
+        $email = base64_decode($get['addr']);
+        $start = base64_decode($get['start']);
+        $token = $get['token'];
+
+        if($start!='blogfamily'||$token!=base64_encode($email.'zhaofei')){
+            show_error('请点击邮箱中的邮件链接进行激活邮箱！',500,'激活邮箱错误');
+        }
+
+        $where = 'email="'.$email.'"';
+        $user = $this->zf_user_model->select_one($where);
+
+        if(empty($user)){
+            show_error('找不到对应的邮箱信息，请重新确认下邮箱信息，亦可以给我发送邮件，我们会在三个工作日内与您联系,谢谢合作！',500,'邮箱信息错误');
+        }
+
+        $res['is_activate'] = 1;
+        $res['user_type'] = 2;
+
+        $this->zf_user_model->update($res,'id='.$user['id']);
+
+        $this->redirect('index/index');
+    }
+
 
     //登录的方法
     public function session_login($account){
 
     	if(empty($account)){
-			Session::clear('fei_chart');
+			Session::clear('forum_home');
     	}else{
     		$email = '';
     		if(!empty($account->email)){
     			$email = $account->email;
     		}
-    		Session::set('login_id',$account->id,'fei_chart');
-    		Session::set('login_email',$email,'fei_chart');
-    		Session::set('login_name',$account->name,'fei_chart');
-    		Session::set('login_nikename',$account->nikename,'fei_chart');
+    		Session::set('login_id',$account->id,'forum_home');
+    		Session::set('login_email',$email,'forum_home');
+    		Session::set('login_name',$account->name,'forum_home');
     	}
     }
 
@@ -204,7 +268,7 @@ class Login extends Common
  
         $class_arr = $this->class_arr;
 
-        $login_user = Chart_user::where($class_arr[$type],$user_data['id'])->find();
+        $login_user = User::where($class_arr[$type],$user_data['id'])->find();
 
     	//微博uid在都学网中有账号 且手机号存在是，则直接登录
     	if(!empty($login_user) && !empty($login_user['email'])){
@@ -251,7 +315,7 @@ class Login extends Common
         		'name' => $login_account,
         		$class_arr[$type] => $external_uid,
         	);
-        $exist_user = Chart_user::whereOr($whereor)->find();
+        $exist_user = User::whereOr($whereor)->find();
 
         if ($exist_user != false)
         {
@@ -271,7 +335,7 @@ class Login extends Common
         $class = $class_arr[$type];
         $map[$class] = $external_uid;
 
-        $user = Chart_user::create($map);
+        $user = User::create($map);
 
 		//注册的账号登陆网站
 		$this->session_login($user);
@@ -290,7 +354,7 @@ class Login extends Common
         {	
         	if(!empty($user_data['avatar_large'])){
                 $headimg = $this->_save_external_user_avatar($user_data['avatar_large']);
-                Chart_user::where('id',$login_user['id'])->update(array('headimg' => $headimg));
+                User::where('id',$login_user['id'])->update(array('headimg' => $headimg));
         	}
         }
     }

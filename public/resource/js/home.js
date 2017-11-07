@@ -1,5 +1,5 @@
 // 弹框
-function alertFun(lable,body,footer,footer_html){
+function alertFun(lable,body,footer){
 	var modelLable=$('#custom-width-modalLabel');
 	var modelBody=$('#custom-model-body');
 	var modelFooter=$('#modelFooter');
@@ -7,8 +7,8 @@ function alertFun(lable,body,footer,footer_html){
 
 	var alertBtn = $('#alert-btn');
 
-	modelLable.html('注册错误');
-	modelBody.html('注册邮箱不能为空!');
+	modelLable.html(lable);
+	modelBody.html(body);
 	if(!footer){
 		modelFooter.css('display','none');
 	}
@@ -16,4 +16,3 @@ function alertFun(lable,body,footer,footer_html){
 	alertBtn.click();
 
 }
-
