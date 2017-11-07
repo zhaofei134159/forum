@@ -35,6 +35,8 @@
 
         <script src="/resource/js/modernizr.min.js"></script>
         <script src="/resource/js/jquery.min.js"></script>
+        <script src="/resource/js/home.js"></script>
+
     </head>
 
 
@@ -298,7 +300,26 @@
             </div>
         <!-- /.modal -->
 
+        <!-- 弹框 -->
+        <div id="custom-width-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="custom-width-modalLabel" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog" style="width:55%;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title" id="custom-width-modalLabel"></h4>
+                    </div>
+                    <div class="modal-body" id="custom-model-body">
 
+                    </div>
+                    <div class="modal-footer" id="modelFooter">
+                        <button type="button" class="btn btn-primary waves-effect waves-light" id="modelSave">确认</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+        <button class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#custom-width-modal" id="alert-btn">Custom width Modal</button>
+
+    
         <div class="wrapper">
             <div class="container">
 

@@ -29,7 +29,7 @@ class Login extends Common
     
     public function index(){
         
-        return $this->view->fetch('register');
+        return $this->view->fetch('index');
     }
 
     public function do_login(){
