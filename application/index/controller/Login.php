@@ -372,7 +372,7 @@ class Login extends Common
         $content = $this->_curl_get_request($url);
             
         if ($content != false) {
-          	$save_dir = '/uploads' . DS . 'headimg/'.date('Ymd');
+          	$save_dir = 'uploads' . DS . 'headimg/'.date('Ymd');
             // $save_dir = trim($save_dir,'/');
             if(!is_dir($save_dir)){
             	mkdir($save_dir,0777);
