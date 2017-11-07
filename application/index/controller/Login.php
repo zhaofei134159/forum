@@ -26,9 +26,10 @@ class Login extends Common
 		$this->login = $config['login'];
 	}
 
-
-    public function login(){
-        return $this->view->fetch('login');
+    
+    public function index(){
+        
+        return $this->view->fetch('register');
     }
 
     public function do_login(){
@@ -50,6 +51,7 @@ class Login extends Common
 		
 		return json(['flog'=>1, 'msg'=>'登录成功！']);
     }
+
 
 
     public function do_register(){

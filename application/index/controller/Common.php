@@ -23,6 +23,7 @@ class Common extends Controller
         $this->assign('controller',$request->controller());
         $this->assign('action',$request->action());
 
+
         if(Session::get('login_id','forum_home')){
         	$this->assign('userid',Session::get('login_id','forum_home'));
         	$this->assign('username',Session::get('name','forum_home'));
