@@ -27,8 +27,8 @@ $conf['smtp']['mailtype'] = "HTML";//邮件格式（HTML/TXT）,TXT为文本邮�
 
 // 控制器 方法
 $conf['controller']['Login'] = '登录 or 注册';
-$conf['controller']['Ucenter'] = '个人中心';
-$conf['action']['order'] = '12312';
+$conf['controller']['Ucenter'] = '个人资料';
+$conf['action']['setting'] = '设置';
 
 
 return $conf;

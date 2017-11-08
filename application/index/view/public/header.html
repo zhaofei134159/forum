@@ -92,8 +92,8 @@
                                 </a>
 
                                 <ul class="dropdown-menu">
-                                    <li><a href="{:url('Ucenter/index')}"><i class="ti-user m-r-5"></i> 个人信息 </a></li>
-                                    <li><a href="javascript:void(0)"><i class="ti-settings m-r-5"></i> 设置 </a></li>
+                                    <li><a href="{:url('Ucenter/index')}"><i class="ti-user m-r-5"></i> 个人资料 </a></li>
+                                    <li><a href="{:url('Ucenter/setting')}"><i class="ti-settings m-r-5"></i> 设置 </a></li>
                                     <li><a href="javascript:void(0)"><i class="ti-lock m-r-5"></i> 锁定用户</a></li>
                                     <li><a href="{:url('login/login_out')}"><i class="ti-power-off m-r-5"></i> 退出登录</a></li>
                                 </ul>
@@ -138,7 +138,7 @@
                         <!-- Navigation Menu-->
                         <ul class="navigation-menu">
                             <li class="active">
-                                <a href="index.html" class="active"><i class="zmdi zmdi-view-dashboard"></i> <span> 首 页 </span> </a>
+                                <a href="index.html" class="active"><i class="zmdi zmdi-home"></i> <span> 首 页 </span> </a>
                             </li>
                             <li class="has-submenu">
                                 <a href="#"><i class="zmdi zmdi-invert-colors"></i> <span> User Interface </span> </a>
@@ -340,7 +340,7 @@
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
-        <button class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#custom-width-modal" id="alert-btn">Custom width Modal</button>
+        <button class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#custom-width-modal" id="alert-btn"  style="display: none;">Custom width Modal</button>
 
     
         <div class="wrapper">
@@ -359,7 +359,8 @@
                             </ul>
                         </div>
                         <h4 class="page-title">
-                            <a href="/">首页</a>
+                            <a href="/"><i class="zmdi zmdi-home"></i> 首 页</a>
+
                             {if condition="$controller!='Index'"}    
                                 / <a href="">{:read_conf('controller')[$controller]}</a>
                             {/if}

@@ -10,16 +10,10 @@ class Index extends Common
 {
 	public function __construct(){
 		parent::__construct();
-		
-        // if(!Session::get('login_id','forum_home')){
-        // 	$this->redirect('login/index');
-        // }
 	}
 
 
-    public function index()
-    {
-        // var_dump($userid);die;
+    public function index(){
         $data = array();
         return $this->view->fetch('index',$data);
     }
