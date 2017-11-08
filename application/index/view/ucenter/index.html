@@ -124,7 +124,12 @@
                             </div>
                         	<!-- 个人资料-->
                             <div role="tabpanel" class="tab-pane fade" id="info">
-                            	
+                                <div class="row">
+                                    {if condition="$user->nikename"}{$user->nikename}{else}{$user.name}{/if} . ( UID:{$user.id} )
+                                    <br>
+                                    邮箱状态：{if condition="$user.is_activate"} 未验证 {else} 验证成功 {/if}
+                                    <br>
+                                </div>
                             </div>
                            
                         </div>
