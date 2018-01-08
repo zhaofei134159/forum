@@ -1,9 +1,12 @@
 {include file="public/header" /}
-
+    <style type="text/css">
+        .UserNum{float:left;font-size:15px;font-weight:bold;padding:0px 6px;width:33%;}
+        .rightBorder{border-right:solid 1px gray;}
+        .number{display:block;}
+    </style>
 	<div class="row">
-
-        <div class="col-lg-3 col-md-12">
-            <div class="text-center card-box">
+        <div class="col-lg-12 col-md-12">
+            <div class="text-center card-box" style="background:url(/resource/images/ucenter/background3.jpg);-moz-background-size:100% 100%;background-size:100% 100%;background-repeat:no-repeat;">
                 <div>
                  	{if condition="$user->headimg"}
                     <img src="/{$user->headimg}" class="img-circle thumb-xl img-thumbnail m-b-10" alt="头像">
@@ -11,40 +14,59 @@
                     <img src="/resource/images/user.png" class="img-circle thumb-xl img-thumbnail m-b-10" alt="头像">
                     {/if}
 
+                    <h3 class="text-muted m-b-30">{if condition="$user->nikename"}{$user->nikename}{else}{$user.name}{/if}</h3>
+
                     <p class="text-muted font-13 m-b-30">
                        用户很懒，没有自己的签名。
                     </p>
-
-                    <div class="text-left">
-                        <p class="text-muted font-13">
-                        	<strong>用户名 :</strong> 
-                        	<span class="m-l-15">
-                 				{if condition="$user->nikename"}{$user->nikename}{else}{$user.name}{/if}
-                 			</span>
-                 		</p>
-
-                        <p class="text-muted font-13"><strong>电话 :</strong><span class="m-l-15">{$user->phone}</span></p>
-
-                        <p class="text-muted font-13"><strong>邮箱 :</strong> <span class="m-l-15">{$user->email}</span></p>
-
-                        <p class="text-muted font-13 m-b-5"><strong>注册时间 :</strong> <span class="m-l-15">{$user.ctime|date="Y-m-d H:i",###}</span></p>
-						
-						{if condition="$userid!=$user.id"}
-                      	<p class="text-muted font-13" style="text-align:center;margin-top:30px;">
-                      		<button type="button" class="btn btn-info btn-rounded w-md waves-effect waves-light m-b-5">加好友</button>
-                      		<button type="button" class="btn btn-success btn-rounded w-md waves-effect waves-light m-b-5">发消息</button>
-                      	</p>
-                      	{/if}
-
-                    </div>
-
                 </div>
+            </div>
+        </div>
+    </div>
 
+    <div  class="row">
+        <div class="col-lg-4 col-md-12">
+            <div class="col-lg-12 text-center card-box"  style="float:right;width:100%;">
+                <div class="UserNum rightBorder"> 
+                    <a href="">
+                        <strong class="number">38</strong>
+                        <span>关注</span>
+                    </a>
+                </div>
+                <div class="UserNum rightBorder">
+                    <a href="">
+                        <strong class="number">38</strong>
+                        <span>粉丝</span>
+                    </a>
+                </div>
+                <div class="UserNum"> 
+                    <a href="">
+                        <strong class="number">38</strong>
+                        <span>发帖</span>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-12 text-center card-box"  style="float:right;width:100%;">
+                 <div class="portlet-heading" style="width:30%;text-align:left;padding:0px 10px;border-right:solid 1px gray;">
+                     个人信息
+                 </div>
+                 <div id="bg-default" class="panel-collapse collapse in">
+                     <div class="WB_innerwrap">
+                         <div class="m_wrap">
+                            <div class="bars_box">
+                                <p class="bar_title">个人资料完成度<span class="num">55%</span></p>
+                                <div class="bar_box S_bg1">
+                                    <div class="bar" style="width:55%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
             </div>
         </div>
 
 
-        <div class="col-lg-9 col-md-12">
+        <div class="col-lg-8 col-md-12">
             <div class="card-box">
 
                 <h4 class="header-title m-t-0 m-b-30">资料展示</h4>
@@ -141,7 +163,6 @@
 
             </div>
         </div><!-- end col -->
-
     </div>
 
 {include file="public/footer" /}
