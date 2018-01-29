@@ -56,113 +56,94 @@
             </div>
         </div>
 
-
         <div class="col-lg-8 col-md-12">
-            <div class="card-box">
-                <div class="col-md-4 input-group">
+            <div class="col-lg-12 text-center card-box">
+                <div class="input-group">
                     <span class="input-group-btn">
-                    <button type="button" class="btn waves-effect waves-light btn-primary">全部</button>
+                    <button type="button" class="btn waves-effect waves-light btn-custom">全部</button>
                     </span>
                     
                     <input type="text" id="example-input1-group2" name="example-input1-group2" class="form-control" placeholder="Search">
                     <span class="input-group-btn">
-                    <button type="button" class="btn waves-effect waves-light btn-primary"><i class="fa fa-search"></i></button>
+                    <button type="button" class="btn waves-effect waves-light btn-custom"><i class="fa fa-search"></i></button>
                     </span>
                 </div>
             </div>
-            <div class="card-box">
-                <h4 class="header-title m-t-0 m-b-30">资料展示</h4>
-
-                <div class="row">
-                    <div class="col-lg-12">
-
-                        <ul class="nav nav-tabs">
-                            <li role="presentation" class="active">
-                                <a href="#home1" role="tab" data-toggle="tab">主题</a>
-                            </li>
-                            <li role="presentation">
-                                <a href="#profile1" role="tab" data-toggle="tab">相册</a>
-                            </li>
-                            <li role="presentation">
-                                <a href="#info" role="tab" data-toggle="tab">个人资料</a>
-                            </li>
+        </div>
+        <div class="col-lg-8 col-md-12">
+            <div class="col-lg-12">
+                <div class="card-box card-tabs">
+                    <div class="dropdown pull-right">
+                        <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown"
+                           aria-expanded="false">
+                            <i class="ti-angle-down"></i>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">删除</a></li>
+                            <li><a href="#">置顶</a></li>
+                            <li><a href="#">加标签</a></li>
+                            <!-- <li class="divider"></li> -->
+                            <!-- <li><a href="#"></a></li> -->
                         </ul>
-                        <div class="tab-content">
-                        	<!-- 主题 -->
-                            <div role="tabpanel" class="tab-pane fade in active" id="home1">
-                               	<div class="row">
-		                            <table class="table table table-hover m-0">
-		                                <thead>
-		                                    <tr>
-		                                        <th>主题</th>
-		                                        <th>板块</th>
-		                                        <th>回复/查看</th>
-		                                        <th>最后发帖</th>
-		                                    </tr>
-		                                </thead>
-		                                {if condition="$theme"}
-		                                <tbody>
-		                                    <tr>
-		                                        <th scope="row">1</th>
-		                                        <td>Mark</td>
-		                                        <td>Otto</td>
-		                                        <td>@mdo</td>
-		                                    </tr>
-		                                    <tr>
-		                                        <th scope="row">2</th>
-		                                        <td>Jacob</td>
-		                                        <td>Thornton</td>
-		                                        <td>@fat</td>
-		                                    </tr>
-		                                    <tr>
-		                                        <th scope="row">3</th>
-		                                        <td>Larry</td>
-		                                        <td>the Bird</td>
-		                                        <td>@twitter</td>
-		                                    </tr>
-		                                </tbody>
-		                                {else}
-		                                 <tbody>
-		                                    <tr>
-		                                        <th colspan="4">无</th>
-		                                    </tr>
-		                                </tbody>
-		                                {/if}
-		                            </table>
-                               	</div>
-                            </div>
-                        	<!-- 相册 -->
-                            <div role="tabpanel" class="tab-pane fade" id="profile1">
-                            	<p>Food truck fixie locavore,
-                                accusamus mcsweeney's marfa nulla single-origin coffee squid.
-                                Exercitation +1 labore velit, blog sartorial PBR leggings next level
-                                wes anderson artisan four loko farm-to-table craft beer twee. Qui
-                                photo booth letterpress, commodo enim craft beer mlkshk aliquip jean
-                                shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda
-                                labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia
-                                yr, vero magna velit sapiente labore stumptown. Vegan fanny pack
-                                odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY
-                                ethical culpa terry richardson biodiesel. Art party scenester
-                                stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed
-                                echo park.</p>
-                            </div>
-                        	<!-- 个人资料-->
-                            <div role="tabpanel" class="tab-pane fade" id="info">
-                                <div class="row">
-                                    {if condition="$user->nikename"}{$user->nikename}{else}{$user.name}{/if} . ( UID:{$user.id} )
-                                    <br>
-                                    邮箱状态：{if condition="$user.is_activate"} 未验证 {else} 验证成功 {/if}
-                                    <br>
+                    </div>
+
+                    <div class="widget-user">
+                        {if condition="$user->headimg"}
+                        <img src="/{$user->headimg}" class="img-circle user-img" alt="头像">
+                        {else}
+                        <img src="/resource/images/user.png" class="img-circle user-img" alt="头像">
+                        {/if}
+                        <div class="wid-u-info">
+                            <h4 class="m-t-0 m-b-5"> {if condition="$user->nikename"} {$user->nikename} {else} {$user->name} {/if} </h4>
+                            <p class="text-muted m-b-5 font-13">{$user->ctime|date="Y-m-d H:i",###}</p>
+                        </div>
+                    </div>
+
+                    <div class="tab-content">
+                        <div id="cardpills-1" class="tab-pane fade in active">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p>
+                                        Anim pariatur cliche reprehenderit, enim eiusmod high life
+                                        accusamus terry richardson ad squid. 3 wolf moon officia aute,
+                                        non cupidatat skateboard dolor brunch. Food truck quinoa
+                                        nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua
+                                        put a bird on it squid single-origin coffee nulla assumenda
+                                        shoreditch et.
+                                    </p>
                                 </div>
                             </div>
-                           
                         </div>
-                    </div><!-- end col -->
-
-
+                        <div id="cardpills-2" class="tab-pane fade">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p>
+                                        Anim pariatur cliche reprehenderit, enim eiusmod high life
+                                        accusamus terry richardson ad squid. 3 wolf moon officia aute,
+                                        non cupidatat skateboard dolor brunch. Food truck quinoa
+                                        nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua
+                                        put a bird on it squid single-origin coffee nulla assumenda
+                                        shoreditch et.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="cardpills-3" class="tab-pane fade">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p>
+                                        Anim pariatur cliche reprehenderit, enim eiusmod high life
+                                        accusamus terry richardson ad squid. 3 wolf moon officia aute,
+                                        non cupidatat skateboard dolor brunch. Food truck quinoa
+                                        nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua
+                                        put a bird on it squid single-origin coffee nulla assumenda
+                                        shoreditch et.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <!-- end row -->
-
             </div>
         </div><!-- end col -->
     </div>
