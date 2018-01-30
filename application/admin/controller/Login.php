@@ -2,12 +2,9 @@
 namespace app\admin\controller;
 
 use app\admin\model\User;
-
-
 use think\Session;
 use think\Config;
 use smtp;
-
 
 
 class Login extends Common
@@ -28,7 +25,7 @@ class Login extends Common
 	}
 
     
-    public function index(){
+    public function login(){
         
         return $this->view->fetch('index');
     }
@@ -36,7 +33,8 @@ class Login extends Common
     public function do_login(){
     	//获取post的值
     	$post = input('post.');
-
+        var_dump($post);die;
+        
 		$user = User::get(['email' => $post['email']]);
 
 		if(empty($user)){
