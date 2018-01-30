@@ -25,51 +25,13 @@
                 </div>
             </div>
         </div>
+        <div class="col-lg-4 col-md-offset-4">
+            <div class="alert alert-danger alert-dismissable" id="ButtonId" style="display:none;">
+                <!-- <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button> -->
+                <p id="alertId"></p>
+            </div>
+        </div>
     </div>
 </div>
-<script type="text/javascript">
-    //登录
-    function do_login(){
-        var email = $('input[name="email"]').val();
-        var password = $('input[name="password"]').val();
-        var remember = [];
-        $('input[name="remember"]:checked').each(function(){
-            remember.push($(this).val());    
-        });
 
-        if(email==''){
-            alertFun('登录错误','登录邮箱不能为空!',false);
-            return false; 
-        }
-
-        var myema =  /^[_\.0-9a-z-]+@([0-9a-z][0-9a-z-]+\.){1,4}[a-z]{2,3}$/i;
-        if(!myema.test(email)) 
-        { 
-            alertFun('登录错误','登录邮箱格式错误!',false);
-            return false; 
-        }
-
-        if(password==''){
-            alertFun('登录错误','密码不能为空!',false);
-            return false; 
-        }
-
-        $.ajax({
-             type: "POST",
-             url: "{:url('login/do_login')}",
-             async: false,
-             data: {email:email,password:password,remember:remember},
-             dataType: "json",
-             success: function(res){
-                if(res.flog!=1){
-                    alertFun('登录错误',res.msg,false);
-                    return false;
-                }else{
-                    window.location.href = '/admin';
-                }
-             }
-        });
-    }
-</script>
 {include file="public/footer" /}
-   

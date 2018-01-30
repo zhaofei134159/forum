@@ -1,5 +1,47 @@
 
+<div id="loadImg" style="width:100%;min-height:1500px;position:fixed;top:0px;left:0px;text-align:center;line-height:730px;z-index:100;display:none;">
+    <img src="/resource/admin/image/5-121204193Q8.gif">
+</div>
 
+<script type="text/javascript" src="/resource/admin/js/admin.js"></script>
+<script type="text/javascript">
+//登录
+function do_login(){
+    loading('show');
+    var email = $('input[name="email"]').val();
+    var password = $('input[name="password"]').val();
+    var remember = [];
+    $('input[name="remember"]:checked').each(function(){
+        remember.push($(this).val());    
+    });
+
+    if(email==''){
+        alertFun('登录邮箱不能为空!');
+        return false; 
+    }
+
+    var myema =  /^[_\.0-9a-z-]+@([0-9a-z][0-9a-z-]+\.){1,4}[a-z]{2,3}$/i;
+    if(!myema.test(email)) 
+    { 
+        alertFun('登录邮箱格式错误!');
+        return false; 
+    }
+
+    if(password==''){
+        alertFun('密码不能为空!');
+        return false; 
+    }
+
+    $.post("{:url('login/do_login')}",{email:email,password:password,remember:remember},function(res){
+        if(res.flog!=1){
+            alertFun(res.msg);
+            return false;
+        }else{
+            window.location.href = '/admin';
+        }
+    },'json');
+}
+</script>
 </body>
 
 </html>

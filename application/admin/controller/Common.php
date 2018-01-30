@@ -8,7 +8,7 @@ use think\Controller;
 use think\Log;
 
 use app\admin\model\Common as modelCommon;
-use app\admin\model\User;
+use app\admin\model\Admin;
 
 
 class Common extends Controller
@@ -25,9 +25,9 @@ class Common extends Controller
         $this->assign('action',$request->action());
 
 
-        if(Session::get('login_id','forum_home')){
-        	$this->assign('userid',Session::get('login_id','forum_home'));
-        	$this->assign('username',Session::get('name','forum_home'));
+        if(Session::get('login_id','forum_admin')){
+        	$this->assign('userid',Session::get('login_id','forum_admin'));
+        	$this->assign('username',Session::get('name','forum_admin'));
             // 记录每个人都干什么了 暂时不加日志
             // Log::log();
         }
@@ -39,9 +39,9 @@ class Common extends Controller
     //获取当前登录人的权限
     public function init($controller,$action){
         // $time = time();
-        if(Session::get('login_id','forum_home')){
+        if(Session::get('login_id','forum_admin')){
 
-            $account = User::get(['id' => Session::get('login_id','forum_home')]);
+            $account = Admin::get(['id' => Session::get('login_id','forum_admin')]);
             
             $this->assign('user',$account);
             

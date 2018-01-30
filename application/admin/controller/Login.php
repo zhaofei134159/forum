@@ -1,7 +1,7 @@
 <?php
 namespace app\admin\controller;
 
-use app\admin\model\User;
+use app\admin\model\Admin;
 use think\Session;
 use think\Config;
 use smtp;
@@ -33,24 +33,44 @@ class Login extends Common
     public function do_login(){
     	//获取post的值
     	$post = input('post.');
-        var_dump($post);die;
         
-		$user = User::get(['email' => $post['email']]);
+		$admin = Admin::get(['email' => $post['email']]);
 
-		if(empty($user)){
+		if(empty($admin)){
 			return json(['flog'=>0, 'msg'=>'没有该账户,请注册！']);
 		}
+        
+        if($admin['is_del']==1){
+            return json(['flog'=>0, 'msg'=>'当前用户已被注销,联系管理员！']);
+        }
 
 		//判断密码是否正确
-		if($user['password'] != md5(md5($post['password']) . $user['login_stat'])){
+		if($admin['password'] != md5(md5($post['password']) . $admin['login_stat'])){
 			return json(['flog'=>0, 'msg'=>'密码错误！']);
 		}
 
-		$this->session_login($user);
+		$this->session_login($admin);
 		
 		return json(['flog'=>1, 'msg'=>'登录成功！']);
     }
 
+    //登录的方法
+    public function session_login($account){
+
+        if(empty($account)){
+            Session::clear('forum_admin');
+        }else{
+            Session::set('login_id',$account->id,'forum_admin');
+            Session::set('login_email',$account->email,'forum_admin');
+            Session::set('login_name',$account->name,'forum_admin');
+        }
+    }
+
+
+    public function login_out(){
+        $this->session_login(array());
+        $this->redirect('index/index');
+    }
 
 
     public function do_register(){
@@ -142,27 +162,6 @@ class Login extends Common
     }
 
 
-    //登录的方法
-    public function session_login($account){
-
-    	if(empty($account)){
-			Session::clear('forum_home');
-    	}else{
-    		$email = '';
-    		if(!empty($account->email)){
-    			$email = $account->email;
-    		}
-    		Session::set('login_id',$account->id,'forum_home');
-    		Session::set('login_email',$email,'forum_home');
-    		Session::set('login_name',$account->name,'forum_home');
-    	}
-    }
-
-
-    public function login_out(){
-    	$this->session_login(array());
-    	$this->redirect('index/index');
-    }
 
 
     //腾讯QQ登录
