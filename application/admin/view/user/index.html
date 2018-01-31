@@ -43,7 +43,7 @@
 	                        <span class="col-lg-2 input-group-btn">
 	                            <button class="btn btn-default" type="button" onclick="formSearch()"><i class="glyphicon glyphicon-search"></i>
 	                            </button>
-	                            <button class="btn btn-success" type="button"><i class="glyphicon glyphicon-plus"></i>
+	                            <button class="btn btn-success" type="button" onclick="UserEdit()"><i class="glyphicon glyphicon-plus"></i>
 	                            </button> 
 	                        </span>
                     	</div>
@@ -75,29 +75,31 @@
 	                                    <td>
 	                                    	{if condition="$ud.sex==1"} 
 	                                    		男 
-	                                    	{else} 
+	                                    	{elseif condition="$ud.sex==2"}
 	                                    		女 
+	                                    	{else}
+	                                    		保密
 	                                    	{/if}
 	                                    </td>
 	                                    <td>
 	                                    	{if condition="$ud.is_del==1"}
-	                                    		是 
+	                                    		<span class="btn btn-outline btn-danger" onclick="isDel({$ud.id},$(this))">是</span>
 	                                    	{else}
-	                                    		否
+	                                    		<span class="btn btn-outline btn-success" onclick="isDel({$ud.id},$(this))">否</span>
 	                                    	{/if}
 	                                    </td>
 	                                    <td>
 	                                    	{if condition="$ud.is_activate==1"}
-	                                    		是 
+	                                    		<span class="btn btn-outline btn-danger" onclick="isActivate({$ud.id},$(this))">是</span>
 	                                    	{else}
-	                                    		否
+	                                    		<span class="btn btn-outline btn-success" onclick="isActivate({$ud.id},$(this))">否</span>
 	                                    	{/if}
 	                                    </td>
 
 	                                    <td>{$ud.ctime|date="Y-m-d H:i",###}</td>
 	                                    <td>
-	                                    	<a href="">编辑</a>
-	                                    	<a href="">删除</a>
+	                                    	<a href="javascript:void(0);" onclick="UserEdit({$ud.id})" class="btn btn-outline btn-info">编辑</a>
+	                                    	<!-- <a href="javascript:void(0);" class="btn btn-outline btn-danger">删除</a> -->
 	                                    </td>
 	                                </tr>
 								{/foreach}
@@ -137,6 +139,60 @@
 
 		    $('#UserSearch').submit();
     	}
+
+    	// 用户编辑
+    	function UserEdit(uid){
+			loading('show');
+    		var url = "{:url('user/editUser')}";
+    		if(uid!=undefined){
+    			url += "?uid="+uid;
+    		}
+    		window.location.href = url;
+    	}
+
+    	//用户是否删除
+    	function isDel(uid,res){
+			loading('show');
+    		$.post("{:url('user/isDelUser')}",{uid:uid},function(data){
+	            loading('hide');
+	            if(res.hasClass('btn-danger')){
+	            	res.removeClass('btn-danger');
+	            }
+	            if(res.hasClass('btn-info')){
+	            	res.removeClass('btn-info');
+	            }
+	            if(data.msg==0){
+	            	res.addClass('btn-success');
+	            	res.html('否');
+	            }else if(data.msg==1){
+	            	res.addClass('btn-danger');
+	            	res.html('是');
+	            }
+		    },'json');
+    	}
+
+    	// 用户是否激活
+    	function isActivate(uid,res){
+    		loading('show');
+    		$.post("{:url('user/isActivate')}",{uid:uid},function(data){
+	            loading('hide');
+	            if(res.hasClass('btn-danger')){
+	            	res.removeClass('btn-danger');
+	            }
+	            if(res.hasClass('btn-info')){
+	            	res.removeClass('btn-info');
+	            }
+	            if(data.msg==0){
+	            	res.addClass('btn-success');
+	            	res.html('否');
+	            }else if(data.msg==1){
+	            	res.addClass('btn-danger');
+	            	res.html('是');
+	            }
+		    },'json');
+
+    	}
+
     </script>
 
 

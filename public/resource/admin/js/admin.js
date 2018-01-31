@@ -19,3 +19,9 @@ function loading(str){
 		$('#loadImg').hide();
 	}
 }
+
+// 返回
+function back(){
+	loading('show');
+	window.history.back();
+}
