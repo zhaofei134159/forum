@@ -47,14 +47,25 @@
                 html += '<br>';
                 html += '名称为:'+treeNode.name;
 
-            if(!log.hasOwnProperty(treeNode.id)){
-                log[treeNode.id]=0;
+            if(!log.hasOwnProperty(treeNode.pId)){
+                log[treeNode.pId]=[];
+                if(!log.hasOwnProperty(treeNode.id)){
+                    log[treeNode.id][]=0;
+                }
             }
             
             if((log[treeNode.id]%2)==0){
+                var cateId = $('input[name="selectCateId"]').val();
+                if(cateId!=''&&cateId!=treeNode.id){
+                    log[cateId]++;
+                }
                 $('input[name="selectCateId"]').val(treeNode.id);
                 $('#log').html(html); 
             }else{
+                var cateId = $('input[name="selectCateId"]').val();
+                if(cateId!=''&&cateId!=treeNode.id){
+                    log[cateId]++;
+                }
                 $('input[name="selectCateId"]').val(0);
                 $('#log').html(''); 
             }
