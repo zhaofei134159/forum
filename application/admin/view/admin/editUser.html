@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">
-                    用户编辑 
+                    管理员 编辑 
                     <button type="button" class="btn btn-outline btn-info" style="float:right;" onclick="back()">
                         <i class="glyphicon glyphicon-arrow-left"></i> 返回 
                     </button>
@@ -22,7 +22,7 @@
                     </div>
                     <div class="panel-body">
                         <div class="row">
-                            <form role="form" action="{:url('user/saveUser')}"  method="post" id="UserEdit" enctype="multipart/form-data">
+                            <form role="form" action="{:url('admin/saveUser')}"  method="post" id="UserEdit" enctype="multipart/form-data">
                                 <div class="col-lg-6">
                                     <input type="hidden" name="id" value="{$UserInfo.id}">
                                     <div class="form-group">
@@ -37,39 +37,13 @@
                                     </div>
                                     <div class="form-group">
                                         <label>昵称：</label>
-                                        <input class="form-control" name="nikename" id="nikename" value="{$UserInfo.nikename}" placeholder="昵称" onblur="findUser($(this),'email')">
+                                        <input class="form-control" name="name" id="name" value="{$UserInfo.name}" placeholder="昵称" >
                                         <!-- onblur="findUser($(this),'nikename')" -->
                                         <p class="help-block"></p>
                                     </div>
-                                    <div class="form-group">
-                                        <label>性别：</label>
-                                        <div class="radio">
-                                            <label class="radio-inline">
-                                                <input type="radio" name="sex" class="sex" value="1" {if condition="$UserInfo.sex==1"} checked {/if}> 男
-                                            </label>
-                                            <label class="radio-inline">
-                                                <input type="radio" name="sex" class="sex" value="2" {if condition="$UserInfo.sex==2"} checked {/if} > 女
-                                            </label>
-
-                                            <label class="radio-inline">
-                                                <input type="radio" name="sex" class="sex" value="3" {if condition="$UserInfo.sex==3"} checked {/if}> 保密
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>简介：</label>
-                                        <textarea class="form-control" name="info" rows="3" style="margin: 0px -5px 0px 0px; width: 605px; height: 74px;resize:none">{$UserInfo.info}</textarea>
-                                    </div>
-                                  
+                                    
                                     <button type="button" class="btn btn-outline btn-success" id="UserEditButton" onclick="EditForm($(this))">提交</button>
                                     <button type="button" class="btn btn-outline btn-info" onclick="back()">返回</button>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label>头像：</label>
-
-                                        <input type="file" class="dropify" name="headimg" data-default-file="/{$UserInfo.headimg}"  />
-                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -84,7 +58,7 @@
     </div>
 
     <script src="/resource/plugins/fileuploads/js/dropify.min.js"></script>
-	<script type="text/javascript" src="/resource/admin/js/admin.js"></script>
+    <script type="text/javascript" src="/resource/admin/js/admin.js"></script>
     <script type="text/javascript">
         $('.dropify').dropify({
             messages: {
@@ -133,9 +107,8 @@
         function findUser(res,type){
             var findField = type;
             var findVal = res.val();
-           
 
-            $.post("{:url('user/findUser')}",{'findField':findField,'findVal':findVal},function(data){
+            $.post("{:url('admin/findUser')}",{'findField':findField,'findVal':findVal},function(data){
                 if(data.flog!=1){
                     res.parent().addClass("has-error");
                     res.next('p').html(data.msg);

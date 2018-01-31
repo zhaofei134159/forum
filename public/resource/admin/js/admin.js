@@ -23,5 +23,5 @@ function loading(str){
 // 返回
 function back(){
 	loading('show');
-	window.history.back();
+	window.history.go(-1);
 }
