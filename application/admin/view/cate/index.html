@@ -50,7 +50,7 @@
             if(!log.hasOwnProperty(treeNode.pId)){
                 log[treeNode.pId]=[];
                 if(!log.hasOwnProperty(treeNode.id)){
-                    log[treeNode.id][]=0;
+                    log[treeNode.pId][treeNode.id]=0;
                 }
             }
             
