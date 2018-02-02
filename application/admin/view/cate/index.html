@@ -18,7 +18,7 @@
         <div class="row">
             <div class="col-lg-4">
                 <div class="form-group">
-                    <input type="input" class="form-control" id="input-select-node" placeholder="Identify node..." value="Parent 1">
+                    <input type="input" class="form-control" id="input-select-node" placeholder="搜索...." value="">
                 </div>
                 <button type="button" class="btn btn-success"> <i class="glyphicon glyphicon-plus"></i> 添加 </button>
                 <button type="button" class="btn btn-info"> <i class="glyphicon glyphicon-edit"></i> 编辑 </button>
@@ -39,52 +39,20 @@
     var defaultData = [
       {
         text: 'Parent 1',
-        href: '#parent1',
-        tags: ['4'],
+        nodeId: 1,
+        parentId: 0,
         nodes: [
           {
             text: 'Child 1',
-            href: '#child1',
-            tags: ['2'],
-            nodes: [
-              {
-                text: 'Grandchild 1',
-                href: '#grandchild1',
-                tags: ['0']
-              },
-              {
-                text: 'Grandchild 2',
-                href: '#grandchild2',
-                tags: ['0']
-              }
-            ]
+            nodeId: 14,
+            parentId: 1
           },
           {
             text: 'Child 2',
-            href: '#child2',
-            tags: ['0']
+            nodeId: 13,
+            parentId: 1
           }
         ]
-      },
-      {
-        text: 'Parent 2',
-        href: '#parent2',
-        tags: ['0']
-      },
-      {
-        text: 'Parent 3',
-        href: '#parent3',
-         tags: ['0']
-      },
-      {
-        text: 'Parent 4',
-        href: '#parent4',
-        tags: ['0']
-      },
-      {
-        text: 'Parent 5',
-        href: '#parent5'  ,
-        tags: ['0']
       }
     ];
 
@@ -92,15 +60,18 @@
         return $('#treeview-selectable').treeview({
             data: defaultData,
             onNodeSelected: function(event, node) {
+                console.log(node);
                 $('#selectable-output').prepend('<p>' + node.text + ' was selected</p>');
+                $('input[name="selectCateId"]').val(node.text);
             },
             onNodeUnselected: function (event, node) {
                 $('#selectable-output').prepend('<p>' + node.text + ' was unselected</p>');
+                $('input[name="selectCateId"]').val('');
             }
         });
     };
     var $selectableTree = initSelectableTree();
-    
+
     var findSelectableNodes = function() {
         return $selectableTree.treeview('search', [ $('#input-select-node').val(), { ignoreCase: false, exactMatch: false } ]);
     };
