@@ -1,113 +1,12 @@
 {include file="public/header,public/top" /}
     
+    <!-- <link href="/resource/admin/tree/css/bootstrap.css" rel="stylesheet"> -->
+    <style type="text/css">
+        .jq22-header{margin-bottom: 15px;font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans", "wenquanyi micro hei", "Hiragino Sans GB", "Hiragino Sans GB W3", "FontAwesome", sans-serif;}
+        .jq22-icon{color: #fff;}
+    </style>
 
-    <!-- <link rel="stylesheet" href="/resource/admin/tree/css/demo.css" type="text/css"> -->
-    <link rel="stylesheet" href="/resource/admin/tree/css/zTreeStyle/zTreeStyle.css" type="text/css">
-    <!-- <script type="text/javascript" src="/resource/admin/tree/js/jquery-1.4.4.min.js"></script> -->
-    <script type="text/javascript" src="/resource/admin/tree/js/jquery.ztree.core.js"></script>
-    <script type="text/javascript" src="/resource/admin/tree/js/jquery.ztree.excheck.js"></script>
-    <script type="text/javascript" src="/resource/admin/tree/js/jquery.ztree.exedit.js"></script>
-    <SCRIPT type="text/javascript">
-        var setting = {
-            view: {
-                selectedMulti: false
-            },
-            check: {
-                enable: true,
-                chkStyle: "radio",
-                radioType: "level"
-            },
-            data: {
-                simpleData: {
-                    enable: true
-                }
-            },
-            callback: {
-                beforeCheck: beforeCheck,
-            }
-        };
-        
-        var zNodes =[
-            { id:12, pId:1, name:"随意勾选 1-2", open:true},
-            { id:121, pId:12, name:"随意勾选 1-2-1"},
-            { id:122, pId:12, name:"随意勾选 1-2-2"},
-            { id:13, pId:1, name:"随意勾选 1-2", open:true},
-            { id:131, pId:13, name:"随意勾选 1-2-1"},
-            { id:132, pId:13, name:"随意勾选 1-2-2"},
-            { id:14, pId:1, name:"随意勾选 1-2", open:true},
-            { id:141, pId:14, name:"随意勾选 1-2-1"},
-            { id:142, pId:14, name:"随意勾选 1-2-2"},
-        ];
-
-        var code, className = "dark";
-        var log = [];
-        function beforeCheck(treeId, treeNode) {
-            console.log(treeNode);
-            var html = 'ID为:'+treeNode.id; 
-                html += '<br>';
-                html += '名称为:'+treeNode.name;
-
-            if(!log.hasOwnProperty(treeNode.pId)){
-                log[treeNode.pId]=[];
-                if(!log.hasOwnProperty(treeNode.id)){
-                    log[treeNode.pId][treeNode.id]=0;
-                }
-            }
-            
-            if((log[treeNode.id]%2)==0){
-                var cateId = $('input[name="selectCateId"]').val();
-                if(cateId!=''&&cateId!=treeNode.id){
-                    log[cateId]++;
-                }
-                $('input[name="selectCateId"]').val(treeNode.id);
-                $('#log').html(html); 
-            }else{
-                var cateId = $('input[name="selectCateId"]').val();
-                if(cateId!=''&&cateId!=treeNode.id){
-                    log[cateId]++;
-                }
-                $('input[name="selectCateId"]').val(0);
-                $('#log').html(''); 
-            }
-
-            log[treeNode.id]++;
-            console.log(log);
-        }     
-
-        function checkNode(e) {
-            var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
-            type = e.data.type,
-            nodes = zTree.getSelectedNodes();
-            if (type.indexOf("All")<0 && nodes.length == 0) {
-                alert("请先选择一个节点");
-            }
-
-            if (type == "checkAllTrue") {
-                zTree.checkAllNodes(true);
-            } else if (type == "checkAllFalse") {
-                zTree.checkAllNodes(false);
-            } else {
-                var callbackFlag = $("#callbackTrigger").attr("checked");
-                for (var i=0, l=nodes.length; i<l; i++) {
-                    if (type == "checkTrue") {
-                        zTree.checkNode(nodes[i], true, null, callbackFlag);
-                    } else if (type == "checkFalse") {
-                        zTree.checkNode(nodes[i], false, null, callbackFlag);
-                    }else if (type == "checkTruePS") {
-                        zTree.checkNode(nodes[i], true, true, callbackFlag);
-                    } else if (type == "checkFalsePS") {
-                        zTree.checkNode(nodes[i], false, true, callbackFlag);
-                    }
-                }
-            }
-        }
-        
-        $(document).ready(function(){
-            $.fn.zTree.init($("#treeDemo"), setting, zNodes);
-            $("#checkTrue").bind("click", {type:"checkTrue"}, checkNode);
-            $("#checkFalse").bind("click", {type:"checkFalse"}, checkNode);
-        });
-    </SCRIPT>
+    <script type="text/javascript" src="/resource/admin/tree/js/bootstrap-treeview.js"></script>
 
     <div id="page-wrapper">
         <div class="row">
@@ -117,23 +16,99 @@
             <!-- /.col-lg-12 -->
         </div>
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <input type="input" class="form-control" id="input-select-node" placeholder="Identify node..." value="Parent 1">
+                </div>
                 <button type="button" class="btn btn-success"> <i class="glyphicon glyphicon-plus"></i> 添加 </button>
                 <button type="button" class="btn btn-info"> <i class="glyphicon glyphicon-edit"></i> 编辑 </button>
                 <button type="button" class="btn btn-danger">  <i class="glyphicon glyphicon-remove"></i> 删除 </button>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-6">
-                <ul id="treeDemo" class="ztree"></ul>
+            <div class="col-lg-4">
+                <div id="treeview-selectable" class=""></div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-4">
                 <label>当前选中的分类为:</label>
-                <pre id="log" ></pre>
+                <pre id="selectable-output" ></pre>
                 <input type="hidden" name="selectCateId">
             </div>
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    var defaultData = [
+      {
+        text: 'Parent 1',
+        href: '#parent1',
+        tags: ['4'],
+        nodes: [
+          {
+            text: 'Child 1',
+            href: '#child1',
+            tags: ['2'],
+            nodes: [
+              {
+                text: 'Grandchild 1',
+                href: '#grandchild1',
+                tags: ['0']
+              },
+              {
+                text: 'Grandchild 2',
+                href: '#grandchild2',
+                tags: ['0']
+              }
+            ]
+          },
+          {
+            text: 'Child 2',
+            href: '#child2',
+            tags: ['0']
+          }
+        ]
+      },
+      {
+        text: 'Parent 2',
+        href: '#parent2',
+        tags: ['0']
+      },
+      {
+        text: 'Parent 3',
+        href: '#parent3',
+         tags: ['0']
+      },
+      {
+        text: 'Parent 4',
+        href: '#parent4',
+        tags: ['0']
+      },
+      {
+        text: 'Parent 5',
+        href: '#parent5'  ,
+        tags: ['0']
+      }
+    ];
+
+    var initSelectableTree = function() {
+        return $('#treeview-selectable').treeview({
+            data: defaultData,
+            onNodeSelected: function(event, node) {
+                $('#selectable-output').prepend('<p>' + node.text + ' was selected</p>');
+            },
+            onNodeUnselected: function (event, node) {
+                $('#selectable-output').prepend('<p>' + node.text + ' was unselected</p>');
+            }
+        });
+    };
+    var $selectableTree = initSelectableTree();
+    
+    var findSelectableNodes = function() {
+        return $selectableTree.treeview('search', [ $('#input-select-node').val(), { ignoreCase: false, exactMatch: false } ]);
+    };
+
+    $('#input-select-node').on('keyup', function (e) {
+        selectableNodes = findSelectableNodes();
+    });
+
+</script>
 
 {include file="public/footer" /}
