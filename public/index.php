@@ -10,7 +10,7 @@
 // +----------------------------------------------------------------------
 
 // [ 应用入口文件 ]
-
+header('content-type:text/html;charset=utf-8');
 // 定义应用目录
 define('APP_PATH', __DIR__ . '/../application/');
 define('EXTEND_PATH','../extend/');

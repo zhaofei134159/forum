@@ -25,3 +25,12 @@ function back(){
 	loading('show');
 	window.history.go(-1);
 }
+
+// 后台弹框
+function adminAlert(){
+	$('#myModal').addClass('in').css('padding-right','17px').css('display','block');
+}
+
+function closeModal(){
+	$('#myModal').removeClass('in').css('padding-right','').css('display','none');
+} 

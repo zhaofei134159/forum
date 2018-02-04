@@ -20,9 +20,9 @@
                 <div class="form-group">
                     <input type="input" class="form-control" id="input-select-node" placeholder="搜索...." value="">
                 </div>
-                <button type="button" class="btn btn-success"> <i class="glyphicon glyphicon-plus"></i> 添加 </button>
-                <button type="button" class="btn btn-info"> <i class="glyphicon glyphicon-edit"></i> 编辑 </button>
-                <button type="button" class="btn btn-danger">  <i class="glyphicon glyphicon-remove"></i> 删除 </button>
+                <button type="button" class="btn btn-success" onclick="cateAdd()"> <i class="glyphicon glyphicon-plus"></i> 添加 </button>
+                <button type="button" class="btn btn-info" onclick="cateEdit()"> <i class="glyphicon glyphicon-edit"></i> 编辑 </button>
+                <button type="button" class="btn btn-danger" onclick="">  <i class="glyphicon glyphicon-remove"></i> 删除 </button>
             </div>
             <div class="col-lg-4">
                 <div id="treeview-selectable" class=""></div>
@@ -30,43 +30,40 @@
             <div class="col-lg-4">
                 <label>当前选中的分类为:</label>
                 <pre id="selectable-output" ></pre>
-                <input type="hidden" name="selectCateId">
+                <input type="hidden" name="selectCate">
             </div>
         </div>
+        
     </div>
 </div>
+<!-- /#page-wrapper -->
+<script type="text/javascript" src="/resource/admin/js/admin.js"></script>
 <script type="text/javascript">
-    var defaultData = [
-      {
-        text: 'Parent 1',
-        nodeId: 1,
-        parentId: 0,
-        nodes: [
-          {
-            text: 'Child 1',
-            nodeId: 14,
-            parentId: 1
-          },
-          {
-            text: 'Child 2',
-            nodeId: 13,
-            parentId: 1
-          }
-        ]
-      }
-    ];
+    // var defaultData = [
+    //   {
+    //     text: 'Parent 1',
+    //     nodes: [
+    //       {
+    //         text: 'Child 1',
+    //       },
+    //       {
+    //         text: 'Child 2',
+    //       }
+    //     ]
+    //   }
+    // ];
+    var defaultData = '{$cateStr}';
 
     var initSelectableTree = function() {
         return $('#treeview-selectable').treeview({
             data: defaultData,
             onNodeSelected: function(event, node) {
-                console.log(node);
-                $('#selectable-output').prepend('<p>' + node.text + ' was selected</p>');
-                $('input[name="selectCateId"]').val(node.text);
+                $('#selectable-output').prepend('<p>' + node.text + ' 选中 </p>');
+                $('input[name="selectCate"]').val(node.text);
             },
             onNodeUnselected: function (event, node) {
-                $('#selectable-output').prepend('<p>' + node.text + ' was unselected</p>');
-                $('input[name="selectCateId"]').val('');
+                $('#selectable-output').prepend('<p>' + node.text + ' 取消选中 </p>');
+                $('input[name="selectCate"]').val('');
             }
         });
     };
@@ -80,6 +77,137 @@
         selectableNodes = findSelectableNodes();
     });
 
+</script>
+<script type="text/javascript">
+
+// 分类添加
+function cateAdd(){
+    loading('show');
+
+    var parentName = '';
+    var parentId = '';
+
+    var selectCate = $('input[name="selectCate"]').val();
+    var Flog = 0;
+    var data = {};
+    $.ajax({
+         type: "POST",
+         url: "{:url('cate/findParentId')}",
+         async: false,
+         data: {'selectCate':selectCate},
+         dataType: "json",
+         success: function(result){
+            console.log(result);
+            if(result.flog==1){
+                Flog = 1;
+                data = result.data;
+            }
+         }
+    });
+
+    if(Flog==0){
+        parentName = '顶级分类';
+        parentId = '0';
+    }else{
+        parentId = data.id;
+        parentName = data.name;
+    }
+
+    var html  = '<div class="row">';
+        html +=     '<div class="col-lg-12">';
+        html +=         '<div class="form-group">';
+        html +=             '<label> 父分类 </label>';
+        html +=             '<input type="input" class="form-control" name="parentName" value="'+parentName+'" disabled>';
+        html +=             '<input type="hidden" name="parentId" value="'+parentId+'">';
+        html +=             '<input type="hidden" name="id" value="">';
+        html +=         '</div>';
+        html +=         '<div class="form-group">';
+        html +=             '<label> 分类名称 </label>';
+        html +=             '<input type="input" class="form-control" name="cateName" value="">';
+        html +=         '</div>';
+        html +=     '</div>';
+        html += '</div>';
+
+    loading('hide');
+    $('#myModalBody').html(html);
+    $('#myModalLabel').html('添加分类');
+    adminAlert();
+}
+
+function cateEdit(){
+    loading('show');
+
+    var parentName = '';
+    var parentId = '';
+    var cateName = '';
+
+    var selectCate = $('input[name="selectCate"]').val();
+    var Flog = 0;
+    var data = {};
+
+    $.ajax({
+         type: "POST",
+         url: "{:url('cate/cateFind')}",
+         async: false,
+         data: {'selectCate':selectCate},
+         dataType: "json",
+         success: function(result){
+            if(result.flog==0){
+                alertFun(res.msg);
+                return false;
+            }else if(result.flog==1){
+                parentId = '0';
+                parentName = '顶级分类';
+                cateName = result.data.cate.name;
+                cateId = result.data.cate.id;
+            }else if(result.flog==2){
+                parentId = result.data.parentArr.id;
+                parentName = result.data.parentArr.name;
+                cateName = result.data.cate.name;
+                cateId = result.data.cate.id;
+            }
+         }
+    });
+    
+    loading('hide');
+
+    var html  = '<div class="row">';
+        html +=     '<div class="col-lg-12">';
+        html +=         '<div class="form-group">';
+        html +=             '<label> 父分类 </label>';
+        html +=             '<input type="input" class="form-control" name="parentName" value="'+parentName+'" disabled>';
+        html +=             '<input type="hidden" name="parentId" value="'+parentId+'">';
+        html +=             '<input type="hidden" name="id" value="'+cateId+'">';
+        html +=         '</div>';
+        html +=         '<div class="form-group">';
+        html +=             '<label> 分类名称 </label>';
+        html +=             '<input type="input" class="form-control" name="cateName" value="'+cateName+'">';
+        html +=         '</div>';
+        html +=     '</div>';
+        html += '</div>';
+
+    $('#myModalBody').html(html);
+    $('#myModalLabel').html('修改分类');
+    adminAlert();
+}
+
+function saveChange(){
+    loading('show');
+    var parentId = $('input[name="parentId"]').val();
+    var parentName = $('input[name="parentName"]').val();
+    var cateName = $('input[name="cateName"]').val();
+    var cateId = $('input[name="id"]').val();
+
+    $.post("{:url('cate/cateAdd')}",{'parentId':parentId,'parentName':parentName,'cateName':cateName,'cateId':cateId},function(res){
+        loading('hide');
+        if(res.flog!=1){
+            alertFun(res.msg);
+            return false;
+        }else{
+            window.location.href = '/admin/cate';
+        }
+    },'json');
+}
 </script>
 
 {include file="public/footer" /}
