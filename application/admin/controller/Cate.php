@@ -88,7 +88,7 @@ class Cate extends Common
         $cateName = $post['cateName'];
         $cateId = $post['cateId'];
 
-        $isCateSet = Admin_cate::get(['name'=>$cateName]);
+        $isCateSet = Admin_cate::get(['name'=>$cateName,'is_del'=>0]);
         if(!empty($isCateSet)){
             return json(['flog'=>0, 'msg'=>$cateName.' 分类已经存在']);
         }
@@ -115,5 +115,26 @@ class Cate extends Common
 
             return json(['flog'=>1, 'msg'=>'分类创建成功']);
         }
+    }
+
+    public function cateDel(){
+        $post = input('post.');
+        $selectCate = $post['selectCate'];
+
+        $isCateSet = Admin_cate::get(['name'=>$selectCate,'is_del'=>0]);
+        if(empty($isCateSet)){
+            return json(['flog'=>0, 'msg'=>$selectCate.'分类错误']);
+        }
+        $SonCates =  Admin_cate::get(['parent_id'=>$isCateSet['id'],'is_del'=>0]); 
+        if(!empty($SonCates)){
+            return json(['flog'=>0, 'msg'=>$selectCate.'分类下 存在子类  不能删除']);
+        }
+        $updateArr = array(
+                'is_del'=>1,                    
+                'utime'=>time(),                  
+            );
+        Admin_cate::where('id', $isCateSet['id'])->update($updateArr); 
+
+        return json(['flog'=>1, 'msg'=>'分类删除成功']);
     }
 }

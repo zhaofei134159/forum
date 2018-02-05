@@ -21,10 +21,8 @@
                     <input type="input" class="form-control" id="input-select-node" placeholder="搜索...." value="">
                 </div>
                 <button type="button" class="btn btn-success" onclick="cateEdit(1)"> <i class="glyphicon glyphicon-plus"></i> 添加 </button>
-
                 <button type="button" class="btn btn-info" onclick="cateEdit(2)"> <i class="glyphicon glyphicon-edit"></i> 编辑 </button>
-
-                <button type="button" class="btn btn-danger" onclick="">  <i class="glyphicon glyphicon-remove"></i> 删除 </button>
+                <button type="button" class="btn btn-danger" onclick="cateDel()">  <i class="glyphicon glyphicon-remove"></i> 删除 </button>
 
             </div>
             <div class="col-lg-4">
@@ -90,7 +88,7 @@
         if(type==2){
             if(selectCate==''){
                 loading('hide');
-                adminAlert('未选中分类','错误',1);
+                adminAlert('未选中分类','错误');
                 return false;
             }
             cateTitle = '修改分类';
@@ -99,7 +97,7 @@
         $.post("{:url('cate/cateEdit')}",{'selectCate':selectCate,'type':type},function(result){
             loading('hide');
             console.log(result);
-            adminAlert(result.data,cateTitle);
+            adminAlert(result.data,cateTitle,1);
         },'json');
     }
 
@@ -115,8 +113,30 @@
         $.post("{:url('cate/cateSave')}",{'parentId':parentId,'parentName':parentName,'cateName':cateName,'cateId':cateId},function(res){
             if(res.flog!=1){
                 loading('hide');
-                alertFun(res.msg);
-                adminAlert(res.msg,'分类',1);
+                // alertFun(res.msg);
+                adminAlert(res.msg,'分类');
+                return false;
+            }else{
+                window.location.href = "{:url('cate/index')}";
+            }
+        },'json');
+    }
+
+    // 分类保存
+    function cateDel(){
+        loading('show');
+        var selectCate = $('input[name="selectCate"]').val();
+        var cateTitle = '分类';
+        if(selectCate==''){
+            loading('hide');
+            adminAlert('未选中分类','错误');
+            return false;
+        }
+
+        $.post("{:url('cate/cateDel')}",{'selectCate':selectCate},function(res){
+            if(res.flog!=1){
+                loading('hide');
+                adminAlert(res.msg,'分类');
                 return false;
             }else{
                 window.location.href = "{:url('cate/index')}";

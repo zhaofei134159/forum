@@ -28,7 +28,7 @@ function back(){
 
 // 后台弹框
 function adminAlert(body,title,save){
-	if(save==''){
+	if(save==undefined){
     	$('#saveChange').hide();
 	}
     $('#myModalBody').html(body);
