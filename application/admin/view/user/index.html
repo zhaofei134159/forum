@@ -20,24 +20,24 @@
 	                        </div>
 	                    	<div class="col-lg-2">
 	                        	<select id="sex" name="sex" class="form-control">
-                                    <option value="0" {if $post['sex']=='0'}selected{/if}>全部</option>
-                                    <option value="1" {if $post['sex']=='1'}selected{/if}>男</option>
-                                    <option value="2" {if $post['sex']=='2'}selected{/if}>女</option>
-                                    <option value="3" {if $post['sex']=='3'}selected{/if}>保密</option>
+                                    <option value="0" {if condition="$post['sex']=='0'"}selected{/if}>全部</option>
+                                    <option value="1" {if condition="$post['sex']=='1'"}selected{/if}>男</option>
+                                    <option value="2" {if condition="$post['sex']=='2'"}selected{/if}>女</option>
+                                    <option value="3" {if condition="$post['sex']=='3'"}selected{/if}>保密</option>
                                 </select>
 	                        </div>
 	                    	<div class="col-lg-2">
 	                        	<select id="is_del" name="is_del" class="form-control">
-                                    <option value="-1" {if $post['is_del']=='-1'}selected{/if}>全部</option>
-                                    <option value="1" {if $post['is_del']=='1'}selected{/if}>删除</option>
-                                    <option value="0" {if $post['is_del']=='0'}selected{/if}>未删除</option>
+                                    <option value="-1" {if condition="$post['is_del']=='-1'"}selected{/if}>全部</option>
+                                    <option value="1" {if condition="$post['is_del']=='1'"}selected{/if}>删除</option>
+                                    <option value="0" {if condition="$post['is_del']=='0'"}selected{/if}>未删除</option>
                                 </select>
 	                        </div>
 	                    	<div class="col-lg-2">
 	                        	<select id="is_activate" name="is_activate" class="form-control">
-                                    <option value="-1" {if $post['is_activate']=='1'}selected{/if}>全部</option>
-                                    <option value="1" {if $post['is_activate']=='1'}selected{/if}>激活</option>
-                                    <option value="0" {if $post['is_activate']=='0'}selected{/if}>未激活</option>
+                                    <option value="-1" {if condition="$post['is_activate']=='1'"}selected{/if}>全部</option>
+                                    <option value="1" {if condition="$post['is_activate']=='1'"}selected{/if}>激活</option>
+                                    <option value="0" {if condition="$post['is_activate']=='0'"}selected{/if}>未激活</option>
                                 </select>
 	                        </div>
 	                        <span class="col-lg-2 input-group-btn">

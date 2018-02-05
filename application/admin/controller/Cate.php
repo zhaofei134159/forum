@@ -52,14 +52,49 @@ class Cate extends Common
         return $this->view->fetch('index',$data);
     }
 
-    public function cateAdd(){
+    public function cateEdit(){
+        $post = input('post.');
+
+        $type = $post['type'];
+        $selectCate = $post['selectCate'];
+
+        $parentArr = array();
+        $cateArr = array();
+        if($type==1&&!empty($selectCate)){
+            $parentArr = Admin_cate::get(['name'=>$selectCate,'is_del'=>0]);
+            if(!empty($parentArr['parent_id'])){
+                return json(['flog'=>0, 'data'=>'二级分类 下 无法创建 子分类']);
+            }
+        }else if($type==2){
+            $cateArr = Admin_cate::get(['name'=>$selectCate,'is_del'=>0]);
+            if(!empty($cateArr['parent_id'])){
+                $parentArr = Admin_cate::get(['id'=>$cateArr['parent_id'],'is_del'=>0]);
+            }
+        }
+
+        $data = array(
+                'cateArr'=>$cateArr,
+                'parentArr'=>$parentArr,
+            );
+        $html = $this->view->fetch('cate_edit',$data);
+
+        return json(['flog'=>1, 'msg'=>'成功','data'=>$html]);
+    }
+
+    public function cateSave(){
         $post = input('post.');
         $parentId = $post['parentId'];
         $parentName = $post['parentName'];
         $cateName = $post['cateName'];
         $cateId = $post['cateId'];
 
+        $isCateSet = Admin_cate::get(['name'=>$cateName]);
+        if(!empty($isCateSet)){
+            return json(['flog'=>0, 'msg'=>$cateName.' 分类已经存在']);
+        }
+
         $cate = Admin_cate::get(['id'=>$cateId]);
+
         if(!empty($cateId)&&!empty($cate)){
             $id = $cate['id'];
             $updateArr = array(
@@ -73,54 +108,12 @@ class Cate extends Common
         }else{
             $cateArr = array();
             $cateArr['name'] = $cateName;
-            $cateArr['cateName'] = $parentId;
+            $cateArr['parent_id'] = $parentId;
             $cateArr['ctime'] = time();
             $cateArr['utime'] = time();
             $cateId = Admin_cate::create($cateArr);
 
             return json(['flog'=>1, 'msg'=>'分类创建成功']);
-        }
-    }
-
-    // 查找分类名称是否存在
-    public function cateFind(){
-        $post = input('post.');
-        $selectCate = $post['selectCate'];
-        $parentArr = array();
-
-
-        $cate = Admin_cate::get(['name'=>$selectCate,'is_del'=>0]);
-        if(empty($cate)){
-            return json(['flog'=>0, 'msg'=>'分类不存在']);
-        }
-        if($cate['parent_id']==0){
-            $data = array('cate'=>$cate,'parentArr'=>$parentArr);
-            return json(['flog'=>1, 'msg'=>'父分类为 顶级分类','data'=>$data]);
-        }
-
-        $parentArr = Admin_cate::get(['id'=>$cate['parent_id'],'is_del'=>0]);
-
-        $data = array('cate'=>$cate,'parentArr'=>$parentArr);
-        return json(['flog'=>2, 'msg'=>'父分类','data'=>$data]);
-   
-    }
-
-    public function findParentId(){
-        $post = input('post.');
-        $selectCate = $post['selectCate'];
-        if(empty($selectCate)){
-            return json(['flog'=>0, 'msg'=>'分类不存在','data'=>array()]);
-        }
-
-        $cate = Admin_cate::get(['name'=>$selectCate,'is_del'=>0]);
-        if(empty($cate)){
-            return json(['flog'=>0, 'msg'=>'分类不存在','data'=>array()]);
-        }else{
-            if($cate['parent_id']!=0){
-                return json(['flog'=>0, 'msg'=>'该分类无法创建子类','data'=>array()]);
-            }else{
-                return json(['flog'=>1, 'msg'=>'分类已存在','data'=>$cate]);
-            }
         }
     }
 }

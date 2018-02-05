@@ -27,8 +27,15 @@ function back(){
 }
 
 // 后台弹框
-function adminAlert(){
+function adminAlert(body,title,save){
+	if(save==''){
+    	$('#saveChange').hide();
+	}
+    $('#myModalBody').html(body);
+    $('#myModalLabel').html(title);
+
 	$('#myModal').addClass('in').css('padding-right','17px').css('display','block');
+	
 }
 
 function closeModal(){
