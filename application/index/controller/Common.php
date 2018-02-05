@@ -8,6 +8,7 @@ use think\Controller;
 use think\Log;
 
 use app\index\model\Common as modelCommon;
+use app\index\model\Setting;
 use app\index\model\User;
 
 
@@ -30,6 +31,13 @@ class Common extends Controller
         	$this->assign('username',Session::get('name','forum_home'));
             // 记录每个人都干什么了 暂时不加日志
             // Log::log();
+        }
+        $webSetting = Setting::get();
+        if(!empty($webSetting)){
+            if($webSetting['switch']==2){
+                $this->error('当前网站正在维护中。。。。。');
+            }
+            $this->assign('webSetting',$webSetting);
         }
 
         $this->init($request->controller(),$request->action());

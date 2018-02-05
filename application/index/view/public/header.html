@@ -8,7 +8,14 @@
 
         <link rel="shortcut icon" href="/resource/images/favicon.ico">
 
-        <title> {:read_conf('website')['web_name']} - Our homeland </title>
+        <title> 
+            {if condition="!empty($webSetting)"}
+                {$webSetting.name}
+            {else}
+                forum
+            {/if}
+            - Our homeland
+         </title>
 
         <!--Morris Chart CSS -->
 		<link rel="stylesheet" href="/resource/plugins/morris/morris.css">
@@ -84,7 +91,13 @@
 
                     <!-- LOGO -->
                     <div class="topbar-left">
-                        <a href="{:url('/')}" class="logo">{:read_conf('website')['web_top_name']}</a>
+                        <a href="{:url('/')}" class="logo">
+                            {if condition="!empty($webSetting)"}
+                                {$webSetting.name}
+                            {else}
+                                forum
+                            {/if}
+                        </a>
                     </div>
                     <!-- End Logo container-->
 

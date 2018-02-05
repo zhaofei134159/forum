@@ -95,14 +95,13 @@ class User extends Common
         $post = input('post.');
 
         $file = request()->file('headimg');
-        $post['headimg'] = '';
-
         if($file){
             $info = $file->move(ROOT_PATH.'public'.DS.'uploads'.DS.'headimg');
             if($info){
                $post['headimg'] = 'uploads'.DS.'headimg'.DS.$info->getSaveName();
             }else{
                 Log::log(Session::get('login_id','forum_admin').' 上传用户 '.$post['email'].' 头像错误 ：'.$file->getError());
+                $post['headimg'] = '';
             }
         }
 

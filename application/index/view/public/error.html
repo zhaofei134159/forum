@@ -10,7 +10,14 @@
         <link rel="shortcut icon" href="/resource/images/favicon.ico">
 
         <!-- App title -->
-        <title>{:read_conf('website')['web_name']} - error</title>
+        <title>
+            {if condition="!empty($webSetting)"}
+                {$webSetting.name}
+            {else}
+                forum
+            {/if} 
+            - error
+        </title>
 
         <!-- App CSS -->
         <link href="/resource/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -29,6 +36,7 @@
         <![endif]-->
 
         <script src="/resource/js/modernizr.min.js"></script>
+        <script src="/resource/js/jquery.min.js"></script>
 
     </head>
     <body>
@@ -38,12 +46,12 @@
         <div class="wrapper-page">
             <div class="ex-page-content text-center">
                 <h3 class="text-uppercase font-600">出错了</h3>
-                <p class="text-muted">
+                <p style="font-size:22px;font-weight:bold;color:#505458;">
                     <?php echo(strip_tags($msg));?>
                 </p>
                 <br>
                 <p>
-                    页面自动 <a id="href" href="<?php echo($url);?>">跳转</a> 等待时间： <b id="wait"><?php echo($wait);?></b>
+                    页面自动 <a id="href" href="{$url}">跳转</a> 等待时间： <b id="wait">{$wait}</b>
                 </p>
             </div>
         </div>
@@ -52,10 +60,22 @@
 
     	<script>
             var resizefunc = [];
+            var inter;
+            $(function(){
+                inter = window.setInterval(function(){
+                    var wait = $('#wait').html();
+                    if(wait<=1){
+                        console.log(wait);
+                        clearInterval(inter);
+                        window.location.href = "{:url('/')}";
+                    }
+                    wait = parseInt(wait) - 1;
+                    $('#wait').html(wait);
+                },1000)
+            })
         </script>
 
         <!-- jQuery  -->
-        <script src="/resource/js/jquery.min.js"></script>
         <script src="/resource/js/bootstrap.min.js"></script>
         <script src="/resource/js/detect.js"></script>
         <script src="/resource/js/fastclick.js"></script>

@@ -3,20 +3,20 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header"> 管理员 列表 </h1>
+                <h1 class="page-header"> 友链 列表 </h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
         <div class="row"> 
         	<div class="col-lg-12">
                 <div class="panel-body">
-                    <form role="form" action="{:url('admin/index')}" method="post" id="UserSearch">
+                    <form role="form" action="{:url('FriendLink/index')}" method="post" id="UserSearch">
                     	<div class="row">
 	                    	<div class="col-lg-3">
-	                    		<input class="form-control" name="email" id="email" value="{$post['email']}" placeholder="邮箱">
+	                    		<input class="form-control" name="name" id="name" value="{$post['name']}" placeholder="名称">
 	                    	</div>
 	                    	<div class="col-lg-3">
-	                        	<input class="form-control" name="nikename" id="nikename" value="{$post['nikename']}" placeholder="昵称">
+	                        	<input class="form-control" name="link" id="link" value="{$post['link']}" placeholder="地址">
 	                        </div>
 	                    	<div class="col-lg-3">
 	                        	<select id="is_del" name="is_del" class="form-control">
@@ -28,7 +28,7 @@
 	                        <span class="col-lg-2 input-group-btn">
 	                            <button class="btn btn-default" type="button" onclick="formSearch()"><i class="glyphicon glyphicon-search"></i>
 	                            </button>
-	                            <button class="btn btn-success" type="button" onclick="UserEdit()"><i class="glyphicon glyphicon-plus"></i>
+	                            <button class="btn btn-success" type="button" onclick="FriendEdit()"><i class="glyphicon glyphicon-plus"></i>
 	                            </button> 
 	                        </span>
                     	</div>
@@ -42,29 +42,44 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>昵称</th>
-                                    <th>邮箱</th>
+                                    <th>名称</th>
+                                    <th>友链图</th>
                                     <th>是否删除</th>
+                                    <th>审核</th>
                                     <th>创建时间</th>
                                     <th>操作</th>
                                 </tr>
                             </thead>
                             <tbody>
-								{foreach $admins as $ad}
+								{foreach $friends as $fd}
 	                                <tr>
-	                                    <td>{$ad.id}</td>
-	                                    <td>{$ad.name}</td>
-	                                    <td>{$ad.email}</td>
+	                                    <td>{$fd.id}</td>
 	                                    <td>
-	                                    	{if condition="$ad.is_del==1"}
-	                                    		<span class="btn btn-outline btn-danger" onclick="isDel({$ad.id},$(this))">是</span>
+		                                    <a href="{$fd.link}" target='block'>
+		                                    	{$fd.name}
+		                                    </a>
+	                                    </td>
+	                                    <td><img src="/{$fd.linkimg}" width="40" height="40"></td>
+	                                    <td>
+	                                    	{if condition="$fd.is_del==1"}
+	                                    		<span class="btn btn-outline btn-danger" onclick="isDel({$fd.id},$(this))">是</span>
 	                                    	{else}
-	                                    		<span class="btn btn-outline btn-success" onclick="isDel({$ad.id},$(this))">否</span>
+	                                    		<span class="btn btn-outline btn-success" onclick="isDel({$fd.id},$(this))">否</span>
 	                                    	{/if}
 	                                    </td>
-	                                    <td>{$ad.createtime|date="Y-m-d H:i",###}</td>
 	                                    <td>
-	                                    	<a href="javascript:void(0);" onclick="UserEdit({$ad.id})" class="btn btn-outline btn-info">编辑</a>
+	                                    	{if condition="$fd.is_check==2"}
+	                                    		<span class="btn btn-outline btn-danger" onclick="isCheck({$fd.id},$(this))">审核失败</span>
+	                                    	{elseif condition="$fd.is_check==1"}
+	                                    		<span class="btn btn-outline btn-success" onclick="isCheck({$fd.id},$(this))">审核成功</span>
+	                                    	{elseif condition="$fd.is_check==0"}
+	                                    		<span class="btn btn-outline btn-default" onclick="isCheck({$fd.id},$(this))">未审核</span>
+	                                    	{/if}
+	                                    </td>
+
+	                                    <td>{$fd.ctime|date="Y-m-d H:i",###}</td>
+	                                    <td>
+	                                    	<a href="javascript:void(0);" onclick="FriendEdit({$fd.id})" class="btn btn-outline btn-info">编辑</a>
 	                                    	<!-- <a href="javascript:void(0);" class="btn btn-outline btn-danger">删除</a> -->
 	                                    </td>
 	                                </tr>
@@ -88,44 +103,31 @@
     	// 搜索
     	function formSearch(){
 	        loading('show');
-    		var email = $('#email').val();
-
-    		if(email==''){
-		    	$('#UserSearch').submit();
-		    	return false;
-    		}
-		    var myema =  /^[_\.0-9a-z-]+@([0-9a-z][0-9a-z-]+\.){1,4}[a-z]{2,3}$/i;
-		    if(!myema.test(email)) 
-		    { 
-    			console.log(12);
-		        loading('hide');
-		      	$('#email').parent().addClass("has-error");  
-		        return false; 
-		    }
+    		// var name = $('#name').val();
 
 		    $('#UserSearch').submit();
     	}
 
     	// 用户编辑
-    	function UserEdit(uid){
+    	function FriendEdit(id){
 			loading('show');
-    		var url = "{:url('admin/editUser')}";
-    		if(uid!=undefined){
-    			url += "?uid="+uid;
+    		var url = "{:url('FriendLink/FriendEdit')}";
+    		if(id!=undefined){
+    			url += "?id="+id;
     		}
     		window.location.href = url;
     	}
 
-    	//用户是否删除
-    	function isDel(uid,res){
+    	// 是否删除
+    	function isDel(id,res){
 			loading('show');
-    		$.post("{:url('admin/isDelUser')}",{uid:uid},function(data){
+    		$.post("{:url('FriendLink/isDelFriend')}",{id:id},function(data){
 	            loading('hide');
 	            if(res.hasClass('btn-danger')){
 	            	res.removeClass('btn-danger');
 	            }
-	            if(res.hasClass('btn-info')){
-	            	res.removeClass('btn-info');
+	            if(res.hasClass('btn-success')){
+	            	res.removeClass('btn-success');
 	            }
 	            if(data.msg==0){
 	            	res.addClass('btn-success');
@@ -137,23 +139,27 @@
 		    },'json');
     	}
 
-    	// 用户是否激活
-    	function isActivate(uid,res){
+    	// 是否审核
+    	function isCheck(id,res){
     		loading('show');
-    		$.post("{:url('admin/isActivate')}",{uid:uid},function(data){
+    		$.post("{:url('FriendLink/isCheckFriend')}",{id:id},function(data){
 	            loading('hide');
 	            if(res.hasClass('btn-danger')){
 	            	res.removeClass('btn-danger');
 	            }
-	            if(res.hasClass('btn-info')){
-	            	res.removeClass('btn-info');
+	            if(res.hasClass('btn-success')){
+	            	res.removeClass('btn-success');
 	            }
-	            if(data.msg==0){
-	            	res.addClass('btn-success');
-	            	res.html('否');
-	            }else if(data.msg==1){
+	            if(res.hasClass('btn-default')){
+	            	res.removeClass('btn-default');
+	            }
+
+	            if(data.msg==2){
 	            	res.addClass('btn-danger');
-	            	res.html('是');
+	            	res.html('审核失败');
+	            }else if(data.msg==1){
+	            	res.addClass('btn-success');
+	            	res.html('审核成功');
 	            }
 		    },'json');
 
