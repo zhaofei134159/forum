@@ -85,7 +85,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li>
-                            <a href="#"><i class="fa fa-user fa-fw"></i> 
+                            <a href="{:url('admin/index')}"><i class="fa fa-user fa-fw"></i> 
                                 {if condition="empty($admin->name)"} 
                                     {$admin->email}
                                 {else}
@@ -93,7 +93,7 @@
                                 {/if}
                             </a>
                         </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> 设置 </a>
+                        <li><a href="{:url('webSetting/index')}"><i class="fa fa-gear fa-fw"></i> 网站设置 </a>
                         </li>
                         <li class="divider"></li>
                         <li><a href="{:url('login/login_out')}"><i class="fa fa-sign-out fa-fw"></i> 退出登录 </a>
