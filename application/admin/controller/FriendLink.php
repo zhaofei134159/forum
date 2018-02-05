@@ -8,20 +8,19 @@ use think\Session;
 use think\Config;
 
 /**
-* 论坛 展示
+* 友情链接 展示
 **/
-class Forum extends Common
-{   
-    public function __construct(){
-        parent::__construct();
-       
+class FriendLink extends Common
+{	
+	public function __construct(){
+		parent::__construct();
+	   
         if(!Session::get('login_id','forum_admin')){
-            $this->redirect('login/login');
+        	$this->redirect('login/login');
         }
-    }
+	}
     
     public function index(){
-        
         $data = array(
             );
         return $this->view->fetch('index',$data);
