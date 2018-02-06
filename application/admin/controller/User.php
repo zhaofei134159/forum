@@ -110,6 +110,7 @@ class User extends Common
             $login_salt = rand(11111, 99999);
             $post['password'] = md5(md5($post['password']).$login_salt);
             $post['login_salt'] = $login_salt;
+            $post['is_activate'] = 1;
             $post['ctime'] = time();
             $accountData = Home_user::create($post);
         }else{
