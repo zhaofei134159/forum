@@ -42,6 +42,9 @@ class Login extends Common
 		if(empty($user)){
 			return json(['flog'=>0, 'msg'=>'没有该账户,请注册！']);
 		}
+        if($user['is_del']==1){
+            return json(['flog'=>0, 'msg'=>'该账号已被注销，联系管理员!']);
+        }
 
 		//判断密码是否正确
 		if($user['password'] != md5(md5($post['password']) . $user['login_stat'])){

@@ -100,11 +100,13 @@
     <script type="text/javascript">
 	  	//登录
         function do_login(){
+            loading('show');
             var email = $('input[name="lg_email"]').val();
             var password = $('input[name="lg_password"]').val();
 
             
             if(email==''){
+                loading('hide');
                 alertFun('登录错误','登录邮箱不能为空!',false);
                 return false; 
             }
@@ -112,11 +114,13 @@
             var myema =  /^[_\.0-9a-z-]+@([0-9a-z][0-9a-z-]+\.){1,4}[a-z]{2,3}$/i;
             if(!myema.test(email)) 
             { 
+                loading('hide');
                 alertFun('登录错误','登录邮箱格式错误!',false);
                 return false; 
             }
 
             if(password==''){
+                loading('hide');
                 alertFun('登录错误','密码不能为空!',false);
                 return false; 
             }
@@ -129,6 +133,7 @@
                  dataType: "json",
                  success: function(res){
                     if(res.flog!=1){
+                        loading('hide');
                			alertFun('登录错误',res.msg,false);
                         return false;
                     }else{
@@ -140,6 +145,7 @@
 
         //注册
         function do_register(){
+            loading('show');
             var email = $('input[name="reg_email"]').val();
             var password = $('input[name="reg_password"]').val();
             var re_password = $('input[name="reg_password2"]').val();
@@ -149,6 +155,7 @@
             console.log(re_password);
 
             if(email==''){
+                loading('hide');
                 alertFun('注册错误','注册邮箱不能为空!',false);
                 return false; 
             }
@@ -156,18 +163,19 @@
             var myema =  /^[_\.0-9a-z-]+@([0-9a-z][0-9a-z-]+\.){1,4}[a-z]{2,3}$/i;
             if(!myema.test(email)) 
             { 
+                loading('hide');
                 alertFun('注册错误','注册邮箱格式错误!',false);
                 return false; 
             }
 
             if(password==''){
-
+                loading('hide');
                 alertFun('注册错误','注册密码不能为空!',false);
                 return false; 
             }
 
             if(password!=re_password){
-
+                loading('hide');
                 alertFun('注册错误','两次输入密码不一致!',false);
                 return false; 
             }
@@ -180,7 +188,8 @@
                  dataType: "json",
                  success: function(res){
                     if(res.flog!=1){
-                       
+                        loading('hide');
+                        
                 		alertFun('注册错误',res.msg,false);
 
                         return false;
