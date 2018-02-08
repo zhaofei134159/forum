@@ -65,7 +65,7 @@
                         </div><!-- /.progress-bar .progress-bar-danger -->
                     </div><!-- /.progress .no-rounded -->
                     <br>
-                    <div class="text-center font-400" style="color:#98A6AD;cursor:pointer;"> 
+                    <div class="text-center font-400" style="color:#98A6AD;cursor:pointer;" onclick="editUser()"> 
                         编辑个人资料 >
                     </div>
                 </div>
@@ -174,5 +174,11 @@
             </div>
         </div><!-- end col -->
     </div>
+    <script type="text/javascript">
+        function editUser(){
+            loading('show');
+            window.location.href = "{:url('ucenter/editUser')}";
+        }
+    </script>
 
 {include file="public/footer" /}

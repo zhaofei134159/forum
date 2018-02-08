@@ -306,13 +306,12 @@
                         </div>
                         <h4 class="page-title">
                             <a href="/"><i class="zmdi zmdi-home"></i> 首 页</a>
-
                             {if condition="$controller!='Index'"}    
-                                / <a href="">{:read_conf('controller')[$controller]}</a>
+                                / <a href="{:url($controller.'/index')}">{:read_conf('home_url')[$controller]['controller']}</a>
                             {/if}
 
                             {if condition="$controller!='Index' && $action!='index'"}    
-                                / <a href="">{:read_conf('action')[$action]}</a>
+                                / <a href="{:url($controller.'/'.$action)}">{:read_conf('home_url')[$controller]['action'][$action]}</a>
                             {/if}
                         </h4>
                     </div>

@@ -31,4 +31,9 @@ $conf['controller']['Ucenter'] = '个人资料';
 $conf['action']['setting'] = '设置';
 
 
+$conf['home_url']['Login']['controller'] = '登录 or 注册';
+$conf['home_url']['Login']['action']['do_bind'] = '绑定邮箱';
+$conf['home_url']['Ucenter']['controller'] = '个人资料';
+$conf['home_url']['Ucenter']['action']['edituser'] = '个人信息修改';
+
 return $conf;

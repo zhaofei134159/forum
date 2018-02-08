@@ -45,4 +45,15 @@ class Ucenter extends Common
     	return $this->view->fetch('setting');
     }
 
+    public function editUser(){
+        $uid = $this->uid;
+        $userinfo = Userinfo::get(['uid'=>$uid]);
+
+
+        $data = array(
+                'userinfo'=>$userinfo
+            );
+        return $this->view->fetch('editUser',$data);
+    }
+
 }
