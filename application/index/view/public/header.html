@@ -196,12 +196,16 @@
             </div>
 
             
-            {if condition="$user && $user->email && !$user->is_activate"} 
+            {if condition="$user && (empty($user->email) || !$user->is_activate)"} 
             <div class="navbar-custom">
                 <div class="container">
                     <div class="alert alert-success alert-dismissable">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        已发送邮件到注册邮箱中 , 请激活邮箱 , 完成注册。
+                        {if condition="empty($user->email)"}
+                            请先  <a href="{:url('login/binEmail')}"> 绑定邮箱 </a> 。
+                        {elseif condition="!$user->is_activate"}
+                            已发送邮件到注册邮箱中 , 请激活邮箱 。
+                        {/if}
                     </div>
                      
                 </div>

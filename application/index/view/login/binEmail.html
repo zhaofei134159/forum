@@ -1,0 +1,113 @@
+{include file="public/header" /}
+ 
+    <style type="text/css">
+        .header-title{font-size:30px;text-align:center;}
+    </style>
+    <div class="row">
+        <div class="col-lg-6 col-md-offset-3">
+            <div class="login-panel panel text-center panel-default">
+                <div class="panel-heading">
+                    <h4 class="header-title"> 绑定邮箱 </h4>
+                </div>
+
+                <div class="panel-body">
+                    <div class="form-horizontal" role="form" data-parsley-validate novalidate>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">邮箱*</label>
+                            <div class="col-sm-7">
+                                <input type="email" required parsley-type="email" name="reg_email" class="form-control"
+                                       id="inputEmail3" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="hori-pass1" class="col-sm-4 control-label">密码*</label>
+                            <div class="col-sm-7">
+                                <input id="hori-pass1" type="password" name="reg_password" placeholder="Password" required
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="hori-pass2" class="col-sm-4 control-label">确认 密码
+                                *</label>
+                            <div class="col-sm-7">
+                                <input data-parsley-equalto="#hori-pass1" type="password" name="reg_password2" required
+                                       placeholder="Password" class="form-control" id="hori-pass2">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <button type="submit" class="btn btn-success waves-effect waves-light" onclick="do_bind()">
+                                    绑定
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- end col -->
+
+    </div>
+
+    <script type="text/javascript">
+        //注册
+        function do_bind(){
+            loading('show');
+            var email = $('input[name="reg_email"]').val();
+            var password = $('input[name="reg_password"]').val();
+            var re_password = $('input[name="reg_password2"]').val();
+
+            console.log(email);
+            console.log(password);
+            console.log(re_password);
+
+            if(email==''){
+                loading('hide');
+                alertFun('注册错误','注册邮箱不能为空!',false);
+                return false; 
+            }
+
+            var myema =  /^[_\.0-9a-z-]+@([0-9a-z][0-9a-z-]+\.){1,4}[a-z]{2,3}$/i;
+            if(!myema.test(email)) 
+            { 
+                loading('hide');
+                alertFun('注册错误','注册邮箱格式错误!',false);
+                return false; 
+            }
+
+            if(password==''){
+                loading('hide');
+                alertFun('注册错误','注册密码不能为空!',false);
+                return false; 
+            }
+
+            if(password!=re_password){
+                loading('hide');
+                alertFun('注册错误','两次输入密码不一致!',false);
+                return false; 
+            }
+
+            $.ajax({
+                 type: "POST",
+                 url: "{:url('login/do_bind')}",
+                 async: false,
+                 data: {email:email,password:password,re_password:re_password},
+                 dataType: "json",
+                 success: function(res){
+                    if(res.flog!=1){
+                        loading('hide');
+                        
+                        alertFun('绑定错误',res.msg,false);
+
+                        return false;
+                    }else{
+                        //注册成功  激活邮箱
+                        window.location.href = "{:url('/')}";
+                    }
+                 }
+            });
+
+        }
+    </script>
+
+{include file="public/footer" /}

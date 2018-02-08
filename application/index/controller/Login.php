@@ -90,6 +90,105 @@ class Login extends Common
 		return json(['flog'=>1, 'msg'=>'注册成功']);
     }
 
+    # 绑定邮箱
+    public function binEmail(){
+    
+        return $this->view->fetch('binEmail');
+    }
+
+    # 执行绑定操作
+    public function do_bind(){
+        $post = input('post.');
+        $email = $post['email'];
+        $password = $post['password'];
+        $re_password = $post['re_password'];
+
+        $uid =  Session::get('login_id','forum_home');
+        #  没有uid 重新登录
+        if(empty($uid)){
+            $this->redirect('login/index');
+        }
+
+        $class_arr = $this->class_arr;
+
+        $class = array(
+            'weibo'=>'微博',
+            'weixin'=>'微信',
+            'qq'=>'腾讯QQ',
+        );
+
+
+        $type = 'qq';
+        $fen = $class[$type];
+        $field = $class_arr[$type];
+
+        $data = array();
+        $res = array();
+
+        $email_user = User::get(['email'=>$email]);
+        $login_user = User::get(['id'=>$uid]);
+
+        if(empty($login_user)||empty($login_user[$field])){
+            return $this->view->fetch('login/web_error',array('type'=>$fen,'login'=>$type));
+        }
+
+        if(!empty($email_user)){
+            //老用户登录绑定
+            $password = md5(md5($post['password']).$email_user['login_stat']);
+            if($email_user['password']!=$password){
+                return json(['flog'=>0, 'msg'=>'您输入的密码与账号不匹配！','data'=>[]]);
+            }
+
+            $update_data['name'] = $email_user['email'];
+            $update_data['email'] = $email_user['email'];
+            $update_data[$field] = $login_user[$field];
+
+            if(empty($email_user['headimg'])){
+                $update_data['headimg'] = $login_user['headimg'];
+            }
+            if(empty($email_user['nikename'])){
+                $update_data['nikename'] = $login_user['nikename'];
+            }
+            
+            User::where('id',$email_user['id'])->update($update_data);
+            User::where('id',$login_user['id'])->update(array($field=>'','is_del'=>1));
+
+            // 删除微信数据
+            User::where('id',$login_user['id'])->delete();
+
+            //注册的账号登陆网站
+            $this->session_login($email_user);
+
+            if($email_user['is_activate']==0){
+                //给注册的邮箱发邮件
+                $this->register_email($post['email']);
+            }
+
+        }else{
+
+            // 检查用户
+            $login_stat = rand(11111, 99999);
+            $new_password = md5(md5($post['password']) . $login_stat);
+            $new_data = array(
+                'name' => $post['email'],
+                'email' => $post['email'],
+                'login_stat' => $login_stat,
+                'password' => $new_password,
+            );
+            User::where('id',$login_user['id'])->update($new_data);
+
+            //注册的账号登陆网站
+            $this->session_login($login_user);
+
+            if($login_user['is_activate']==0){
+                //给注册的邮箱发邮件
+                $this->register_email($post['email']);
+            }
+
+        }
+        
+        return json(['flog'=>1, 'msg'=>'绑定成功！','data'=>[]]);
+    }
 
     //发邮件
     public function register_email($email){
@@ -273,7 +372,7 @@ class Login extends Common
 
         $login_user = User::where($class_arr[$type],$user_data['id'])->find();
 
-    	//微博uid在都学网中有账号 且手机号存在是，则直接登录
+    	//微博uid 有账号 且手机号存在是，则直接登录
     	if(!empty($login_user) && !empty($login_user['email'])){
     		//登录机制
             $this->_external_session_login($login_user,$user_data);
@@ -431,7 +530,7 @@ class Login extends Common
     }
 
     //绑定
-    public function do_bind(){
+    public function do_bind_old(){
     	$post = $this->input->post();
 
         $class_arr = $this->class_arr;
