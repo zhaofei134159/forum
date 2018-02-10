@@ -1,8 +1,95 @@
 {include file="public/header" /}
+	
+    <link href="/resource/plugins/fileuploads/css/dropify.min.css" rel="stylesheet" type="text/css" />
+
+	<div class="row">
+
+        <div class="col-lg-2 col-md-2">
+            <div class="card-box text-center">
+                {include file="public/userinfoleft" /}
+            </div>
+        </div>
+
+        <div class="col-lg-10 col-md-10">
+            <div class="card-box">
+                <h4 class="header-title m-t-0 m-b-30">信息修改</h4>
+
+                <form action="{:url('ucenter/saveUserHeadimg')}" method="post" enctype="multipart/form-data" data-parsley-validate novalidate id="headForm">
+                	<div class="form-group">
+                        <label for="userName"> 昵称： </label>
+                        <input type="text" name="nikename" id="nikename" parsley-trigger="change" required
+                               placeholder="昵称" class="form-control" value="{$user->nikename}">
+                    </div>
+                	<div class="form-group">
+                        <label for="userName">选择本地照片，上传自己的头像</label>
+                        {if condition="$user->headimg"}
+	                 	<input type="file" name="headimg" class="dropify" data-default-file="/{$user->headimg}" />
+	                    {else}
+	                 	<input type="file" name="headimg" class="dropify" data-default-file="/resource/images/user.png" />
+	                    {/if}
+                    </div>
+                	
+                    <!-- <div class="form-group">
+                        <label for="userName">User Name*</label>
+                        <input type="text" name="nick" parsley-trigger="change" required
+                               placeholder="Enter user name" class="form-control" id="userName">
+                    </div>
+                    <div class="form-group">
+                        <label for="emailAddress">Email address*</label>
+                        <input type="email" name="email" parsley-trigger="change" required
+                               placeholder="Enter email" class="form-control" id="emailAddress">
+                    </div>
+                    <div class="form-group">
+                        <label for="pass1">Password*</label>
+                        <input id="pass1" type="password" placeholder="Password" required
+                               class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="passWord2">Confirm Password *</label>
+                        <input data-parsley-equalto="#pass1" type="password" required
+                               placeholder="Password" class="form-control" id="passWord2">
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <input id="remember-1" type="checkbox">
+                            <label for="remember-1"> Remember me </label>
+                        </div>
+                    </div>-->
+
+                    <div class="form-group text-right m-b-0">
+                        <button class="btn btn-primary waves-effect waves-light" type="botton" onclick="headSubmit()">
+                           提交
+                        </button>
+                        <button type="reset" class="btn btn-default waves-effect waves-light m-l-5">
+                            取消
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div><!-- end col -->
+
+	</div>
 
 
 
+</div>
+<script src="/resource/plugins/fileuploads/js/dropify.min.js"></script>
+<script type="text/javascript">
+    $('.dropify').dropify({
+        messages: {
+            'default': 'Drag and drop a file here or click',
+            'replace': 'Drag and drop or click to replace',
+            'remove': 'Remove',
+            'error': 'Ooops, something wrong appended.'
+        },
+        error: {
+            'fileSize': 'The file size is too big (1M max).'
+        }
+    });
 
-
-
+    function headSubmit(){
+    	loading('show');
+    	$('#headForm').submit();
+    }
+</script>
 {include file="public/footer" /}

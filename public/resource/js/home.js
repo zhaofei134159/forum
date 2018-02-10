@@ -16,3 +16,4 @@ function alertFun(lable,body,footer){
 	alertBtn.click();
 
 }
+

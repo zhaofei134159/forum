@@ -41,3 +41,10 @@ function adminAlert(body,title,save){
 function closeModal(){
 	$('#myModal').removeClass('in').css('padding-right','').css('display','none');
 } 
+
+
+
+function loadingUrl(url){
+	loading('show');
+	window.location.href = url;
+}
