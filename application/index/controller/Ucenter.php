@@ -184,4 +184,11 @@ class Ucenter extends Common
         $this->redirect('ucenter/basicUserInfo');
     }
 
+    public function detailUserInfo(){
+
+        
+        $data = array();
+        return $this->view->fetch('detailUserInfo',$data);   
+    }
+
 }

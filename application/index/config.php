@@ -36,5 +36,31 @@ $conf['home_url']['Login']['action']['do_bind'] = '绑定邮箱';
 $conf['home_url']['Ucenter']['controller'] = '个人资料';
 $conf['home_url']['Ucenter']['action']['edituser'] = '个人信息修改';
 $conf['home_url']['Ucenter']['action']['basicuserinfo'] = '基本资料';
+$conf['home_url']['Ucenter']['action']['detailUserInfo'] = '详细资料';
+
+# 用户性格
+$conf['user_character']['1'] = '温柔';
+$conf['user_character']['2'] = '粗犷';
+$conf['user_character']['3'] = '活泼';
+$conf['user_character']['4'] = '老成';
+$conf['user_character']['5'] = '内向';
+$conf['user_character']['6'] = '开朗';
+$conf['user_character']['7'] = '豪爽';
+$conf['user_character']['8'] = '沉默';
+$conf['user_character']['9'] = '急躁';
+$conf['user_character']['10'] = '沉稳';
+
+
+# 教育程度
+$conf['edu_lavel']['no'] = '未知';
+$conf['edu_lavel']['1'] = '初中';
+$conf['edu_lavel']['2'] = '高中';
+$conf['edu_lavel']['3'] = '大学';
+$conf['edu_lavel']['4'] = '硕士';
+$conf['edu_lavel']['5'] = '小学';
+$conf['edu_lavel']['6'] = '中专/技校';
+$conf['edu_lavel']['7'] = '大专';
+$conf['edu_lavel']['8'] = '博士';
+$conf['edu_lavel']['9'] = '其他';
 
 return $conf;
