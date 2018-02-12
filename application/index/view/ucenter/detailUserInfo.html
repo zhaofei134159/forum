@@ -11,9 +11,9 @@
 
         <div class="col-lg-10 col-md-10">
             <div class="card-box">
-                <h4 class="header-title m-t-0 m-b-30"> 详细资料 </h4>
-
-                <form action="{:url('ucenter/saveUserBasic')}" method="post" enctype="multipart/form-data" data-parsley-validate novalidate id="basicFrom">
+                <h3 class="header-title m-t-0 m-b-30"> 详细资料 </h3>
+                <hr>
+                <form action="{:url('ucenter/saveDetailUser')}" method="post" enctype="multipart/form-data" data-parsley-validate novalidate id="basicFrom">
                     <div class="form-group" >
                         <label for="userName"> 婚姻状况：</label>
                         <select class="form-control select2" name="maritalStatus" id="maritalStatus" style="width:200px;">
@@ -27,26 +27,35 @@
                         <div>
                             {foreach $character = read_conf('user_character') as $user_key=>$user_character}
                             <div class="checkbox checkbox-primary checkbox-inline">
-                                <input id="checkbox2" type="checkbox" name="label[]" value="{$user_key}">
-                                <label for="checkbox2"> {$user_character} </label>
+                                <input id="checkbox{$user_key}" type="checkbox" name="label[]" value="{$user_key}" {if condition="in_array($user_key,$userinfo[labelArr])"}checked{/if}>
+                                <label for="checkbox{$user_key}"> {$user_character} </label>
                             </div>
                             {/foreach}
                         </div>
                     </div>
                     <div class="form-group" >
                         <label for="userName"> 教育程度：</label>
-                        <select class="form-control select2" name="maritalStatus" id="maritalStatus" style="width:200px;">
-                            <option value="0">请选择</option>
+                        <select class="form-control select2" name="education" id="education" style="width:200px;">
                             {foreach $edu_lavels = read_conf('edu_lavel') as $edu_key=>$edu_lavel}
-                            <div class="checkbox checkbox-primary checkbox-inline">
-                                <input id="checkbox2" type="checkbox" name="education[]" value="{$edu_key}">
-                                <label for="checkbox2"> {$edu_lavel} </label>
-                            </div>
+                            <option value="{$edu_key}" {if condition="($userinfo['education']==$edu_key)"}selected{/if}>{$edu_lavel}</option>
                             {/foreach}
                         </select>
                     </div>
+                    <div class="form-group" >
+                        <label for="userName"> 当前职业：</label>
+                        <select class="form-control select2" name="occupation" id="occupation" style="width:200px;">
+                            {foreach $occupation = read_conf('occupation') as $occ_key=>$occ_val}
+                            <option value="{$occ_key}" {if condition="($userinfo['occupation']==$occ_key)"}selected{/if}>{$occ_val}</option>
+                            {/foreach}
+                        </select>
+                    </div>
+                    <div class="form-group" >
+                        <label for="userName"> 联系方式：</label>
+                        <input type="text" name="phone" id="phone" parsley-trigger="change" required
+                               placeholder="phone" class="form-control" value="{$userinfo->phone}" style="width:400px;">
+                    </div>
 
-                    <div class="form-group text-center m-b-0">
+                    <div class="form-group text-right m-b-0">
                         <button class="btn btn-primary waves-effect waves-light" type="botton" onclick="basicSubmit()">
                            提交
                         </button>
@@ -67,82 +76,6 @@
     function basicSubmit(){
     	loading('show');
     	$('#basicFrom').submit();
-    }
-
-    var home_province = "{$homeplace['province']}";
-    var domi_province = "{$domicile['province']}";
-    var home_city = "{$homeplace['city']}";
-    var domi_city = "{$domicile['city']}";
-    var home_area = "{$homeplace['area']}";
-    var domi_area = "{$domicile['area']}";
-    $(function(){
-        if(home_province!=""){
-            citys(home_province,'city');
-        }
-        if(domi_province!=""){
-            citys(domi_province,'live_city');
-        }
-        if(home_city!=""){
-            areas(home_city,'area');
-        }
-        if(domi_city!=""){
-            areas(domi_city,'live_area');
-        }
-    })
-
-    function citys(proCode,resName){
-        // loading('show');
-        var city = home_city;   
-        if(resName=='live_city'){
-            city = domi_city;
-        }
-        $.post("{:url('ucenter/proCitys')}",{proCode:proCode},function(result){
-            if(result.flog==0){
-                loading('hide');
-                alertFun('查找城市',result.msg,false);
-                return false;
-            }else{
-                var html = '<option value="0">请选择</option>';
-                $.each(result.data,function(i,index){
-                    var selected = '';
-                    if(index.code==city){
-                        selected = 'selected';
-                    }
-                    html += '<option value="'+index.code+'" '+selected+'>'+index.name+'</option>';
-                })
-                loading('hide');
-                console.log(html);
-                $('#'+resName).html(html);
-            }
-        },'json');
-    }
-
-    function areas(cityCode,resName){
-        // loading('show');
-        var area = home_area;   
-        if(resName=='live_area'){
-            area = domi_area;
-        }
-        $.post("{:url('ucenter/cityAreas')}",{cityCode:cityCode},function(result){
-            if(result.flog==0){
-                loading('hide');
-                alertFun('查找地区',result.msg,false);
-                return false;
-            }else{
-                var html = '<option value="0">请选择</option>';
-                $.each(result.data,function(i,index){
-                    var selected = '';
-                    if(index.code==area){
-                        selected = 'selected';
-                    }
-                    html += '<option value="'+index.code+'" '+selected+'>'+index.name+'</option>';
-                })
-                loading('hide');
-                console.log(html);
-                $('#'+resName).html(html);
-            }
-        },'json');
-
     }
 </script>
 {include file="public/footer" /}

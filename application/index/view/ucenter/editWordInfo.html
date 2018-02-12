@@ -1,0 +1,187 @@
+{include file="public/header" /}
+	
+
+	<div class="row">
+
+        <div class="col-lg-2 col-md-2">
+            <div class="card-box text-center">
+                {include file="public/userinfoleft" /}
+            </div>
+        </div>
+
+        <div class="col-lg-10 col-md-10">
+            <div class="card-box">
+                <h4 class="header-title m-t-0 m-b-30">工作信息</h4>
+                <hr>
+                <table class="table table table-hover m-0">
+                    <thead>
+                        <tr>
+                            <th>工作单位</th>
+                            <th>工作时间</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="workInfoBody">
+                        {foreach $workInfo as $workKey=>$workVal}
+                        <tr id="workInfo{$workKey}">
+                            <td>{$workVal[wordJob]}</td>
+                            <td>{$workVal[timeSpan]}</td>
+                            <td>
+                                <button type="button" class="btn btn-danger btn-rounded waves-effect waves-light m-b-5" onclick="delWork({$workKey})">删除</button>
+                            </td>
+                        </tr>
+                        {/foreach}
+                    </tbody>
+                    <tbody>
+                        <tr> 
+                            <td>
+                                <input type="text" name="wordJob" id="wordJob" parsley-trigger="change" required
+                                    placeholder="工作单位" class="form-control" value="">
+                            </td> 
+                            <td>
+                                <select class="form-control select2" name="year_start" id="year_start" onchange="yearCheck($(this))">
+                                    <option value="0">年</option>
+                                    {for start="date('Y')" end="1900" comparison="egt" step="-1"}
+                                    <option value="{$i}">{$i}</option>
+                                    {/for}
+                                </select>
+                                <select class="form-control select2" name="month_start" id="month_start" >
+                                    <option value="0">月</option>
+                                </select>
+                                --
+                                <select class="form-control select2" name="year_end" id="year_end" onchange="yearEndCheck($(this))">
+                                    <option value="0">年</option>
+                                    <option value="至今">至今</option>
+                                </select>
+                                <select class="form-control select2" name="month_end" id="month_end" >
+                                    <option value="0">月</option>
+                                </select>
+                            </td> 
+                            <td>
+                               <button type="button" class="btn btn-custom btn-rounded waves-effect waves-light m-b-5" onclick="FormSave($(this))">保存</button>
+                            </td> 
+                        </tr>   
+                    </tbody>
+                </table>
+
+            </div>
+        </div><!-- end col -->
+
+	</div>
+
+
+
+</div>
+<script type="text/javascript">
+    function yearCheck(res){
+        var myDate = new Date();
+        var value = res.val();
+        if(value!=0){
+            var month_start = '<option value="0">月</option>';
+            for(var i=1;i<=12;i++){
+                month_start += '<option value="'+i+'">'+i+'</option>';
+            }
+            $('#month_start').html(month_start);
+
+            var year_end = '<option value="0">年</option>';
+                year_end += '<option value="至今">至今</option>';
+            for(var j=myDate.getFullYear();j>=value;j--){
+                year_end += '<option value="'+j+'">'+j+'</option>';
+            }
+            $('#year_end').html(year_end);
+        }
+    }
+
+    function yearEndCheck(res){
+        var value = res.val();
+
+        $('#month_end').show();
+        if(value=='至今'){
+            $('#month_end').hide();
+        }else if(value!=0){
+            var month_end = '<option value="0">月</option>';
+            for(var i=1;i<=12;i++){
+                month_end += '<option value="'+i+'">'+i+'</option>';
+            }
+            $('#month_end').html(month_end);
+        }
+    }
+
+    function FormSave(res){
+        loading('show');
+        var wordJob = $('#wordJob').val();
+        var year_start = $('#year_start').val();
+        var month_start = $('#month_start').val();
+        var year_end = $('#year_end').val();
+        var month_end = $('#month_end').val();
+       
+        if(wordJob==''){
+            loading('hide');
+            alertFun('保存错误','工作单位不能为空!',false);
+            return false;
+        }
+        if(year_start=='0'){
+            loading('hide');
+            alertFun('保存错误','开始工作年份请选择!',false);
+            return false;
+        }
+        if(month_start=='0'){
+            loading('hide');
+            alertFun('保存错误','开始工作月份请选择!',false);
+            return false;
+        }
+        if(year_end=='0'){
+            loading('hide');
+            alertFun('保存错误','结束工作月份请选择!',false);
+            return false;
+        }
+        if(month_end=='0'){
+            loading('hide');
+            alertFun('保存错误','结束工作月份请选择!',false);
+            return false;
+        }
+        var data = {
+            'wordJob':wordJob,
+            'year_start':year_start,
+            'month_start':month_start,
+            'year_end':year_end,
+            'month_end':month_end,
+        }; 
+
+        $.post("{:url('ucenter/saveWordInfo')}",data,function(res){
+            if(res.flog==0){
+                loading('hide');
+                alertFun('保存错误',res.msg,false);
+                return false;
+            }else{
+                var html = '';
+                $.each(res.data,function(i,index){
+                        html += '<tr id="workInfo'+i+'">';
+                        html += '<td>'+index.wordJob+'</td>';
+                        html += '<td>'+index.timeSpan+'</td>';
+                        html += '<td> <button type="button" class="btn btn-danger btn-rounded waves-effect waves-light m-b-5" onclick="delWork('+i+')">删除</button> </td>';
+                        html += '</tr>';
+
+                })
+                loading('hide');
+                $('#workInfoBody').append(html);
+            }
+        },'json')
+    }
+
+    function delWork(key){
+        loading('show');
+        $.post("{:url('ucenter/delWorkInfo')}",{'key':key},function(res){
+            if(res.flog==0){
+                loading('hide');
+                alertFun('删除错误',res.msg,false);
+                return false;
+            }else{
+                loading('hide');
+                $('#workInfo'+key).remove();
+                return false;
+            }
+        },'json');
+    } 
+</script>
+{include file="public/footer" /}

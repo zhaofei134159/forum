@@ -12,7 +12,7 @@
         <div class="col-lg-10 col-md-10">
             <div class="card-box">
                 <h4 class="header-title m-t-0 m-b-30">基本资料</h4>
-
+                <hr>
                 <form action="{:url('ucenter/saveUserBasic')}" method="post" enctype="multipart/form-data" data-parsley-validate novalidate id="basicFrom">
                     <div class="form-group" >
                         <label for="userName"> 性别：</label>
@@ -28,7 +28,7 @@
                         <div>
                             <select class="form-control select2" name="year" id="year" style="width:200px;display:inline;">
                                 <option value="0">年</option>
-                                {for start="$year" end="1900" comparison="egt" step="-1"}
+                                {for start="date('Y')" end="1900" comparison="egt" step="-1"}
                                 <option value="{$i}" {if condition="$data_year==$i"}selected{/if}>{$i}</option>
                                 {/for}
                             </select>

@@ -1,0 +1,132 @@
+{include file="public/header" /}
+	
+
+	<div class="row">
+
+        <div class="col-lg-2 col-md-2">
+            <div class="card-box text-center">
+                {include file="public/userinfoleft" /}
+            </div>
+        </div>
+
+        <div class="col-lg-10 col-md-10">
+            <div class="card-box">
+                <h4 class="header-title m-t-0 m-b-30">教育背景</h4>
+                <hr>
+                <table class="table table table-hover m-0">
+                    <thead>
+                        <tr>
+                            <th>学校类型</th>
+                            <th>学校名称</th>
+                            <th>入学年份</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="schoolBody">
+                        {foreach $eduBack as $eduKey=>$eduVal}
+                        <tr id="eduBack{$eduKey}">
+                            <td>{$eduVal[educationStr]}</td>
+                            <td>{$eduVal[schoolName]}</td>
+                            <td>{$eduVal[year]}</td>
+                            <td>
+                                <button type="button" class="btn btn-danger btn-rounded waves-effect waves-light m-b-5" onclick="delEdu({$eduKey})">删除</button>
+                            </td>
+                        </tr>
+                        {/foreach}
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <select class="form-control select2" name="education" id="education">
+                                    {foreach $edu_lavels = read_conf('edu_lavel') as $edu_key=>$edu_lavel}
+                                    <option value="{$edu_key}">{$edu_lavel}</option>
+                                    {/foreach}
+                                </select>
+                            </td> 
+                            <td>
+                                <input type="text" name="schoolName" id="schoolName" parsley-trigger="change" required
+                                    placeholder="学校名称" class="form-control" value="" >
+                            </td> 
+                            <td>
+                                <select class="form-control select2" name="year" id="year" >
+                                    <option value="0">请选择</option>
+                                    {for start="date('Y')" end="1900" comparison="egt" step="-1"}
+                                    <option value="{$i}">{$i}</option>
+                                    {/for}
+                                </select>
+                            </td> 
+                            <td>
+                               <button type="button" class="btn btn-custom btn-rounded waves-effect waves-light m-b-5" onclick="FormSave($(this))">保存</button>
+                            </td> 
+                        </tr>   
+                    </tbody>
+                </table>
+
+            </div>
+        </div><!-- end col -->
+
+	</div>
+
+
+
+</div>
+<script type="text/javascript">
+    function FormSave(res){
+        loading('show');
+        var education = $('#education').val();
+        var schoolName = $('#schoolName').val();
+        var year = $('#year').val();
+        if(education=='no'){
+            loading('hide');
+            alertFun('保存错误','学校类型要选择!',false);
+            return false;
+        }
+        if(schoolName==''){
+            loading('hide');
+            alertFun('保存错误','学校名称不能为空!',false);
+            return false;
+        }
+        if(year=='0'){
+            loading('hide');
+            alertFun('保存错误','入学年份请选择!',false);
+            return false;
+        }
+
+        $.post("{:url('ucenter/saveEduBack')}",{'education':education,'schoolName':schoolName,'year':year},function(res){
+            if(res.flog==0){
+                loading('hide');
+                alertFun('保存错误',res.msg,false);
+                return false;
+            }else{
+                var html = '';
+                $.each(res.data,function(i,index){
+                        html += '<tr id="eduBack'+i+'">';
+                        html += '<td>'+index.educationStr+'</td>';
+                        html += '<td>'+index.schoolName+'</td>';
+                        html += '<td>'+index.year+'</td>';
+                        html += '<td> <button type="button" class="btn btn-danger btn-rounded waves-effect waves-light m-b-5" onclick="delEdu('+i+')">删除</button> </td>';
+                        html += '</tr>';
+
+                })
+                loading('hide');
+                $('#schoolBody').append(html);
+            }
+        },'json')
+    }
+
+    function delEdu(key){
+        loading('show');
+        $.post("{:url('ucenter/delEduBack')}",{'key':key},function(res){
+            if(res.flog==0){
+                loading('hide');
+                alertFun('删除错误',res.msg,false);
+                return false;
+            }else{
+                loading('hide');
+                $('#eduBack'+key).remove();
+                return false;
+            }
+        },'json');
+    } 
+</script>
+{include file="public/footer" /}
