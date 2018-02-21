@@ -96,3 +96,19 @@ function str_em($str,$title)
 	$title = strtr($title, $new);
 	return $title;
 }
+
+function cateSplit($cate){
+	$arr = array();
+	foreach($cate as $ct){
+		if($ct['parent_id']==0){
+			$arr[$ct['id']] = $ct;
+			$arr[$ct['id']]['son'] = array(); 
+		}
+		foreach($cate as $c){
+			if($ct['id']==$c['parent_id']){
+				$arr[$ct['id']]['son'][$c['id']] = $c;
+			}
+		}
+	}
+	return $arr;
+}

@@ -29,9 +29,16 @@ class Forum extends Common
             $this->redirect('login/index');
         }
 
-        $cate = Cate::all(['is_del'=>0]);
+        $cateArr = Cate::all(['is_del'=>0]);
+        if($cateArr) {
+            $cateArr = collection($cateArr)->toArray();
+        }
+        $cateGroup = cateSplit($cateArr);
 
-        return $this->view->fetch('applyModerator');
+        $data = array(
+                'cateGroup'=>$cateGroup,
+            );
+        return $this->view->fetch('applyModerator',$data);
     }
 
 }
