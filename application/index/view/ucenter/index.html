@@ -1,7 +1,7 @@
 {include file="public/header" /}
     <style type="text/css">
         .UserNum{float:left;font-size:15px;font-weight:bold;padding:0px 6px;width:33%;}
-        .rightBorder{border-right:solid 1px gray;}
+        .leftBorder{border-left:solid 1px gray;display:inline;}
         .number{display:block;}
     </style>
 	<div class="row">
@@ -27,20 +27,18 @@
     <div  class="row">
         <div class="col-lg-4 col-md-12">
             <div class="col-lg-12">
-                <div class="text-center card-box" >
-                    <div> 
-                        <a href="" >
-                            <strong class="number">38</strong>
-                            <span>关注</span>
-                        </a>
-                        <a href="" >
-                            <strong class="number">38</strong>
-                            <span>粉丝</span>
-                        </a>
-                        <a href="" >
-                            <strong class="number">38</strong>
-                            <span>发帖</span>
-                        </a>
+                <div class="card-box widget-user">
+                    <div class="text-center col-lg-4 col-md-4">
+                        <h2 class="text-custom" data-plugin="counterup">38</h2>
+                        <h5>关注</h5>
+                    </div>
+                    <div class="text-center col-lg-4 col-md-4 ">
+                        <h2 class="text-custom" data-plugin="counterup">38</h2>
+                        <h5>粉丝</h5>
+                    </div>
+                    <div class="text-center col-lg-4 col-md-4 ">
+                        <h2 class="text-custom" data-plugin="counterup">38</h2>
+                        <h5>发帖</h5>
                     </div>
                 </div>
             </div>
@@ -49,7 +47,7 @@
                     <div class="portlet-heading" style="width:100%;text-align:left;margin-bottom:15px;">
                         <span style="padding:0px 10px;"> 个人信息 </span> 
                        |
-                        <span style="padding:0px 10px;"> LV {$user->grade} </span>
+                        <!-- <span style="padding:0px 10px;"> LV {$user->grade} </span> -->
                     </div>
                     <hr>
                     <div style="width:100%">

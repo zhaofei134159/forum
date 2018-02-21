@@ -25,20 +25,6 @@ $conf['smtp']['smtppass'] = "zf134159";//SMTP服务器的用户密码
 $conf['smtp']['mailtype'] = "HTML";//邮件格式（HTML/TXT）,TXT为文本邮件
 
 
-// 控制器 方法
-$conf['controller']['Login'] = '登录 or 注册';
-$conf['controller']['Ucenter'] = '个人资料';
-$conf['action']['setting'] = '设置';
-
-
-$conf['home_url']['Login']['controller'] = '登录 or 注册';
-$conf['home_url']['Login']['action']['do_bind'] = '绑定邮箱';
-$conf['home_url']['Ucenter']['controller'] = '个人资料';
-$conf['home_url']['Ucenter']['action']['edituser'] = '个人信息修改';
-$conf['home_url']['Ucenter']['action']['basicuserinfo'] = '基本资料';
-$conf['home_url']['Ucenter']['action']['detailuserinfo'] = '详细资料';
-$conf['home_url']['Ucenter']['action']['edubackinfo'] = '教育背景';
-$conf['home_url']['Ucenter']['action']['editwordinfo'] = '工作信息';
 
 # 用户性格
 	$conf['user_character']['1'] = '温柔';

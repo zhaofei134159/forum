@@ -1,0 +1,120 @@
+{include file="public/header" /}
+
+<link href="/resource/plugins/fileuploads/css/dropify.min.css" rel="stylesheet" type="text/css" />
+
+<!-- Treeview css -->
+<link href="/resource/plugins/jstree/style.css" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+    .header-title{font-size:30px;text-align:center;}
+    .backWhite{background:white;}
+</style>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="login-panel panel text-center panel-default">
+            <div class="panel-heading">
+                <h4 class="header-title"> 申请版主 </h4>
+            </div>
+        </div>
+
+        <div class="card-box text-center">
+            <div class="form-horizontal" >
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">版块分类：</label>
+                    <div class="col-sm-6  text-left">
+                        <div id="basicTree">
+                            <ul>
+                                <li>版块分类
+                                    <ul>
+                                        <li data-jstree='{"opened":true}'>Assets
+                                            <ul>
+                                                <li data-jstree='{"type":"file"}'>Css</li>
+                                                <li data-jstree='{"opened":true}'>Plugins
+                                                    <ul>
+                                                        <li data-jstree='{"selected":true,"type":"file"}'>Plugin one</li>
+                                                        <li data-jstree='{"type":"file"}'>Plugin two</li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li data-jstree='{"opened":true}'>Email Template
+                                            <ul>
+                                                <li data-jstree='{"type":"file"}'>Email one</li>
+                                                <li data-jstree='{"type":"file"}'>Email two</li>
+                                            </ul>
+                                        </li>
+                                        <li data-jstree='{"icon":"zmdi zmdi-view-dashboard"}'>Dashboard</li>
+                                        <li data-jstree='{"icon":"zmdi zmdi-format-underlined"}'>Typography</li>
+                                        <li data-jstree='{"opened":true}'>User Interface
+                                            <ul>
+                                                <li data-jstree='{"type":"file"}'>Buttons</li>
+                                                <li data-jstree='{"type":"file"}'>Cards</li>
+                                            </ul>
+                                        </li>
+                                        <li data-jstree='{"icon":"zmdi zmdi-collection-text"}'>Forms</li>
+                                        <li data-jstree='{"icon":"zmdi zmdi-view-list"}'>Tables</li>
+                                    </ul>
+                                </li>
+                                <li data-jstree='{"type":"file"}'>Frontend</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="name" class="col-sm-3 control-label">版块名：</label>
+                    <div class="col-sm-6">
+                        <input type="text" required name="name" class="form-control" id="name" placeholder="版块名">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">简介：</label>
+                    <div class="col-sm-6">
+                        <textarea class="form-control" name="info" rows="3" cols="" style="margin: 0px -5px 0px 0px;resize:none"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label  class="col-sm-3 control-label">背景图：</label>
+                    <div class="col-sm-6">
+                        <input type="file" class="dropify" name="headimg" data-default-file=""  />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success waves-effect waves-light" onclick="do_apply()">
+                        申请
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div><!-- end col -->
+
+</div>
+
+<script src="/resource/plugins/fileuploads/js/dropify.min.js"></script>
+<script type="text/javascript" src="/resource/admin/js/admin.js"></script>
+
+<!-- Tree view js -->
+<script src="/resource/plugins/jstree/jstree.min.js"></script>
+<script src="/resource/pages/jquery.tree.js"></script>
+
+<script type="text/javascript">
+    $('.dropify').dropify({
+        messages: {
+            'default': 'Drag and drop a file here or click',
+            'replace': 'Drag and drop or click to replace',
+            'remove': 'Remove',
+            'error': 'Ooops, something wrong appended.'
+        },
+        error: {
+            'fileSize': 'The file size is too big (1M max).'
+        }
+    });
+
+    function basicSubmit(){
+    	loading('show');
+    	$('#basicFrom').submit();
+    }
+</script>
+{include file="public/footer" /}

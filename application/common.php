@@ -41,10 +41,22 @@ function read_conf($name = '',$config_path = 'config.php')
 		return array();
 	}
 
-
-	think\Config::load($config_path);
+	$a = think\Config::load($config_path);
 	return think\Config::get($name);
 }
+
+# 地址读配置
+function url_read_conf($name,$config_path = 'urlConfig.php',$actionField='index')
+{
+	if(empty($name)){
+		return array();
+	}
+
+	$urlConfig = think\Config::load(APP_PATH.'/index/'.$config_path,'',$actionField);
+	return $urlConfig[$name];
+}
+
+
 //过滤参数
 function clearhtml($str)
 {

@@ -2,6 +2,7 @@
 namespace app\index\controller;
 
 use app\index\model\User;
+use app\index\model\Cate;
 
 use think\Session;
 use think\Config;
@@ -24,7 +25,13 @@ class Forum extends Common
 
     # 申请版主
     public function applyModerator(){
+        if(!Session::get('login_id','forum_home')){
+            $this->redirect('login/index');
+        }
 
+        $cate = Cate::all(['is_del'=>0]);
+
+        return $this->view->fetch('applyModerator');
     }
 
 }
