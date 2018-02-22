@@ -97,6 +97,23 @@ function str_em($str,$title)
 	return $title;
 }
 
+# 对象转数组
+function objToArray($obj,$str=''){
+	if($obj) {
+        $obj = collection($obj)->toArray();
+    }
+    $arr = array();
+    if(!empty($str)){
+	    foreach($obj as $key=>$val){
+	    	$arr[$val[$str]] = $val;
+	    }
+    }else{
+    	$arr = $obj;
+    }
+    return $arr;
+}
+
+# 分类拆分
 function cateSplit($cate){
 	$arr = array();
 	foreach($cate as $ct){
@@ -111,4 +128,19 @@ function cateSplit($cate){
 		}
 	}
 	return $arr;
+}
+
+# 上传图片
+function uploadFile($file,$path){
+	$filePath = '';
+ 	if($file){
+        $fileInfo = $file->move(ROOT_PATH.'public'.DS.$path);
+        if($fileInfo){
+           $filePath = $path.DS.$fileInfo->getSaveName();
+        }else{
+            Log::log($uid.' 前台上传forum 头像错误 ：'.$file->getError());
+        }
+    }
+
+    return $filePath;
 }

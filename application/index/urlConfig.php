@@ -27,6 +27,8 @@ array(
 		'controller'=>'论坛版块',
 		'action'=>array(
 			'applymoderator'=>'申请版主',
+			'myplatelist'=>'我的版块',
+			'myPlateEdit'=>'版块编辑',
 		),
 	),
 );

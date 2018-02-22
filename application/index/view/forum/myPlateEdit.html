@@ -13,38 +13,21 @@
     <div class="col-lg-12">
         <div class="login-panel panel text-center panel-default">
             <div class="panel-heading">
-                <h4 class="header-title"> 申请版主 </h4>
+                <h4 class="header-title"> 板块编辑 </h4>
             </div>
         </div>
 
         <div class="card-box text-center">
             <div class="form-horizontal" >
-                <form action="{:url('forum/saveApplyPlate')}" method="post" enctype="multipart/form-data" data-parsley-validate novalidate id="applyPlate">
+                <form action="{:url('forum/saveEditPlate')}" method="post" enctype="multipart/form-data" data-parsley-validate novalidate id="applyPlate">
                     <div class="form-group">
                         <label class="col-sm-3 control-label"> 
                             <span style="color:red;">*</span>
                             版块分类：
                         </label>
-                        <div class="col-sm-6  text-left">
-                            <div id="basicTree">
-                                <ul>
-                                    {foreach $cateGroup as $cate}
-                                    <li> 
-                                        <span onclick="selectCate({$cate['id']},'parent')">{$cate['name']}</span>
-                                        {if condition="!empty($cate['son'])"}
-                                            <ul>
-                                                {foreach $cate['son'] as $c}
-                                                <li data-jstree='{"type":"file"}'>
-                                                    <span onclick="selectCate({$c['id']},'son')">{$c['name']}</span>
-                                                </li>
-                                                {/foreach}
-                                            </ul>
-                                        {/if}
-                                    </li>
-                                    {/foreach}
-                                </ul>
-                            </div>
-                            <input type="hidden" name="cateId" id="cateId">
+                        <div class="col-sm-6 text-left">
+                            {$cateArr[$plate.cateid]['name']}
+                            <input type="hidden" name="plateId" value="{$plate.id}">
                         </div>
                     </div>
                     <div class="form-group">
@@ -52,14 +35,14 @@
                             <span style="color:red;">*</span>
                             版块名：
                         </label>
-                        <div class="col-sm-6">
-                            <input type="text" required name="name" class="form-control" id="name" find="0" onblur="findPlateName()" placeholder="版块名">
+                        <div class="col-sm-6 text-left">
+                            {$plate.name}
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label">简介：</label>
                         <div class="col-sm-6">
-                            <textarea class="form-control" name="info" rows="3" cols="" style="margin: 0px -5px 0px 0px;resize:none"></textarea>
+                            <textarea class="form-control" name="info" rows="3" cols="" style="margin: 0px -5px 0px 0px;resize:none">{$plate.info}</textarea>
                         </div>
                     </div>
                     <div class="form-group">
@@ -68,18 +51,18 @@
                             头像图：
                         </label>
                         <div class="col-sm-6">
-                            <input type="file" class="dropify" name="headimg" data-default-file=""  />
+                            <input type="file" class="dropify" name="headimg" data-default-file="/{$plate.headimg}" value="/{$plate.headimg}" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label  class="col-sm-3 control-label">背景图：</label>
                         <div class="col-sm-6">
-                            <input type="file" class="dropify" name="backimg" data-default-file=""  />
+                            <input type="file" class="dropify" name="backimg" data-default-file="/{$plate.backimg}" value="/{$plate.backimg}" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <button type="button" class="btn btn-success waves-effect waves-light" onclick="return do_apply()">
-                            申请
+                        <button type="button" class="btn btn-success waves-effect waves-light" onclick="doEdit()">
+                            提交
                         </button>
                         <button type="button" class="btn btn-info waves-effect waves-light" onclick="myPlate()">
                             我的版块
@@ -118,48 +101,10 @@
         window.location.href = "{:url('forum/myPlateList')}";
     }
 
-    function findPlateName(){
-        loading('show');
-        var name = $('input[name="name"]').val();
-        if(name==''){
-            loading('hide');
-            alertFun('申请版主','版块名称 不能为空！',false);
-            return false;
-        }
-        $.post("{:url('forum/findPlateName')}",{'name':name},function(res){
-            if(res.flog==0){
-                loading('hide');
-                alertFun('申请版主','板块名称不能重复',false);
-                $('input[name="name"]').attr('find','0');
-                return false;
-            }else{
-                loading('hide');
-                $('input[name="name"]').attr('find','1');
-            }
-        },'json');
-    }
-
-    function do_apply(){
+    function doEdit(){
     	loading('show');
-        var cateId = $('#cateId').val();
-        var name = $('input[name="name"]').val();
-        var find = $('input[name="name"]').attr('find');
         var headimg = $('input[name="headimg"]').val();
-        if(cateId==''){
-            loading('hide');
-            alertFun('申请版主','请选择分类, 然后在提交！',false);
-            return false;
-        }
-        if(name==''){
-            loading('hide');
-            alertFun('申请版主','版块名称 不能为空！',false);
-            return false;
-        }
-        if(find!=1){
-            loading('hide');
-            alertFun('申请版主','板块名称不能重复',false);
-            return false;
-        }
+        console.log(headimg);
         if(headimg==''){
             loading('hide');
             alertFun('申请版主','请上传 版块头像图！',false);
