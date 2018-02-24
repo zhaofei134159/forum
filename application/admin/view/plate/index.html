@@ -64,6 +64,13 @@
 	                                    		<span class="btn btn-outline btn-success" onclick="isDel({$plate.id},$(this))">否</span>
 	                                    	{/if}
 	                                    </td>
+	                                    <td>
+	                                    	{if condition="$plate.is_del==1"}
+	                                    		<span class="btn btn-outline btn-danger" onclick="isDel({$plate.id},$(this))">是</span>
+	                                    	{else}
+	                                    		<span class="btn btn-outline btn-success" onclick="isDel({$plate.id},$(this))">否</span>
+	                                    	{/if}
+	                                    </td>
 	                                    <td>{$plate.ctime|date="Y-m-d H:i",###}</td>
 	                                    <td>
 	                                    	<a href="javascript:void(0);" onclick="UserEdit({$plate.id})" class="btn btn-outline btn-info">编辑</a>
