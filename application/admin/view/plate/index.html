@@ -54,9 +54,9 @@
 	                                <tr>
 	                                    <td>{$plate.id}</td>
 	                                    <td>{$plate.name}</td>
-	                                    <td>{}</td>
-	                                    <td>{}</td>
-	                                    <td>{}</td>
+	                                    <td><img src="/{$plate.headimg}" width="40" height="40"></td>
+	                                    <td>{$cates[$plate.cateid][name]}</td>
+	                                    <td>{$users[$plate.userid][nikename]}</td>
 	                                    <td>
 	                                    	{if condition="$plate.is_del==1"}
 	                                    		<span class="btn btn-outline btn-danger" onclick="isDel({$plate.id},$(this))">是</span>
@@ -65,10 +65,12 @@
 	                                    	{/if}
 	                                    </td>
 	                                    <td>
-	                                    	{if condition="$plate.is_del==1"}
-	                                    		<span class="btn btn-outline btn-danger" onclick="isDel({$plate.id},$(this))">是</span>
-	                                    	{else}
-	                                    		<span class="btn btn-outline btn-success" onclick="isDel({$plate.id},$(this))">否</span>
+	                                    	{if condition="$plate.is_check==2"}
+	                                    		<span class="btn btn-outline btn-danger" onclick="isCheck({$plate.id},$(this))">审核失败</span>
+	                                    	{elseif condition="$plate.is_check==1"}
+	                                    		<span class="btn btn-outline btn-success" onclick="isCheck({$plate.id},$(this))">审核成功</span>
+	                                    	{elseif condition="$plate.is_check==0"}
+	                                    		<span class="btn btn-outline btn-default" onclick="isCheck({$plate.id},$(this))">未审核</span>
 	                                    	{/if}
 	                                    </td>
 	                                    <td>{$plate.ctime|date="Y-m-d H:i",###}</td>

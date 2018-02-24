@@ -98,7 +98,7 @@ function str_em($str,$title)
 }
 
 # 对象转数组
-function objToArray($obj,$str=''){
+function objToArray($obj,$str='id'){
 	if($obj) {
         $obj = collection($obj)->toArray();
     }

@@ -39,10 +39,18 @@ class Plate extends Common
         $plates = model_plate::where($where)->order('ctime','desc')->paginate(10, false);
         $page = $plates->render();
 
+        $cates = Admin_cate::all(['is_del'=>0]);
+        $cates = objToArray($cates);
+        
+        $users = Home_user::all(['is_del'=>0]);
+        $users = objToArray($users);
+
         $data = array(
                 'plates'=>$plates,
                 'page'=>$page,
                 'post'=>$post,
+                'cates'=>$cates,
+                'users'=>$users,
             );
         return $this->view->fetch('index',$data);
     }
