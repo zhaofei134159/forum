@@ -6,8 +6,8 @@
 				{foreach $users as $user}
 					{if condition="!in_array($user.id,$userids)"}
                         <div class="file-box" style="float:left;">
-                            <img src="/{$user.headimg}" class="img-responsive img-thumbnail" alt="{$user.name}">
-                            <p class="font-13 m-b-5 text-muted"><small>{$user.name}</small></p>
+                            <img src="/{$user.headimg}" class="img-responsive img-thumbnail" alt="{$user.nikename}">
+                            <p class="font-13 m-b-5 text-muted"><small>{$user.nikename}</small></p>
                         </div>
 					{/if}
 				{/foreach}
@@ -19,8 +19,8 @@
 				{foreach $users as $user}
 					{if condition="in_array($user.id,$userids)"}
                         <div class="file-box" style="float:left;">
-                            <img src="/{$user.headimg}" class="img-responsive img-thumbnail" alt="{$user.name}">
-                            <p class="font-13 m-b-5 text-muted"><small>{$user.name}</small></p>
+                            <img src="/{$user.headimg}" class="img-responsive img-thumbnail" alt="{$user.nikename}">
+                            <p class="font-13 m-b-5 text-muted"><small>{$user.nikename}</small></p>
                         </div>
 					{/if}
 				{/foreach}

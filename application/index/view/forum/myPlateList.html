@@ -116,7 +116,15 @@
     function adminAdd(plateId){
         loading('show');
         $.post("{:url('forum/findPlateUsers')}",{'plateId':plateId},function(res){
-
+            if(res.flog==0){
+                loading('hide');
+                alertFun('管理员',res.msg,false);
+                return false;
+            }else{
+                loading('hide');
+                alertFun('管理员',res.data,false);
+                return false;
+            }
         },'json')
     }
 </script>

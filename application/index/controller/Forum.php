@@ -165,9 +165,8 @@ class Forum extends Common
 
     # 查找版块下的管理员
     public function findPlateUsers(){
-        $post = input('post.*');
+        $post = input('post.');
         $plateId = $post['plateId'];
-        var_dump($plateId);
         if(empty($plateId)){
             return json(['flog'=>0, 'msg'=>'版块不存在']);
         }
@@ -186,7 +185,7 @@ class Forum extends Common
             );
         $html = $this->view->fetch('findPlateUsers',$data);  
 
-        echo $html;
+        return json(['flog'=>1, 'msg'=>'成功','data'=>$html]);
     }
 
 
