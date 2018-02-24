@@ -108,8 +108,16 @@
         window.location.href = "{:url('forum/myPlateEdit')}?id="+id;
     }
     function plateDel(id){
-        // loading('show');
-        // window.location.href = "{:url('forum/plateDel')}?id="+id;
+        loading('show');
+        $.post("{:url('forum/plateDel')}",{'plateId':id},function(res){
+            if(res.flog==0){
+                loading('hide');
+                alertFun('管理员',res.msg,false);
+                return false;
+            }else{
+               window.location.reload();
+            }
+        },'json')
     }
     function adminEdit(plateId){
         loading('show');

@@ -209,5 +209,27 @@ class Forum extends Common
         return json(['flog'=>1, 'msg'=>'修改管理员成功','data'=>$user]);
     }
 
+    # 板块删除
+    public function plateDel(){
+        if(!Session::get('login_id','forum_home')){
+            $this->redirect('login/index');
+        }
+        $post = input('post.');
+        $plateId = $post['plateId'];
+        if(empty($plateId)){
+            return json(['flog'=>0, 'msg'=>'版块不存在']);
+        }
+
+        $plate = Plate::get(['id'=>$plateId]);
+        $is_del = 0;
+        if($plate['is_del']==0){
+            $is_del = 1;
+        }
+        $data = array('is_del'=>$is_del);
+        Plate::where('id', $plateId)->update($data); 
+
+        $this->redirect('forum/myPlateList');
+    }
+
 
 }
