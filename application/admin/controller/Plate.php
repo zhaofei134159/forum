@@ -4,7 +4,7 @@ namespace app\admin\controller;
 use app\admin\model\Admin as Admin_user;
 use app\admin\model\User as Home_user;
 use app\admin\model\Cate as Admin_cate;
-use app\admin\model\Plate;
+use app\admin\model\Plate as model_plate;
 use think\Session;
 use think\Config;
 
@@ -21,6 +21,7 @@ class Plate extends Common
         }
     }
     
+    
     public function index(){
         $post = input('post.');
 
@@ -35,7 +36,7 @@ class Plate extends Common
             $where['is_del'] = $is_del; 
         }
 
-        $plate = Plate::where($where)->order('ctime','desc')->paginate(10, false);
+        $plate = model_plate::where($where)->order('ctime','desc')->paginate(10, false);
         $page = $plate->render();
 
         $data = array(
