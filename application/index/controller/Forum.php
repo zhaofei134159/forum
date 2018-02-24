@@ -177,7 +177,7 @@ class Forum extends Common
             $userids = explode(',',$plate['adminids']);
         }
 
-        $users = User::where(['is_del'=>0,'id'=>['!=',$plate['userid']]])->select();
+        $users = User::where(['is_del'=>0,'id'=>['<>',$plate['userid']]])->select();
 
         $data = array(
                 'userids'=>$userids,
