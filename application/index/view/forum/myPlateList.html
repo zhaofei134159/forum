@@ -48,10 +48,16 @@
                     <div class="project-members m-b-20 text-left">
                         <span class="m-r-5 font-600">管理员 :</span>
                         <div class="files-list">
-                            <!-- <div class="file-box" style="float:left;">
-                                <a href=""><img src="assets/images/attached-files/img-1.jpg" class="img-responsive img-thumbnail" alt="attached-img"></a>
-                                <p class="font-13 m-b-5 text-muted"><small>File one</small></p>
-                            </div> -->
+                            <div style="float:left;" id="adminids">
+                            {foreach $users as $user}
+                                {if condition="in_array($user.id,explode(',',$plate.adminids))"}
+                                <div class="file-box" >
+                                    <a href=""><img src="/{$user.headimg}" class="img-responsive img-thumbnail" alt="{$user.nikename}"></a>
+                                    <p class="font-13 m-b-5 text-muted"><small>{$user.nikename}</small></p>
+                                </div>
+                                {/if}
+                            {/foreach}
+                            </div>
                             <div class="file-box m-l-15"  style="float:left;cursor:pointer;" id="adminEdit">
                                 <div class="add-new-plus" onclick="adminEdit({$plate.id})">
                                     <span><i class="zmdi-plus zmdi"></i></span>
@@ -141,8 +147,8 @@
                     html += '<p class="font-13 m-b-5 text-muted"><small>'+index.nikename+'</small></p>';
                     html += '</div>';
                 })
-                $('#adminEdit').before(html);
-                $('.label').click();
+                $('#adminids').html(html);
+                $('#adminids').click();
             }
         },'json')
     })

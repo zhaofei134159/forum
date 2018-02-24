@@ -40,10 +40,13 @@ class Forum extends Common
         $myPlate = Plate::where($where)->order('ctime','desc')->paginate(10, false);        
         $page = $myPlate->render();
 
+        $users = User::where(['is_del'=>0,'id'=>['<>',$uid]])->select();
+
         $data = array(
                 'myPlate'=>$myPlate,
                 'page'=>$page,
                 'cateArr'=>$cateArr,
+                'users'=>$users,
             );
         return $this->view->fetch('myPlateList',$data);
     }
