@@ -8,7 +8,7 @@
 			<div id="users" class="files-list">
 				{foreach $users as $user}
 					{if condition="!in_array($user.id,$userids)"}
-                        <span class="file-box file-img" onclick="adminAdd({$user.id},'{$user.nikename}','{$user.headimg}')" id="user_{$user.id}">
+                        <span class="file-box file-img" onclick="adminAdd({$user.id})" id="user_{$user.id}">
                             <img class="img-circle thumb-sm" alt="{$user.nikename}" src="/{$user.headimg}" >
                             <p class="font-13 m-b-5 text-muted"><small>{$user.nikename}</small></p>
                         </span>
@@ -25,7 +25,7 @@
 			<div id="admins" class="files-list">
 				{foreach $users as $user}
 					{if condition="in_array($user.id,$userids)"}
-                        <span class="file-box file-img" onclick="adminDel({$user.id},'{$user.nikename}','{$user.headimg}')" id="admin_{$user.id}">
+                        <span class="file-box file-img" onclick="adminDel({$user.id})" id="admin_{$user.id}">
                             <img class="img-circle thumb-sm" alt="{$user.nikename}" src="/{$user.headimg}" >
                             <p class="font-13 m-b-5 text-muted"><small>{$user.nikename}</small></p>
                         	<input type="hidden" name="adminid[]" value="{$user.id}">
@@ -38,12 +38,12 @@
 </div>
 
 <script type="text/javascript">
-	function adminAdd(userid,nikename,headimg){
-		console.log(headimg);
-		 headimg = $('#user_'+userid).find('img').attr('src');
-		 console.log(headimg);
-		var html  = '<span class="file-box file-img" onclick="adminDel('+userid+','+nikename+','+headimg+')" id="admin_'+userid+'">';
-            html += '<img class="img-circle thumb-sm" alt="'+nikename+'" src="/'+headimg+'" >';
+	function adminAdd(userid){
+		var headimg = $('#user_'+userid).find('img').attr('src');
+		var nikename = $('#user_'+userid).find('img').attr('alt');
+
+		var html  = '<span class="file-box file-img" onclick="adminDel('+userid+')" id="admin_'+userid+'">';
+            html += '<img class="img-circle thumb-sm" alt="'+nikename+'" src="'+headimg+'" >';
             html += '<p class="font-13 m-b-5 text-muted"><small>'+nikename+'</small></p>';
             html += '<input type="hidden" name="adminid[]" value="{$user.id}">';
             html += '</span>';
@@ -52,7 +52,7 @@
         $('#admins').append(html);
 	}
 
-	function adminDel(userid,nikename,headimg){
+	function adminDel(userid){
         $('#admin_'+userid).remove();
         $('#user_'+userid).show();
 	}
