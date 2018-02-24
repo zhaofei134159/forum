@@ -51,7 +51,7 @@
                             <div style="float:left;" id="adminids">
                             {foreach $users as $user}
                                 {if condition="in_array($user.id,explode(',',$plate.adminids))"}
-                                <div class="file-box" style="text-align:center;">
+                                <div class="file-box" style="text-align:center;float:left;">
                                     <a href=""><img src="/{$user.headimg}" class="img-circle thumb-sm" alt="{$user.nikename}"></a>
                                     <p class="font-13 m-b-5 text-muted"><small>{$user.nikename}</small></p>
                                 </div>
@@ -142,13 +142,13 @@
                 loading('hide');
                 var html = '';
                 $.each(res.data,function(i,index){
-                    html += '<div class="file-box" style="text-align:center;">';
+                    html += '<div class="file-box" style="text-align:center;float:left;">';
                     html += '<a href=""><img src="/'+index.headimg+'" class="img-circle thumb-sm" alt="'+index.nikename+'"></a>';
                     html += '<p class="font-13 m-b-5 text-muted"><small>'+index.nikename+'</small></p>';
                     html += '</div>';
                 })
                 $('#adminids').html(html);
-                $('#adminids').click();
+                $('#custom-width-modal').hide();
             }
         },'json')
     })
