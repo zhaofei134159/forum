@@ -5,10 +5,11 @@
 			<div id="users" class="files-list">
 				{foreach $users as $user}
 					{if condition="!in_array($user.id,$userids)"}
-                        <div class="file-box" style="float:left;">
-                            <img src="/{$user.headimg}" class="img-circle user-img" width="45" height="45" alt="{$user.nikename}">
+                        <span class="file-box">
+                            <img class="img-circle thumb-sm" alt="{$user.nikename}" src="/{$user.headimg}" >
                             <p class="font-13 m-b-5 text-muted"><small>{$user.nikename}</small></p>
-                        </div>
+                        </span>
+                        
 					{/if}
 				{/foreach}
 			</div>
@@ -21,10 +22,10 @@
 			<div id="admins" class="files-list">
 				{foreach $users as $user}
 					{if condition="in_array($user.id,$userids)"}
-                        <div class="file-box" style="float:left;">
-                            <img src="/{$user.headimg}" class="img-circle user-img" width="45" height="45" alt="{$user.nikename}">
+                        <span class="file-box">
+                            <img class="img-circle thumb-sm" alt="{$user.nikename}" src="/{$user.headimg}" >
                             <p class="font-13 m-b-5 text-muted"><small>{$user.nikename}</small></p>
-                        </div>
+                        </span>
 					{/if}
 				{/foreach}
 			</div>
