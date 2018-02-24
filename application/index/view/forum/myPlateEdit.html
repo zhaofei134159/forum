@@ -103,7 +103,7 @@
 
     function doEdit(){
     	loading('show');
-        var headimg = $('input[name="headimg"]').val();
+        var headimg = $('input[name="headimg"]').attr('value');
         console.log(headimg);
         if(headimg==''){
             loading('hide');

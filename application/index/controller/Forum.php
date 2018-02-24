@@ -31,6 +31,9 @@ class Forum extends Common
         }
         $uid = Session::get('login_id','forum_home');
 
+        $cateArr = Cate::all(['is_del'=>0]);
+        $cateArr = objToArray($cateArr);
+
         $where = array();
         $where['userid'] = $uid;
 
@@ -40,7 +43,7 @@ class Forum extends Common
         $data = array(
                 'myPlate'=>$myPlate,
                 'page'=>$page,
-                // 'post'=>$post,
+                'cateArr'=>$cateArr,
             );
         return $this->view->fetch('myPlateList',$data);
     }
@@ -140,14 +143,15 @@ class Forum extends Common
         $post = input('post.');
         $headimg = request()->file('headimg');
         $backimg = request()->file('backimg');
-        var_dump($headimg);
-        var_dump($backimg);
-        
-        $saveHeadPath = 'uploads'.DS.'forum'.DS.'headimg';
-        $data['headimg'] = uploadFile($headimg,$saveHeadPath);
 
-        $saveBackPath = 'uploads'.DS.'forum'.DS.'backimg';
-        $data['backimg'] = uploadFile($backimg,$saveBackPath);
+        if($headimg){
+            $saveHeadPath = 'uploads'.DS.'forum'.DS.'headimg';
+            $data['headimg'] = uploadFile($headimg,$saveHeadPath);
+        }
+        if($backimg){
+            $saveBackPath = 'uploads'.DS.'forum'.DS.'backimg';
+            $data['backimg'] = uploadFile($backimg,$saveBackPath);
+        }
         
         $data['info'] = $post['info'];
         $data['ctime'] = time();
@@ -157,6 +161,32 @@ class Forum extends Common
         $accountData = Plate::where('id', $plateId)->update($data); 
 
         $this->redirect('forum/myPlateList');
+    }
+
+    # 查找版块下的管理员
+    public function findPlateUsers(){
+        $post = input('post.*');
+        $plateId = $post['plateId'];
+        var_dump($plateId);
+        if(empty($plateId)){
+            return json(['flog'=>0, 'msg'=>'版块不存在']);
+        }
+
+        $plate = Plate::get(['id'=>$plateId]);
+        $userids = array();
+        if(!empty($plate['adminids'])){
+            $userids = explode(',',$plate['adminids']);
+        }
+
+        $users = User::where(['is_del'=>0])->select();
+
+        $data = array(
+                'userids'=>$userids,
+                'users'=>$users
+            );
+        $html = $this->view->fetch('findPlateUsers',$data);  
+
+        echo $html;
     }
 
 

@@ -6,63 +6,89 @@
     </div>
     <div class="row">
         {foreach $myPlate as $plate}
-        <div class="col-lg-4">
-            <div class="card-box project-box">
-                <div class="label 
-                    {if condition='$plate.is_check==0'}
-                        label-warning
-                    {elseif condition='$plate.is_check==2'}
-                        label-danger
-                    {elseif condition='$plate.is_check==1'}
-                        label-success
-                    {/if}"
-                >
-                    {if condition='$plate.is_check==0'}
-                        未审核
-                    {elseif condition='$plate.is_check==2'}
-                        审核失败
-                    {elseif condition='$plate.is_check==1'}
-                        审核通过
-                    {/if}
-                </div>
-                <h4 class="m-t-0 m-b-5"><a href="" class="text-inverse">{$plate['name']}</a></h4>
-                {if condition='$plate.is_check==2'}
-                    <p class="text-danger text-uppercase m-b-20 font-13">{$plate['reason']}</p>
-                {/if}
-                <p class="text-muted font-13">{$plate['info']}</p>
-                <ul class="list-inline">
-                    <li>
-                        <h3 class="m-b-0">0</h3>
-                        <p class="text-muted">关注</p>
-                    </li>
-                    <li>
-                        <h3 class="m-b-0">0</h3>
-                        <p class="text-muted">帖子</p>
-                    </li>
-                </ul>
+        <div class="col-md-4">
+            <div class="text-center card-box">
 
-                <div class="project-members m-b-20">
-                    <span class="m-r-5 font-600">管理员 :</span>
-                    
+                <div>
+                    <img src="/{$plate.headimg}" class="img-circle thumb-xl img-thumbnail m-b-10" alt="{$plate.name}">
+
+                    <p class="text-muted font-13 m-b-30">
+                        {$plate.info}
+                    </p>
+
+                    <div class="text-left">
+                        <p class="text-muted font-13"><strong>版块名称 :</strong> <span class="m-l-15">{$plate.name}</span></p>
+
+                        <p class="text-muted font-13"><strong>版块分类 :</strong><span class="m-l-15">{$cateArr[$plate.cateid][name]}</span></p>
+
+                        <p class="text-muted font-13">
+                            <strong>版块状态 :</strong>
+                            <span class="m-l-15">
+                                <span class="label 
+                                    {if condition='$plate.is_check==0'}
+                                        label-warning
+                                    {elseif condition='$plate.is_check==2'}
+                                        label-danger
+                                    {elseif condition='$plate.is_check==1'}
+                                        label-success
+                                    {/if}"
+                                >
+                                    {if condition='$plate.is_check==0'}
+                                        未审核
+                                    {elseif condition='$plate.is_check==2'}
+                                        审核失败
+                                    {elseif condition='$plate.is_check==1'}
+                                        审核通过
+                                    {/if}
+                                </span>
+                            </span>
+                        </p>
+                    </div>
+
+                    <div class="project-members m-b-20 text-left">
+                        <span class="m-r-5 font-600">管理员 :</span>
+                        <div class="files-list">
+                            <div class="file-box" style="float:left;">
+                                <a href=""><img src="assets/images/attached-files/img-1.jpg" class="img-responsive img-thumbnail" alt="attached-img"></a>
+                                <p class="font-13 m-b-5 text-muted"><small>File one</small></p>
+                            </div>
+                            <div class="file-box" style="float:left;">
+                                <a href=""><img src="assets/images/attached-files/img-2.jpg" class="img-responsive img-thumbnail" alt="attached-img"></a>
+                                <p class="font-13 m-b-5 text-muted"><small>Attached-2</small></p>
+                            </div>
+                            <div class="file-box" style="float:left;">
+                                <a href=""><img src="assets/images/attached-files/img-3.png" class="img-responsive img-thumbnail" alt="attached-img"></a>
+                                <p class="font-13 m-b-5 text-muted"><small>Dribbble shot</small></p>
+                            </div>
+                            <div class="file-box m-l-15" style="float:left;cursor:pointer;">
+                                <div class="add-new-plus" onclick="adminAdd({$plate.id})">
+                                    <span><i class="zmdi-plus zmdi"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <div class="project-members m-b-20 text-center">
+                        <button type="button" class="btn btn-warning  btn-rounded waves-effect waves-light" onclick="plateEdit({$plate.id})">编辑</button>
+                        <button type="button" class="btn waves-effect  btn-rounded waves-light
+                            {if condition='$plate.is_del==0'}
+                                btn-danger
+                            {else}
+                                btn-success
+                            {/if}
+                        "  onclick="plateDel({$plate.id})">
+                            {if condition='$plate.is_del==0'}
+                                删除
+                            {else}
+                                恢复
+                            {/if}
+                        </button>
+                    </div>
                 </div>
 
-                <div class="project-members m-b-20 text-right">
-                    <button type="button" class="btn btn-warning waves-effect waves-light" onclick="plateEdit({$plate.id})">编辑</button>
-                    <button type="button" class="btn waves-effect waves-light
-                        {if condition='$plate.is_del==0'}
-                            btn-danger
-                        {else}
-                            btn-success
-                        {/if}
-                    "  onclick="plateDel({$plate.id})">
-                        {if condition='$plate.is_del==0'}
-                            删除
-                        {else}
-                            恢复
-                        {/if}
-                    </button>
-                </div>
             </div>
+
         </div>
         {/foreach}
     </div>
@@ -86,6 +112,12 @@
     function plateDel(id){
         // loading('show');
         // window.location.href = "{:url('forum/plateDel')}?id="+id;
+    }
+    function adminAdd(plateId){
+        loading('show');
+        $.post("{:url('forum/findPlateUsers')}",{'plateId':plateId},function(res){
+
+        },'json')
     }
 </script>
 {include file="public/footer" /}
