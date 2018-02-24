@@ -87,4 +87,19 @@ class Plate extends Common
 
         return json(['flog'=>1, 'msg'=>$update['is_check']]);
     }
+
+    public function editPlate(){
+        $get = input('get.');
+
+        $PlateInfo = array();
+        if(!empty($get['plateId'])){
+            $plateId = $get['plateId'];
+            $PlateInfo =  model_plate::get(['id'=>$plateId]);
+        }
+
+        $data = array(
+                'PlateInfo'=>$PlateInfo,
+            );
+        return $this->view->fetch('editPlate',$data);
+    }
 }

@@ -1,0 +1,144 @@
+{include file="public/header,public/top" /}
+
+    <link href="/resource/plugins/fileuploads/css/dropify.min.css" rel="stylesheet" type="text/css" />
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    版块 编辑 
+                    <button type="button" class="btn btn-outline btn-info" style="float:right;" onclick="back()">
+                        <i class="glyphicon glyphicon-arrow-left"></i> 返回 
+                    </button>
+                </h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        基本信息
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <form role="form" action="{:url('plate/savePlate')}"  method="post" id="PlateEdit" enctype="multipart/form-data">
+                                <div class="col-lg-6">
+                                    <input type="hidden" name="id" value="{$PlateInfo.id}">
+                                    <div class="form-group">
+                                        <label>版块名：</label>
+                                        {if condition="empty($PlateInfo.id)"}
+                                            <input class="form-control" name="name" id="name" value="{$PlateInfo.name}" placeholder="昵称" >
+                                        {else}
+                                            {$PlateInfo.name}
+                                        {/if}
+                                        <p class="help-block"></p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>简介：</label>
+                                        <textarea class="form-control" name="info" rows="3" cols="" style="margin: 0px -5px 0px 0px;resize:none">{$PlateInfo.info}</textarea>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label>简介：</label>
+                                        <textarea class="form-control" name="info" rows="3" cols="" style="margin: 0px -5px 0px 0px;resize:none">{$PlateInfo.info}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>版块标示图：</label>
+                                        <input type="file" class="dropify" name="headimg" data-default-file="/{$PlateInfo.headimg}"  />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>版块背景图：</label>
+                                        <input type="file" class="dropify" name="backimg" data-default-file="/{$PlateInfo.backimg}"  />
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <button type="button" class="btn btn-outline btn-success" id="FriendEditButton" onclick="EditForm($(this))">提交</button>
+                                    <button type="button" class="btn btn-outline btn-info" onclick="back()">返回</button>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- /.row (nested) -->
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+    </div>
+
+    <script src="/resource/plugins/fileuploads/js/dropify.min.js"></script>
+    <script type="text/javascript" src="/resource/admin/js/admin.js"></script>
+    <script type="text/javascript">
+        $('.dropify').dropify({
+            messages: {
+                'default': 'Drag and drop a file here or click',
+                'replace': 'Drag and drop or click to replace',
+                'remove': 'Remove',
+                'error': 'Ooops, something wrong appended.'
+            },
+            error: {
+                'fileSize': 'The file size is too big (1M max).'
+            }
+        });
+
+        // 修改信息
+        function EditForm(res){
+            if(res.hasClass('disabled')){
+                return false;
+            }
+
+            loading('show');
+            var uid = $('input[name="id"]').val();
+            var email = $('#email').val();
+            var password = $('#password').val();
+
+            var myema =  /^[_\.0-9a-z-]+@([0-9a-z][0-9a-z-]+\.){1,4}[a-z]{2,3}$/i;
+            if(!myema.test(email)) 
+            { 
+                console.log(12);
+                loading('hide');
+                $('#email').parent().addClass("has-error");  
+                $('#email').next('p').html('邮箱格式不正确');
+                return false; 
+            }
+
+            if(uid==''&&password==''){
+                loading('hide');
+                $('#password').parent().addClass("has-error");  
+                $('#password').next('p').html('密码不能为空');
+                return false; 
+            }
+
+            $('#UserEdit').submit();
+        }
+
+        // 查看是否已经存在邮箱和昵称
+        function findUser(res,type){
+            var findField = type;
+            var findVal = res.val();
+
+            $.post("{:url('admin/findUser')}",{'findField':findField,'findVal':findVal},function(data){
+                if(data.flog!=1){
+                    res.parent().addClass("has-error");
+                    res.next('p').html(data.msg);
+                    $('#UserEditButton').addClass('disabled');
+                    return false;
+                }else{
+                    if($('#UserEditButton').hasClass('disabled')){
+                        $('#UserEditButton').removeClass('disabled');
+                    }
+                    return false;
+                }
+            },'json');
+        }
+    </script>
+
+
+
+</div>
+
+{include file="public/footer" /}
