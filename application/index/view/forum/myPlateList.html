@@ -120,13 +120,13 @@
         },'json')
     }
 
-    function modelSave(){
+    $('#modelSave').click(function(){
         // loading('show');
         var adminids = new Array();
         $("input[name^='adminid']").each(function(i, index) {
             adminids[i] =$(this).val();
         });
         console.log(adminids);
-    }
+    })
 </script>
 {include file="public/footer" /}
