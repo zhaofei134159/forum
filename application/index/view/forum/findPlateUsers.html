@@ -8,7 +8,7 @@
 			<div id="users" class="files-list">
 				{foreach $users as $user}
 					{if condition="!in_array($user.id,$userids)"}
-                        <span class="file-box file-img">
+                        <span class="file-box file-img" onclick="adminAdd({$user.id},'{$user.nikename}','{$user.headimg}')" id="user_{$user.id}">
                             <img class="img-circle thumb-sm" alt="{$user.nikename}" src="/{$user.headimg}" >
                             <p class="font-13 m-b-5 text-muted"><small>{$user.nikename}</small></p>
                         </span>
@@ -25,9 +25,10 @@
 			<div id="admins" class="files-list">
 				{foreach $users as $user}
 					{if condition="in_array($user.id,$userids)"}
-                        <span class="file-box file-img">
+                        <span class="file-box file-img" onclick="adminDel({$user.id},'{$user.nikename}','{$user.headimg}')" id="admin_{$user.id}">
                             <img class="img-circle thumb-sm" alt="{$user.nikename}" src="/{$user.headimg}" >
                             <p class="font-13 m-b-5 text-muted"><small>{$user.nikename}</small></p>
+                        	<input type="hidden" name="adminid[]" value="{$user.id}">
                         </span>
 					{/if}
 				{/foreach}
@@ -35,3 +36,21 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+	function adminAdd(userid,nikename,headimg){
+		var html  = '<span class="file-box file-img" onclick="adminDel('+userid+','+nikename+','+headimg+')" id="admin_'+userid+'">';
+            html += '<img class="img-circle thumb-sm" alt="'+nikename+'" src="/'+headimg+'" >';
+            html += '<p class="font-13 m-b-5 text-muted"><small>'+nikename+'</small></p>';
+            html += '<input type="hidden" name="adminid[]" value="{$user.id}">';
+            html += '</span>';
+
+        $('#user_'+userid).hide();
+        $('#admin_'+userid).append(html);
+	}
+
+	function adminDel(userid,nikename,headimg){
+        $('#admin_'+userid).remove();
+        $('#user_'+userid).show();
+	}
+</script>
