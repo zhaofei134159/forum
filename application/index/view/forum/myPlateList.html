@@ -137,11 +137,12 @@
                 var html = '';
                 $.each(res.data,function(i,index){
                     html += '<div class="file-box" style="float:left;">';
-                    html += '<a href=""><img src="'+index.headimg+'" class="img-responsive img-thumbnail" alt="'+index.nikename+'"></a>';
+                    html += '<a href=""><img src="/'+index.headimg+'" class="img-responsive img-thumbnail" alt="'+index.nikename+'"></a>';
                     html += '<p class="font-13 m-b-5 text-muted"><small>'+index.nikename+'</small></p>';
                     html += '</div>';
                 })
                 $('#adminEdit').before(html);
+                $('.label').click();
             }
         },'json')
     })
