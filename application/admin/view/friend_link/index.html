@@ -121,7 +121,7 @@
     	// 是否删除
     	function isDel(id,res){
 			loading('show');
-    		$.post("{:url('FriendLink/isDelFriend')}",{id:id},function(data){
+    		$.post("{:url('Plate/isDelPlate')}",{id:id},function(data){
 	            loading('hide');
 	            if(res.hasClass('btn-danger')){
 	            	res.removeClass('btn-danger');
@@ -142,7 +142,7 @@
     	// 是否审核
     	function isCheck(id,res){
     		loading('show');
-    		$.post("{:url('FriendLink/isCheckFriend')}",{id:id},function(data){
+    		$.post("{:url('Plate/isCheckPlate')}",{id:id},function(data){
 	            loading('hide');
 	            if(res.hasClass('btn-danger')){
 	            	res.removeClass('btn-danger');

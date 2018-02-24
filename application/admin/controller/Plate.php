@@ -41,7 +41,7 @@ class Plate extends Common
 
         $cates = Admin_cate::all(['is_del'=>0]);
         $cates = objToArray($cates);
-        
+
         $users = Home_user::all(['is_del'=>0]);
         $users = objToArray($users);
 
@@ -53,5 +53,38 @@ class Plate extends Common
                 'users'=>$users,
             );
         return $this->view->fetch('index',$data);
+    }
+
+
+    public function isDelPlate(){
+        $post = input('post.');
+        $id = $post['id'];
+
+        $user = model_plate::get(['id'=>$id]);
+        $update = array();
+        if(empty($user['is_del'])){
+            $update['is_del'] = 1;
+        }else if($user['is_del']==1){
+           $update['is_del'] = 0;
+        }
+        model_plate::where('id', $id)->update($update);
+
+        return json(['flog'=>1, 'msg'=>$update['is_del']]);
+    }
+
+    public function isCheckPlate(){
+        $post = input('post.');
+        $id = $post['id'];
+
+        $user = model_plate::get(['id'=>$id]);
+        $update = array();
+        if(empty($user['is_check'])||$user['is_check']==2){
+            $update['is_check'] = 1;
+        }else if($user['is_check']==1){
+           $update['is_check'] = 2;
+        }
+        model_plate::where('id', $id)->update($update);
+
+        return json(['flog'=>1, 'msg'=>$update['is_check']]);
     }
 }
