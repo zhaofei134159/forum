@@ -228,7 +228,7 @@ class Forum extends Common
         $data = array('is_del'=>$is_del);
         Plate::where('id', $plateId)->update($data); 
 
-        $this->redirect('forum/myPlateList');
+        return json(['flog'=>1, 'msg'=>'success']);
     }
 
 
