@@ -1,28 +1,28 @@
 <div class="row">
+	<style type="text/css">
+		.file-img{float: left;border-right: solid 1px gray;padding: 0px 20px;text-align: center;}
+	</style>
 	<div class="col-lg-8">
 		<div class="form-group">
 			<label> 用户: </label>
 			<div id="users" class="files-list">
 				{foreach $users as $user}
 					{if condition="!in_array($user.id,$userids)"}
-                        <span class="file-box">
+                        <span class="file-box file-img">
                             <img class="img-circle thumb-sm" alt="{$user.nikename}" src="/{$user.headimg}" >
                             <p class="font-13 m-b-5 text-muted"><small>{$user.nikename}</small></p>
                         </span>
-                        
 					{/if}
 				{/foreach}
 			</div>
 		</div>
-		<br>
 		<hr>
-		<br>
 		<div class="form-group">
 			<label> 管理员: </label>
 			<div id="admins" class="files-list">
 				{foreach $users as $user}
 					{if condition="in_array($user.id,$userids)"}
-                        <span class="file-box">
+                        <span class="file-box file-img">
                             <img class="img-circle thumb-sm" alt="{$user.nikename}" src="/{$user.headimg}" >
                             <p class="font-13 m-b-5 text-muted"><small>{$user.nikename}</small></p>
                         </span>
