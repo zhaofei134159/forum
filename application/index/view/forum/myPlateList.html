@@ -127,7 +127,6 @@
             adminids[i] =$(this).val();
         });
         var plateId = $('input[name="plateId"]').val();
-        v
         $.post("{:url('forum/savePlateAdmin')}",{'plateId':plateId,'adminids':adminids},function(res){
             if(res.flog==0){
                 loading('hide');
