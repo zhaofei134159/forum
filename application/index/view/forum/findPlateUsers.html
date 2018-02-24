@@ -56,13 +56,13 @@
 	function adminDel(userid){
 		var headimg = $('#admin_'+userid).find('img').attr('src');
 		var nikename = $('#admin_'+userid).find('img').attr('alt');
-		
+
 		var html  = '<span class="file-box file-img" onclick="adminAdd('+userid+')" id="user_'+userid+'">';
             html += '<img class="img-circle thumb-sm" alt="'+nikename+'" src="'+headimg+'" >';
             html += '<p class="font-13 m-b-5 text-muted"><small>'+nikename+'</small></p>';
             html += '</span>';
 
         $('#admin_'+userid).remove();
-        $('#user_'+userid).append(html);
+        $('#users').append(html);
 	}
 </script>
