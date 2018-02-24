@@ -51,7 +51,7 @@
                             <div style="float:left;" id="adminids">
                             {foreach $users as $user}
                                 {if condition="in_array($user.id,explode(',',$plate.adminids))"}
-                                <div class="file-box" >
+                                <div class="file-box" style="text-align:center;">
                                     <a href=""><img src="/{$user.headimg}" class="img-circle thumb-sm" alt="{$user.nikename}"></a>
                                     <p class="font-13 m-b-5 text-muted"><small>{$user.nikename}</small></p>
                                 </div>
@@ -142,7 +142,7 @@
                 loading('hide');
                 var html = '';
                 $.each(res.data,function(i,index){
-                    html += '<div class="file-box" style="float:left;">';
+                    html += '<div class="file-box" style="text-align:center;">';
                     html += '<a href=""><img src="/'+index.headimg+'" class="img-circle thumb-sm" alt="'+index.nikename+'"></a>';
                     html += '<p class="font-13 m-b-5 text-muted"><small>'+index.nikename+'</small></p>';
                     html += '</div>';
