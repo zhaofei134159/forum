@@ -40,6 +40,8 @@
 <script type="text/javascript">
 	function adminAdd(userid,nikename,headimg){
 		console.log(headimg);
+		 headimg = $('#user_'+userid).find('img').attr('src');
+		 console.log(headimg);
 		var html  = '<span class="file-box file-img" onclick="adminDel('+userid+','+nikename+','+headimg+')" id="admin_'+userid+'">';
             html += '<img class="img-circle thumb-sm" alt="'+nikename+'" src="/'+headimg+'" >';
             html += '<p class="font-13 m-b-5 text-muted"><small>'+nikename+'</small></p>';
