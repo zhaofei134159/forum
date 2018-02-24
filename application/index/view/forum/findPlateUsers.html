@@ -49,12 +49,17 @@
             html += '<input type="hidden" name="adminid[]" value="'+userid+'">';
             html += '</span>';
 
-        $('#user_'+userid).hide();
+        $('#user_'+userid).remove();
         $('#admins').append(html);
 	}
 
 	function adminDel(userid){
+		var html  = '<span class="file-box file-img" onclick="adminAdd('+userid+')" id="user_'+userid+'">';
+            html += '<img class="img-circle thumb-sm" alt="'+nikename+'" src="'+headimg+'" >';
+            html += '<p class="font-13 m-b-5 text-muted"><small>'+nikename+'</small></p>';
+            html += '</span>';
+
         $('#admin_'+userid).remove();
-        $('#user_'+userid).show();
+        $('#user_'+userid).append(html);
 	}
 </script>
