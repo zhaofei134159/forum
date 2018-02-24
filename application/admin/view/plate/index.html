@@ -125,17 +125,16 @@
     		}
     		window.location.href = url;
     	}
-
-    	//用户是否删除
-    	function isDel(uid,res){
+		// 是否删除
+    	function isDel(id,res){
 			loading('show');
-    		$.post("{:url('admin/isDelUser')}",{uid:uid},function(data){
+    		$.post("{:url('Plate/isDelPlate')}",{id:id},function(data){
 	            loading('hide');
 	            if(res.hasClass('btn-danger')){
 	            	res.removeClass('btn-danger');
 	            }
-	            if(res.hasClass('btn-info')){
-	            	res.removeClass('btn-info');
+	            if(res.hasClass('btn-success')){
+	            	res.removeClass('btn-success');
 	            }
 	            if(data.msg==0){
 	            	res.addClass('btn-success');
@@ -147,23 +146,27 @@
 		    },'json');
     	}
 
-    	// 用户是否激活
-    	function isActivate(uid,res){
+    	// 是否审核
+    	function isCheck(id,res){
     		loading('show');
-    		$.post("{:url('admin/isActivate')}",{uid:uid},function(data){
+    		$.post("{:url('Plate/isCheckPlate')}",{id:id},function(data){
 	            loading('hide');
 	            if(res.hasClass('btn-danger')){
 	            	res.removeClass('btn-danger');
 	            }
-	            if(res.hasClass('btn-info')){
-	            	res.removeClass('btn-info');
+	            if(res.hasClass('btn-success')){
+	            	res.removeClass('btn-success');
 	            }
-	            if(data.msg==0){
-	            	res.addClass('btn-success');
-	            	res.html('否');
-	            }else if(data.msg==1){
+	            if(res.hasClass('btn-default')){
+	            	res.removeClass('btn-default');
+	            }
+
+	            if(data.msg==2){
 	            	res.addClass('btn-danger');
-	            	res.html('是');
+	            	res.html('审核失败');
+	            }else if(data.msg==1){
+	            	res.addClass('btn-success');
+	            	res.html('审核成功');
 	            }
 		    },'json');
 
