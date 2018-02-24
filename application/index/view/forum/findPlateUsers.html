@@ -35,6 +35,7 @@
 			</div>
 		</div>
 	</div>
+	<input type="hidden" name="plateId" value="{$plateId}">
 </div>
 
 <script type="text/javascript">
@@ -45,7 +46,7 @@
 		var html  = '<span class="file-box file-img" onclick="adminDel('+userid+')" id="admin_'+userid+'">';
             html += '<img class="img-circle thumb-sm" alt="'+nikename+'" src="'+headimg+'" >';
             html += '<p class="font-13 m-b-5 text-muted"><small>'+nikename+'</small></p>';
-            html += '<input type="hidden" name="adminid[]" value="{$user.id}">';
+            html += '<input type="hidden" name="adminid[]" value="'+userid+'">';
             html += '</span>';
 
         $('#user_'+userid).hide();

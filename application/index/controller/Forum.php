@@ -188,5 +188,22 @@ class Forum extends Common
         return json(['flog'=>1, 'msg'=>'成功','data'=>$html]);
     }
 
+    public function savePlateAdmin(){
+        $post = input('post.');
+        $adminids = $post['adminids'];
+        $plateId = $post['plateId'];
+        if(empty($plateId)){
+            return json(['flog'=>0, 'msg'=>'版块不存在']);
+        }
+
+        $plateId = $post['plateId'];
+        $data = array('adminids'=>implode(',',$adminids));
+        $accountData = Plate::where('id', $plateId)->update($data);
+
+        $user = User::where('id','in',$adminids)->select();
+
+        return json(['flog'=>1, 'msg'=>'修改管理员成功','data'=>$user]);
+    }
+
 
 }

@@ -48,11 +48,11 @@
                     <div class="project-members m-b-20 text-left">
                         <span class="m-r-5 font-600">管理员 :</span>
                         <div class="files-list">
-                            <div class="file-box" style="float:left;">
+                            <!-- <div class="file-box" style="float:left;">
                                 <a href=""><img src="assets/images/attached-files/img-1.jpg" class="img-responsive img-thumbnail" alt="attached-img"></a>
                                 <p class="font-13 m-b-5 text-muted"><small>File one</small></p>
-                            </div>
-                            <div class="file-box m-l-15" style="float:left;cursor:pointer;">
+                            </div> -->
+                            <div class="file-box m-l-15"  style="float:left;cursor:pointer;" id="adminEdit">
                                 <div class="add-new-plus" onclick="adminEdit({$plate.id})">
                                     <span><i class="zmdi-plus zmdi"></i></span>
                                 </div>
@@ -121,12 +121,30 @@
     }
 
     $('#modelSave').click(function(){
-        // loading('show');
+        loading('show');
         var adminids = new Array();
         $("input[name^='adminid']").each(function(i, index) {
             adminids[i] =$(this).val();
         });
-        console.log(adminids);
+        var plateId = $('input[name="plateId"]').val();
+        v
+        $.post("{:url('forum/savePlateAdmin')}",{'plateId':plateId,'adminids':adminids},function(res){
+            if(res.flog==0){
+                loading('hide');
+                alertFun('管理员',res.msg,false);
+                return false;
+            }else{
+                loading('hide');
+                var html = '';
+                $.each(res.data,function(i,index){
+                    html += '<div class="file-box" style="float:left;">';
+                    html += '<a href=""><img src="assets/images/attached-files/img-1.jpg" class="img-responsive img-thumbnail" alt="attached-img"></a>';
+                    html += '<p class="font-13 m-b-5 text-muted"><small>File one</small></p>';
+                    html += '</div>';
+                })
+                $('#adminEdit').before(html);
+            }
+        },'json')
     })
 </script>
 {include file="public/footer" /}
