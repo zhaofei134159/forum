@@ -52,16 +52,8 @@
                                 <a href=""><img src="assets/images/attached-files/img-1.jpg" class="img-responsive img-thumbnail" alt="attached-img"></a>
                                 <p class="font-13 m-b-5 text-muted"><small>File one</small></p>
                             </div>
-                            <div class="file-box" style="float:left;">
-                                <a href=""><img src="assets/images/attached-files/img-2.jpg" class="img-responsive img-thumbnail" alt="attached-img"></a>
-                                <p class="font-13 m-b-5 text-muted"><small>Attached-2</small></p>
-                            </div>
-                            <div class="file-box" style="float:left;">
-                                <a href=""><img src="assets/images/attached-files/img-3.png" class="img-responsive img-thumbnail" alt="attached-img"></a>
-                                <p class="font-13 m-b-5 text-muted"><small>Dribbble shot</small></p>
-                            </div>
                             <div class="file-box m-l-15" style="float:left;cursor:pointer;">
-                                <div class="add-new-plus" onclick="adminAdd({$plate.id})">
+                                <div class="add-new-plus" onclick="adminEdit({$plate.id})">
                                     <span><i class="zmdi-plus zmdi"></i></span>
                                 </div>
                             </div>
@@ -113,7 +105,7 @@
         // loading('show');
         // window.location.href = "{:url('forum/plateDel')}?id="+id;
     }
-    function adminAdd(plateId){
+    function adminEdit(plateId){
         loading('show');
         $.post("{:url('forum/findPlateUsers')}",{'plateId':plateId},function(res){
             if(res.flog==0){
