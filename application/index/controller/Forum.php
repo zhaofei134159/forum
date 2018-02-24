@@ -181,7 +181,8 @@ class Forum extends Common
 
         $data = array(
                 'userids'=>$userids,
-                'users'=>$users
+                'users'=>$users,
+                'plateId'=>$plateId
             );
         $html = $this->view->fetch('findPlateUsers',$data);  
 
