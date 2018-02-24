@@ -39,30 +39,34 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>昵称</th>
-                                    <th>邮箱</th>
+                                    <th>版块名</th>
+                                    <th>标示图</th>
+                                    <th>分类</th>
+                                    <th>版主</th>
                                     <th>是否删除</th>
+                                    <th>是否审核通过</th>
                                     <th>创建时间</th>
                                     <th>操作</th>
                                 </tr>
                             </thead>
                             <tbody>
-								{foreach $admins as $ad}
+								{foreach $plates as $plate}
 	                                <tr>
-	                                    <td>{$ad.id}</td>
-	                                    <td>{$ad.name}</td>
-	                                    <td>{$ad.email}</td>
+	                                    <td>{$plate.id}</td>
+	                                    <td>{$plate.name}</td>
+	                                    <td>{}</td>
+	                                    <td>{}</td>
+	                                    <td>{}</td>
 	                                    <td>
-	                                    	{if condition="$ad.is_del==1"}
-	                                    		<span class="btn btn-outline btn-danger" onclick="isDel({$ad.id},$(this))">是</span>
+	                                    	{if condition="$plate.is_del==1"}
+	                                    		<span class="btn btn-outline btn-danger" onclick="isDel({$plate.id},$(this))">是</span>
 	                                    	{else}
-	                                    		<span class="btn btn-outline btn-success" onclick="isDel({$ad.id},$(this))">否</span>
+	                                    		<span class="btn btn-outline btn-success" onclick="isDel({$plate.id},$(this))">否</span>
 	                                    	{/if}
 	                                    </td>
-	                                    <td>{$ad.createtime|date="Y-m-d H:i",###}</td>
+	                                    <td>{$plate.ctime|date="Y-m-d H:i",###}</td>
 	                                    <td>
-	                                    	<a href="javascript:void(0);" onclick="UserEdit({$ad.id})" class="btn btn-outline btn-info">编辑</a>
-	                                    	<!-- <a href="javascript:void(0);" class="btn btn-outline btn-danger">删除</a> -->
+	                                    	<a href="javascript:void(0);" onclick="UserEdit({$plate.id})" class="btn btn-outline btn-info">编辑</a>
 	                                    </td>
 	                                </tr>
 								{/foreach}

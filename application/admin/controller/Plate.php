@@ -36,11 +36,11 @@ class Plate extends Common
             $where['is_del'] = $is_del; 
         }
 
-        $plate = model_plate::where($where)->order('ctime','desc')->paginate(10, false);
-        $page = $plate->render();
+        $plates = model_plate::where($where)->order('ctime','desc')->paginate(10, false);
+        $page = $plates->render();
 
         $data = array(
-                'plate'=>$plate,
+                'plates'=>$plates,
                 'page'=>$page,
                 'post'=>$post,
             );
