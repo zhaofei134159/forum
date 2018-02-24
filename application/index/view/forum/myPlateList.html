@@ -137,8 +137,8 @@
                 var html = '';
                 $.each(res.data,function(i,index){
                     html += '<div class="file-box" style="float:left;">';
-                    html += '<a href=""><img src="assets/images/attached-files/img-1.jpg" class="img-responsive img-thumbnail" alt="attached-img"></a>';
-                    html += '<p class="font-13 m-b-5 text-muted"><small>File one</small></p>';
+                    html += '<a href=""><img src="'+index.headimg+'" class="img-responsive img-thumbnail" alt="'+index.nikename+'"></a>';
+                    html += '<p class="font-13 m-b-5 text-muted"><small>'+index.nikename+'</small></p>';
                     html += '</div>';
                 })
                 $('#adminEdit').before(html);
