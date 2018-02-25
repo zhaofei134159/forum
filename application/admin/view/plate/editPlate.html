@@ -39,7 +39,13 @@
                                     <div class="form-group">
                                         <label>版主：</label>
                                         {if condition="empty($PlateInfo.id)"}
-
+                                            <select name="userid" id="userid" class="form-control">
+                                                <option value="0">请选择</option>
+                                                {foreach $userArr as $user}
+                                                <option value="{$user.id}">{$user.email}</option>
+                                                {/foreach}
+                                            </select>
+                                            <p class="help-block"></p>
                                         {else}
                                             {$userArr[$PlateInfo.userid]['nikename']}
                                         {/if}
@@ -73,11 +79,12 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>版块标示图：</label>
-                                        <input type="file" class="dropify" name="headimg" data-default-file="/{$PlateInfo.headimg}"  />
+                                        <input type="file" class="dropify" name="headimg" data-default-file="/{$PlateInfo.headimg}"  value="/{$PlateInfo.headimg}"/>
+                                        <p class="help-block"></p>
                                     </div>
                                     <div class="form-group">
                                         <label>版块背景图：</label>
-                                        <input type="file" class="dropify" name="backimg" data-default-file="/{$PlateInfo.backimg}"  />
+                                        <input type="file" class="dropify" name="backimg" data-default-file="/{$PlateInfo.backimg}"  value="/{$PlateInfo.backimg}"/>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
@@ -114,8 +121,29 @@
 
         // 修改信息
         function EditForm(res){
+            if(res.hasClass('disabled')){
+                return false;
+            }
             loading('show');
-          
+            var plateId = $('input[name="plateId"]').val();
+
+            if(plateId==''){
+                var cateid = $("#cateid option:selected").val();
+                if(cateid==0){
+                    loading('hide');
+                    $('#cateid').parent().addClass("has-error");
+                    $('#cateid').next('p').html('选择子分类');
+                    return false;
+                }
+                var headimg = $('input[name="headimg"]').attr('value');
+                console.log(headimg);
+                if(headimg==''){
+                    loading('hide');
+                    $('input[name="headimg"]').parent().addClass("has-error");
+                    $('input[name="headimg"]').next('p').html('选择子分类');
+                    return false;
+                }
+            }
             $('#PlateEdit').submit();
         }
 
@@ -123,7 +151,7 @@
             var pCate = res.val();
             if(pCate==0){
                 res.parent().addClass("has-error");
-                res.next('p').html('请选父分类！');
+                res.next().next('p').html('请选父分类！');
                 $('#EditButton').addClass('disabled');
                 return false;
             }
@@ -131,7 +159,7 @@
             $.post("{:url('plate/findCate')}",{'pCate':pCate},function(data){
                 if(data.flog!=1){
                     res.parent().addClass("has-error");
-                    res.next('p').html(data.msg);
+                    res.next().next('p').html(data.msg);
                     $('#EditButton').addClass('disabled');
                     return false;
                 }else{
