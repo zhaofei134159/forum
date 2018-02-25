@@ -125,7 +125,7 @@ class Plate extends Common
 
         $cate = Admin_cate::where(['is_del'=>0,'parent_id'=>$pid])->select();
 
-        return json(['flog'=>1, 'msg'=>'父分类错误','data'=>$cate]);
+        return json(['flog'=>1, 'msg'=>'成功','data'=>$cate]);
     }
 
     public function savePlate(){
