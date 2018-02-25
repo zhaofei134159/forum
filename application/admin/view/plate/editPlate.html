@@ -2,7 +2,7 @@
 
     <link href="/resource/plugins/fileuploads/css/dropify.min.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="/resource/admin/tree/js/bootstrap-treeview.js"></script>
-    
+
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
@@ -51,7 +51,7 @@
                                             版块分类：
                                         </label>
                                         {if condition="empty($PlateInfo.id)"}
-                                            <pre id="selectable-output" ></pre>
+                                            <div id="treeview-selectable" class=""></div>
                                             <input type="hidden" name="selectCate">
                                         {else}
                                             {$cate[$PlateInfo.cateid]['name']}
