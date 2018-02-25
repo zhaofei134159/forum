@@ -30,7 +30,7 @@ class Plate extends Common
 
         $where = array();
         if(!empty($name)){
-            $where['name'] = $name; 
+            $where['name'] = array('like','%'.$name.'%'); 
         }
         if($is_del!='-1'){ 
             $where['is_del'] = $is_del; 
@@ -97,8 +97,23 @@ class Plate extends Common
             $PlateInfo =  model_plate::get(['id'=>$plateId]);
         }
 
+        # 分类
+        $cateArr = Admin_cate::all(['is_del'=>0]);
+        $cateArr = objToArray($cateArr);
+        $cateGroup = cateSplit($cateArr);
+        $parentCate = array_keys($cateGroup);
+
+        # 用户
+        $userArr = Home_user::all(['is_del'=>0]);
+        $userArr = objToArray($userArr);
+
+
         $data = array(
                 'PlateInfo'=>$PlateInfo,
+                'cateArr'=>$cateArr,
+                'cateGroup'=>$cateGroup,
+                'parentCate'=>$parentCate,
+                'userArr'=>$userArr
             );
         return $this->view->fetch('editPlate',$data);
     }

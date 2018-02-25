@@ -34,9 +34,43 @@
                                         {/if}
                                         <p class="help-block"></p>
                                     </div>
+
                                     <div class="form-group">
-                                        <label>简介：</label>
-                                        <textarea class="form-control" name="info" rows="3" cols="" style="margin: 0px -5px 0px 0px;resize:none">{$PlateInfo.info}</textarea>
+                                        <label>版主：</label>
+                                        {if condition="empty($PlateInfo.id)"}
+
+                                        {else}
+                                            {$cateGroup[$PlateInfo.cateid]['name']}
+                                        {/if}
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label> 
+                                            版块分类：
+                                        </label>
+                                        {if condition="empty($PlateInfo.id)"}
+                                        <div id="basicTree">
+                                            <ul>
+                                                {foreach $cateGroup as $cate}
+                                                <li> 
+                                                    <span onclick="selectCate({$cate['id']},'parent')">{$cate['name']}</span>
+                                                    {if condition="!empty($cate['son'])"}
+                                                        <ul>
+                                                            {foreach $cate['son'] as $c}
+                                                            <li data-jstree='{"type":"file"}'>
+                                                                <span onclick="selectCate({$c['id']},'son')">{$c['name']}</span>
+                                                            </li>
+                                                            {/foreach}
+                                                        </ul>
+                                                    {/if}
+                                                </li>
+                                                {/foreach}
+                                            </ul>
+                                        </div>
+                                        {else}
+                                            {$cateArr[$PlateInfo.cateid]['name']}
+                                        {/if}
+                                        <input type="hidden" name="cateId" id="cateId">
                                     </div>
                                     
                                     <div class="form-group">

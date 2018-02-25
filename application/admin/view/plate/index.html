@@ -10,7 +10,7 @@
         <div class="row"> 
         	<div class="col-lg-12">
                 <div class="panel-body">
-                    <form role="form" action="{:url('plate/index')}" method="post" id="UserSearch">
+                    <form role="form" action="{:url('plate/index')}" method="post" id="PlateSearch">
                     	<div class="row">
 	                    	<div class="col-lg-3">
 	                        	<input class="form-control" name="name" id="name" value="{$post['name']}" placeholder="版块名">
@@ -98,22 +98,7 @@
     	// 搜索
     	function formSearch(){
 	        loading('show');
-    		var email = $('#email').val();
-
-    		if(email==''){
-		    	$('#UserSearch').submit();
-		    	return false;
-    		}
-		    var myema =  /^[_\.0-9a-z-]+@([0-9a-z][0-9a-z-]+\.){1,4}[a-z]{2,3}$/i;
-		    if(!myema.test(email)) 
-		    { 
-    			console.log(12);
-		        loading('hide');
-		      	$('#email').parent().addClass("has-error");  
-		        return false; 
-		    }
-
-		    $('#UserSearch').submit();
+		    $('#PlateSearch').submit();
     	}
 
     	function PlateEdit(plateId){
