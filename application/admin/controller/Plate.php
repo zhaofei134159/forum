@@ -124,6 +124,9 @@ class Plate extends Common
         }
 
         $cate = Admin_cate::where(['is_del'=>0,'parent_id'=>$pid])->select();
+        if(empty($cate)){
+            return json(['flog'=>0, 'msg'=>'该分类下没有子分类']);
+        }
 
         return json(['flog'=>1, 'msg'=>'成功','data'=>$cate]);
     }

@@ -43,7 +43,6 @@
                                         {else}
                                             {$userArr[$PlateInfo.userid]['nikename']}
                                         {/if}
-                                        <input type="hidden" name="userId" id="userId" value="{$PlateInfo.userid}">
                                     </div>
 
                                     <div class="form-group">
@@ -64,7 +63,6 @@
                                         {else}
                                             {$cate[$PlateInfo.cateid]['name']}
                                         {/if}
-                                        <input type="hidden" name="cateId" id="cateId" value="{$PlateInfo.cateid}">
                                     </div>
                                     
                                     <div class="form-group">
@@ -125,7 +123,7 @@
             var pCate = res.val();
             if(pCate==0){
                 res.parent().addClass("has-error");
-                res.next('p').html(data.msg);
+                res.next('p').html('请选父分类！');
                 $('#EditButton').addClass('disabled');
                 return false;
             }
