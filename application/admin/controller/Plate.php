@@ -103,36 +103,29 @@ class Plate extends Common
         $userArr = objToArray($userArr);
 
         # 分类
-        $cate = Admin_cate::all(['is_del'=>0]);
+        $cates = Admin_cate::all(['is_del'=>0,'parent_id'=>0]);
 
-        $cateArr = array();
-        $i = 0;
-        $j = 0;
-        foreach($cate as $val){
-            if($val['parent_id']==0){
-                $cateArr[$i]['text'] = $val['name'];
-                $cateArr[$i]['nodeId'] = $val['id'];
-                $cateArr[$i]['parent_id'] = $val['parent_id'];
-                $cateArr[$i]['nodes'] = array();
-            }
-            foreach($cate as $c){
-                if($c['parent_id']==$val['id']){
-                    $cateArr[$i]['nodes'][$j]['text'] = $c['name'];
-                    $cateArr[$i]['nodes'][$j]['nodeId'] = $c['id'];
-                    $cateArr[$i]['nodes'][$j]['parent_id'] = $c['parent_id'];
-                    $j++;
-                }
-            }
-            $i++;
-        }
-        $cateStr = json_encode($cateArr);
 
         $data = array(
                 'PlateInfo'=>$PlateInfo,
-                'cateStr'=>$cateStr,
+                'cates'=>$cates,
                 'userArr'=>$userArr
             );
         return $this->view->fetch('editPlate',$data);
+    }
+
+    public function findCate(){
+        $post = input('post.');
+        $pid = $post['pCate'];
+
+        $pcate = Admin_cate::get(['is_del'=>0,'id'=>$pid]);
+        if(empty($pcate)){
+            return json(['flog'=>0, 'msg'=>'父分类错误']);
+        }
+
+        $cate = Admin_cate::where(['is_del'=>0,'parent_id'=>$pid])->select();
+
+        return json(['flog'=>1, 'msg'=>'父分类错误','data'=>$cate]);
     }
 
     public function savePlate(){
