@@ -40,8 +40,9 @@
                                         {if condition="empty($PlateInfo.id)"}
 
                                         {else}
-                                            {$cateGroup[$PlateInfo.cateid]['name']}
+                                            {$userArr[$PlateInfo.userid]['name']}
                                         {/if}
+                                        <input type="hidden" name="userId" id="userId" value="{$PlateInfo.userid}">
                                     </div>
 
                                     <div class="form-group">
@@ -70,7 +71,7 @@
                                         {else}
                                             {$cateArr[$PlateInfo.cateid]['name']}
                                         {/if}
-                                        <input type="hidden" name="cateId" id="cateId">
+                                        <input type="hidden" name="cateId" id="cateId" value="{$PlateInfo.cateid}">
                                     </div>
                                     
                                     <div class="form-group">
@@ -121,32 +122,8 @@
 
         // 修改信息
         function EditForm(res){
-            if(res.hasClass('disabled')){
-                return false;
-            }
-
             loading('show');
-            var uid = $('input[name="id"]').val();
-            var email = $('#email').val();
-            var password = $('#password').val();
-
-            var myema =  /^[_\.0-9a-z-]+@([0-9a-z][0-9a-z-]+\.){1,4}[a-z]{2,3}$/i;
-            if(!myema.test(email)) 
-            { 
-                console.log(12);
-                loading('hide');
-                $('#email').parent().addClass("has-error");  
-                $('#email').next('p').html('邮箱格式不正确');
-                return false; 
-            }
-
-            if(uid==''&&password==''){
-                loading('hide');
-                $('#password').parent().addClass("has-error");  
-                $('#password').next('p').html('密码不能为空');
-                return false; 
-            }
-
+          
             $('#UserEdit').submit();
         }
 
