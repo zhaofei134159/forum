@@ -97,25 +97,39 @@ class Plate extends Common
             $PlateInfo =  model_plate::get(['id'=>$plateId]);
         }
 
-        # 分类
-        $cateArr = Admin_cate::all(['is_del'=>0]);
-        $cateArr = objToArray($cateArr);
-        $cateGroup = cateSplit($cateArr);
-        $cateStr = json_encode($cateGroup);
-
-        $parentCate = array_keys($cateGroup);
 
         # 用户
         $userArr = Home_user::all(['is_del'=>0]);
         $userArr = objToArray($userArr);
 
+        # 分类
+        $cate = Admin_cate::all(['is_del'=>0]);
+
+        $cateArr = array();
+        $i = 0;
+        $j = 0;
+        foreach($cate as $val){
+            if($val['parent_id']==0){
+                $cateArr[$i]['text'] = $val['name'];
+                $cateArr[$i]['nodeId'] = $val['id'];
+                $cateArr[$i]['parent_id'] = $val['parent_id'];
+                $cateArr[$i]['nodes'] = array();
+            }
+            foreach($cate as $c){
+                if($c['parent_id']==$val['id']){
+                    $cateArr[$i]['nodes'][$j]['text'] = $c['name'];
+                    $cateArr[$i]['nodes'][$j]['nodeId'] = $c['id'];
+                    $cateArr[$i]['nodes'][$j]['parent_id'] = $c['parent_id'];
+                    $j++;
+                }
+            }
+            $i++;
+        }
+        $cateStr = json_encode($cateArr);
 
         $data = array(
                 'PlateInfo'=>$PlateInfo,
-                'cateArr'=>$cateArr,
                 'cateStr'=>$cateStr,
-                'cateGroup'=>$cateGroup,
-                'parentCate'=>$parentCate,
                 'userArr'=>$userArr
             );
         return $this->view->fetch('editPlate',$data);
