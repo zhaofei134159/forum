@@ -40,7 +40,7 @@
                                         {if condition="empty($PlateInfo.id)"}
 
                                         {else}
-                                            {$userArr[$PlateInfo.userid]['name']}
+                                            {$userArr[$PlateInfo.userid]['nikename']}
                                         {/if}
                                         <input type="hidden" name="userId" id="userId" value="{$PlateInfo.userid}">
                                     </div>
@@ -124,7 +124,7 @@
         function EditForm(res){
             loading('show');
           
-            $('#UserEdit').submit();
+            $('#PlateEdit').submit();
         }
 
         // 查看是否已经存在邮箱和昵称

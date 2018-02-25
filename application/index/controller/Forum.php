@@ -157,7 +157,7 @@ class Forum extends Common
         }
         
         $data['info'] = $post['info'];
-        $data['ctime'] = time();
+        $data['utime'] = time();
 
         $plateId = $post['plateId'];
 

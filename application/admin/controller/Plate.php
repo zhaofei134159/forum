@@ -117,4 +117,34 @@ class Plate extends Common
             );
         return $this->view->fetch('editPlate',$data);
     }
+
+    public function savePlate(){
+        $post = input('post.');    
+        $plateId = $post['plateId'];
+
+        if(empty($plateId)){
+
+        }else{
+
+            $headimg = request()->file('headimg');
+            $backimg = request()->file('backimg');
+
+            if($headimg){
+                $saveHeadPath = 'uploads'.DS.'forum'.DS.'headimg';
+                $data['headimg'] = uploadFile($headimg,$saveHeadPath);
+            }
+            if($backimg){
+                $saveBackPath = 'uploads'.DS.'forum'.DS.'backimg';
+                $data['backimg'] = uploadFile($backimg,$saveBackPath);
+            }
+            
+            $data['info'] = $post['info'];
+            $data['utime'] = time();
+
+            $accountData = Plate::where('id', $plateId)->update($data); 
+
+        }
+
+        $this->redirect('plate/index');
+    }
 }
