@@ -141,7 +141,7 @@ class Plate extends Common
             $data['info'] = $post['info'];
             $data['utime'] = time();
 
-            $accountData = Plate::where('id', $plateId)->update($data); 
+            $accountData = model_plate::where('id', $plateId)->update($data); 
 
         }
 
