@@ -101,6 +101,8 @@ class Plate extends Common
         $cateArr = Admin_cate::all(['is_del'=>0]);
         $cateArr = objToArray($cateArr);
         $cateGroup = cateSplit($cateArr);
+        $cateStr = json_encode($cateGroup);
+        
         $parentCate = array_keys($cateGroup);
 
         # 用户

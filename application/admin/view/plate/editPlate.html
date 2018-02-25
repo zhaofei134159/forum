@@ -50,24 +50,8 @@
                                             版块分类：
                                         </label>
                                         {if condition="empty($PlateInfo.id)"}
-                                        <div id="basicTree">
-                                            <ul>
-                                                {foreach $cateGroup as $cate}
-                                                <li> 
-                                                    <span onclick="selectCate({$cate['id']},'parent')">{$cate['name']}</span>
-                                                    {if condition="!empty($cate['son'])"}
-                                                        <ul>
-                                                            {foreach $cate['son'] as $c}
-                                                            <li data-jstree='{"type":"file"}'>
-                                                                <span onclick="selectCate({$c['id']},'son')">{$c['name']}</span>
-                                                            </li>
-                                                            {/foreach}
-                                                        </ul>
-                                                    {/if}
-                                                </li>
-                                                {/foreach}
-                                            </ul>
-                                        </div>
+                                            <pre id="selectable-output" ></pre>
+                                            <input type="hidden" name="selectCate">
                                         {else}
                                             {$cateArr[$PlateInfo.cateid]['name']}
                                         {/if}
@@ -107,6 +91,24 @@
 
     <script src="/resource/plugins/fileuploads/js/dropify.min.js"></script>
     <script type="text/javascript" src="/resource/admin/js/admin.js"></script>
+    <script type="text/javascript">
+        
+        var defaultData = '{$cateStr}';
+
+        var initSelectableTree = function() {
+            return $('#treeview-selectable').treeview({
+                data: defaultData,
+                onNodeSelected: function(event, node) {
+                    $('input[name="selectCate"]').val(node.text);
+                },
+                onNodeUnselected: function (event, node) {
+                    $('input[name="selectCate"]').val('');
+                }
+            });
+        };
+        var $selectableTree = initSelectableTree();
+
+    </script>
     <script type="text/javascript">
         $('.dropify').dropify({
             messages: {
