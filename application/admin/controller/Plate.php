@@ -102,7 +102,7 @@ class Plate extends Common
         $cateArr = objToArray($cateArr);
         $cateGroup = cateSplit($cateArr);
         $cateStr = json_encode($cateGroup);
-        
+
         $parentCate = array_keys($cateGroup);
 
         # 用户
@@ -113,6 +113,7 @@ class Plate extends Common
         $data = array(
                 'PlateInfo'=>$PlateInfo,
                 'cateArr'=>$cateArr,
+                'cateStr'=>$cateStr,
                 'cateGroup'=>$cateGroup,
                 'parentCate'=>$parentCate,
                 'userArr'=>$userArr
