@@ -24,7 +24,7 @@
                         <div class="row">
                             <form role="form" action="{:url('plate/savePlate')}"  method="post" id="PlateEdit" enctype="multipart/form-data">
                                 <div class="col-lg-6">
-                                    <input type="hidden" name="id" value="{$PlateInfo.id}">
+                                    <input type="hidden" name="plateId" value="{$PlateInfo.id}">
                                     <div class="form-group">
                                         <label>版块名：</label>
                                         {if condition="empty($PlateInfo.id)"}
