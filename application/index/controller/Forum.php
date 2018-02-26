@@ -37,7 +37,7 @@ class Forum extends Common
         $where = array();
         $where['userid'] = $uid;
 
-        $myPlate = Plate::where($where)->order('ctime','desc')->paginate(10, false);        
+        $myPlate = Plate::where($where)->order('ctime','desc')->paginate(9, false);        
         $page = $myPlate->render();
 
         $users = User::where(['is_del'=>0,'id'=>['<>',$uid]])->select();
