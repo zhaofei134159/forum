@@ -26,9 +26,16 @@ array(
 	'Forum'=>array(
 		'controller'=>'论坛版块',
 		'action'=>array(
+			'index'=>'版块首页',
 			'applymoderator'=>'申请版主',
 			'myplatelist'=>'我的版块',
 			'myPlateEdit'=>'版块编辑',
+		),
+	),
+	'Cart'=>array(
+		'controller'=>'论坛帖子',
+		'action'=>array(
+			'index'=>'帖子首页',
 		),
 	),
 );

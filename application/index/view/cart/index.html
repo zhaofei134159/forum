@@ -1,37 +1,74 @@
 {include file="public/header" /}
     <div class="row">
         <div class="col-sm-4">
-            <button type="button" class="btn btn-purple btn-rounded w-md waves-effect waves-light m-b-20" onclick="applyPlate()"> 申请版块 </button>
+            <button type="button" class="btn btn-info btn-rounded w-md waves-effect waves-light m-b-20" onclick="sendCart()"> 发帖 </button>
         </div>
     </div>
+    <style type="text/css">
+        .table>tbody>tr>td, .table>tbody>tr>th{border-bottom:1px solid #ddd;}
+        .author{width:100px;font-size:14px;}
+        .commit{width:200px;font-size:14px;}
+        .name{height:60px;line-height:60px;}
+    </style>
     <div class="row">
 
         <div class="col-md-12">
-            <div class="">
+            <div class="">  
+                <div class="panel panel-custom panel-border card-draggable ui-sortable-handle">
+                    <div class="panel-heading" >
+                        <table class="table table table-hover m-0">
+                            <thead>
+                                <tr>
+                                    <th class="name">
+                                        <button class="btn btn-info waves-effect waves-light btn-sm m-b-5" onclick="seeCart('all')"> 全部 </button>
+                                        <button class="btn btn-success waves-effect waves-light btn-sm m-b-5" onclick="seeCart('new')"> 最新 </button>
+                                        <button class="btn btn-custom waves-effect waves-light btn-sm m-b-5" onclick="seeCart('hot')"> 热门 </button>
+                                        <button class="btn btn-primary waves-effect waves-light btn-sm m-b-5" onclick="seeCart('elite')"> 精华 </button>
+                                    </th>
+                                    <th class="author">作者</th>
+                                    <th class="commit">回复/查看</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    
+                    <div class="panel-body icon-list-demo">
+                        <!-- 置顶 -->
+                        <div class="clearfix">
 
-                <div class="card-box">
-                    <h4 class="page-header header-title"><b>Web App Icons </b></h4>
-                    <div class="row icon-list-demo">
+                        </div>
+
+                        <h4 class="page-header m-t-10 header-title"></h4>
+
+                        <div class="clearfix">
+                            <table class="table table table-hover m-0">
+                                <tr>
+                                    <td class="name">平安科技着眼城市建设支点，“智慧城市云”功不可没</td>
+                                    <td class="author"> 
+                                        。。。
+                                        <br>
+                                        2018-02-26
+                                    </td>
+                                    <td class="commit">
+
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
 
                     </div>
 
-                    <h4 class="page-header header-title"><b>Control Icons</b></h4>
-                    <div class="row icon-list-demo">
-
-                    </div>
-
-                    <h4 class="page-header header-title"><b>Text Editor</b></h4>
-                    <div class="row icon-list-demo">
-
-                    </div>
                 </div>
-                
+
             </div>
         </div>
 
     </div>
 </div>
 <script type="text/javascript">
-  
+    function sendCart(){
+        loading('show');
+        window.location.href = "{:url('cart/sendCart')}";
+    }
 </script>
 {include file="public/footer" /}

@@ -18,7 +18,7 @@ class Cart extends Common
 	}
 
 	public function index(){
-		
+
         return $this->view->fetch('index');
 	}
 }
