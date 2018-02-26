@@ -133,6 +133,11 @@
                     $('#userid').parent().addClass("has-error");
                     $('#userid').next('p').html('选择版主');
                     return false;
+                }else{
+                    if($('#userid').parent().addClass("has-error")){
+                        $('#userid').parent().removeClass("has-error")
+                        $('#userid').next('p').html('');
+                    }
                 }
 
                 var cateid = $("#cateid option:selected").val();
@@ -141,6 +146,11 @@
                     $('#cateid').parent().addClass("has-error");
                     $('#cateid').next('p').html('选择子分类');
                     return false;
+                }else{
+                    if($('#cateid').parent().addClass("has-error")){
+                        $('#cateid').parent().removeClass("has-error")
+                        $('#cateid').next('p').html('');
+                    }
                 }
 
                 var headimg = $('input[name="headimg"]').attr('value');
@@ -150,6 +160,11 @@
                     $('input[name="headimg"]').parent().addClass("has-error");
                     $('input[name="headimg"]').next('p').html('上传版块标示图');
                     return false;
+                }else{
+                    if($('input[name="headimg"]').parent().addClass("has-error")){
+                        $('input[name="headimg"]').parent().removeClass("has-error")
+                        $('input[name="headimg"]').next('p').html('');
+                    }
                 }
             }
             $('#PlateEdit').submit();
