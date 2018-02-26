@@ -37,6 +37,7 @@ array(
 		'action'=>array(
 			'index'=>'帖子首页',
 			'sendcart'=>'发表帖子',
+			'seecart'=>'查看帖子',
 		),
 	),
 );
