@@ -72,18 +72,17 @@ class Cart extends Common
 
         $cart = model_cart::create($data);
 
-        $this->redirect('cart/seeCart',['cartId'=>$cart['id']]);
+        $this->redirect('cart/seeCart',['cartId'=>$cart['id'],'plateId'=>$plateId]);
 	}
 
 
     public function seeCart(){
-        $get = input('get.');
-        $cartId = $get['cartId'];
-        var_dump(input('param.cartId'));
-        var_dump($cartId);
+        $get = input('input.');
+        $cartId = input('param.cartId');
+        $plateId = input('param.plateId');
 
         $cart = model_cart::get(['id'=>$cartId]);
-
+        
         $data = array(
                 'cart'=>$cart,
             );

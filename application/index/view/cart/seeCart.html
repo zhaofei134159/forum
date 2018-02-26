@@ -1,0 +1,29 @@
+{include file="public/header" /}
+    {if condition="empty($cart)"}
+        <div class="row">
+            该帖子跑到火星了！
+        </div>
+    {elseif condition="$cart.is_del==1"} 
+        <div class="row">
+            该帖子已删除！
+        </div>
+    {else}
+        <div class="row">
+            <div class="col-sm-4">
+                <button type="button" class="btn btn-success btn-rounded w-md waves-effect waves-light m-b-20" onclick="ReplyCart()"> 回帖 </button>
+                <button type="button" class="btn btn-info btn-rounded w-md waves-effect waves-light m-b-20" onclick="back()"> 返回 </button>
+            </div>
+        </div>
+        <div class="row">
+
+
+        </div>
+    {/if}
+</div>
+<script type="text/javascript" src="/resource/admin/js/admin.js"></script>
+<script type="text/javascript">
+    function ReplyCart(plateId){
+       
+    }
+</script>
+{include file="public/footer" /}
