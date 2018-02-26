@@ -58,7 +58,7 @@
                                         {if condition="empty($PlateInfo.id)"}
                                             <select name="cateParent" id="cateParent" class="form-control" onchange="parentCate($(this))">
                                                 <option value="0">请选择</option>
-                                                {foreach $cates as $cate}
+                                                {foreach $parent_cates as $cate}
                                                 <option value="{$cate.id}">{$cate.name}</option>
                                                 {/foreach}
                                             </select>
@@ -67,7 +67,7 @@
                                             </select>
                                             <p class="help-block"></p>
                                         {else}
-                                            {$cate[$PlateInfo.cateid]['name']}
+                                            {$cates[$PlateInfo.cateid]['name']}
                                         {/if}
                                     </div>
                                     

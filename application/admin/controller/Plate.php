@@ -97,17 +97,19 @@ class Plate extends Common
             $PlateInfo =  model_plate::get(['id'=>$plateId]);
         }
 
-
         # 用户
         $userArr = Home_user::all(['is_del'=>0]);
         $userArr = objToArray($userArr);
 
         # 分类
-        $cates = Admin_cate::all(['is_del'=>0,'parent_id'=>0]);
+        $parent_cates = Admin_cate::all(['is_del'=>0,'parent_id'=>0]);
 
+        $cates = Admin_cate::all(['is_del'=>0]);
+        $cates = objToArray($cates);
 
         $data = array(
                 'PlateInfo'=>$PlateInfo,
+                'parent_cates'=>$parent_cates,
                 'cates'=>$cates,
                 'userArr'=>$userArr
             );
