@@ -128,6 +128,13 @@
             var plateId = $('input[name="plateId"]').val();
 
             if(plateId==''){
+                var userid = $("#userid option:selected").val();
+                if(userid==0){
+                    loading('hide');
+                    $('#userid').parent().addClass("has-error");
+                    $('#userid').next('p').html('选择版主');
+                    return false;
+                }
                 var cateid = $("#cateid option:selected").val();
                 if(cateid==0){
                     loading('hide');
