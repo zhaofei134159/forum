@@ -50,14 +50,41 @@ class Cart extends Common
 	}
 
 	public function saveCart(){
-		if(!Session::get('login_id','forum_home')){
+        $userid = Session::get('login_id','forum_home');
+		if(!$userid){
             $this->redirect('login/index');
         }
         $post = input('post.');
-        var_dump($post);die;
+
         $plateId = $post['plateId'];
         $name = $post['name'];
+        $content = $post['content'];
+
+        $data = array();
+        $data['plateId'] = $plateId;
+        $data['title'] = $name;
+        $data['content'] = $content;
+        $data['userid'] = $userid;
+        $data['cartId'] = 0;
+        $data['see'] = 0;
+        $data['ctime'] = time();
+        $data['utime'] = time();
+
+        model_cart::insert($data);
+
 	}
+
+
+    public function seeCart(){
+        $get = input('get.');
+        $cartId = $get['cartId'];
+        $cart = model_cart::get(['id'=>$cartId]);
+        
+        $data = array(
+                'cart'=>$cart,
+            );
+        return $this->view->fetch('seeCart',$data);
+    }
 
 
 }
