@@ -155,7 +155,7 @@
 
                 var headimg = $('input[name="headimg"]').attr('value');
                 console.log(headimg);
-                if(headimg=='/'||headimg==''){
+                if(headimg==undefined){
                     loading('hide');
                     $('input[name="headimg"]').parent().addClass("has-error");
                     $('input[name="headimg"]').next('p').html('上传版块标示图');

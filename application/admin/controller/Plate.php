@@ -137,6 +137,28 @@ class Plate extends Common
 
         if(empty($plateId)){
 
+            $data = array();
+            $data['name'] = $post['name'];
+            $data['info'] = $post['info'];
+            $data['userid'] = $post['userid'];
+            $data['cateid'] = $post['cateid'];
+            $data['is_check'] = 1;
+            $data['is_del'] = 0;
+            $data['ctime'] = time();
+            $data['utime'] = time();
+
+            $headimg = request()->file('headimg');
+            $backimg = request()->file('backimg');
+            if($headimg){
+                $saveHeadPath = 'uploads'.DS.'forum'.DS.'headimg';
+                $data['headimg'] = uploadFile($headimg,$saveHeadPath);
+            }
+            if($backimg){
+                $saveBackPath = 'uploads'.DS.'forum'.DS.'backimg';
+                $data['backimg'] = uploadFile($backimg,$saveBackPath);
+            }
+
+            $place = model_plate::insert($data); 
         }else{
 
             $headimg = request()->file('headimg');
@@ -154,7 +176,7 @@ class Plate extends Common
             $data['info'] = $post['info'];
             $data['utime'] = time();
 
-            $accountData = model_plate::where('id', $plateId)->update($data); 
+            $place = model_plate::where('id', $plateId)->update($data); 
 
         }
 
