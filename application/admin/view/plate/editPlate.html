@@ -134,28 +134,21 @@
                     $('#userid').next('p').html('选择版主');
                     return false;
                 }
-                
+
                 var cateid = $("#cateid option:selected").val();
                 if(cateid==0){
                     loading('hide');
                     $('#cateid').parent().addClass("has-error");
                     $('#cateid').next('p').html('选择子分类');
                     return false;
-                }else{
-                    if($('#UserEditButton').hasClass('disabled')){
-                        $('#UserEditButton').removeClass('disabled');
-                    }
                 }
 
                 var headimg = $('input[name="headimg"]').attr('value');
                 console.log(headimg);
-                if(headimg==''){
+                if(headimg=='/'||headimg==''){
                     loading('hide');
                     $('input[name="headimg"]').parent().addClass("has-error");
-                    $('input[name="headimg"]').next('p').html('选择子分类');
-                    return false;
-                }
-                if(res.hasClass('disabled')){
+                    $('input[name="headimg"]').next('p').html('上传版块标示图');
                     return false;
                 }
             }
@@ -167,7 +160,6 @@
             if(pCate==0){
                 res.parent().addClass("has-error");
                 res.next().next('p').html('请选父分类！');
-                $('#EditButton').addClass('disabled');
                 return false;
             }
 
@@ -175,12 +167,8 @@
                 if(data.flog!=1){
                     res.parent().addClass("has-error");
                     res.next().next('p').html(data.msg);
-                    $('#EditButton').addClass('disabled');
                     return false;
                 }else{
-                    if($('#UserEditButton').hasClass('disabled')){
-                        $('#UserEditButton').removeClass('disabled');
-                    }
                     var html = '<option value="0">请选择</option>';
                     $.each(data.data,function(i,index){
                         html += '<option value="'+index.id+'">'+index.name+'</option>';
