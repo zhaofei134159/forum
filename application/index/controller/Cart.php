@@ -70,9 +70,9 @@ class Cart extends Common
         $data['ctime'] = time();
         $data['utime'] = time();
 
-        $cartId = model_cart::create($data);
+        $cart = model_cart::create($data);
 
-        $this->redirect('cart/seeCart',['cartId'=>$cartId]);
+        $this->redirect('cart/seeCart',['cartId'=>$cart['id']]);
 	}
 
 
