@@ -23,12 +23,13 @@
 
         <div class="card-box text-center">
             <div class="form-horizontal" >
-                <form action="{:url('Cart/saveCart')}" method="post" enctype="multipart/form-data" data-parsley-validate novalidate id="applyPlate">
+                <form action="{:url('Cart/saveCart')}" method="post" enctype="multipart/form-data" data-parsley-validate novalidate id="sendCart">
                     <div class="form-group">
                         <label for="name" class="col-sm-1 control-label"> 
                             帖子标题：
                         </label>
                         <div class="col-sm-11">
+                            <input type="hidden" name="plateId" value="{$plateId}">
                             <input type="text" required name="name" class="form-control" id="name" find="0" placeholder="帖子标题">
                         </div>
                     </div>
@@ -78,6 +79,16 @@
 
 
 <script type="text/javascript">
-    
+    function doEdit(){
+        loading('show');
+
+        var name = $('input[name="name"]').val();
+        if(name==''){
+            loading('hide');
+            alertFun('发表帖子','帖子标题不能为空',false);
+            return false;
+        }
+        $('#sendCart').submit();
+    }
 </script>
 {include file="public/footer" /}

@@ -48,4 +48,16 @@ class Cart extends Common
         	);
         return $this->view->fetch('sendCart',$data);
 	}
+
+	public function saveCart(){
+		if(!Session::get('login_id','forum_home')){
+            $this->redirect('login/index');
+        }
+        $post = input('post.');
+        var_dump($post);die;
+        $plateId = $post['plateId'];
+        $name = $post['name'];
+	}
+
+
 }
