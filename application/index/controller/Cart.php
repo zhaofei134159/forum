@@ -70,8 +70,9 @@ class Cart extends Common
         $data['ctime'] = time();
         $data['utime'] = time();
 
-        model_cart::insert($data);
+        $cartId = model_cart::insert($data);
 
+        $this->redirect('cart/seeCart',['cartId'=>$cartId]);
 	}
 
 
@@ -79,7 +80,7 @@ class Cart extends Common
         $get = input('get.');
         $cartId = $get['cartId'];
         $cart = model_cart::get(['id'=>$cartId]);
-        
+
         $data = array(
                 'cart'=>$cart,
             );
