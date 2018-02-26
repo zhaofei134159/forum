@@ -40,6 +40,9 @@
                                 <div id='edit' style="margin-top: 30px;">
                                 </div>
                             </section>
+                            <div style="display:none;">
+                                <textarea name="content" id="content"></textarea>
+                            </div>
                         </div>
                     </div>
                     
@@ -88,6 +91,9 @@
             alertFun('发表帖子','帖子标题不能为空',false);
             return false;
         }
+        var content = $('#edit').find('.froala-element').html();
+        console.log(content);
+
         $('#sendCart').submit();
     }
 </script>
