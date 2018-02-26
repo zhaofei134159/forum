@@ -82,6 +82,8 @@ class Cart extends Common
         $plateId = input('param.plateId');
 
         $cart = model_cart::get(['id'=>$cartId]);
+
+        model_cart::where('id',$cartId)->update(['see'=>intval($cart['see'])+1]);
         
         $data = array(
                 'cart'=>$cart,
