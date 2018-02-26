@@ -68,6 +68,7 @@
                     <div class="clearfix"></div>
 
                     <div class="project-members m-b-20 text-center">
+                        <button type="button" class="btn btn-info  btn-rounded waves-effect waves-light" onclick="SeePlate({$plate.id})">查看帖子</button>
                         <button type="button" class="btn btn-warning  btn-rounded waves-effect waves-light" onclick="plateEdit({$plate.id})">编辑</button>
                         <button type="button" class="btn waves-effect  btn-rounded waves-light
                             {if condition='$plate.is_del==0'}
@@ -99,6 +100,10 @@
 
 </div>
 <script type="text/javascript">
+    function SeePlate(){
+        loading('show');
+        window.location.href = "{:url('cart/index')}";
+    }
     function applyPlate(){
         loading('show');
         window.location.href = "{:url('forum/applyModerator')}";
