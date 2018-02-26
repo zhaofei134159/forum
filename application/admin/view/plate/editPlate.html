@@ -126,7 +126,18 @@
             var plateId = $('input[name="plateId"]').val();
 
             if(plateId==''){
-
+                var name = $('input[name="name"]').val();
+                if(name==0){
+                    loading('hide');
+                    $('input[name="name"]').parent().addClass("has-error");
+                    $('input[name="name"]').next('p').html('填写版块名');
+                    return false;
+                }else{
+                    if($('input[name="name"]').parent().addClass("has-error")){
+                        $('input[name="name"]').parent().removeClass("has-error")
+                        $('input[name="name"]').next('p').html('');
+                    }
+                }
                 var userid = $("#userid option:selected").val();
                 if(userid==0){
                     loading('hide');
@@ -153,9 +164,9 @@
                     }
                 }
 
-                var headimg = $('input[name="headimg"]').attr('value');
+                var headimg = $('input[name="headimg"]').val();
                 console.log(headimg);
-                if(headimg==undefined){
+                if(headimg==''){
                     loading('hide');
                     $('input[name="headimg"]').parent().addClass("has-error");
                     $('input[name="headimg"]').next('p').html('上传版块标示图');
