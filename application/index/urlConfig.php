@@ -36,7 +36,7 @@ array(
 		'controller'=>'论坛帖子',
 		'action'=>array(
 			'index'=>'帖子首页',
-			'sendCart'=>'发表帖子',
+			'sendcart'=>'发表帖子',
 		),
 	),
 );
