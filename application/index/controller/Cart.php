@@ -21,9 +21,9 @@ class Cart extends Common
 	public function index(){
 		$plateId = input('get.plateId');
 
-		$where = array()
+		$where = array();
 		$where['is_del'] = 0;
-		$where['plateId'] = $plateId
+		$where['plateId'] = $plateId;
 
 		$carts = model_cart::where($where)->order('ctime','desc')->paginate(20, false);        
         $page = $carts->render();
