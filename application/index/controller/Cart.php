@@ -79,7 +79,7 @@ class Cart extends Common
     public function seeCart(){
         $get = input('get.');
         $cartId = $get['cartId'];
-        var_dump($_GET['cartId']);
+        var_dump(input('param.cartId'));
         var_dump($cartId);
 
         $cart = model_cart::get(['id'=>$cartId]);
