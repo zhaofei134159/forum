@@ -36,6 +36,7 @@ class Cart extends Common
         		'page'=>$page,
                 'users'=>$users,
         		'plateId'=>$plateId,
+                's_time'=>time(),
         	);
         return $this->view->fetch('index',$data);
 	}
