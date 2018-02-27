@@ -167,8 +167,8 @@ class Cart extends Common
                 'plateId'=>$plateId,
                 'cart'=>$cart,
                 'users'=>$users,
-                'replys'=>$replys
-                'page'=>$page
+                'replys'=>$replys,
+                'page'=>$page,
             );
         return $this->view->fetch('seeCart',$data);
     }
