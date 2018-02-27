@@ -197,7 +197,7 @@ class Cart extends Common
 
         $cart = model_cart::create($data);
 
-        $this->redirect('cart/seeCart',['cartId'=>$cart['id'],'plateId'=>$cart['plateId']]);
+        $this->redirect('cart/seeCart',['cartId'=>$cartId,'plateId'=>$cart['plateId']]);
     }
 
 
