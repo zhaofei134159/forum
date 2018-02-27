@@ -99,7 +99,7 @@
                                         <strong> 帖子:</strong> <a href="">33</a>
                                     </div>
                                     <div class="info">
-                                        {$user->info}
+                                        {$users[$cart.userid]['info']}
                                     </div> 
                                 </div>
                                 <div class="SendMessage">
@@ -194,7 +194,7 @@
         window.location.href = "{:url('cart/index')}?plateId="+plateId;
     }
     function replies(){
-        window.location.href = window.location+'#replies';
+        window.location.href = window.location.hash+'#replies';
     }
 </script>
 {include file="public/footer" /}
