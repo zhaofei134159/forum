@@ -61,7 +61,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="card-box">
-                    <button type="button" class="btn btn-success btn-rounded w-md waves-effect waves-light m-b-20""> 回帖 </button>
+                    <button type="button" class="btn btn-success btn-rounded w-md waves-effect waves-light m-b-20" onclick="replies()"> 回帖 </button>
                     <button type="button" class="btn btn-default btn-rounded w-md waves-effect waves-light m-b-20" onclick="fanhui({$plateId})" style="border:1px solid gray;float:right;"> 帖子列表 </button>
 
                     <table class="table table-bordered m-0">
@@ -117,27 +117,30 @@
 
                     </table>
                     <br>
-                    <button type="button" class="btn btn-success btn-rounded w-md waves-effect waves-light m-b-10"> 回帖 </button>
+                    <button type="button" class="btn btn-info btn-rounded w-md waves-effect waves-light m-b-10" onclick="sendCart({$plateId})"> 发帖 </button>
                     <button type="button" class="btn btn-default btn-rounded w-md waves-effect waves-light m-b-10" onclick="fanhui({$plateId})" style="border:1px solid gray;float:right;"> 帖子列表 </button>
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="card-box">
-                    <table class="table table-bordered m-0">
+                    <table class="table table-bordered m-0" id="replies">
                         <tr class="user-mar">
                             <th class="see" style="vertical-align:inherit;">
                                 
                             </th>
                             <th class="title" style="padding-left:30px;vertical-align:inherit;">
                                 {if condition="$userid"}
-                                <section id="editor" style="margin-bottom:20px;">
-                                    <div id='edit' style="margin-top: 30px;">
+                                <form action="{:url('Cart/ReplyCart')}" method="post" enctype="multipart/form-data" data-parsley-validate novalidate id="ReplyCart">
+                                    <section id="editor" style="margin-bottom:20px;">
+                                        <div id='edit' style="margin-top: 30px;">
+                                        </div>
+                                    </section>
+                                    <div style="display:none;">
+                                        <textarea name="content" id="content"></textarea>
                                     </div>
-                                </section>
-                                <div style="display:none;">
-                                    <textarea name="content" id="content"></textarea>
-                                </div>
-                                <button type="button" class="btn btn-info w-md waves-effect waves-light m-b-10" onclick="Reply()"> 发表回复 </button>
+                                    <input type="hidden" name="cartId" value="{$cart.id}">
+                                    <button type="button" class="btn btn-info w-md waves-effect waves-light m-b-10" onclick="doReply()"> 发表回复 </button>
+                                </form>
                                 {else}
                                     <div style="min-height:200px;text-align:center;width:100%;line-height:200px;">
                                         您需要登录后才可以回帖  <a href="">登录</a> | <b>注册</b>
@@ -174,12 +177,24 @@
 </script>
 
 <script type="text/javascript">
-    function ReplyCart(plateId){
-       
+    function doReply(){
+        loading('show');
+        var content = $('#edit').find('.froala-element').html();
+        console.log(content);
+        $("#content").val(content);
+        
+        $('#ReplyCart').submit();
+    }
+    function sendCart(plateId){
+        loading('show');
+        window.location.href = "{:url('cart/sendCart')}?plateId="+plateId;
     }
     function fanhui(plateId){
         loading('show');
         window.location.href = "{:url('cart/index')}?plateId="+plateId;
+    }
+    function replies(){
+        window.location.href = window.location.href+'#replies';
     }
 </script>
 {include file="public/footer" /}
