@@ -63,15 +63,40 @@
                                         </a>
                                     </td>
                                     <td class="operation" style="height:30px;line-height:41px;">
-                                        <img src="/resource/images/cart/agree.gif" style="width:22px;margin-right:5px;">
-                                        {if condition="time()-$topCart.ctime<=3600"}
-                                        <img src="/resource/images/cart/new.png" style="width:32px;margin-right:5px;">
-                                        {/if}
-                                        {if condition="$topCart.is_hot==1"}
-                                        <img src="/resource/images/cart/hot_1.gif" style="width:27px;margin-right:5px;">
-                                        {/if}
-                                        {if condition="$topCart.is_elite==1"}
-                                        <img src="/resource/images/cart/digest_3.gif" style="width:27px;margin-right:5px;">
+                                        {if condition="$userid==$plate.userid"}
+                                            <button class="btn btn-purple waves-effect waves-light btn-xs m-b-5" onclick="removeCart('top',{$topCart.id},{$plateId})">
+                                                移除置顶
+                                            </button>
+                                            {if condition="$topCart.is_hot==1"}
+                                            <button class="btn btn-purple waves-effect waves-light btn-xs m-b-5"onclick="removeCart('hot',{$topCart.id},{$plateId})">
+                                                移除热门
+                                            </button>
+                                            {else}
+                                            <button class="btn btn-purple waves-effect waves-light btn-xs m-b-5"onclick="addCart('hot',{$topCart.id},{$plateId})">
+                                                填加热门
+                                            </button>
+                                            {/if}
+                                            {if condition="$topCart.is_elite==1"}
+                                            <button class="btn btn-purple waves-effect waves-light btn-xs m-b-5"onclick="removeCart('elite',{$topCart.id},{$plateId})">
+                                                移除精华
+                                            </button>
+                                            {else}
+                                            <button class="btn btn-purple waves-effect waves-light btn-xs m-b-5"
+                                            onclick="addCart('elite',{$topCart.id},{$plateId})">
+                                                填加热门
+                                            </button>
+                                            {/if}
+                                        {else}
+                                            <img src="/resource/images/cart/agree.gif" style="width:22px;margin-right:5px;" onclick="" >
+                                            {if condition="time()-$topCart.ctime<=3600"}
+                                            <img src="/resource/images/cart/new.png" style="width:32px;margin-right:5px;">
+                                            {/if}
+                                            {if condition="$topCart.is_hot==1"}
+                                            <img src="/resource/images/cart/hot_1.gif" style="width:27px;margin-right:5px;">
+                                            {/if}
+                                            {if condition="$topCart.is_elite==1"}
+                                            <img src="/resource/images/cart/digest_3.gif" style="width:27px;margin-right:5px;">
+                                            {/if}
                                         {/if}
                                     </td>
                                     <td class="author"> 
@@ -154,6 +179,31 @@
         loading('show');
         $('#'+type+'Cart').addClass('btn-default');
         window.location.href = "{:url('cart/index')}?plateId="+plateId+"&type="+type;
+    }
+    function removeCart(str,cartId,plateId){
+        loading('show');
+        $.post("{:url('cart/removeCart')}",{'cartId':cartId,'str':str},function(result){
+            if(res.flog==0){
+                loading('hide');
+                alertFun('帖子',res.msg,false);
+                return false;
+            }else{
+                window.location.href =  window.location.href;
+            }
+        },'json');
+    }
+
+    function addCart(str,cartId,plateId){
+        loading('show');
+        $.post("{:url('cart/addCart')}",{'cartId':cartId,'str':str},function(result){
+            if(res.flog==0){
+                loading('hide');
+                alertFun('帖子',res.msg,false);
+                return false;
+            }else{
+                window.location.href =  window.location.href;
+            }
+        },'json');
     }
 </script>
 {include file="public/footer" /}

@@ -25,6 +25,8 @@ class Cart extends Common
             $type = 'all';
         }
 
+        $plate = Plate::get(['id'=>$plateId]);
+
         # 置顶的一些帖子 
         $topWhere = array();
         $topWhere['is_del'] = 0;
@@ -57,11 +59,50 @@ class Cart extends Common
         		'carts'=>$carts,
         		'page'=>$page,
                 'users'=>$users,
+                'plate'=>$plate,
         		'plateId'=>$plateId,
                 'type'=>$type,
         	);
         return $this->view->fetch('index',$data);
 	}
+
+    # 修改状态
+    public function removeCart(){
+        $post = input('post.');
+        $cartId = $post['cartId'];
+        $str = $post['str'];
+
+        $cart = model_cart::get(['id'=>$cartId,'is_del'=>0]);
+        if(empty($cart)){
+            return json(['flog'=>0, 'msg'=>'帖子出错了!']);
+        }    
+
+        $update = array();
+        $update['is_'+$str] = 0;
+
+        model_cart::where('id',$cartId)->update($update);
+        
+        return json(['flog'=>1, 'msg'=>'success!']);
+    }
+
+    public function addCart(){
+        $post = input('post.');
+        $cartId = $post['cartId'];
+        $str = $post['str'];
+
+        $cart = model_cart::get(['id'=>$cartId,'is_del'=>0]);
+        if(empty($cart)){
+            return json(['flog'=>0, 'msg'=>'帖子出错了!']);
+        }    
+
+        $update = array();
+        $update['is_'+$str] = 1;
+
+        model_cart::where('id',$cartId)->update($update);
+
+        return json(['flog'=>1, 'msg'=>'success!']);
+    }
+
 
 	# 发帖
 	public function sendCart(){
