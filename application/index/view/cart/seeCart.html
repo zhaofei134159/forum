@@ -39,13 +39,13 @@
         <div class="row">
             <div class="col-sm-12">
                 <button type="button" class="btn btn-success btn-rounded w-md waves-effect waves-light m-b-20" onclick="ReplyCart()"> 回帖 </button>
-                <button type="button" class="btn btn-default btn-rounded w-md waves-effect waves-light m-b-20" onclick="fanhui({$plateId})" style="border:1px solid gray;"> 帖子列表 </button>
+                <button type="button" class="btn btn-default btn-rounded w-md waves-effect waves-light m-b-20" onclick="fanhui({$plateId})" style="border:1px solid gray;float:right;"> 帖子列表 </button>
             </div>
         </div>
         <style type="text/css">
-            .see{width:240px;height:50px;line-height:50px;text-align:center;color:gray;opacity:0.8;margin:0 auto;}
+            .see{width:240px;height:50px;line-height:50px;text-align:center;color:gray;opacity:0.8;margin:0 auto;background:#E5EDF2;}
             .title{text-align:left;font-size:19px;height:50px;line-height:50px;}
-            .users{width:240px;text-align:center;}
+            .users{width:240px;text-align:center;background:#E5EDF2;}
             .content{}
             .user-mar{border-bottom:4px solid #71b6f9;}
             .user-pad{border-bottom:2px dashed rgba(144,144,144,0.6);}
@@ -111,6 +111,24 @@
 
                     </table>
                 </div>
+            </div>
+            <div class="col-sm-12">
+                <button type="button" class="btn btn-success btn-rounded w-md waves-effect waves-light m-b-20" onclick="ReplyCart()"> 回帖 </button>
+                <button type="button" class="btn btn-default btn-rounded w-md waves-effect waves-light m-b-20" onclick="fanhui({$plateId})" style="border:1px solid gray;float:right;"> 帖子列表 </button>
+            </div>
+            <div class="col-sm-12">
+                <table class="table table-bordered m-0">
+                    <tr class="user-mar">
+                        <th class="see" style="vertical-align:inherit;">
+                            查看:{$cart.see} 
+                            &nbsp; <span style="border-left:solid 1px gray;width:2px;height:20px;"></span> &nbsp;
+                            回复:{$cart.see} 
+                        </th>
+                        <th class="title" style="padding-left:30px;vertical-align:inherit;">
+                            {$cart.title}
+                        </th>
+                    </tr>
+                </table>
             </div>
         </div>
     {/if}
