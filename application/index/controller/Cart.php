@@ -58,6 +58,7 @@ class Cart extends Common
         		'page'=>$page,
                 'users'=>$users,
         		'plateId'=>$plateId,
+                'type'=>$type,
         	);
         return $this->view->fetch('index',$data);
 	}

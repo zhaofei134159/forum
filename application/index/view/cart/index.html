@@ -21,10 +21,10 @@
                             <thead>
                                 <tr>
                                     <th class="name">
-                                        <button class="btn btn-info waves-effect waves-light btn-sm m-b-5" onclick="seeCart({$plateId},'all')"> 全部 </button>
-                                        <button class="btn btn-success waves-effect waves-light btn-sm m-b-5" onclick="seeCart({$plateId},'new')"> 最新 </button>
-                                        <button class="btn btn-custom waves-effect waves-light btn-sm m-b-5" onclick="seeCart({$plateId},'hot')"> 热门 </button>
-                                        <button class="btn btn-primary waves-effect waves-light btn-sm m-b-5" onclick="seeCart({$plateId},'elite')"> 精华 </button>
+                                        <button class="btn {if condition='$type=='all'}btn-default{else}btn-info{/if} waves-effect waves-light btn-sm m-b-5" id="allCart" onclick="seeCart({$plateId},'all')"> 全部 </button>
+                                        <button class="btn {if condition='$type=='all'}btn-default{else}btn-success{/if} waves-effect waves-light btn-sm m-b-5" id="newCart" onclick="seeCart({$plateId},'new')"> 最新 </button>
+                                        <button class="btn {if condition='$type=='all'}btn-default{else}btn-custom{/if} waves-effect waves-light btn-sm m-b-5" id="hotCart" onclick="seeCart({$plateId},'hot')"> 热门 </button>
+                                        <button class="btn {if condition='$type=='all'}btn-default{else}btn-primary{/if} waves-effect waves-light btn-sm m-b-5" id="eliteCart" onclick="seeCart({$plateId},'elite')"> 精华 </button>
                                     </th>
                                     <th class="operation"></th>
                                     <th class="author">作者</th>
