@@ -50,6 +50,9 @@
                         <button type="button" class="btn btn-success waves-effect waves-light" onclick="doEdit()">
                             提交
                         </button>
+                        <button type="button" class="btn btn-success waves-effect waves-light" onclick="cartList()">
+                            帖子列表
+                        </button>
                     </div>
                 </form>
             </div>
@@ -97,6 +100,11 @@
         
 
         $('#sendCart').submit();
+    }
+    function cartList(){
+        var plateId = $('input[name="plateId"]').val();
+        window.location.href = "{:url('cart/index')}?plateId="+plateId;
+
     }
 </script>
 {include file="public/footer" /}
