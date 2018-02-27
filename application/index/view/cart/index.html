@@ -152,6 +152,7 @@
 
     function seeCart(plateId,type){
         loading('show');
+        $('#'+type+'Cart').addClass('btn-default');
         window.location.href = "{:url('cart/index')}?plateId="+plateId+"&type="+type;
     }
 </script>
