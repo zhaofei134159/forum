@@ -43,9 +43,9 @@
             </div>
         </div>
         <style type="text/css">
-            .see{width:10%;text-align:center;color:gray;opacity:0.8;margin:0 auto;}
+            .see{text-align:center;color:gray;opacity:0.8;margin:0 auto;}
             .title{text-align:left;font-size:19px;}
-            .users{width:10%;text-align:center;}
+            .users{text-align:center;}
             .content{}
             .user-mar{border-bottom:4px solid #71b6f9;}
             .user-pad{border-bottom:2px dashed rgba(144,144,144,0.6);}
@@ -60,7 +60,7 @@
                 <div class="card-box">
                     <table class="table table-bordered m-0">
                         <tr class="user-mar">
-                            <th class="see">
+                            <th class="see" style="width:10%;">
                                 查看:{$cart.see} 
                                 &nbsp; <span style="border-left:solid 1px gray;width:2px;height:20px;"></span> &nbsp;
                                 回复:{$cart.see} 
@@ -71,7 +71,7 @@
                         </tr>
 
                         <tr class="user-pad">
-                            <td class="users"> {$users[$cart.userid]['nikename']} </td>
+                            <td class="users" style="width:10%;"> {$users[$cart.userid]['nikename']} </td>
                             <td class="content" style="padding-left:30px;">
                                 发表于 {$cart.ctime|date="Y-m-d H:i:s",###}
                                 <span style="float:right;padding-right:30px;color:red;">楼主</span>
@@ -108,81 +108,6 @@
                             </td>
                         </tr>
 
-                        <tr class="user-pad">
-                            <td class="users"> {$users[$cart.userid]['nikename']} </td>
-                            <td class="content" style="padding-left:30px;">
-                                发表于 {$cart.ctime|date="Y-m-d H:i:s",###}
-                                <span style="float:right;padding-right:30px;color:red;">楼主</span>
-                            </td>
-                        </tr>
-                        <tr class="user-mar">
-                            <td class="users">
-                                <div class="headimg">
-                                    {if condition="$user->headimg"}
-                                    <img src="/{$user->headimg}" class="thumb-xl img-thumbnail m-b-10" alt="头像">
-                                    {else}
-                                    <img src="/resource/images/user.png" class=" thumb-xl img-thumbnail m-b-10" alt="头像">
-                                    {/if}
-                                </div>
-                                <div class="userinfo">
-                                    <div class="num">
-                                        <strong> 关注:</strong> <a href="">33</a>
-                                        <span class="m-r-15"></span>
-                                        <strong> 帖子:</strong> <a href="">33</a>
-                                    </div>
-                                    <div class="info">
-                                        {$user->info}
-                                    </div> 
-                                </div>
-                                <div class="SendMessage">
-                                    <button class="btn btn-custom btn-trans waves-effect waves-custom w-md m-b-5">
-                                        <i class="ti-comment"></i> 
-                                        &nbsp; 发消息
-                                    </button>
-                                </div>
-                            </td>
-                            <td class="content" style="padding-left:30px;">
-                                {$cart.content}
-                            </td>
-                        </tr>
-
-                        <tr class="user-pad">
-                            <td class="users"> {$users[$cart.userid]['nikename']} </td>
-                            <td class="content" style="padding-left:30px;">
-                                发表于 {$cart.ctime|date="Y-m-d H:i:s",###}
-                                <span style="float:right;padding-right:30px;color:red;">楼主</span>
-                            </td>
-                        </tr>
-                        <tr class="user-mar">
-                            <td class="users">
-                                <div class="headimg">
-                                    {if condition="$user->headimg"}
-                                    <img src="/{$user->headimg}" class="thumb-xl img-thumbnail m-b-10" alt="头像">
-                                    {else}
-                                    <img src="/resource/images/user.png" class=" thumb-xl img-thumbnail m-b-10" alt="头像">
-                                    {/if}
-                                </div>
-                                <div class="userinfo">
-                                    <div class="num">
-                                        <strong> 关注:</strong> <a href="">33</a>
-                                        <span class="m-r-15"></span>
-                                        <strong> 帖子:</strong> <a href="">33</a>
-                                    </div>
-                                    <div class="info">
-                                        {$user->info}
-                                    </div> 
-                                </div>
-                                <div class="SendMessage">
-                                    <button class="btn btn-custom btn-trans waves-effect waves-custom w-md m-b-5">
-                                        <i class="ti-comment"></i> 
-                                        &nbsp; 发消息
-                                    </button>
-                                </div>
-                            </td>
-                            <td class="content" style="padding-left:30px;">
-                                {$cart.content}
-                            </td>
-                        </tr>
 
                     </table>
                 </div>
