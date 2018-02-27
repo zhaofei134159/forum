@@ -78,7 +78,7 @@ class Cart extends Common
         }    
 
         $update = array();
-        $update['is_'+$str] = 0;
+        $update['is_'.$str] = 0;
 
         model_cart::where('id',$cartId)->update($update);
         
@@ -96,7 +96,7 @@ class Cart extends Common
         }    
 
         $update = array();
-        $update['is_'+$str] = 1;
+        $update['is_'.$str] = 1;
 
         model_cart::where('id',$cartId)->update($update);
 
