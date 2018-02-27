@@ -28,9 +28,13 @@ class Cart extends Common
 		$carts = model_cart::where($where)->order('ctime','desc')->paginate(20, false);        
         $page = $carts->render();
 
+        $users = User::all(['is_del'=>0]);
+        $users = objToArray($users);
+
         $data = array(
         		'carts'=>$carts,
         		'page'=>$page,
+                'users'=>$users,
         		'plateId'=>$plateId,
         	);
         return $this->view->fetch('index',$data);

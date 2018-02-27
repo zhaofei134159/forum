@@ -42,24 +42,34 @@
 
                         <div class="clearfix">
                             <table class="table table table-hover m-0">
+                                {foreach $carts as $cart}
                                 <tr>
                                     <td class="name" style="height:30px;line-height:41px;">
+                                        {if condition="time()-$cart.ctime<=3600"}
                                         <img src="/resource/images/folder_new.gif" style="margin-right:5px;">
+                                        {else}
+                                        <img src="/resource/images/folder_common.gif" style="margin-right:5px;">
+                                        {/if}
                                         <a href="">
-                                            平安科技着眼城市建设支点，“智慧城市云”功不可没
+                                            {$cart.title}
                                         </a>
                                     </td>
                                     <td class="author"> 
-                                        <a href=""> 。。。</a>
+                                        <a href=""> {$users[$cart.userid]['name']}</a>
                                         <br>
-                                        2018-02-26
+                                        {if condition="time()-$cart.ctime>3600"}
+                                            {$cart.ctime|date="Y-m-d H:s",###}
+                                        {else}
+                                            {time()-$cart.ctime} 分钟前
+                                        {/if}
                                     </td>
                                     <td class="commit">
                                         <a href=""> 23 </a> 
                                         <br>
-                                        32
+                                        {$cart.see}
                                     </td>
                                 </tr>
+                                {/foreach}
                             </table>
                         </div>
 
