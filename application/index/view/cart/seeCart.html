@@ -129,6 +129,7 @@
                                 
                             </th>
                             <th class="title" style="padding-left:30px;vertical-align:inherit;">
+                                {if condition="$userid"}
                                 <section id="editor" style="margin-bottom:20px;">
                                     <div id='edit' style="margin-top: 30px;">
                                     </div>
@@ -137,6 +138,9 @@
                                     <textarea name="content" id="content"></textarea>
                                 </div>
                                 <button type="button" class="btn btn-info w-md waves-effect waves-light m-b-10" onclick="Reply()"> 发表回复 </button>
+                                {else}
+                                    您需要登录后才可以回帖  <a href="">登录</a> | <b>注册</b>
+                                {/if}
                             </th>
                         </tr>
                     </table>
