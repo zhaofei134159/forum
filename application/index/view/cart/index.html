@@ -39,11 +39,7 @@
                         <div class="clearfix">
 
                         </div>
-
-                        <div class="clearfix" style="background:#71b6f9;height:17px;">
-
-                        </div>
-
+                        <div class="clearfix" style="background:#71b6f9;height:17px;"></div>
                         <div class="clearfix">
                             <table class="table table table-hover m-0">
                                 {foreach $carts as $cart}
@@ -54,7 +50,7 @@
                                         {else}
                                         <img src="/resource/images/cart/folder_common.gif" style="margin-right:5px;">
                                         {/if}
-                                        <a href="">
+                                        <a href="{:url('Cart/seeCart',['cartId'=>$cart.od])}">
                                             {$cart.title}
                                         </a>
                                     </td>
@@ -70,7 +66,7 @@
                                         {/if}
                                     </td>
                                     <td class="author"> 
-                                        <a href=""> {$users[$cart.userid]['name']}</a>
+                                        <a href="{:url('Cart/saveCart')}"> {$users[$cart.userid]['name']}</a>
                                         <br>
                                         {:tranTime($cart.ctime)}
                                     </td>
