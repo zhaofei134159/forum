@@ -90,6 +90,7 @@ class Cart extends Common
         model_cart::where('id',$cartId)->update(['see'=>intval($cart['see'])+1]);
         
         $data = array(
+                'plateId'=>$plateId
                 'cart'=>$cart,
             );
         return $this->view->fetch('seeCart',$data);

@@ -50,7 +50,7 @@
                                         {else}
                                         <img src="/resource/images/cart/folder_common.gif" style="margin-right:5px;">
                                         {/if}
-                                        <a href="{:url('Cart/seeCart',['cartId'=>$cart.id])}">
+                                        <a href="{:url('Cart/seeCart',['cartId'=>$cart.id,'plateId'=>$plateId])}">
                                             {$cart.title}
                                         </a>
                                     </td>

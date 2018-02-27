@@ -9,7 +9,7 @@
                                 <h3 class="font-600">帖子找不到了</h3>
                                 <p class="text-muted"> 帖子找不到了, 那可能我们正在对这个帖子做调整，耐心等待！ </p>
 
-                                <button type="button" class="btn btn-success waves-effect waves-light m-t-10" onclick="fanhui()"> 返回 </button>
+                                <button type="button" class="btn btn-success waves-effect waves-light m-t-10" onclick="fanhui({$plateId})"> 返回 </button>
 
                             </div>
                         </div><!-- end col -->
@@ -27,7 +27,7 @@
                                 <h3 class="font-600">该帖子已删除！</h3>
                                 <p class="text-muted"> 帖子 可能 违规，查看其他帖子吧！ </p>
 
-                                <button type="button" class="btn btn-success waves-effect waves-light m-t-10" onclick="fanhui()"> 返回 </button>
+                                <button type="button" class="btn btn-success waves-effect waves-light m-t-10" onclick="fanhui({$plateId})"> 返回 </button>
 
                             </div>
                         </div><!-- end col -->
@@ -39,7 +39,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <button type="button" class="btn btn-success btn-rounded w-md waves-effect waves-light m-b-20" onclick="ReplyCart()"> 回帖 </button>
-                <button type="button" class="btn btn-info btn-rounded w-md waves-effect waves-light m-b-20" style="float:right;" onclick="fanhui()"> 返回 </button>
+                <button type="button" class="btn btn-info btn-rounded w-md waves-effect waves-light m-b-20" style="float:right;" onclick="fanhui({$plateId})"> 返回 </button>
             </div>
         </div>
         <div class="row">
@@ -56,9 +56,9 @@
     function ReplyCart(plateId){
        
     }
-    function fanhui(){
+    function fanhui(plateId){
         loading('show');
-        window.location.href = "{:url('cart/index')}";
+        window.location.href = "{:url('cart/index')}?plateId="+plateId;
     }
 </script>
 {include file="public/footer" /}
