@@ -57,58 +57,60 @@
         </style>
         <div class="row">
             <div class="col-sm-12">
-                <table class="card-box table table-bordered m-0">
-                    <tr class="user-mar">
-                        <th class="see">
-                            查看:{$cart.see} 
-                            &nbsp; <span style="border-left:solid 1px gray;width:2px;height:20px;"></span> &nbsp;
-                            回复:{$cart.see} 
-                        </th>
-                        <th class="title" style="padding-left:30px;">
-                            {$cart.title}
-                        </th>
-                    </tr>
+                <div class="card-box">
+                    <table class="table table-bordered m-0">
+                        <tr class="user-mar">
+                            <th class="see" style="vertical-align:none;">
+                                查看:{$cart.see} 
+                                &nbsp; <span style="border-left:solid 1px gray;width:2px;height:20px;"></span> &nbsp;
+                                回复:{$cart.see} 
+                            </th>
+                            <th class="title" style="padding-left:30px;vertical-align:none;">
+                                {$cart.title}
+                            </th>
+                        </tr>
 
-                    <tr class="user-pad">
-                        <td class="users"> {$users[$cart.userid]['nikename']} </td>
-                        <td class="content" style="padding-left:30px;">
-                            发表于 {$cart.ctime|date="Y-m-d H:i:s",###}
-                            <span style="float:right;padding-right:30px;color:red;">楼主</span>
-                        </td>
-                    </tr>
-                    <tr class="user-mar">
-                        <td class="users">
-                            <div class="headimg">
-                                {if condition="$user->headimg"}
-                                <img src="/{$user->headimg}" class="thumb-xl img-thumbnail m-b-10" alt="头像">
-                                {else}
-                                <img src="/resource/images/user.png" class=" thumb-xl img-thumbnail m-b-10" alt="头像">
-                                {/if}
-                            </div>
-                            <div class="userinfo">
-                                <div class="num">
-                                    <strong> 关注:</strong> <a href="">33</a>
-                                    <span class="m-r-15"></span>
-                                    <strong> 帖子:</strong> <a href="">33</a>
+                        <tr class="user-pad">
+                            <td class="users"> {$users[$cart.userid]['nikename']} </td>
+                            <td class="content" style="padding-left:30px;">
+                                发表于 {$cart.ctime|date="Y-m-d H:i:s",###}
+                                <span style="float:right;padding-right:30px;color:red;">楼主</span>
+                            </td>
+                        </tr>
+                        <tr class="user-mar">
+                            <td class="users">
+                                <div class="headimg">
+                                    {if condition="$user->headimg"}
+                                    <img src="/{$user->headimg}" class="thumb-xl img-thumbnail m-b-10" alt="头像">
+                                    {else}
+                                    <img src="/resource/images/user.png" class=" thumb-xl img-thumbnail m-b-10" alt="头像">
+                                    {/if}
                                 </div>
-                                <div class="info">
-                                    {$user->info}
-                                </div> 
-                            </div>
-                            <div class="SendMessage">
-                                <button class="btn btn-custom btn-trans waves-effect waves-custom w-md m-b-5">
-                                    <i class="ti-comment"></i> 
-                                    &nbsp; 发消息
-                                </button>
-                            </div>
-                        </td>
-                        <td class="content" style="padding-left:30px;">
-                            {$cart.content}
-                        </td>
-                    </tr>
+                                <div class="userinfo">
+                                    <div class="num">
+                                        <strong> 关注:</strong> <a href="">33</a>
+                                        <span class="m-r-15"></span>
+                                        <strong> 帖子:</strong> <a href="">33</a>
+                                    </div>
+                                    <div class="info">
+                                        {$user->info}
+                                    </div> 
+                                </div>
+                                <div class="SendMessage">
+                                    <button class="btn btn-custom btn-trans waves-effect waves-custom w-md m-b-5">
+                                        <i class="ti-comment"></i> 
+                                        &nbsp; 发消息
+                                    </button>
+                                </div>
+                            </td>
+                            <td class="content" style="padding-left:30px;">
+                                {$cart.content}
+                            </td>
+                        </tr>
 
 
-                </table>
+                    </table>
+                </div>
             </div>
         </div>
     {/if}
