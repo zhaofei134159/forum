@@ -45,7 +45,7 @@ class Cart extends Common
             $where['is_elite'] = 1;
         }
 		$carts = model_cart::where($where)->order('ctime','desc')->paginate(2, false,[
-                'plateId'=>$plateId,
+                'query'=>['plateId'=>$plateId],
             ]);        
         $page = $carts->render();
 
