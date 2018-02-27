@@ -21,10 +21,10 @@
                             <thead>
                                 <tr>
                                     <th class="name">
-                                        <button class="btn btn-info waves-effect waves-light btn-sm m-b-5" onclick="seeCart('all')"> 全部 </button>
-                                        <button class="btn btn-success waves-effect waves-light btn-sm m-b-5" onclick="seeCart('new')"> 最新 </button>
-                                        <button class="btn btn-custom waves-effect waves-light btn-sm m-b-5" onclick="seeCart('hot')"> 热门 </button>
-                                        <button class="btn btn-primary waves-effect waves-light btn-sm m-b-5" onclick="seeCart('elite')"> 精华 </button>
+                                        <button class="btn btn-info waves-effect waves-light btn-sm m-b-5" onclick="seeCart({$plateId},'all')"> 全部 </button>
+                                        <button class="btn btn-success waves-effect waves-light btn-sm m-b-5" onclick="seeCart({$plateId},'new')"> 最新 </button>
+                                        <button class="btn btn-custom waves-effect waves-light btn-sm m-b-5" onclick="seeCart({$plateId},'hot')"> 热门 </button>
+                                        <button class="btn btn-primary waves-effect waves-light btn-sm m-b-5" onclick="seeCart({$plateId},'elite')"> 精华 </button>
                                     </th>
                                     <th class="operation"></th>
                                     <th class="author">作者</th>
@@ -37,7 +37,35 @@
                     <div class="panel-body icon-list-demo">
                         <!-- 置顶 -->
                         <div class="clearfix">
-
+                            <table class="table table table-hover m-0">
+                                {foreach $topCarts as $topCart}
+                                <tr>
+                                    <td class="name" style="height:30px;line-height:41px;">
+                                        {if condition="time()-$topCart.ctime<=3600"}
+                                        <img src="/resource/images/cart/folder_new.gif" style="margin-right:5px;">
+                                        {else}
+                                        <img src="/resource/images/cart/folder_common.gif" style="margin-right:5px;">
+                                        {/if}
+                                        <a href="{:url('Cart/seeCart',['cartId'=>$topCart.id,'plateId'=>$plateId])}">
+                                            {$topCart.title}
+                                        </a>
+                                    </td>
+                                    <td class="operation" style="height:30px;line-height:41px;">
+                                        <img src="/resource/images/cart/agree.gif" style="width:32px;margin-right:5px;">
+                                    </td>
+                                    <td class="author"> 
+                                        <a href="{:url('Cart/saveCart')}"> {$users[$topCart.userid]['name']}</a>
+                                        <br>
+                                        {:tranTime($topCart.ctime)}
+                                    </td>
+                                    <td class="commit">
+                                        <a href=""> 23 </a> 
+                                        <br>
+                                        {$topCart.see}
+                                    </td>
+                                </tr>
+                                {/foreach}
+                            </table>
                         </div>
                         <div class="clearfix" style="background:#71b6f9;height:17px;"></div>
                         <div class="clearfix">
@@ -99,6 +127,11 @@
     function sendCart(plateId){
         loading('show');
         window.location.href = "{:url('cart/sendCart')}?plateId="+plateId;
+    }
+
+    function seeCart(plateId,type){
+        loading('show');
+        window.location.href = "{:url('cart/index')}?plateId="+plateId+"&type="+type;
     }
 </script>
 {include file="public/footer" /}

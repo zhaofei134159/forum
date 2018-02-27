@@ -20,18 +20,38 @@ class Cart extends Common
 
 	public function index(){
 		$plateId = input('get.plateId');
+        $type = input('get.type');
+        if(empty($type)){
+            $type = 'all';
+        }
+        
+        # 置顶的一些帖子 
+        $topWhere = array();
+        $topWhere['is_del'] = 0;
+        $topWhere['plateId'] = $plateId;
+        $topWhere['is_top'] = 1;
+        $topCarts = model_cart::where($topWhere)->select();        
 
+        # 不置顶的一些 帖子
 		$where = array();
 		$where['is_del'] = 0;
 		$where['plateId'] = $plateId;
-
-		$carts = model_cart::where($where)->order('ctime','desc')->paginate(20, false);        
+        $where['is_top'] = 0;
+        if($type=='new'){
+            $where['ctime'] = array('>=',time()-3600);
+        }else if($type=='hot'){
+            $where['is_hot'] = 1;
+        }else if($type=='elite'){
+            $where['is_elite'] = 1;
+        }
+		$carts = model_cart::where($where)->order('ctime','desc')->paginate(2, false);        
         $page = $carts->render();
 
         $users = User::all(['is_del'=>0]);
         $users = objToArray($users);
 
         $data = array(
+                'topCarts'=>$topCarts,
         		'carts'=>$carts,
         		'page'=>$page,
                 'users'=>$users,
