@@ -75,7 +75,9 @@
                                         {if condition="time()-$cart.ctime>3600"}
                                             {$cart.ctime|date="Y-m-d H:s",###}
                                         {else}
-                                            {$s_time-$cart.ctime} 分钟前
+                                            {if condition="$s_time-$cart.ctime>60"} 
+                                                {($s_time-$cart.ctime)/60|intval} 分钟前
+                                            {/if}
                                         {/if}
                                     </td>
                                     <td class="commit">
