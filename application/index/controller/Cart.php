@@ -151,11 +151,15 @@ class Cart extends Common
 
         $cart = model_cart::get(['id'=>$cartId]);
 
+        $users = User::all(['is_del'=>0]);
+        $users = objToArray($users);
+
         model_cart::where('id',$cartId)->update(['see'=>intval($cart['see'])+1]);
         
         $data = array(
                 'plateId'=>$plateId,
                 'cart'=>$cart,
+                'users'=>$users,
             );
         return $this->view->fetch('seeCart',$data);
     }

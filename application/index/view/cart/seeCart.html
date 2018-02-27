@@ -43,25 +43,33 @@
             </div>
         </div>
         <style type="text/css">
-            .see{width:260px;text-align:center;color:gray;opacity:0.5;}
-            .title{text-align:left;padding-left:30px;font-size:19px;}
+            .see{width:260px;text-align:center;color:gray;opacity:0.8;}
+            .title{text-align:left;font-size:19px;}
+            .users{width:260px;text-align:center;}
+            .content{}
         </style>
         <div class="row">
             <div class="col-sm-12">
                 <div class="card-box">
                     <table class="table table-bordered m-0">
-                        <thead>
-                            <tr>
-                                <th class="see">
-                                    查看:{$cart.see} 
-                                    &nbsp; <span style="border-left:solid 1px gray;width:2px;height:20px;"></span> &nbsp;
-                                    回复:{$cart.see} 
-                                </th>
-                                <th class="title">
-                                    {$cart.title}
-                                </th>
-                            </tr>
-                        </thead>
+                        <tr>
+                            <th class="see">
+                                查看:{$cart.see} 
+                                &nbsp; <span style="border-left:solid 1px gray;width:2px;height:20px;"></span> &nbsp;
+                                回复:{$cart.see} 
+                            </th>
+                            <th class="title" style="padding-left:30px;">
+                                {$cart.title}
+                            </th>
+                        </tr>
+
+                        <tr>
+                            <td class="users"> {$users[$cart.userid]['name']} </td>
+                            <td class="content">
+                                发表于 {$cart.ctime|date="Y-m-d H:i:s",###}
+                                <span style="float:right;">楼主</span>
+                            </td>
+                        </tr>
 
                     </table>
                 </div>
