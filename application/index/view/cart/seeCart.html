@@ -61,7 +61,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="card-box">
-                    <button type="button" class="btn btn-success btn-rounded w-md waves-effect waves-light m-b-20" onclick="ReplyCart()"> 回帖 </button>
+                    <button type="button" class="btn btn-success btn-rounded w-md waves-effect waves-light m-b-20""> 回帖 </button>
                     <button type="button" class="btn btn-default btn-rounded w-md waves-effect waves-light m-b-20" onclick="fanhui({$plateId})" style="border:1px solid gray;float:right;"> 帖子列表 </button>
 
                     <table class="table table-bordered m-0">
@@ -117,6 +117,7 @@
 
                     </table>
                     <br>
+                    <button type="button" class="btn btn-success btn-rounded w-md waves-effect waves-light m-b-10"> 回帖 </button>
                     <button type="button" class="btn btn-default btn-rounded w-md waves-effect waves-light m-b-10" onclick="fanhui({$plateId})" style="border:1px solid gray;float:right;"> 帖子列表 </button>
                 </div>
             </div>
@@ -128,14 +129,14 @@
                                 
                             </th>
                             <th class="title" style="padding-left:30px;vertical-align:inherit;">
-                                <section id="editor">
+                                <section id="editor" style="margin-bottom:20px;">
                                     <div id='edit' style="margin-top: 30px;">
                                     </div>
                                 </section>
                                 <div style="display:none;">
                                     <textarea name="content" id="content"></textarea>
                                 </div>
-                                <button type="button" class="btn btn-info btn-rounded w-md waves-effect waves-light m-b-10" onclick="ReplyCart()"> 发表回复 </button>
+                                <button type="button" class="btn btn-info w-md waves-effect waves-light m-b-10" onclick="Reply()"> 发表回复 </button>
                             </th>
                         </tr>
                     </table>
