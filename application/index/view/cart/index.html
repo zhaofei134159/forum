@@ -72,13 +72,7 @@
                                     <td class="author"> 
                                         <a href=""> {$users[$cart.userid]['name']}</a>
                                         <br>
-                                        {if condition="time()-$cart.ctime>3600"}
-                                            {$cart.ctime|date="Y-m-d H:s",###}
-                                        {else}
-                                            {if condition="$s_time-$cart.ctime>60"} 
-                                                {intval(($s_time-$cart.ctime)/60)} 分钟前
-                                            {/if}
-                                        {/if}
+                                        {tranTime($cart.ctime)}
                                     </td>
                                     <td class="commit">
                                         <a href=""> 23 </a> 
