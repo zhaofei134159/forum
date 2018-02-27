@@ -24,7 +24,7 @@ class Cart extends Common
         if(empty($type)){
             $type = 'all';
         }
-        
+
         # 置顶的一些帖子 
         $topWhere = array();
         $topWhere['is_del'] = 0;
@@ -44,7 +44,9 @@ class Cart extends Common
         }else if($type=='elite'){
             $where['is_elite'] = 1;
         }
-		$carts = model_cart::where($where)->order('ctime','desc')->paginate(2, false);        
+		$carts = model_cart::where($where)->order('ctime','desc')->paginate(2, false,[
+                'plateId'=>$plateId,
+            ]);        
         $page = $carts->render();
 
         $users = User::all(['is_del'=>0]);
