@@ -114,7 +114,45 @@
                             </td>
                         </tr>
 
-
+                        {foreach $replys as $key=>$reply}
+                            <tr class="user-pad">
+                                <td class="users"> {$users[$reply.userid]['nikename']} </td>
+                                <td class="content" style="padding-left:30px;">
+                                    发表于 {$reply.ctime|date="Y-m-d H:i:s",###}
+                                    <span style="float:right;padding-right:30px;color:red;">{$key} 楼</span>
+                                </td>
+                            </tr>
+                            <tr class="user-mar">
+                                <td class="users">
+                                    <div class="headimg">
+                                        {if condition="$users[$reply.userid]['headimg']"}
+                                        <img src="/{$users[$reply.userid]['headimg']}" class="thumb-xl img-thumbnail m-b-10" alt="头像">
+                                        {else}
+                                        <img src="/resource/images/user.png" class=" thumb-xl img-thumbnail m-b-10" alt="头像">
+                                        {/if}
+                                    </div>
+                                    <div class="userinfo">
+                                        <div class="num">
+                                            <strong> 关注:</strong> <a href="">33</a>
+                                            <span class="m-r-15"></span>
+                                            <strong> 帖子:</strong> <a href="">33</a>
+                                        </div>
+                                        <div class="info">
+                                            {$users[$reply.userid]['info']}
+                                        </div> 
+                                    </div>
+                                    <div class="SendMessage">
+                                        <button class="btn btn-custom btn-bordred waves-effect waves-light w-md m-b-5">
+                                            <i class="ti-comment"></i> 
+                                            &nbsp; 发消息
+                                        </button>
+                                    </div>
+                                </td>
+                                <td class="content" style="padding-left:30px;">
+                                    {$reply.content}
+                                </td>
+                            </tr>
+                        {/foreach}
                     </table>
                     <br>
                     <button type="button" class="btn btn-info btn-rounded w-md waves-effect waves-light m-b-10" onclick="sendCart({$plateId})"> 发帖 </button>

@@ -30,13 +30,15 @@ class Cart extends Common
         # 置顶的一些帖子 
         $topWhere = array();
         $topWhere['is_del'] = 0;
+        $topWhere['cartId'] = 0;
         $topWhere['plateId'] = $plateId;
         $topWhere['is_top'] = 1;
         $topCarts = model_cart::where($topWhere)->select();        
 
         # 不置顶的一些 帖子
 		$where = array();
-		$where['is_del'] = 0;
+        $where['is_del'] = 0;
+		$where['cartId'] = 0;
 		$where['plateId'] = $plateId;
         $where['is_top'] = 0;
         if($type=='new'){
@@ -155,13 +157,47 @@ class Cart extends Common
         $users = objToArray($users);
 
         model_cart::where('id',$cartId)->update(['see'=>intval($cart['see'])+1]);
+
+        $replys = model_cart::where(['is_del'=>0,'cartId'=>$cartId])->order('ctime','asc')->paginate(20, false,[
+                'query'=>['plateId'=>$plateId,'cartId'=>$cartId],
+            ]);        
+        $page = $replys->render();
         
         $data = array(
                 'plateId'=>$plateId,
                 'cart'=>$cart,
                 'users'=>$users,
+                'replys'=>$replys
+                'page'=>$page
             );
         return $this->view->fetch('seeCart',$data);
+    }
+
+    # 回复
+    public function ReplyCart(){
+        $userid = Session::get('login_id','forum_home');
+        if(!$userid){
+            $this->redirect('login/index');
+        }
+        $post = input('post.');
+
+        $cartId = $post['cartId'];
+        $content = $post['content'];
+
+        $cart = model_cart::get(['id'=>$cartId]);
+
+        $data = array();
+        $data['plateId'] = $cart['plateId'];
+        $data['content'] = $content;
+        $data['userid'] = $userid;
+        $data['cartId'] = $cartId;
+        $data['see'] = 0;
+        $data['ctime'] = time();
+        $data['utime'] = time();
+
+        $cart = model_cart::create($data);
+
+        $this->redirect('cart/seeCart',['cartId'=>$cart['id'],'plateId'=>$cart['plateId']]);
     }
 
 
