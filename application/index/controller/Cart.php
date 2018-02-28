@@ -206,6 +206,6 @@ class Cart extends Common
             $saveCartPath = 'uploads'.DS.'forum'.DS.'cart';
             $link = uploadFile($file,$saveCartPath);
         }
-        return json(['link'=>$link]);
+        return json(['link'=>'/'.$link]);
     }
 }
