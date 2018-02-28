@@ -18,6 +18,8 @@ class Ucenter extends Common
     public $uid = 0;
     public $userid = 0;
 
+    public $infos = array('sex','birthday','bloodtype','homeplace','domicile','maritalStatus','label','education','occupation','phone','edu_back','work_info');
+
 	public function __construct(){
 		parent::__construct();
 
@@ -34,19 +36,19 @@ class Ucenter extends Common
     // 个人资料
     public function index(){
     	$uid = $this->uid;
-    	
+    	$uid = 48;
     	$get = input('get.');
     	if($get['uid']){
     		$uid = $get['uid'];
     	}
     	$user = User::get(['id'=>$uid]);
         $userinfo = Userinfo::get(['uid'=>$uid]);
-
+     
         $infoRate = 0;
         if(!empty($userinfo)){
-            foreach($userinfo as $val){
-                if(!empty($val)&&$val!='[]'){
-                   $infoRate += 0.9; 
+            foreach($this->infos as $info){
+                if(!empty($userinfo[$info])&&$userinfo[$info]!='[]'){
+                    $infoRate += 0.9;
                 }
             }
         }
