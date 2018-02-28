@@ -287,8 +287,10 @@ class Ucenter extends Common
         
         $userinfo = Userinfo::get(['uid'=>$uid]);
         $eduBack = json_decode($userinfo['edu_back'],true);
-        foreach($eduBack as $key=>$data){
-            $eduBack[$key]['educationStr'] = read_conf('edu_lavel')[$data['education']];
+        if(!empty($eduBack)){
+            foreach($eduBack as $key=>$data){
+                $eduBack[$key]['educationStr'] = read_conf('edu_lavel')[$data['education']];
+            }
         }
         $data = array(
                 'userinfo'=>$userinfo,
