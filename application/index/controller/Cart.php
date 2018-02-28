@@ -158,7 +158,7 @@ class Cart extends Common
 
         model_cart::where('id',$cartId)->update(['see'=>intval($cart['see'])+1]);
 
-        $replys = model_cart::where(['is_del'=>0,'cartId'=>$cartId])->order('ctime','asc')->paginate(20, false,[
+        $replys = model_cart::where(['is_del'=>0,'cartId'=>$cartId])->order('ctime','asc')->paginate(1, false,[
                 'query'=>['plateId'=>$plateId,'cartId'=>$cartId],
             ]);        
         $page = $replys->render();
