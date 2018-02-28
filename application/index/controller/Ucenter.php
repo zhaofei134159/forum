@@ -47,12 +47,12 @@ class Ucenter extends Common
         if(!empty($userinfo)){
             foreach($this->infos as $info){
                 if(!empty($userinfo[$info])&&$userinfo[$info]!='[]'){
-                    $infoRate += 0.9;
+                    $infoRate += 8.3;
                 }
             }
         }
 
-        $infoRate = floor($infoRate)*10;
+        $infoRate = round($infoRate);
     	$data = array(
     			'user'=>$user,
                 'infoRate'=>$infoRate,
