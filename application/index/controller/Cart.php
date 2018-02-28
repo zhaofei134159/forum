@@ -202,9 +202,9 @@ class Cart extends Common
 
     public function upload(){
         $file = request()->file('file');
-        if($headimg){
-            $saveHeadPath = 'uploads'.DS.'forum'.DS.'headimg';
-            $link = uploadFile($headimg,$saveHeadPath);
+        if($file){
+            $saveCartPath = 'uploads'.DS.'forum'.DS.'cart';
+            $link = uploadFile($file,$saveCartPath);
         }
         return json(['link'=>$link]);
     }
