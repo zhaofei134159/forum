@@ -200,5 +200,12 @@ class Cart extends Common
         $this->redirect('cart/seeCart',['cartId'=>$cartId,'plateId'=>$cart['plateId']]);
     }
 
-
+    public function upload(){
+        $file = request()->file('file');
+        if($headimg){
+            $saveHeadPath = 'uploads'.DS.'forum'.DS.'headimg';
+            $link = uploadFile($headimg,$saveHeadPath);
+        }
+        return json(['link'=>$link]);
+    }
 }
