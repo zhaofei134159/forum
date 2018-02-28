@@ -75,15 +75,15 @@
 <script type="text/javascript">
     function basicSubmit(){
     	loading('show');
-        //手机号正则  
+        //手机号正则
         var phoneReg = /(^1[3|4|5|7|8]\d{9}$)|(^09\d{8}$)/;  
-        //电话  
-        var phone = $.trim($('#phone').val());  
-        if (!phoneReg.test(phone)) {  
+        //电话
+        var phone = $.trim($('#phone').val());
+        if (!phoneReg.test(phone)) {
             loading('hide');
             var $toast = toastr['error']('请输入有效的手机号码！');
-            return false;  
-        }  
+            return false;
+        }
     	$('#basicFrom').submit();
     }
 </script>
