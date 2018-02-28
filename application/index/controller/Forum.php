@@ -99,11 +99,14 @@ class Forum extends Common
         $headimg = request()->file('headimg');
         $backimg = request()->file('backimg');
 
-        $saveHeadPath = 'uploads'.DS.'forum'.DS.'headimg';
-        $data['headimg'] = uploadFile($headimg,$saveHeadPath);
-
-        $saveBackPath = 'uploads'.DS.'forum'.DS.'backimg';
-        $data['backimg'] = uploadFile($backimg,$saveBackPath);
+        if($headimg){
+            $saveHeadPath = 'uploads'.DS.'forum'.DS.'headimg';
+            $data['headimg'] = uploadFile($headimg,$saveHeadPath);
+        }
+        if($backimg){
+            $saveBackPath = 'uploads'.DS.'forum'.DS.'backimg';
+            $data['backimg'] = uploadFile($backimg,$saveBackPath);
+        }
         
         $data['name'] = $post['name'];
         $data['info'] = $post['info'];
