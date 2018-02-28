@@ -42,8 +42,19 @@ class Ucenter extends Common
     	$user = User::get(['id'=>$uid]);
         $userinfo = Userinfo::get(['uid'=>$uid]);
 
+        $infoRate = 0;
+        if(!empty($userinfo)){
+            foreach($userinfo as $val){
+                if(empty($val)){
+                   $infoRate += 0.9; 
+                }
+            }
+        }
+
+        $infoRate = floor($infoRate)*10;
     	$data = array(
-    			'user'=>$user
+    			'user'=>$user,
+                'infoRate'=>$infoRate,
     		);
         return $this->view->fetch('index',$data);
     }
