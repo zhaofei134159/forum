@@ -45,7 +45,7 @@ class Ucenter extends Common
         $infoRate = 0;
         if(!empty($userinfo)){
             foreach($userinfo as $val){
-                if(empty($val)){
+                if(!empty($val)&&$val!='[]'){
                    $infoRate += 0.9; 
                 }
             }
