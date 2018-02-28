@@ -22,15 +22,17 @@
                         </tr>
                     </thead>
                     <tbody id="workInfoBody">
-                        {foreach $workInfo as $workKey=>$workVal}
-                        <tr id="workInfo{$workKey}">
-                            <td>{$workVal[wordJob]}</td>
-                            <td>{$workVal[timeSpan]}</td>
-                            <td>
-                                <button type="button" class="btn btn-danger btn-rounded waves-effect waves-light m-b-5" onclick="delWork({$workKey})">删除</button>
-                            </td>
-                        </tr>
-                        {/foreach}
+                        {if condition="!empty($workInfo)"}
+                            {foreach $workInfo as $workKey=>$workVal}
+                            <tr id="workInfo{$workKey}">
+                                <td>{$workVal[wordJob]}</td>
+                                <td>{$workVal[timeSpan]}</td>
+                                <td>
+                                    <button type="button" class="btn btn-danger btn-rounded waves-effect waves-light m-b-5" onclick="delWork({$workKey})">删除</button>
+                                </td>
+                            </tr>
+                            {/foreach}
+                        {/if}
                     </tbody>
                     <tbody>
                         <tr> 
