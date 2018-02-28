@@ -96,6 +96,11 @@
         }
         var content = $('#edit').find('.froala-element').html();
         console.log(content);
+        if(content=='<p><br></p>'){
+            loading('hide');
+            var $toast = toastr['error']('发帖内容不能为空！');
+            return false;
+        }
         $("#content").val(content);
         
 
