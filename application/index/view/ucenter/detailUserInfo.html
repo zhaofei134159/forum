@@ -27,7 +27,7 @@
                         <div>
                             {foreach $character = read_conf('user_character') as $user_key=>$user_character}
                             <div class="checkbox checkbox-primary checkbox-inline">
-                                <input id="checkbox{$user_key}" type="checkbox" name="label[]" value="{$user_key}" {if condition="in_array($user_key,$userinfo[labelArr])"}checked{/if}>
+                                <input id="checkbox{$user_key}" type="checkbox" name="label[]" value="{$user_key}" {if condition="!empty($userinfo[labelArr])&&in_array($user_key,$userinfo[labelArr])"}checked{/if}>
                                 <label for="checkbox{$user_key}"> {$user_character} </label>
                             </div>
                             {/foreach}
