@@ -36,7 +36,6 @@ class Ucenter extends Common
     // 个人资料
     public function index(){
     	$uid = $this->uid;
-    	$uid = 48;
     	$get = input('get.');
     	if($get['uid']){
     		$uid = $get['uid'];
