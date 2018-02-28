@@ -185,6 +185,7 @@ class Cart extends Common
         $content = $post['content'];
 
         $cart = model_cart::get(['id'=>$cartId]);
+        $countReply = model_cart::where('cartId',$cartId)->count();
 
         $data = array();
         $data['plateId'] = $cart['plateId'];
@@ -192,6 +193,7 @@ class Cart extends Common
         $data['userid'] = $userid;
         $data['cartId'] = $cartId;
         $data['see'] = 0;
+        $data['floor'] = $countReply+1;
         $data['ctime'] = time();
         $data['utime'] = time();
 
