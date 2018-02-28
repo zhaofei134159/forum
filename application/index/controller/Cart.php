@@ -208,4 +208,21 @@ class Cart extends Common
         }
         return json(['link'=>'/'.$link]);
     }
+
+    public function images(){
+        $links = array();
+        $links[] = '/resource/images/gallery/1.jpg';
+        $links[] = '/resource/images/gallery/2.jpg';
+        $links[] = '/resource/images/gallery/3.jpg';
+        $links[] = '/resource/images/gallery/4.jpg';
+        $links[] = '/resource/images/gallery/5.jpg';
+        $links[] = '/resource/images/gallery/6.jpg';
+        $links[] = '/resource/images/gallery/7.jpg';
+        $links[] = '/resource/images/gallery/8.jpg';
+        $links[] = '/resource/images/gallery/9.jpg';
+        $links[] = '/resource/images/gallery/10.jpg';
+        $links[] = '/resource/images/gallery/11.jpg';
+        $links[] = '/resource/images/gallery/12.jpg';
+        return json($links);
+    }
 }
