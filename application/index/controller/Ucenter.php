@@ -53,18 +53,23 @@ class Ucenter extends Common
                 }
             }
         }
+        $infoRate = round($infoRate);
+        
 
         # 板块
         $PlateWhere = array();
         $PlateWhere['is_del'] = 0;
         $PlateWhere['cartId'] = 0;
-        $plate = Cart::where($PlateWhere)->select();
+        $carts = Cart::where($PlateWhere)->order('ctime','desc')->paginate(20, false,[
+                'query'=>['plateId'=>$plateId],
+            ]);        
+        $page = $carts->render();
 
 
-        $infoRate = round($infoRate);
     	$data = array(
     			'user'=>$user,
                 'infoRate'=>$infoRate,
+                'carts'=>$carts,
     		);
         return $this->view->fetch('index',$data);
     }
