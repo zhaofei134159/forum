@@ -6,6 +6,8 @@ use app\index\model\Userinfo;
 use app\index\model\Province;
 use app\index\model\City;
 use app\index\model\Area;
+use app\index\model\Plate;
+use app\index\model\Cart;
 
 
 use think\Session;
@@ -51,6 +53,13 @@ class Ucenter extends Common
                 }
             }
         }
+
+        # 板块
+        $PlateWhere = array();
+        $PlateWhere['is_del'] = 0;
+        $PlateWhere['cartId'] = 0;
+        $plate = Cart::where($PlateWhere)->select();
+
 
         $infoRate = round($infoRate);
     	$data = array(
