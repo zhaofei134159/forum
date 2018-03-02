@@ -55,8 +55,10 @@ class Ucenter extends Common
         }
         $infoRate = round($infoRate);
         
-        $carts = Cart::userCartPlate($uid);
-
+        $cart_model = new Cart();
+        $carts = $cart_model->userCartPlate($uid);  
+        var_dump($carts);
+        
         die;
     	$data = array(
     			'user'=>$user,
