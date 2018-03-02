@@ -103,17 +103,17 @@
                     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                         {foreach $Plates as $plate}
                         <div class="panel panel-default bx-shadow-none">
-                            <div class="panel-heading" role="tab" id="headingOne">
+                            <div class="panel-heading" role="tab" id="heading_{$plate.pid}">
                                 <h4 class="panel-title">
                                     <a role="button" data-toggle="collapse"
-                                       data-parent="#accordion" href="#collapseOne"
-                                       aria-expanded="true" aria-controls="collapseOne">
+                                       data-parent="#accordion" href="#collapse_{$plate.pid}"
+                                       aria-expanded="true" aria-controls="collapse_{$plate.pid}">
                                         {$plate.name}
                                     </a>
                                 </h4>
                             </div>
-                            <div id="collapseOne" class="panel-collapse collapse in"
-                                 role="tabpanel" aria-labelledby="headingOne">
+                            <div id="collapse_{$plate.pid}" class="panel-collapse collapse in"
+                                 role="tabpanel" aria-labelledby="heading_{$plate.pid}">
                                 <div class="panel-body">
                                     <table class="table table table-hover m-0">
                                         {foreach $carts[$plate.pid] as $cart}
