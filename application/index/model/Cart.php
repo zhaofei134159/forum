@@ -20,6 +20,8 @@ class Cart extends Common
                 'query'=>['uid'=>$uid],
             ]);
         $page = $carts->render();
+        echo $this->getLastSql();
+        echo '<br>';
         var_dump($carts);die;
 
 
