@@ -57,7 +57,7 @@ class Ucenter extends Common
         
         $carts = Cart::userCartPlate($uid);
 
-
+        die;
     	$data = array(
     			'user'=>$user,
                 'infoRate'=>$infoRate,
