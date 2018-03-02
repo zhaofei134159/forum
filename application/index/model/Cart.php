@@ -15,6 +15,7 @@ class Cart extends Common
         $CartWhere = array();
         $CartWhere['forum_cart.is_del'] = 0;
         $CartWhere['forum_cart.userid'] = $uid;
+        $CartWhere['forum_cart.cartId'] = 0;
         $carts = $this->join('forum_plate','forum_cart.plateId = forum_plate.id')->where($CartWhere)->order('forum_cart.ctime','desc')->paginate(20, false,[
                 'query'=>['uid'=>$uid],
             ]);
