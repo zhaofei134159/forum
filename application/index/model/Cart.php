@@ -10,7 +10,7 @@ class Cart extends Common
 	* param uid
 	* return arr
 	*/
-	protected function userCartPlate($uid){
+	public function userCartPlate($uid){
 
         $CartWhere = array();
         $CartWhere['is_del'] = 0;
