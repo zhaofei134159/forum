@@ -16,15 +16,19 @@ class Cart extends Common
         $CartWhere['forum_cart.is_del'] = 0;
         $CartWhere['forum_cart.userid'] = $uid;
         $CartWhere['forum_cart.cartId'] = 0;
-        $carts = $this->join('forum_plate','forum_cart.plateId = forum_plate.id','LEFT')->where($CartWhere)->order('forum_cart.ctime','desc')->paginate(20, false,[
+        $field = 'forum_plate.id as pid,forum_plate.name,forum_plate.cateid,forum_plate.userid as puserid,forum_plate.is_del,forum_plate.ctime as pctime,forum_cart.id as id,forum_cart.plateId,forum_cart.title,forum_cart.userid,forum_cart.see,forum_cart.is_del,forum_cart.is_hot,forum_cart.is_elite,forum_cart.is_top,forum_cart.floor,forum_cart.ctime';
+        $carts = $this->join('forum_plate','forum_cart.plateId = forum_plate.id','LEFT')->field($field)->where($CartWhere)->order('forum_cart.ctime','desc')->paginate(20, false,[
                 'query'=>['uid'=>$uid],
             ]);
         $page = $carts->render();
-        echo $this->getLastSql();
-        echo '<br>';
-        var_dump($carts);die;
 
+        $PlateCart = array();
+        $Plates = array();
+       	foreach($carts as $cart){
+       		$PlateCart[$cart['plateId']][$cart['id']] = $cart;
+       		$Plates[$cart['plateId']] = $cart;
+       	}
 
-
+       	return ['PlateCart'=>$PlateCart,'Plates'=>$Plates,'page'=>$page];
 	}
 }

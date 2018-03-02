@@ -56,15 +56,20 @@ class Ucenter extends Common
         $infoRate = round($infoRate);
         
         $cart_model = new Cart();
-        $carts = $cart_model->userCartPlate($uid);  
-        var_dump($carts);
+        $cartResults = $cart_model->userCartPlate($uid);
+
+
+        $users = User::all(['is_del'=>0]);
+        $users = objToArray($users);
+
         
-        die;
     	$data = array(
     			'user'=>$user,
                 'infoRate'=>$infoRate,
-                'carts'=>$carts,
-                'page'=>$page
+                'carts'=>$cartResults['PlateCart'],
+                'page'=>$cartResults['page'],
+                'Plates'=>$cartResults['Plates'],
+                'users'=>$users,
     		);
         return $this->view->fetch('index',$data);
     }
