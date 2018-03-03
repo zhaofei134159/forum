@@ -70,7 +70,6 @@ class Ucenter extends Common
         $users = objToArray($users);
 
         $result = $this->userPlateCart($first_pid,$uid);
-        var_dump($result);die;
         
     	$data = array(
     			'user'=>$user,
