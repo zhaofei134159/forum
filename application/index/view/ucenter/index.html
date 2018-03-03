@@ -136,7 +136,7 @@
         function plateCart(plateId,uid){
             loading('show');
             $.post("{:url('cart/userPlateCart')}",{'plateId':plateId,'uid':uid},function(result){
-                if(result.flog==0){
+                if(result.flog==1){
                     loading('hide');
                     $('#cartData').html(result.html);
                 }
