@@ -138,7 +138,7 @@
             $.post("{:url('cart/userPlateCart')}",{'plateId':plateId,'uid':uid},function(result){
                 if(result.flog==1){
                     loading('hide');
-                    $('#cartData').html(result.html);
+                    $('#cartData').html(result.data);
                 }
             },'json')
         }
