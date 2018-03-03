@@ -70,9 +70,7 @@ class Ucenter extends Common
         $users = objToArray($users);
 
         $result = $this->userPlateCart($first_pid,$uid);
-        var_dump($first_pid);
-        var_dump($result);
-        die;
+        
     	$data = array(
     			'user'=>$user,
                 'infoRate'=>$infoRate,
@@ -86,8 +84,6 @@ class Ucenter extends Common
     }
 
     public function userPlateCart($plateId,$uid){
-        $plateId = $post['plateId'];
-        $uid = $post['uid'];
 
         $cart_model = new Cart();
         $result = $cart_model->userPalteCart($plateId,$uid);
