@@ -37,7 +37,7 @@ class Cart extends Common
         $CartWhere['forum_cart.is_del'] = 0;
         $CartWhere['forum_cart.userid'] = $uid;
         $CartWhere['forum_cart.cartId'] = 0;
-        $field = 'forum_plate.id as pid,forum_plate.name,forum_plate.cateid,forum_plate.userid as puserid,forum_plate.is_del,forum_plate.ctime as pctime';
+        $field = 'forum_plate.id as pid,forum_plate.name,forum_plate.cateid,forum_plate.userid as puserid,forum_plate.is_del,forum_plate.ctime as pctime,forum_cart.plateId ';
         $carts = $this->join('forum_plate','forum_cart.plateId = forum_plate.id','LEFT')->field($field)->where($CartWhere)->order('forum_cart.ctime','desc')->paginate(7, false);
         // ,['query'=>['uid'=>$uid],]
         $Plates = array();
