@@ -56,8 +56,11 @@ class Ucenter extends Common
         $infoRate = round($infoRate);
         
         $cart_model = new Cart();
-        $cartResults = $cart_model->userCartPlate($uid);
-
+        $cartResults = $cart_model->userSendCartPlate($uid);
+        $first_pid = 0;
+        if(!empty($cartResults['Plates'])){
+            $first_pid = array_keys($cartResults['Plates'])[0]; 
+        }
 
         $users = User::all(['is_del'=>0]);
         $users = objToArray($users);
@@ -66,9 +69,8 @@ class Ucenter extends Common
     	$data = array(
     			'user'=>$user,
                 'infoRate'=>$infoRate,
-                'carts'=>$cartResults['PlateCart'],
-                'page'=>$cartResults['page'],
                 'Plates'=>$cartResults['Plates'],
+                'first_pid'=>$first_pid,
                 'users'=>$users,
     		);
         return $this->view->fetch('index',$data);
@@ -486,5 +488,5 @@ class Ucenter extends Common
 
         return json(['flog'=>1, 'msg'=>'删除成功']);
     }
-    
+
 }

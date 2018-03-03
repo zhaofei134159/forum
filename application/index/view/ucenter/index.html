@@ -100,33 +100,21 @@
 
             <div class="col-lg-12">
                 <div class="card-box card-tabs">
-                     <div class="dropdown pull-right">
-                        <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown"
-                           aria-expanded="false">
-                            <i class="ti-angle-down"></i>
-                        </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">删除</a></li>
-                            <li><a href="#">置顶</a></li>
-                            <li><a href="#">加标签</a></li>
-                            <!-- <li class="divider"></li> -->
-                            <!-- <li><a href="#"></a></li> -->
-                        </ul>
-                    </div>
+                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                        <div class="col-lg-12 col-md-12 col-sm-12 ">
+                            <div class="portfolioFilter">
+                                {foreach $Plates as $plate}
+                                <a href="javascript:void(0);" data-filter="" class="waves-effect waves-custom" onclick="plateCart('{$plate.pid}','{$userid}')">{$plate.name}</a>
+                                {/foreach}
+                            </div>
+                        </div>
 
-                    <div class="widget-user">
-                        {if condition="$user->headimg"}
-                        <img src="/{$user->headimg}" class="img-circle user-img" width="75" height="75" alt="头像">
-                        {else}
-                        <img src="/resource/images/user.png" class="img-circle user-img" width="75" height="75" alt="头像">
-                        {/if}
-                        <div class="wid-u-info">
-                            <h4 class="m-t-0 m-b-5"> {if condition="$user->nikename"} {$user->nikename} {else} {$user->name} {/if} </h4>
-                            <p class="text-muted m-b-5 font-13">{$user->ctime|date="Y-m-d H:i",###}</p>
+                        <div class="row port m-b-20">
+                            <div class="portfolioContainer">
+                                
+                            </div>
                         </div>
                     </div>
-                    
-                    
                 </div>
             </div><!-- end col -->
 
@@ -137,7 +125,20 @@
             loading('show');
             window.location.href = "{:url('ucenter/editUser')}";
         }
+        var first_pid = '{$first_pid}';
+        var userid = '{$userid}';
+        $(function(){
+            if(first_pid!=''&&first_pid!='0'){
+                plateCart(first_pid,userid);
+            }
+        })
 
+        function plateCart(plateId,uid){
+            loading('show');
+            $.post("{:url('cart/userPlateCart')}",{'plateId':plateId,'uid':uid},function(){
+
+            },'json')
+        }
     </script>
 
 {include file="public/footer" /}

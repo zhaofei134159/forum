@@ -228,4 +228,13 @@ class Cart extends Common
         return json($links);
     }
 
+    public function userPlateCart(){
+        $post = input('post.');
+        $plateId = $post['plateId'];
+        $uid = $post['uid'];
+
+        $carts = Cart::userPalteCart($plateId,$uid);
+        var_Dump($carts);
+
+    }
 }
