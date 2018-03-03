@@ -42,11 +42,11 @@ class Ucenter extends Common
     	if($get['uid']){
     		$uid = $get['uid'];
     	}
-        $plateId = $get['plateId']
+        $plateId = $get['plateId'];
 
     	$user = User::get(['id'=>$uid]);
+
         $userinfo = Userinfo::get(['uid'=>$uid]);
-     
         $infoRate = 0;
         if(!empty($userinfo)){
             foreach($this->infos as $info){
@@ -65,6 +65,7 @@ class Ucenter extends Common
             $first_pid = array_keys($cartResults['Plates'])[0]; 
         }
 
+        
         $users = User::all(['is_del'=>0]);
         $users = objToArray($users);
 
