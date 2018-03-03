@@ -152,8 +152,8 @@
 
         function plateCart(plateId,uid){
             loading('show');
-            $('#pname_'+plateId).siblings().removeClass('select');
-            $('#pname_'+plateId).addClass('select');
+            $('#pname_'+plateId).siblings().removeAttr('style');
+            $('#pname_'+plateId).attr('style','color:#71b6f9;');
             $.post("{:url('cart/userPlateCart')}",{'plateId':plateId,'uid':uid},function(result){
                 if(result.flog==1){
                     loading('hide');
