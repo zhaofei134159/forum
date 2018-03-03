@@ -26,12 +26,12 @@
                 <img src="/resource/images/cart/digest_3.gif" style="width:27px;margin-right:5px;">
                 {/if}
             </td>
-            <td class="author"> 
-                <a href=""> {$users[$cart.userid]['name']}</a>
+            <td class="author" style="height:30px;line-height:41px;"> 
+                <a href=""> {$users[$userid]['name']}</a>
                 <br>
                 {:tranTime($cart.ctime)}
             </td>
-            <td class="commit">
+            <td class="commit" style="height:30px;line-height:41px;">
                 {$cart.reply} 
                 <br>
                 {$cart.see}

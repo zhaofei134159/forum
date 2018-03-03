@@ -236,9 +236,13 @@ class Cart extends Common
         $cart_model = new model_cart();
         $result = $cart_model->userPalteCart($plateId,$uid);
 
+        $users = User::all(['is_del'=>0]);
+        $users = objToArray($users);
+
         $data = array(
                 'carts'=>$result['carts'],
                 'page'=>$result['page'],
+                'users'=>$users,
             );
 
         $html = $this->view->fetch('userPlateCart',$data);
