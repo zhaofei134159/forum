@@ -10,6 +10,7 @@
         .handle{width:230px;}
         .operation{width:200px;}
         .name{height:60px;line-height:60px;}
+        .select{color:#71b6f9;}
     </style>
 	<div class="row">
         <div class="col-lg-12 col-md-12">
@@ -113,7 +114,7 @@
                                         <th class="name">
                                             <div class="portfolioFilter">
                                                 {foreach $Plates as $plate}
-                                                <a href="javascript:void(0);" data-filter="" class="waves-effect waves-custom" onclick="plateCart('{$plate.pid}','{$userid}')">{$plate.name}</a>
+                                                <a href="javascript:void(0);" data-filter="" class="waves-effect waves-custom" onclick="plateCart('{$plate.pid}','{$userid}')" id="pname_{$plate.pid}">{$plate.name}</a>
                                                 {/foreach}
                                             </div>
                                         </th>
@@ -151,6 +152,8 @@
 
         function plateCart(plateId,uid){
             loading('show');
+            $('#pname_'+plateId).siblings().removeClass('select');
+            $('#pname_'+plateId).addClass('select');
             $.post("{:url('cart/userPlateCart')}",{'plateId':plateId,'uid':uid},function(result){
                 if(result.flog==1){
                     loading('hide');
