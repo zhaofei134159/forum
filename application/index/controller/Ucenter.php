@@ -39,7 +39,7 @@ class Ucenter extends Common
     public function index(){
     	$uid = $this->uid;
     	$get = input('get.');
-    	if($get['uid']){
+    	if(!empty($get['uid'])){
     		$uid = $get['uid'];
     	}
         $plateId = $get['plateId'];
