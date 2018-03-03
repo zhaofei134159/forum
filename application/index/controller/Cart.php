@@ -233,8 +233,8 @@ class Cart extends Common
         $plateId = $post['plateId'];
         $uid = $post['uid'];
 
-        $carts = Cart::userPalteCart($plateId,$uid);
+        $cart_model = new model_cart();
+        $carts = $cart_model->userPalteCart($plateId,$uid);
         var_Dump($carts);
-
     }
 }
