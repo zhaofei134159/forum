@@ -61,6 +61,8 @@ class Ucenter extends Common
         $cartResults = $cart_model->userSendCartPlate($uid);
         
         $first_pid = $plateId;
+        var_dump($first_pid);
+        var_dump(empty($first_pid));
         if(empty($first_pid)&&!empty($cartResults['Plates'])){
             $first_pid = array_keys($cartResults['Plates'])[0]; 
         }
