@@ -71,6 +71,7 @@ class Ucenter extends Common
         $users = User::all(['is_del'=>0]);
         $users = objToArray($users);
 
+        var_dump($first_pid);die;
         $result = $this->userPlateCart($first_pid,$uid);
 
     	$data = array(
