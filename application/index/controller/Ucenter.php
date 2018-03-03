@@ -65,7 +65,7 @@ class Ucenter extends Common
             $first_pid = array_keys($cartResults['Plates'])[0]; 
         }
 
-        
+
         $users = User::all(['is_del'=>0]);
         $users = objToArray($users);
 
@@ -77,7 +77,8 @@ class Ucenter extends Common
                 'Plates'=>$cartResults['Plates'],
                 'first_pid'=>$first_pid,
                 'users'=>$users,
-                'result'=>$result,
+                'carts'=>$result['carts'],
+                'page'=>$result['page'],
     		);
         return $this->view->fetch('index',$data);
     }

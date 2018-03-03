@@ -130,7 +130,7 @@
                             <div class="portfolioContainer" id="cartData">
                                 <div class="panel-body">
                                     <table class="table table table-hover m-0">
-                                        {foreach $result.carts as $cart}
+                                        {foreach $carts as $cart}
                                         <tr>
                                             <td class="name" style="height:30px;line-height:41px;">
                                                 {if condition="time()-$cart.ctime<=3600"}
