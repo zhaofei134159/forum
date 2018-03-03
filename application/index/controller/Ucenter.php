@@ -61,7 +61,7 @@ class Ucenter extends Common
         $cartResults = $cart_model->userSendCartPlate($uid);
         
         $first_pid = $plateId;
-        if(!isset($first_pid)&&!empty($cartResults['Plates'])){
+        if(empty($first_pid)&&!empty($cartResults['Plates'])){
             $first_pid = array_keys($cartResults['Plates'])[0]; 
         }
 
@@ -70,7 +70,7 @@ class Ucenter extends Common
         $users = objToArray($users);
 
         $result = $this->userPlateCart($first_pid,$uid);
-        
+
     	$data = array(
     			'user'=>$user,
                 'infoRate'=>$infoRate,
