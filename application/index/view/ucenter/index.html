@@ -26,7 +26,11 @@
 
                     <div class="userInfo">
                         <p class="text-muted font-13 m-b-30 user-info">
-                            {$user.info|default="用户很懒，没有自己的签名。"}
+                            {if condition="$user.info"}
+                                {$user.info}
+                            {else}
+                                没有属于描述自己的签名
+                            {/if}
                         </p>
                     </div>
                 </div>
