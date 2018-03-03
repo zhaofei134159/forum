@@ -101,19 +101,16 @@
             <div class="col-lg-12">
                 <div class="card-box card-tabs">
                     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                        {foreach $Plates as $plate}
-                        <div class="panel panel-default bx-shadow-none">
-                            <div class="panel-heading" role="tab" id="heading_{$plate.pid}">
-                                <h4 class="panel-title">
-                                    <a role="button" data-toggle="collapse"
-                                       data-parent="#accordion" href="#collapse_{$plate.pid}"
-                                       aria-expanded="true" aria-controls="collapse_{$plate.pid}">
-                                        {$plate.name}
-                                    </a>
-                                </h4>
+                        <div class="col-lg-12 col-md-12 col-sm-12 ">
+                            <div class="portfolioFilter">
+                                {foreach $Plates as $plate}
+                                <a href="javascript:void(0);" data-filter="" class="waves-effect waves-custom">{$plate.name}</a>
+                                {/foreach}
                             </div>
-                            <div id="collapse_{$plate.pid}" class="panel-collapse collapse "
-                                 role="tabpanel" aria-labelledby="heading_{$plate.pid}">
+                        </div>
+
+                        <div class="row port m-b-20">
+                            <div class="portfolioContainer">
                                 <div class="panel-body">
                                     <table class="table table table-hover m-0">
                                         {foreach $carts[$plate.pid] as $cart}
@@ -155,17 +152,17 @@
                                         </tr>
                                         {/foreach}
                                     </table>
+                                                
+                                    <div class="col-lg-12 text-right">
+                                        {$page}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        {/foreach}
                     </div>
                 </div>
             </div><!-- end col -->
 
-            <div class="col-lg-12 text-right">
-                {$page}
-            </div>
         </div><!-- end col -->
     </div>
     <script type="text/javascript">
