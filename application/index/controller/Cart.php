@@ -234,7 +234,15 @@ class Cart extends Common
         $uid = $post['uid'];
 
         $cart_model = new model_cart();
-        $carts = $cart_model->userPalteCart($plateId,$uid);
-        var_Dump($carts);
+        $result = $cart_model->userPalteCart($plateId,$uid);
+
+        $data = array(
+                'carts'=>$result['carts'];
+                'page'=>$result['page'];
+            );
+
+        $html = $this->view->fetch('userPlateCart',$data);
+
+        return json(['flog'=>1,'msg'=>'成功','data'=>$html]);
     }
 }
