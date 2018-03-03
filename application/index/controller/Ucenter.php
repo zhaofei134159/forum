@@ -42,6 +42,8 @@ class Ucenter extends Common
     	if($get['uid']){
     		$uid = $get['uid'];
     	}
+        $plateId = $get['plateId']
+
     	$user = User::get(['id'=>$uid]);
         $userinfo = Userinfo::get(['uid'=>$uid]);
      
@@ -57,14 +59,16 @@ class Ucenter extends Common
         
         $cart_model = new Cart();
         $cartResults = $cart_model->userSendCartPlate($uid);
-        $first_pid = 0;
-        if(!empty($cartResults['Plates'])){
+        
+        $first_pid = $plateId;
+        if(!isset($first_pid)&&!empty($cartResults['Plates'])){
             $first_pid = array_keys($cartResults['Plates'])[0]; 
         }
 
         $users = User::all(['is_del'=>0]);
         $users = objToArray($users);
 
+        $result = $this->userPlateCart($first_pid,$uid);
         
     	$data = array(
     			'user'=>$user,
@@ -72,8 +76,23 @@ class Ucenter extends Common
                 'Plates'=>$cartResults['Plates'],
                 'first_pid'=>$first_pid,
                 'users'=>$users,
+                'result'=>$result,
     		);
         return $this->view->fetch('index',$data);
+    }
+
+    public function userPlateCart($plateId,$uid){
+        $plateId = $post['plateId'];
+        $uid = $post['uid'];
+
+        $cart_model = new model_cart();
+        $result = $cart_model->userPalteCart($plateId,$uid);
+
+        $data = array(
+                'carts'=>$result['carts'],
+                'page'=>$result['page'],
+            );
+        return $data;
     }
 
     // 个人设置

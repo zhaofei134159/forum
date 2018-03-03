@@ -128,7 +128,52 @@
 
                         <div class="row port m-b-20">
                             <div class="portfolioContainer" id="cartData">
-                                
+                                <div class="panel-body">
+                                    <table class="table table table-hover m-0">
+                                        {foreach $result.carts as $cart}
+                                        <tr>
+                                            <td class="name" style="height:30px;line-height:41px;">
+                                                {if condition="time()-$cart.ctime<=3600"}
+                                                <img src="/resource/images/cart/folder_new.gif" style="margin-right:5px;">
+                                                {else}
+                                                <img src="/resource/images/cart/folder_common.gif" style="margin-right:5px;">
+                                                {/if}
+                                                <a href="{:url('Cart/seeCart',['cartId'=>$cart.id,'plateId'=>$cart.plateId])}">
+                                                    {$cart.title}
+                                                </a>
+                                            </td>
+                                            <td class="operation" style="height:30px;line-height:41px;">
+                                                {if condition="$cart.is_top==1"}
+                                                <img src="/resource/images/cart/agree.gif" style="width:22px;margin-right:5px;" onclick="" >
+                                                {/if}
+                                                {if condition="time()-$cart.ctime<=3600"}
+                                                <img src="/resource/images/cart/new.png" style="width:32px;margin-right:5px;">
+                                                {/if}
+                                                {if condition="$cart.is_hot==1"}
+                                                <img src="/resource/images/cart/hot_1.gif" style="width:27px;margin-right:5px;">
+                                                {/if}
+                                                {if condition="$cart.is_elite==1"}
+                                                <img src="/resource/images/cart/digest_3.gif" style="width:27px;margin-right:5px;">
+                                                {/if}
+                                            </td>
+                                            <td class="author"> 
+                                                <a href=""> {$users[$userid]['name']}</a>
+                                                <br>
+                                                {:tranTime($cart.ctime)}
+                                            </td>
+                                            <td class="commit">
+                                                {$cart.reply} 
+                                                <br>
+                                                {$cart.see}
+                                            </td>
+                                        </tr>
+                                        {/foreach}
+                                    </table>
+
+                                    <div class="col-lg-12 text-right">
+                                        {$page}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -142,24 +187,12 @@
             loading('show');
             window.location.href = "{:url('ucenter/editUser')}";
         }
-        var first_pid = '{$first_pid}';
-        var userid = '{$userid}';
-        $(function(){
-            if(first_pid!=''&&first_pid!='0'){
-                plateCart(first_pid,userid);
-            }
-        })
 
         function plateCart(plateId,uid){
             loading('show');
             $('#pname_'+plateId).siblings().removeAttr('style');
             $('#pname_'+plateId).attr('style','color:#71b6f9;');
-            $.post("{:url('cart/userPlateCart')}",{'plateId':plateId,'uid':uid},function(result){
-                if(result.flog==1){
-                    loading('hide');
-                    $('#cartData').html(result.data);
-                }
-            },'json')
+            window.location.href = "{:url('ucenter/editUser')}?plateId="+plateId;
         }
     </script>
 
