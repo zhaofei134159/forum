@@ -114,7 +114,7 @@
                                         <th class="name">
                                             <div class="portfolioFilter">
                                                 {foreach $Plates as $plate}
-                                                <a href="javascript:void(0);" data-filter="" class="waves-effect waves-custom" onclick="plateCart('{$plate.pid}','{$userid}')" id="pname_{$plate.pid}">{$plate.name}</a>
+                                                <a href="javascript:void(0);" data-filter="" class="waves-effect waves-custom" onclick="plateCart('{$plate.pid}','{$userid}')" id="pname_{$plate.pid}" {if condition="$place.id==$first_pid"}style="color:#71b6f9;"{/if}>{$plate.name}</a>
                                                 {/foreach}
                                             </div>
                                         </th>
@@ -192,7 +192,7 @@
             loading('show');
             $('#pname_'+plateId).siblings().removeAttr('style');
             $('#pname_'+plateId).attr('style','color:#71b6f9;');
-            window.location.href = "{:url('ucenter/editUser')}?plateId="+plateId;
+            window.location.href = "{:url('ucenter/index')}?plateId="+plateId;
         }
     </script>
 
