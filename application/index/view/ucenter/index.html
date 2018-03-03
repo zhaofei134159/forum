@@ -102,11 +102,22 @@
                 <div class="card-box card-tabs">
                     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                         <div class="col-lg-12 col-md-12 col-sm-12 ">
-                            <div class="portfolioFilter">
-                                {foreach $Plates as $plate}
-                                <a href="javascript:void(0);" data-filter="" class="waves-effect waves-custom" onclick="plateCart('{$plate.pid}','{$userid}')">{$plate.name}</a>
-                                {/foreach}
-                            </div>
+                            <table class="table table table-hover m-0">
+                                <thead>
+                                    <tr>
+                                        <th class="name">
+                                            <div class="portfolioFilter">
+                                                {foreach $Plates as $plate}
+                                                <a href="javascript:void(0);" data-filter="" class="waves-effect waves-custom" onclick="plateCart('{$plate.pid}','{$userid}')">{$plate.name}</a>
+                                                {/foreach}
+                                            </div>
+                                        </th>
+                                        <th class="operation"></th>
+                                        <th class="author">作者</th>
+                                        <th class="commit">回复/查看</th>
+                                    </tr>
+                                </thead>
+                            </table>
                         </div>
 
                         <div class="row port m-b-20">
