@@ -59,6 +59,11 @@ class Cart extends Common
         $carts = $this->join('forum_plate','forum_cart.plateId = forum_plate.id','LEFT')->field($field)->where($CartWhere)->order('forum_cart.ctime','desc')->paginate(20, false ,['query'=>['uid'=>$uid],]);
         $page = $carts->render();
 
+        foreach($carts as $cKey=>$cart){
+          $reply = $this->where(['cartId'=>$cart['id'],'is_del'=>0])->count();
+          $carts[$cKey]['reply'] = $reply;
+        }
+
 
         return ['carts'=>$carts,'page'=>$page];
   }
