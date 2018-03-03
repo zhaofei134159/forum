@@ -86,7 +86,7 @@ class Ucenter extends Common
         $plateId = $post['plateId'];
         $uid = $post['uid'];
 
-        $cart_model = new model_cart();
+        $cart_model = new Cart();
         $result = $cart_model->userPalteCart($plateId,$uid);
 
         $data = array(
