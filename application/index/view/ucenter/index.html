@@ -110,7 +110,7 @@
                         </div>
 
                         <div class="row port m-b-20">
-                            <div class="portfolioContainer">
+                            <div class="portfolioContainer" id="cartData">
                                 
                             </div>
                         </div>
@@ -135,8 +135,11 @@
 
         function plateCart(plateId,uid){
             loading('show');
-            $.post("{:url('cart/userPlateCart')}",{'plateId':plateId,'uid':uid},function(){
-
+            $.post("{:url('cart/userPlateCart')}",{'plateId':plateId,'uid':uid},function(result){
+                if(result.flog==0){
+                    loading('hide');
+                    $('#cartData').html(result.html);
+                }
             },'json')
         }
     </script>
