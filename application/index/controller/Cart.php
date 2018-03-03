@@ -227,4 +227,5 @@ class Cart extends Common
         $links[] = '/resource/images/gallery/12.jpg';
         return json($links);
     }
+
 }

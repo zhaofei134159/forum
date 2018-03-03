@@ -486,6 +486,5 @@ class Ucenter extends Common
 
         return json(['flog'=>1, 'msg'=>'删除成功']);
     }
-
-
+    
 }
