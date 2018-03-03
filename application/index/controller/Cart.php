@@ -237,8 +237,8 @@ class Cart extends Common
         $result = $cart_model->userPalteCart($plateId,$uid);
 
         $data = array(
-                'carts'=>$result['carts'];
-                'page'=>$result['page'];
+                'carts'=>$result['carts'],
+                'page'=>$result['page'],
             );
 
         $html = $this->view->fetch('userPlateCart',$data);
