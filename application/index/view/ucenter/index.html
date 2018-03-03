@@ -47,7 +47,7 @@
                         <h5>粉丝</h5>
                     </div>
                     <div class="text-center col-lg-4 col-md-4 ">
-                        <h2 class="text-custom" data-plugin="counterup">38</h2>
+                        <h2 class="text-custom" data-plugin="counterup">{$cartCount}</h2>
                         <h5>发帖</h5>
                     </div>
                 </div>
@@ -72,9 +72,11 @@
                             </div><!-- /.progress-bar .progress-bar-danger -->
                         </div><!-- /.progress .no-rounded -->
                         <br>
+                        {if condition="$userid==$uid"}
                         <div class="text-center font-400" style="color:#98A6AD;cursor:pointer;" onclick="editUser()"> 
                             编辑个人资料 >
                         </div>
+                        {/if}
                     </div>
                 </div>
             </div>
@@ -107,6 +109,7 @@
             <div class="col-lg-12">
                 <div class="card-box card-tabs">
                     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                        {if condition="!empty($Plates)"}
                         <div class="col-lg-12 col-md-12 col-sm-12 ">
                             <table class="table table table-hover m-0">
                                 <thead>
@@ -176,6 +179,11 @@
                                 </div>
                             </div>
                         </div>
+                        {else}
+                        <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                            暂无发表帖子
+                        </div>
+                        {/if}
                     </div>
                 </div>
             </div><!-- end col -->

@@ -70,15 +70,20 @@ class Ucenter extends Common
         $users = objToArray($users);
 
         $result = $this->userPlateCart($first_pid,$uid);
+
+        # 该用户发帖数
+        $cartCount = Cart::where(['is_del'=>0,'cartId'=>0,'userid'=>$uid])->count();
         
     	$data = array(
     			'user'=>$user,
+                'uid'=>$uid,
                 'infoRate'=>$infoRate,
                 'Plates'=>$cartResults['Plates'],
                 'first_pid'=>$first_pid,
                 'users'=>$users,
                 'carts'=>$result['carts'],
                 'page'=>$result['page'],
+                'cartCount'=>$cartCount,
     		);
         return $this->view->fetch('index',$data);
     }
