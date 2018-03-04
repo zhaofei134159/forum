@@ -31,10 +31,19 @@ class Index extends Common
         	}
         }
 
+        # 版主
+        $plateUser = Plate::where(['is_del'=>0,'is_check'=>1,'is_home'=>1])->limit(4)->select(); 
+        $plateUser = objToArray($plateUser);
+
+        $users = User::all(['is_del'=>0]);
+        $users = objToArray($users);
+
         $data = array(
         		'plates'=>$plates,
         		'cates'=>$cates,
         		'zhuCates'=>$zhuCates,
+        		'plateUser'=>$plateUser,
+        		'users'=>$users,
         	);
         return $this->view->fetch('index',$data);
     }
