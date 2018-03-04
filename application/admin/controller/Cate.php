@@ -22,30 +22,30 @@ class Cate extends Common
 
         $where = array();
         $where['is_del'] = 0;
-        $cate = Admin_cate::all($where);
+        $where['parent_id'] = 0;
+        $pcate = Admin_cate::all($where);
         $cateArr = array();
         $i = 0;
         $j = 0;
-        foreach($cate as $val){
-            if($val['parent_id']==0){
-                $cateArr[$i]['text'] = $val['name'];
-                $cateArr[$i]['nodeId'] = $val['id'];
-                $cateArr[$i]['parent_id'] = $val['parent_id'];
-                $cateArr[$i]['nodes'] = array();
-            }
-            foreach($cate as $c){
-                if($c['parent_id']==$val['id']){
-                    $cateArr[$i]['nodes'][$j]['text'] = $c['name'];
-                    $cateArr[$i]['nodes'][$j]['nodeId'] = $c['id'];
-                    $cateArr[$i]['nodes'][$j]['parent_id'] = $c['parent_id'];
-                    $j++;
-                }
-            }
-            if(empty($cateArr[$i]['nodes'])){
-                $cateArr[$i]['nodes'][0]['text'] = '无';
-            }
+        foreach($pcate as $key=>$val){
+            $cateArr[$key]['text'] = $val['name'];
+            $cateArr[$key]['nodeId'] = $val['id'];
+            $cateArr[$key]['parent_id'] = $val['parent_id'];
+            $cateArr[$key]['nodes'] = array();
 
-            $i++;
+            $where = array();
+            $where['is_del'] = 0;
+            $where['parent_id'] = $val['id'];
+            $scate = Admin_cate::all($where);
+            if(empty($scate)){
+                $cateArr[$key]['nodes'][0]['text'] = '无';
+                continue;
+            }
+            foreach($scate as $skey=>$cate){
+                $cateArr[$key]['nodes'][$skey]['text'] = $c['name'];
+                $cateArr[$key]['nodes'][$skey]['nodeId'] = $c['id'];
+                $cateArr[$key]['nodes'][$skey]['parent_id'] = $c['parent_id'];
+            }
         }
 
 
