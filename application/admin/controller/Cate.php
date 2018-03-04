@@ -38,7 +38,7 @@ class Cate extends Common
             $where['parent_id'] = $val['id'];
             $scate = Admin_cate::all($where);
             if(empty($scate)){
-                $cateArr[$key]['nodes'][0]['text'] = '无';
+                // $cateArr[$key]['nodes'][0]['text'] = '无';
                 continue;
             }
             foreach($scate as $skey=>$cate){
