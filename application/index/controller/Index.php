@@ -24,10 +24,17 @@ class Index extends Common
 
         $cates = Cate::where(['is_del'=>0])->select();
         $cates = objToArray($cates);
+        $zhuCates = 0;
+        foreach($cates as $cate){
+        	if($cate['parent_id']==0){
+        		$zhuCates++;
+        	}
+        }
 
         $data = array(
         		'plates'=>$plates,
-        		'cates'=>$cates
+        		'cates'=>$cates,
+        		'zhuCates'=>$zhuCates,
         	);
         return $this->view->fetch('index',$data);
     }
