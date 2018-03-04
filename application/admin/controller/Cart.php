@@ -81,6 +81,8 @@ class Cart extends Common
         $users = Home_user::all(['is_del'=>0]);
         $users = objToArray($users);
 
+        $plate = Admin_plate::get(['is_del'=>0,'id'=>$cart['plateId']]);
+
         $replys = Admin_cart::where(['is_del'=>0,'cartId'=>$cartId])->order('ctime','asc')->paginate(20, false,[
                 'query'=>['cartId'=>$cartId],
             ]);        
@@ -90,6 +92,7 @@ class Cart extends Common
                 'cart'=>$cart,
                 'users'=>$users,
                 'replys'=>$replys,
+                'plate'=>$plate,
                 'page'=>$page,
             );
 
