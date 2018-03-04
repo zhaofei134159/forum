@@ -83,7 +83,7 @@ class Cart extends Common
             $cartWhere['plateId'] = $plateId;
             $carts = $this->where($cartWhere)->where(function($query){
                         $query->whereOr('is_hot',1)->whereOr('is_elite',1)->whereOr('is_top',1)->whereOr('ctime','>=',time()-3600);
-                    }->limit(4)->select();
+                    })->limit(4)->select();
             $carts = objToArray($carts);
             $plates[$plateId]['carts'] = $carts;
         }
