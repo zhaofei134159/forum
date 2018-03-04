@@ -194,12 +194,12 @@
                             </li>
                             {foreach $topHeaderCates as $cateId=>$cateData}
                             <li class="has-submenu">
-                                <a href="javascript:void(0);"><i class="zmdi zmdi-invert-colors"></i> <span> {$cateData.name} </span> </a>
+                                <a href="javascript:void(0);"> <span> {$cateData.name} </span> </a>
                                 <ul class="submenu megamenu">
                                     <li>
                                         <ul>
                                             {foreach $cateData['son'] as $sonCateId=>$sonCateData}
-                                                <li><a href=""> {$cateData.name} </a></li>
+                                                <li><a href=""> {$sonCateData.name} </a></li>
                                             {/foreach}
                                         </ul>
                                     </li>
