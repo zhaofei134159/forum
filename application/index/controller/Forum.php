@@ -55,7 +55,8 @@ class Forum extends Common
         $get = input('get.');
         $cateId = $get['cateId'];
 
-        $cateArr = Cate::get(['is_del'=>0,'id'=>$cateId]);
+        $cateArr = Cate::get(['is_del'=>0]);
+        $cateArr = objToArray($cateArr);
 
         $where = array();
         $where['cateid'] = $cateId;
