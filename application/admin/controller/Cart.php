@@ -32,21 +32,19 @@ class Cart extends Common
         if($get['plateId']){
             $where['plateId'] = $get['plateId'];
         }
-        if($get['is_del']!='-1'){ 
+        if(isset($get['is_del'])&&$get['is_del']!='-1'){ 
             $where['is_del'] = $get['is_del']; 
         }
         $where['cartId'] = 0;
         $carts = Admin_cart::where($where)->order('ctime','desc')->paginate(10, false);
         $page = $carts->render();
         echo Admin_cart::getLastSql();
-        diie;
 
         $plates = Admin_plate::all(['is_del'=>0]);
         $plates = objToArray($plates);
 
         $users = Home_user::all(['is_del'=>0]);
         $users = objToArray($users);
-        var_dump($carts);die;
 
         $data = array(
                 'carts'=>$carts,
