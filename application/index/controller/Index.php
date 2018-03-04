@@ -20,7 +20,7 @@ class Index extends Common
     public function index(){
 
         $cart_model = new Cart();
-        $plates = $cart_model->userCartPlate();
+        $plates = $cart_model->PlateCart();
         var_dump($plates);die;
         $data = array(
         		'plates'=>$plates,
