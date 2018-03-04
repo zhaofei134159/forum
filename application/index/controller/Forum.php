@@ -60,14 +60,15 @@ class Forum extends Common
         $where = array();
         $where['cateid'] = $cateId;
         $where['is_check'] = 1;
+        $where['is_del'] = 0;
 
-        $myPlate = Plate::where($where)->order('ctime','desc')->paginate(9, false);        
-        $page = $myPlate->render();
+        $catePlate = Plate::where($where)->order('ctime','desc')->paginate(9, false);        
+        $page = $catePlate->render();
 
         $users = User::where(['is_del'=>0])->select();
 
         $data = array(
-                'myPlate'=>$myPlate,
+                'catePlate'=>$catePlate,
                 'page'=>$page,
                 'cateArr'=>$cateArr,
                 'users'=>$users,
