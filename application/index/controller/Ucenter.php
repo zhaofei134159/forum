@@ -73,6 +73,8 @@ class Ucenter extends Common
 
         # 该用户发帖数
         $cartCount = Cart::where(['is_del'=>0,'cartId'=>0,'userid'=>$uid])->count();
+
+        $plateCount = Plate::where(['is_del'=>0,'is_check'=>1,'userid'=>$uid])->count();
         
     	$data = array(
     			'user'=>$user,
@@ -84,6 +86,7 @@ class Ucenter extends Common
                 'carts'=>$result['carts'],
                 'page'=>$result['page'],
                 'cartCount'=>$cartCount,
+                'plateCount'=>$plateCount,
     		);
         return $this->view->fetch('index',$data);
     }
