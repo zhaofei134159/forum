@@ -44,7 +44,7 @@ class Cate extends Common
             $i++;
         }
 
-        // var_dump($cateArr);die;
+        var_dump($cateArr);die;
 
         $data = array(
                 'cateStr'=>json_encode($cateArr),
