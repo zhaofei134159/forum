@@ -61,9 +61,8 @@ class Common extends Controller
         foreach($topHeaderCates as $cateId=>$cate){
             $sonCate = Cate::where(['is_del'=>0,'parent_id'=>$cateId])->limit(10)->select();
             $sonCate = objToArray($sonCate);
-            $cates[$cateId]['son'] = $sonCate;
+            $topHeaderCates[$cateId]['son'] = $sonCate;
         }
-        var_dump($cates);die;
         $this->assign('topHeaderCates',$topHeaderCates);
     }
 
