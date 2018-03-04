@@ -3,7 +3,12 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header"> 帖子回复 </h1>
+                <h1 class="page-header"> 
+                	帖子回复 
+                    <button type="button" class="btn btn-outline btn-info" style="float:right;" onclick="back()">
+                        <i class="glyphicon glyphicon-arrow-left"></i> 返回 
+                    </button>
+                </h1>
             </div>
             <!-- /.col-lg-12 -->
 	        </div><link href="/resource/text-editing/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -31,9 +36,6 @@
 	        <div class="row">
 	            <div class="col-sm-12">
 	                <div class="card-box">
-	                    <button type="button" class="btn btn-success btn-rounded w-md waves-effect waves-light m-b-20" onclick="replies()"> 回帖 </button>
-	                    <button type="button" class="btn btn-default btn-rounded w-md waves-effect waves-light m-b-20" onclick="fanhui({$plateId})" style="border:1px solid gray;float:right;"> 帖子列表 </button>
-
 	                    <table class="table table-bordered m-0">
 	                        <tr class="user-mar">
 	                            <th class="see" style="vertical-align:inherit;">
@@ -129,38 +131,6 @@
 	                        </tr>
 	                    </table>
 	                    <br>
-	                    <button type="button" class="btn btn-info btn-rounded w-md waves-effect waves-light m-b-10" onclick="sendCart({$plateId})"> 发帖 </button>
-	                    <button type="button" class="btn btn-default btn-rounded w-md waves-effect waves-light m-b-10" onclick="fanhui({$plateId})" style="border:1px solid gray;float:right;"> 帖子列表 </button>
-	                </div>
-	            </div>
-	            <div class="col-sm-12">
-	                <div class="card-box">
-	                    <table class="table table-bordered m-0" id="replies">
-	                        <tr class="user-mar">
-	                            <th class="see" style="vertical-align:inherit;">
-	                                
-	                            </th>
-	                            <th class="title" style="padding-left:30px;vertical-align:inherit;">
-	                                {if condition="$userid"}
-	                                <form action="{:url('Cart/ReplyCart')}" method="post" enctype="multipart/form-data" data-parsley-validate novalidate id="ReplyCart">
-	                                    <section id="editor" style="margin-bottom:20px;">
-	                                        <div id='edit' style="margin-top: 30px;">
-	                                        </div>
-	                                    </section>
-	                                    <div style="display:none;">
-	                                        <textarea name="content" id="content"></textarea>
-	                                    </div>
-	                                    <input type="hidden" name="cartId" value="{$cart.id}">
-	                                    <button type="button" class="btn btn-info w-md waves-effect waves-light m-b-10" onclick="doReply()"> 发表回复 </button>
-	                                </form>
-	                                {else}
-	                                    <div style="min-height:200px;text-align:center;width:100%;line-height:200px;">
-	                                        您需要登录后才可以回帖  <a href="">登录</a> | <b>注册</b>
-	                                    </div>
-	                                {/if}
-	                            </th>
-	                        </tr>
-	                    </table>
 	                </div>
 	            </div>
 	        </div>
