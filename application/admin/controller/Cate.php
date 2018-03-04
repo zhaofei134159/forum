@@ -42,9 +42,9 @@ class Cate extends Common
                 continue;
             }
             foreach($scate as $skey=>$cate){
-                $cateArr[$key]['nodes'][$skey]['text'] = $c['name'];
-                $cateArr[$key]['nodes'][$skey]['nodeId'] = $c['id'];
-                $cateArr[$key]['nodes'][$skey]['parent_id'] = $c['parent_id'];
+                $cateArr[$key]['nodes'][$skey]['text'] = $cate['name'];
+                $cateArr[$key]['nodes'][$skey]['nodeId'] = $cate['id'];
+                $cateArr[$key]['nodes'][$skey]['parent_id'] = $cate['parent_id'];
             }
         }
 
