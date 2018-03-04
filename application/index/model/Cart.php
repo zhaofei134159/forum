@@ -77,7 +77,7 @@ class Cart extends Common
         $plates = objToArray($plates);
 
         foreach($plates as $plateId=>$plate){
-            $cartWhere = array();['is_del'=>0,'plateId'=>$plateId,'cartId'=>0,'is_hot'=>1]
+            $cartWhere = array();
             $cartWhere['is_del'] = 0;
             $cartWhere['cartId'] = 0;
             $cartWhere['plateId'] = $plateId;
