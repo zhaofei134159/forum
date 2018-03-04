@@ -84,6 +84,7 @@
 	                                    <td>{$plate.ctime|date="Y-m-d H:i",###}</td>
 	                                    <td>
 	                                    	<a href="javascript:void(0);" onclick="PlateEdit({$plate.id})" class="btn btn-outline btn-info">编辑</a>
+	                                    	<a href="javascript:void(0);" onclick="PlateCart({$plate.id})" class="btn btn-outline btn-success">查看帖子</a>
 	                                    </td>
 	                                </tr>
 								{/foreach}
@@ -112,6 +113,15 @@
     	function PlateEdit(plateId){
 			loading('show');
     		var url = "{:url('plate/editPlate')}";
+    		if(plateId!=undefined){
+    			url += "?plateId="+plateId;
+    		}
+    		window.location.href = url;
+    	}
+
+    	function PlateCart(plateId){
+			loading('show');
+    		var url = "{:url('Cart/index')}";
     		if(plateId!=undefined){
     			url += "?plateId="+plateId;
     		}
