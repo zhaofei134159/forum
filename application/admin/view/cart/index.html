@@ -63,7 +63,7 @@
 								{foreach $carts as $cart}
 	                                <tr>
 	                                    <td>{$cart.id}</td>
-	                                    <td>{$cart.title}</td>
+	                                    <td><span style="white-space:nowrap;text-overflow:ellipsis;overflow:hidden;text-align:center;width:140px;margin:0 auto;">{$cart.title}</span></td>
 	                                    <td>{$plates[$cart.plateId]['name']}</td>
 	                                    <td>{$users[$cart.userid][nikename]}</td>
 	                                    <td>{$cart.see}</td>
