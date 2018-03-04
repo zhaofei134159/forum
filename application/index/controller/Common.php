@@ -63,6 +63,7 @@ class Common extends Controller
             $sonCate = objToArray($sonCate);
             $cates[$cateId]['son'] = $sonCate;
         }
+        var_dump($cates);die;
         $this->assign('topHeaderCates',$topHeaderCates);
     }
 
