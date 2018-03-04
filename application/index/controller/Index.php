@@ -34,7 +34,7 @@ class Index extends Common
         }
 
         # 版主
-        $plateUser = Plate::where(['is_del'=>0,'is_check'=>1,'is_home'=>1])->group('userid')->order('is_elite,is_hot,is_top','desc')->limit(4)->select(); 
+        $plateUser = Plate::where(['is_del'=>0,'is_check'=>1,'is_home'=>1])->group('userid')->limit(4)->select(); 
         $plateUser = objToArray($plateUser);
 
         $users = User::all(['is_del'=>0]);
