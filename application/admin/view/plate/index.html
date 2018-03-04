@@ -76,9 +76,9 @@
 	                                    </td>
 	                                    <td>
 	                                    	{if condition="$plate.is_home==1"}
-	                                    		<span class="btn btn-outline btn-danger" onclick="isHome({$plate.id},$(this))">是</span>
+	                                    		<span class="btn btn-outline btn-success" onclick="isHome({$plate.id},$(this))">是</span>
 	                                    	{else}
-	                                    		<span class="btn btn-outline btn-success" onclick="isHome({$plate.id},$(this))">否</span>
+	                                    		<span class="btn btn-outline btn-danger" onclick="isHome({$plate.id},$(this))">否</span>
 	                                    	{/if}
 	                                    </td>
 	                                    <td>{$plate.ctime|date="Y-m-d H:i",###}</td>
@@ -178,10 +178,10 @@
 	            	res.removeClass('btn-success');
 	            }
 	            if(data.msg==0){
-	            	res.addClass('btn-success');
+	            	res.addClass('btn-danger');
 	            	res.html('否');
 	            }else if(data.msg==1){
-	            	res.addClass('btn-danger');
+	            	res.addClass('btn-success');
 	            	res.html('是');
 	            }
 		    },'json');
