@@ -35,7 +35,7 @@ class Cart extends Common
         $topWhere['is_top'] = 1;
         $topCarts = model_cart::where($topWhere)->select();
         foreach($topCarts as $key=>$top){
-              $reply = $this->where(['cartId'=>$top['id'],'is_del'=>0])->count();
+              $reply = model_cart::where(['cartId'=>$top['id'],'is_del'=>0])->count();
               $topCarts[$key]['reply'] = $reply;
         }     
 
@@ -58,7 +58,7 @@ class Cart extends Common
         $page = $carts->render();
 
         foreach($carts as $key=>$cart){
-              $reply = $this->where(['cartId'=>$cart['id'],'is_del'=>0])->count();
+              $reply = model_cart::where(['cartId'=>$cart['id'],'is_del'=>0])->count();
               $carts[$key]['reply'] = $reply;
         }     
 
