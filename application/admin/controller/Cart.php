@@ -71,4 +71,28 @@ class Cart extends Common
 
         return json(['flog'=>1, 'msg'=>$update['is_del']]);
     }
+
+    public function SeeCart(){
+        $get = input('get.');
+        $cartId = $get['cartId'];
+
+        $cart = Admin_cart::get(['id'=>$cartId]);
+
+        $users = Home_user::all(['is_del'=>0]);
+        $users = objToArray($users);
+
+        $replys = Admin_cart::where(['is_del'=>0,'cartId'=>$cartId])->order('ctime','asc')->paginate(20, false,[
+                'query'=>['cartId'=>$cartId],
+            ]);        
+        $page = $replys->render();
+        
+        $data = array(
+                'cart'=>$cart,
+                'users'=>$users,
+                'replys'=>$replys,
+                'page'=>$page,
+            );
+
+        return $this->view->fetch('SeeCart',$data);
+    }
 }
