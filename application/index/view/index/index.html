@@ -6,12 +6,12 @@
                 <div class="card-box widget-user">
                     <div>
                         {if condition="$users[$plateU.userid]['headimg']"}
-                        <img src="/{$users[$plateU.userid]['headimg']}" class="img-responsive img-circle" alt="头像">
+                        <img src="/{$users[$plateU.userid]['headimg']}" class="img-responsive img-circle" style="width:72px;height:72px;" alt="头像">
                         {else}
-                        <img src="/resource/images/user.png" class="img-responsive img-circle" alt="头像">
+                        <img src="/resource/images/user.png" class="img-responsive img-circle" style="width:72px;height:72px;" alt="头像">
                         {/if}
                         <div class="wid-u-info">
-                            <h4 class="m-t-0 m-b-5">{$plateU.name}</h4>
+                            <h4 class="m-t-0 m-b-5">板块名：{$plateU.name}</h4>
                             <p class="text-muted m-b-5 font-13">{$users[$plateU.userid]['nikename']}</p>
                             <small class="text-info"><b>版主</b></small>
                         </div>
