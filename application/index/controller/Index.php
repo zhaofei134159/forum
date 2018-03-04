@@ -9,6 +9,8 @@ use app\index\model\Common as modelCommon;
 use app\index\model\Cate;
 use app\index\model\Plate;
 use app\index\model\Cart;
+use app\index\model\User;
+
 
 class Index extends Common
 {
