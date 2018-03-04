@@ -67,4 +67,27 @@ class Cart extends Common
 
         return ['carts'=>$carts,'page'=>$page];
   }
+
+  public function PlateCart(){
+        $plateWhere = array();
+        $plateWhere['is_del'] = 0;
+        $plateWhere['is_check'] = 1;
+        $plateWhere['is_home'] = 1;
+        $plates = Plate::where($plateWhere)->order('ctime','desc')->limit(10)->select();
+        $plates = objToArray($plates);
+
+        foreach($plates as $plateId=>$plate){
+            $cartWhere = array();['is_del'=>0,'plateId'=>$plateId,'cartId'=>0,'is_hot'=>1]
+            $cartWhere['is_del'] = 0;
+            $cartWhere['cartId'] = 0;
+            $cartWhere['plateId'] = $plateId;
+            $carts = $this->where($cartWhere)->where(function($query){
+                        $query->whereOr('is_hot',1)->whereOr('is_elite',1)->whereOr('is_top',1)->whereOr('ctime','>=',time()-3600);
+                    }->limit(4)->select();
+            $carts = objToArray($carts);
+            $plates[$plateId]['carts'] = $carts;
+        }
+
+        return $plates;
+  }
 }

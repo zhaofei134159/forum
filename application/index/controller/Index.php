@@ -19,8 +19,11 @@ class Index extends Common
 
     public function index(){
 
-
+        $cart_model = new Cart();
+        $plates = $cart_model->userCartPlate();
+        var_dump($plates);die;
         $data = array(
+        		'plates'=>$plates,
         	);
         return $this->view->fetch('index',$data);
     }
