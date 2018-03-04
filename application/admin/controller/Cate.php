@@ -42,15 +42,13 @@ class Cate extends Common
                 }
             }
             if(empty($cateArr[$i]['nodes'])){
-                unset($cateArr[$i]['nodes']);
-                unset($cateArr[$i]['parent_id']);
-                unset($cateArr[$i]['nodeId']);
+                $cateArr[$i]['nodes'][0]['text'] = '无';
             }
 
             $i++;
         }
 
-        
+
         $data = array(
                 'cateStr'=>json_encode($cateArr),
             );
