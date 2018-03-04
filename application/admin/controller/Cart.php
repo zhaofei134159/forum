@@ -29,7 +29,7 @@ class Cart extends Common
         if(!empty($get['title'])){
             $where['title'] = array('like','%'.$get['title'].'%'); 
         }
-        if($get['plateId']){
+        if(isset($get['plateId'])&&$get['plateId']!='-1'){
             $where['plateId'] = $get['plateId'];
         }
         if(isset($get['is_del'])&&$get['is_del']!='-1'){ 
