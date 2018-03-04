@@ -41,6 +41,10 @@ class Cate extends Common
                     $j++;
                 }
             }
+            if(empty($cateArr[$i]['nodes'])){
+                unset($cateArr[$i]['nodes']);
+            }
+
             $i++;
         }
 
