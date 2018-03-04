@@ -113,7 +113,7 @@
                                         {:tranTime($topCart.ctime)}
                                     </td>
                                     <td class="commit">
-                                        <a href="{:url('Cart/seeCart',['cartId'=>$cart.id,'plateId'=>$plateId])}"> 23 </a> 
+                                        <a href="{:url('Cart/seeCart',['cartId'=>$cart.id,'plateId'=>$plateId])}"> {$topCart.reply}  </a> 
                                         <br>
                                         {$topCart.see}
                                     </td>
@@ -179,7 +179,7 @@
                                         {:tranTime($cart.ctime)}
                                     </td>
                                     <td class="commit">
-                                        <a href="{:url('Cart/seeCart',['cartId'=>$cart.id,'plateId'=>$plateId])}"> 23 </a> 
+                                        <a href="{:url('Cart/seeCart',['cartId'=>$cart.id,'plateId'=>$plateId])}"> {$cart.reply} </a> 
                                         <br>
                                         {$cart.see}
                                     </td>

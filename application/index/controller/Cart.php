@@ -33,7 +33,11 @@ class Cart extends Common
         $topWhere['cartId'] = 0;
         $topWhere['plateId'] = $plateId;
         $topWhere['is_top'] = 1;
-        $topCarts = model_cart::where($topWhere)->select();        
+        $topCarts = model_cart::where($topWhere)->select();
+        foreach($topCarts as $key=>$top){
+              $reply = $this->where(['cartId'=>$top['id'],'is_del'=>0])->count();
+              $topCarts[$key]['reply'] = $reply;
+        }     
 
         # 不置顶的一些 帖子
 		$where = array();
@@ -52,6 +56,11 @@ class Cart extends Common
                 'query'=>['plateId'=>$plateId],
             ]);        
         $page = $carts->render();
+
+        foreach($carts as $key=>$cart){
+              $reply = $this->where(['cartId'=>$cart['id'],'is_del'=>0])->count();
+              $carts[$key]['reply'] = $reply;
+        }     
 
         $users = User::all(['is_del'=>0]);
         $users = objToArray($users);
