@@ -57,6 +57,7 @@ class Forum extends Common
 
         $cateArr = Cate::all(['is_del'=>0]);
         $cateArr = objToArray($cateArr);
+        $curCate = $cateArr[$cateId];
 
         $where = array();
         $where['cateid'] = $cateId;
@@ -72,6 +73,7 @@ class Forum extends Common
                 'catePlate'=>$catePlate,
                 'page'=>$page,
                 'cateArr'=>$cateArr,
+                'curCate'=>$curCate,
                 'users'=>$users,
             );
         return $this->view->fetch('catePlate',$data);
