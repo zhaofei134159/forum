@@ -38,7 +38,6 @@ class Cart extends Common
         $where['cartId'] = 0;
         $carts = Admin_cart::where($where)->order('ctime','desc')->paginate(10, false);
         $page = $carts->render();
-        echo Admin_cart::getLastSql();
 
         $plates = Admin_plate::all(['is_del'=>0]);
         $plates = objToArray($plates);
