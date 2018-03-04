@@ -88,6 +88,22 @@ class Plate extends Common
         return json(['flog'=>1, 'msg'=>$update['is_check']]);
     }
 
+    public function isHomePlate(){
+        $post = input('post.');
+        $id = $post['id'];
+
+        $user = model_plate::get(['id'=>$id]);
+        $update = array();
+        if(empty($user['is_home'])){
+            $update['is_home'] = 1;
+        }else if($user['is_home']==1){
+           $update['is_home'] = 0;
+        }
+        model_plate::where('id', $id)->update($update);
+
+        return json(['flog'=>1, 'msg'=>$update['is_home']]);
+    }
+
     public function editPlate(){
         $get = input('get.');
 

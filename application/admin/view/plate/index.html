@@ -45,6 +45,7 @@
                                     <th>版主</th>
                                     <th>是否删除</th>
                                     <th>是否审核通过</th>
+                                    <th>是否推荐到首页</th>
                                     <th>创建时间</th>
                                     <th>操作</th>
                                 </tr>
@@ -71,6 +72,13 @@
 	                                    		<span class="btn btn-outline btn-success" onclick="isCheck({$plate.id},$(this))">审核成功</span>
 	                                    	{elseif condition="$plate.is_check==0"}
 	                                    		<span class="btn btn-outline btn-default" onclick="isCheck({$plate.id},$(this))">未审核</span>
+	                                    	{/if}
+	                                    </td>
+	                                    <td>
+	                                    	{if condition="$plate.is_home==1"}
+	                                    		<span class="btn btn-outline btn-danger" onclick="isHome({$plate.id},$(this))">是</span>
+	                                    	{else}
+	                                    		<span class="btn btn-outline btn-success" onclick="isHome({$plate.id},$(this))">否</span>
 	                                    	{/if}
 	                                    </td>
 	                                    <td>{$plate.ctime|date="Y-m-d H:i",###}</td>
@@ -156,6 +164,27 @@
 	            }
 		    },'json');
 
+    	}
+
+    	// 是否推荐到首页
+    	function isHome(id,res){
+			loading('show');
+    		$.post("{:url('Plate/isHomePlate')}",{id:id},function(data){
+	            loading('hide');
+	            if(res.hasClass('btn-danger')){
+	            	res.removeClass('btn-danger');
+	            }
+	            if(res.hasClass('btn-success')){
+	            	res.removeClass('btn-success');
+	            }
+	            if(data.msg==0){
+	            	res.addClass('btn-success');
+	            	res.html('否');
+	            }else if(data.msg==1){
+	            	res.addClass('btn-danger');
+	            	res.html('是');
+	            }
+		    },'json');
     	}
 
     </script>
