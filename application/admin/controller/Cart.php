@@ -44,7 +44,7 @@ class Cart extends Common
 
         $users = Home_user::all(['is_del'=>0]);
         $users = objToArray($users);
-
+        var_dump($carts);die;
 
         $data = array(
                 'carts'=>$carts,
