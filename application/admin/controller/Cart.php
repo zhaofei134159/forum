@@ -83,7 +83,7 @@ class Cart extends Common
 
         $plate = Admin_plate::get(['is_del'=>0,'id'=>$cart['plateId']]);
 
-        $replys = Admin_cart::where(['is_del'=>0,'cartId'=>$cartId])->order('ctime','asc')->paginate(20, false,[
+        $replys = Admin_cart::where(['is_del'=>0,'cartId'=>$cartId])->order('ctime','asc')->paginate(9, false,[
                 'query'=>['cartId'=>$cartId],
             ]);        
         $page = $replys->render();
