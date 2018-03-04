@@ -22,8 +22,12 @@ class Index extends Common
         $cart_model = new Cart();
         $plates = $cart_model->PlateCart();
 
+        $cates = Cate::where(['is_del'=>0])->select();
+        $cates = objToArray($cates);
+
         $data = array(
         		'plates'=>$plates,
+        		'cates'=>$cates
         	);
         return $this->view->fetch('index',$data);
     }
