@@ -54,4 +54,20 @@ class Cart extends Common
             );
         return $this->view->fetch('index',$data);
     }
+
+    public function isDelCart(){
+        $post = input('post.');
+        $id = $post['id'];
+
+        $user = Admin_cart::get(['id'=>$id]);
+        $update = array();
+        if(empty($user['is_del'])){
+            $update['is_del'] = 1;
+        }else if($user['is_del']==1){
+           $update['is_del'] = 0;
+        }
+        Admin_cart::where('id', $id)->update($update);
+
+        return json(['flog'=>1, 'msg'=>$update['is_del']]);
+    }
 }

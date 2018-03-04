@@ -25,6 +25,9 @@
 	                    	<div class="col-lg-3">
 	                        	<select id="plateId" name="plateId" class="form-control">
                                     <option value="-1" {if condition="$get['plateId']=='-1'"}selected{/if}>选择板块</option>
+                                    {foreach $plates as $plate}
+                                    <option value="{$plate.id}" {if condition="$get['plateId']==$plate.id"}selected{/if}>{$plate.name}</option>
+                                    {/foreach}
                                 </select>
 	                        </div>
 	                        <span class="col-lg-2 input-group-btn">
@@ -44,52 +47,57 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>版块名</th>
-                                    <th>标示图</th>
-                                    <th>分类</th>
-                                    <th>版主</th>
+                                    <th>帖子标题</th>
+                                    <th>帖子板块</th>
+                                    <th>发帖用户</th>
+                                    <th>查看次数</th>
                                     <th>是否删除</th>
-                                    <th>是否审核通过</th>
-                                    <th>是否推荐到首页</th>
+                                    <th>是否热门</th>
+                                    <th>是否精华</th>
+                                    <th>是否置顶</th>
                                     <th>创建时间</th>
                                     <th>操作</th>
                                 </tr>
                             </thead>
                             <tbody>
-								{foreach $plates as $plate}
+								{foreach $carts as $cart}
 	                                <tr>
-	                                    <td>{$plate.id}</td>
-	                                    <td>{$plate.name}</td>
-	                                    <td><img src="/{$plate.headimg}" width="40" height="40"></td>
-	                                    <td>{$cates[$plate.cateid][name]}</td>
-	                                    <td>{$users[$plate.userid][nikename]}</td>
+	                                    <td>{$cart.id}</td>
+	                                    <td>{$cart.title}</td>
+	                                    <td><img src="/{$plates[$cart.plateId]['name']}" width="40" height="40"></td>
+	                                    <td>{$users[$cart.userid][nikename]}</td>
+	                                    <td>{$cart.see}</td>
 	                                    <td>
-	                                    	{if condition="$plate.is_del==1"}
-	                                    		<span class="btn btn-outline btn-danger" onclick="isDel({$plate.id},$(this))">是</span>
+	                                    	{if condition="$cart.is_del==1"}
+	                                    		<span class="btn btn-outline btn-danger" onclick="isDel({$cart.id},$(this))">是</span>
 	                                    	{else}
-	                                    		<span class="btn btn-outline btn-success" onclick="isDel({$plate.id},$(this))">否</span>
+	                                    		<span class="btn btn-outline btn-success" onclick="isDel({$cart.id},$(this))">否</span>
 	                                    	{/if}
 	                                    </td>
 	                                    <td>
-	                                    	{if condition="$plate.is_check==2"}
-	                                    		<span class="btn btn-outline btn-danger" onclick="isCheck({$plate.id},$(this))">审核失败</span>
-	                                    	{elseif condition="$plate.is_check==1"}
-	                                    		<span class="btn btn-outline btn-success" onclick="isCheck({$plate.id},$(this))">审核成功</span>
-	                                    	{elseif condition="$plate.is_check==0"}
-	                                    		<span class="btn btn-outline btn-default" onclick="isCheck({$plate.id},$(this))">未审核</span>
+	                                    	{if condition="$cart.is_hot==1"}
+	                                    		<span class="btn btn-outline btn-danger">是</span>
+	                                    	{elseif condition="$cart.is_hot==0"}
+	                                    		<span class="btn btn-outline btn-success">否</span>
 	                                    	{/if}
 	                                    </td>
 	                                    <td>
-	                                    	{if condition="$plate.is_home==1"}
-	                                    		<span class="btn btn-outline btn-success" onclick="isHome({$plate.id},$(this))">是</span>
+	                                    	{if condition="$plate.is_elite==1"}
+	                                    		<span class="btn btn-outline btn-success">是</span>
 	                                    	{else}
-	                                    		<span class="btn btn-outline btn-danger" onclick="isHome({$plate.id},$(this))">否</span>
+	                                    		<span class="btn btn-outline btn-danger">否</span>
+	                                    	{/if}
+	                                    </td>
+	                                    <td>
+	                                    	{if condition="$plate.is_top==1"}
+	                                    		<span class="btn btn-outline btn-success">是</span>
+	                                    	{else}
+	                                    		<span class="btn btn-outline btn-danger">否</span>
 	                                    	{/if}
 	                                    </td>
 	                                    <td>{$plate.ctime|date="Y-m-d H:i",###}</td>
 	                                    <td>
-	                                    	<a href="javascript:void(0);" onclick="PlateEdit({$plate.id})" class="btn btn-outline btn-info">编辑</a>
-	                                    	<a href="javascript:void(0);" onclick="PlateCart({$plate.id})" class="btn btn-outline btn-success">查看帖子</a>
+	                                    	<a href="javascript:void(0);" onclick="SeeCart({$plate.id})" class="btn btn-outline btn-info">查看</a>
 	                                    </td>
 	                                </tr>
 								{/foreach}
@@ -115,20 +123,12 @@
 		    $('#PlateSearch').submit();
     	}
 
-    	function PlateEdit(plateId){
-			loading('show');
-    		var url = "{:url('plate/editPlate')}";
-    		if(plateId!=undefined){
-    			url += "?plateId="+plateId;
-    		}
-    		window.location.href = url;
-    	}
 
-    	function PlateCart(plateId){
+    	function SeeCart(cartId){
 			loading('show');
-    		var url = "{:url('Cart/index')}";
-    		if(plateId!=undefined){
-    			url += "?plateId="+plateId;
+    		var url = "{:url('Cart/SeeCart')}";
+    		if(cartId!=undefined){
+    			url += "?cartId="+cartId;
     		}
     		window.location.href = url;
     	}
@@ -137,7 +137,7 @@
 		// 是否删除
     	function isDel(id,res){
 			loading('show');
-    		$.post("{:url('Plate/isDelPlate')}",{id:id},function(data){
+    		$.post("{:url('Cart/isDelCart')}",{id:id},function(data){
 	            loading('hide');
 	            if(res.hasClass('btn-danger')){
 	            	res.removeClass('btn-danger');
@@ -150,53 +150,6 @@
 	            	res.html('否');
 	            }else if(data.msg==1){
 	            	res.addClass('btn-danger');
-	            	res.html('是');
-	            }
-		    },'json');
-    	}
-
-    	// 是否审核
-    	function isCheck(id,res){
-    		loading('show');
-    		$.post("{:url('Plate/isCheckPlate')}",{id:id},function(data){
-	            loading('hide');
-	            if(res.hasClass('btn-danger')){
-	            	res.removeClass('btn-danger');
-	            }
-	            if(res.hasClass('btn-success')){
-	            	res.removeClass('btn-success');
-	            }
-	            if(res.hasClass('btn-default')){
-	            	res.removeClass('btn-default');
-	            }
-
-	            if(data.msg==2){
-	            	res.addClass('btn-danger');
-	            	res.html('审核失败');
-	            }else if(data.msg==1){
-	            	res.addClass('btn-success');
-	            	res.html('审核成功');
-	            }
-		    },'json');
-
-    	}
-
-    	// 是否推荐到首页
-    	function isHome(id,res){
-			loading('show');
-    		$.post("{:url('Plate/isHomePlate')}",{id:id},function(data){
-	            loading('hide');
-	            if(res.hasClass('btn-danger')){
-	            	res.removeClass('btn-danger');
-	            }
-	            if(res.hasClass('btn-success')){
-	            	res.removeClass('btn-success');
-	            }
-	            if(data.msg==0){
-	            	res.addClass('btn-danger');
-	            	res.html('否');
-	            }else if(data.msg==1){
-	            	res.addClass('btn-success');
 	            	res.html('是');
 	            }
 		    },'json');
