@@ -49,4 +49,9 @@ class Index extends Common
         	);
         return $this->view->fetch('index',$data);
     }
+
+    public function catePlate(){
+        $get = input('get.');
+        $cateId = $get['cateId'];
+    }
 }

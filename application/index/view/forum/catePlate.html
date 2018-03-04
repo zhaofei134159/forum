@@ -1,0 +1,150 @@
+{include file="public/header" /}
+    <div class="row">
+        <div class="col-sm-4">
+            <button type="button" class="btn btn-purple btn-rounded w-md waves-effect waves-light m-b-20" onclick="applyPlate()"> 申请版块 </button>
+        </div>
+    </div>
+    <div class="row">
+        {foreach $myPlate as $plate}
+        <div class="col-md-4">
+            <div class="text-center card-box">
+
+                <div>
+                    <img src="/{$plate.headimg}" class="img-circle thumb-xl img-thumbnail m-b-10" alt="{$plate.name}">
+
+                    <p class="text-muted font-13 m-b-30">
+                        {$plate.info}
+                    </p>
+
+                    <div class="text-left">
+                        <p class="text-muted font-13"><strong>版块名称 :</strong> <span class="m-l-15">{$plate.name}</span></p>
+
+                        <p class="text-muted font-13"><strong>版块分类 :</strong><span class="m-l-15">{$cateArr[$plate.cateid][name]}</span></p>
+
+                        <p class="text-muted font-13">
+                            <strong>版块状态 :</strong>
+                            <span class="m-l-15">
+                                <span class="label 
+                                    {if condition='$plate.is_check==0'}
+                                        label-warning
+                                    {elseif condition='$plate.is_check==2'}
+                                        label-danger
+                                    {elseif condition='$plate.is_check==1'}
+                                        label-success
+                                    {/if}"
+                                >
+                                    {if condition='$plate.is_check==0'}
+                                        未审核
+                                    {elseif condition='$plate.is_check==2'}
+                                        审核失败
+                                    {elseif condition='$plate.is_check==1'}
+                                        审核通过
+                                    {/if}
+                                </span>
+                            </span>
+                        </p>
+                    </div>
+
+                    <div class="project-members m-b-20 text-left">
+                        <span class="m-r-5 font-600">管理员 :</span>
+                        <div class="files-list">
+                            <div style="float:left;" id="adminids">
+                            {foreach $users as $user}
+                                {if condition="in_array($user.id,explode(',',$plate.adminids))"}
+                                <div class="file-box" style="text-align:center;float:left;">
+                                    <a href=""><img src="/{$user.headimg}" class="img-circle thumb-sm" alt="{$user.nikename}"></a>
+                                    <p class="font-13 m-b-5 text-muted"><small>{$user.nikename}</small></p>
+                                </div>
+                                {/if}
+                            {/foreach}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <div class="project-members m-b-20 text-center">
+                        <button type="button" class="btn btn-info  btn-rounded waves-effect waves-light" onclick="SeePlate({$plate.id})">查看帖子</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        {/foreach}
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-md-offset-3 text-center">
+            {$page}
+        </div>
+    </div>
+
+
+</div>
+<script type="text/javascript">
+    function SeePlate(id){
+        loading('show');
+        window.location.href = "{:url('cart/index')}?plateId="+id;
+    }
+    function applyPlate(){
+        loading('show');
+        window.location.href = "{:url('forum/applyModerator')}";
+    }
+    function plateEdit(id){
+        loading('show');
+        window.location.href = "{:url('forum/myPlateEdit')}?id="+id;
+    }
+    function plateDel(id){
+        loading('show');
+        $.post("{:url('forum/plateDel')}",{'plateId':id},function(res){
+            if(res.flog==0){
+                loading('hide');
+                alertFun('管理员',res.msg,false);
+                return false;
+            }else{
+               window.location.href="{:url('forum/myPlateList')}";
+            }
+        },'json')
+    }
+    function adminEdit(plateId){
+        loading('show');
+        $.post("{:url('forum/findPlateUsers')}",{'plateId':plateId},function(res){
+            if(res.flog==0){
+                loading('hide');
+                alertFun('管理员',res.msg,false);
+                return false;
+            }else{
+                loading('hide');
+                alertFun('管理员',res.data,1);
+                return false;
+            }
+        },'json')
+    }
+
+    $('#modelSave').click(function(){
+        loading('show');
+        var adminids = new Array();
+        $("input[name^='adminid']").each(function(i, index) {
+            adminids[i] =$(this).val();
+        });
+        var plateId = $('input[name="plateId"]').val();
+        $.post("{:url('forum/savePlateAdmin')}",{'plateId':plateId,'adminids':adminids},function(res){
+            if(res.flog==0){
+                loading('hide');
+                alertFun('管理员',res.msg,false);
+                return false;
+            }else{
+                loading('hide');
+                var html = '';
+                $.each(res.data,function(i,index){
+                    html += '<div class="file-box" style="text-align:center;float:left;">';
+                    html += '<a href=""><img src="/'+index.headimg+'" class="img-circle thumb-sm" alt="'+index.nikename+'"></a>';
+                    html += '<p class="font-13 m-b-5 text-muted"><small>'+index.nikename+'</small></p>';
+                    html += '</div>';
+                })
+                $('#adminids').html(html);
+                $('.close').click();
+            }
+        },'json')
+    })
+</script>
+{include file="public/footer" /}

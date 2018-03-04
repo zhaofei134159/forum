@@ -199,7 +199,7 @@
                                     <li>
                                         <ul>
                                             {foreach $cateData['son'] as $sonCateId=>$sonCateData}
-                                                <li><a href=""> {$sonCateData.name} </a></li>
+                                                <li><a href="{:url('forum/catePlate')}?cateId={$sonCateData.id}"> {$sonCateData.name} </a></li>
                                             {/foreach}
                                         </ul>
                                     </li>

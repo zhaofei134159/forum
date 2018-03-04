@@ -51,6 +51,30 @@ class Forum extends Common
         return $this->view->fetch('myPlateList',$data);
     }
 
+    public function catePlate(){ 
+        $get = input('get.');
+        $cateId = $get['cateId'];
+
+        $cateArr = Cate::get(['is_del'=>0,'id'=>$cateId]);
+
+        $where = array();
+        $where['cateid'] = $cateId;
+        $where['is_check'] = 1;
+
+        $myPlate = Plate::where($where)->order('ctime','desc')->paginate(9, false);        
+        $page = $myPlate->render();
+
+        $users = User::where(['is_del'=>0])->select();
+
+        $data = array(
+                'myPlate'=>$myPlate,
+                'page'=>$page,
+                'cateArr'=>$cateArr,
+                'users'=>$users,
+            );
+        return $this->view->fetch('catePlate',$data);
+    }
+
 
     # 申请版主
     public function applyModerator(){
