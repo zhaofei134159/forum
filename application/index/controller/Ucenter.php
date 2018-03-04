@@ -25,19 +25,24 @@ class Ucenter extends Common
 	public function __construct(){
 		parent::__construct();
 
-        if(!Session::get('login_id','forum_home')){
-            $this->redirect('login/index');
-        }
-
         $this->uid = Session::get('login_id','forum_home');
         $this->userid =  Session::get('login_id','forum_home');
 
 	}
 
+    public function is_login(){
+        if(!Session::get('login_id','forum_home')){
+            $this->redirect('login/index');
+        }
+    } 
+
     
     // 个人资料
     public function index(){
     	$uid = $this->uid;
+        if(!$uid){
+            $this->redirect('login/index');
+        }
     	$get = input('get.');
     	if(!empty($get['uid'])){
     		$uid = $get['uid'];
@@ -92,6 +97,7 @@ class Ucenter extends Common
     }
 
     public function userPlateCart($plateId,$uid){
+        $this->is_login();
 
         $cart_model = new Cart();
         $result = $cart_model->userPalteCart($plateId,$uid);
@@ -105,10 +111,12 @@ class Ucenter extends Common
 
     // 个人设置
     public function setting(){
+        $this->is_login();
     	return $this->view->fetch('setting');
     }
 
     public function editUser(){
+        $this->is_login();
         $uid = $this->uid;
         $user = User::get(['id'=>$uid]);
         $userinfo = Userinfo::get(['uid'=>$uid]);
@@ -122,6 +130,7 @@ class Ucenter extends Common
     }
 
     public function saveUserHeadimg(){
+        $this->is_login();
         $uid = $this->uid;
         $user = User::get(['id'=>$uid]);
         if(empty($user)||$user['is_del']==1){
@@ -151,6 +160,7 @@ class Ucenter extends Common
 
     # 基本资料
     public function basicUserInfo(){
+        $this->is_login();
         $uid = $this->uid;
 
         $user = User::get(['id'=>$uid]);
@@ -198,6 +208,7 @@ class Ucenter extends Common
     }
 
     public function saveUserBasic(){
+        $this->is_login();
 
         $uid = $this->uid;
         $user = User::get(['id'=>$uid]);
@@ -325,6 +336,7 @@ class Ucenter extends Common
 
     # 教育背景
     public function eduBackInfo(){
+        $this->is_login();
         
         $uid = $this->uid;
         
@@ -425,6 +437,8 @@ class Ucenter extends Common
 
     # 工作信息
     public function editWordInfo(){
+        $this->is_login();
+        
         $uid = $this->uid;
         
         $userinfo = Userinfo::get(['uid'=>$uid]);
