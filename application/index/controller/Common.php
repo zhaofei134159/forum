@@ -10,7 +10,7 @@ use think\Log;
 use app\index\model\Common as modelCommon;
 use app\index\model\Setting;
 use app\index\model\User;
-use app\index\model\Cart;
+use app\index\model\Cate;
 
 class Common extends Controller
 {
