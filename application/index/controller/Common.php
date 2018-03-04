@@ -10,7 +10,7 @@ use think\Log;
 use app\index\model\Common as modelCommon;
 use app\index\model\Setting;
 use app\index\model\User;
-
+use app\index\model\Cart;
 
 class Common extends Controller
 {
@@ -55,6 +55,15 @@ class Common extends Controller
             
         }
 
+        # 分类展示
+        $topHeaderCates =  Cate::where(['is_del'=>0,'parent_id'=>0])->limit(6)->select();
+        $topHeaderCates = objToArray($topHeaderCates);
+        foreach($topHeaderCates as $cateId=>$cate){
+            $sonCate = Cate::where(['is_del'=>0,'parent_id'=>$cateId])->limit(10)->select();
+            $sonCate = objToArray($sonCate);
+            $cates[$cateId]['son'] = $sonCate;
+        }
+        $this->assign('topHeaderCates',$topHeaderCates);
     }
 
 }
