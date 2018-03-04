@@ -103,12 +103,12 @@
                                         {/if}
                                     </td>
                                     <td class="author"> 
-                                        <a href=""> {$users[$topCart.userid]['name']}</a>
+                                        <a href="{:url('ucenter/index')}?uid={$topCart.userid}"> {$users[$topCart.userid]['name']}</a>
                                         <br>
                                         {:tranTime($topCart.ctime)}
                                     </td>
                                     <td class="commit">
-                                        <a href=""> 23 </a> 
+                                        <a href="{:url('Cart/seeCart',['cartId'=>$cart.id,'plateId'=>$plateId])}"> 23 </a> 
                                         <br>
                                         {$topCart.see}
                                     </td>
@@ -169,12 +169,12 @@
                                         {/if}
                                     </td>
                                     <td class="author"> 
-                                        <a href=""> {$users[$cart.userid]['name']}</a>
+                                        <a href="{:url('ucenter/index')}?uid={$cart.userid}"> {$users[$cart.userid]['name']}</a>
                                         <br>
                                         {:tranTime($cart.ctime)}
                                     </td>
                                     <td class="commit">
-                                        <a href=""> 23 </a> 
+                                        <a href="{:url('Cart/seeCart',['cartId'=>$cart.id,'plateId'=>$plateId])}"> 23 </a> 
                                         <br>
                                         {$cart.see}
                                     </td>

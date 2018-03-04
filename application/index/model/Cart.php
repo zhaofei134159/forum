@@ -85,6 +85,10 @@ class Cart extends Common
                         $query->whereOr('is_hot',1)->whereOr('is_elite',1)->whereOr('is_top',1)->whereOr('ctime','>=',time()-3600);
                     })->limit(4)->select();
             $carts = objToArray($carts);
+            foreach($carts as $cartId=>$cart){
+              $reply = $this->where(['cartId'=>$cart['id'],'is_del'=>0])->count();
+              $carts[$cartId]['reply'] = $reply;
+            }
             $plates[$plateId]['carts'] = $carts;
         }
 

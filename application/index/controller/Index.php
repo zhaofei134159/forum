@@ -21,7 +21,7 @@ class Index extends Common
 
         $cart_model = new Cart();
         $plates = $cart_model->PlateCart();
-        var_dump($plates);die;
+
         $data = array(
         		'plates'=>$plates,
         	);
