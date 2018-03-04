@@ -64,7 +64,6 @@ class Forum extends Common
 
         $catePlate = Plate::where($where)->order('ctime','desc')->paginate(9, false);        
         $page = $catePlate->render();
-        var_dump($catePlate);die;
 
         $users = User::where(['is_del'=>0])->select();
 
