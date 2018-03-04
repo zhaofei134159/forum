@@ -76,23 +76,23 @@
 	                                    </td>
 	                                    <td>
 	                                    	{if condition="$cart.is_hot==1"}
-	                                    		是
+	                                    		<span style="color:green;">是</span>
 	                                    	{elseif condition="$cart.is_hot==0"}
-	                                    		否
+	                                    		<span style="color:red;">否</span>
 	                                    	{/if}
 	                                    </td>
 	                                    <td>
 	                                    	{if condition="$plate.is_elite==1"}
-	                                    		是
+	                                    		<span style="color:green;">是</span>
 	                                    	{else}
-	                                    		否
+	                                    		<span style="color:red;">否</span>
 	                                    	{/if}
 	                                    </td>
 	                                    <td>
 	                                    	{if condition="$plate.is_top==1"}
-	                                    		是
+	                                    		<span style="color:green;">是</span>
 	                                    	{else}
-	                                    		否
+	                                    		<span style="color:red;">否</span>
 	                                    	{/if}
 	                                    </td>
 	                                    <td>{$plate.ctime|date="Y-m-d H:i",###}</td>
