@@ -40,6 +40,8 @@ class Index extends Common
         $users = User::all(['is_del'=>0]);
         $users = objToArray($users);
 
+        $friend = Friend::where(['is_del'=>0,'is_check'=>1])->limit(30)->select();
+
         $data = array(
         		'plates'=>$plates,
         		'cates'=>$cates,
