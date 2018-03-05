@@ -113,10 +113,11 @@
                         {foreach $friend as $fval}
                         <div class="col-md-3 widget-user">
                             <a href="{$fval[link]}">
-                                <img src="/{$fval[linkimg]}" class="img-responsive img-circle" alt="user">
+                                <img src="/{$fval[linkimg]}" class="img-responsive img-circle" alt="user" style="width:72px;height:72px;">
                                 <div class="wid-u-info">
                                     <h4 class="m-t-0 m-b-5">{$fval[name]}</h4>
-                                    <p class="text-muted m-b-5 font-13">{$fval[link]}</p>
+                                    <p class="text-muted m-b-5 font-13" style="white-space:nowrap;text-overflow:ellipsis;overflow:hidden;width:100%;">{$fval[info]}</p>
+                                    <small class="text-warning"><b>{$fval[link]}</b></small>
                                 </div>
                             </a>
                         </div>
