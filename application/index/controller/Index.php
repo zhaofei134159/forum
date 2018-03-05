@@ -59,7 +59,7 @@ class Index extends Common
     public function FriendList(){
         $uid = input('get.uid');
 
-        $sel = arrya();
+        $sel = array();
 
         $where = array();
         $where['is_del'] = 0;
