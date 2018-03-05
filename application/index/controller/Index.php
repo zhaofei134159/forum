@@ -64,7 +64,7 @@ class Index extends Common
         if(isset($uid)&&!empty($uid)){
             $where['adminid'] = $uid;
         }
-        $friends = Friend::where($where)->order('ctime','desc')->paginate(1, false);        
+        $friends = Friend::where($where)->order('ctime','desc')->paginate(16, false);        
         $page = $friends->render();
 
         $users = User::all(['is_del'=>0]);
