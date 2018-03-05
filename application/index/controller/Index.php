@@ -50,6 +50,7 @@ class Index extends Common
         		'zhuCates'=>$zhuCates,
         		'plateUser'=>$plateUser,
         		'users'=>$users,
+                'friend'=>$friend,
         	);
         return $this->view->fetch('index',$data);
     }
