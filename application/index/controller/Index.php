@@ -57,14 +57,21 @@ class Index extends Common
 
     # 友情链接列表
     public function FriendList(){
-        $uid = input('param.uid');
+        $uid = input('get.uid');
+
+        $sel = arrya();
 
         $where = array();
         $where['is_del'] = 0;
         if(isset($uid)&&!empty($uid)){
             $where['adminid'] = $uid;
+            $sel =  [
+                        'query'=>['uid'=>$uid],
+                    ];
+        }else{
+            $where['is_check'] = 1;
         }
-        $friends = Friend::where($where)->order('ctime','desc')->paginate(16, false);        
+        $friends = Friend::where($where)->order('ctime','desc')->paginate(16, false, $sel);        
         $page = $friends->render();
 
         $users = User::all(['is_del'=>0]);

@@ -19,7 +19,26 @@
                                 <div class="wid-u-info">
                                     <h4 class="m-t-0 m-b-5">{$fval[name]}</h4>
                                     <p class="text-muted m-b-5 font-13" style="white-space:nowrap;text-overflow:ellipsis;overflow:hidden;width:100%;">{$fval[info]}</p>
-                                    <div class="text-success" style="white-space:nowrap;text-overflow:ellipsis;overflow:hidden;width:100%;"><b>{$users[$fval['adminid']]['nikename']}</b></div>
+                                    <div 
+                                        {if condition="$fval.is_check==0"}
+                                            class="text-warning" 
+                                        {elseif condition="$fval.is_check==1"}
+                                            class="text-success"
+                                        {elseif condition="$fval.is_check==2"}
+                                            class="text-danger"
+                                        {/if}
+
+                                        style="white-space:nowrap;text-overflow:ellipsis;overflow:hidden;width:100%;">
+                                        <b> 
+                                            {if condition="$fval.is_check==0"}
+                                                未审核
+                                            {elseif condition="$fval.is_check==1"}
+                                                审核通过
+                                            {elseif condition="$fval.is_check==2"}
+                                                审核失败
+                                            {/if}
+                                        </b>
+                                    </div>
                                 </div>
                             </a>
                         </div>
