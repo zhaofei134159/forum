@@ -10,6 +10,8 @@ use app\index\model\Cate;
 use app\index\model\Plate;
 use app\index\model\Cart;
 use app\index\model\User;
+use app\index\model\Friend;
+
 
 
 class Index extends Common
