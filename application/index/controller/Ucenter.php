@@ -141,6 +141,7 @@ class Ucenter extends Common
 
         $update = array();
         $update['nikename'] = $post['nikename'];
+        $update['info'] = $post['info'];
 
         $file = request()->file('headimg');
         if($file){
