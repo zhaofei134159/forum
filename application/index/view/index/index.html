@@ -107,17 +107,20 @@
             <div class="col-md-12">
                 <div class="panel panel-border panel-success">
                     <div class="panel-heading">
-                        <h3 class="panel-title"> 友情链接 </h3>
+                        <h3 class="panel-title"> 
+                            友情链接 
+                            <button type="button" class="btn btn-success btn-rounded waves-effect waves-light m-b-5" onclick="ApplyFriend()">申请</button>
+                        </h3>
                     </div>
                     <div class="panel-body">  
                         {foreach $friend as $fval}
-                        <div class="col-md-3 widget-user">
+                        <div class="col-md-2 widget-user" style="min-height:72px;">
                             <a href="{$fval[link]}">
                                 <img src="/{$fval[linkimg]}" class="img-responsive img-circle" alt="user" style="width:72px;height:72px;">
                                 <div class="wid-u-info">
                                     <h4 class="m-t-0 m-b-5">{$fval[name]}</h4>
                                     <p class="text-muted m-b-5 font-13" style="white-space:nowrap;text-overflow:ellipsis;overflow:hidden;width:100%;">{$fval[info]}</p>
-                                    <small class="text-warning"><b>{$fval[link]}</b></small>
+                                    <small class="text-success" style="white-space:nowrap;text-overflow:ellipsis;overflow:hidden;width:100%;"><b>{$fval[link]}</b></small>
                                 </div>
                             </a>
                         </div>
@@ -128,5 +131,10 @@
             </div>
         </div>
 
-
+    <script type="text/javascript">
+        function ApplyFriend(){
+            loading('show');
+            window.location.href = "{:url('index/ApplyFriend')}";
+        }
+    </script>
 {include file="public/footer" /}
