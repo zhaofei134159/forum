@@ -67,6 +67,29 @@ class Index extends Common
     }
 
     public function saveApplyFriend(){
+        $post = input('post.');
 
+        if(!preg_match('/(http:\/\/)|(https:\/\/)/i',$post['link'])) {
+            $post['link'] = 'http://'.$post['link'];
+        }
+
+        $file = request()->file('linkimg');
+        if($file){
+            $info = $file->move(ROOT_PATH.'public'.DS.'uploads'.DS.'linkimg');
+            if($info){
+               $post['linkimg'] = 'uploads'.DS.'linkimg'.DS.$info->getSaveName();
+            }else{
+                $post['linkimg'] = '';
+                Log::log(Session::get('login_id','forum_home').' 上传链图 '.$post['name'].' 错误 ：'.$file->getError());
+            }
+        }
+
+        $post['is_check'] = 0;
+        $post['adminid'] = Session::get('login_id','forum_home');
+        $post['ctime'] = time();
+        $post['utime'] = time();
+        Friend::create($post);
+        
+        $this->redirect('index/index');
     }
 }

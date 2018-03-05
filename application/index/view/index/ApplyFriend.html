@@ -41,7 +41,7 @@
                         <div class="form-group">
                             <div class="col-sm-12">
                                 <button type="submit" class="btn btn-success waves-effect waves-light" onclick="doApply()">
-                                    绑定
+                                    申请链接
                                 </button>
                             </div>
                         </div>
@@ -70,22 +70,19 @@
         // 修改信息
         function doApply(res){
             loading('show');
-            var id = $('input[name="id"]').val();
-            var name = $('#name').val();
-            var link = $('#link').val();
+            var name = $('input[name="name"]').val();
+            var link = $('input[name="link"]').val();
 
             if(name==''){
                 loading('hide');
-                $('#name').parent().addClass("has-error");  
-                $('#name').next('p').html('名称不能为空');
-                return false; 
+                var $toast = toastr['error']('名称不能为空！');
+                return false;
             }
 
             if(link==''){
                 loading('hide');
-                $('#link').parent().addClass("has-error");  
-                $('#link').next('p').html('链接不能为空');
-                return false; 
+                var $toast = toastr['error']('链接不能为空！');
+                return false;
             }
 
             $('#FriendEdit').submit();
