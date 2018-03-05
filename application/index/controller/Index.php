@@ -42,7 +42,7 @@ class Index extends Common
         $users = User::all(['is_del'=>0]);
         $users = objToArray($users);
 
-        $friend = Friend::where(['is_del'=>0,'is_check'=>1])->limit(15)->select();
+        $friend = Friend::where(['is_del'=>0,'is_check'=>1])->order('ctime','desc')->limit(8)->select();
 
         $data = array(
         		'plates'=>$plates,
@@ -55,12 +55,37 @@ class Index extends Common
         return $this->view->fetch('index',$data);
     }
 
+    # 友情链接列表
+    public function FriendList(){
+        $uid = input('param.uid');
+
+        $where = array();
+        $where['is_del'] = 0;
+        if(isset($uid)&&!empty($uid)){
+            $where['adminid'] = $uid;
+        }
+        $friends = Friend::where($where)->order('ctime','desc')->paginate(1, false);        
+        $page = $friends->render();
+
+        $users = User::all(['is_del'=>0]);
+        $users = objToArray($users);
+
+        $data = array(
+                'friends'=>$friends,
+                'page'=>$page,
+                'users'=>$users,
+            );
+
+        return $this->view->fetch('FriendList',$data);
+    }
+
     # 申请友情链接
     public function ApplyFriend(){
 
         if(!Session::get('login_id','forum_home')){
             $this->redirect('login/index');
         }
+
         $data = array();
 
         return $this->view->fetch('ApplyFriend',$data);

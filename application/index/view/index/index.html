@@ -111,17 +111,19 @@
                             友情链接 
                             &nbsp;&nbsp;&nbsp;
                             <button type="button" class="btn btn-success waves-effect waves-light btn-sm m-b-5" onclick="ApplyFriend()">申请</button>
+                            &nbsp;&nbsp;&nbsp;
+                            <button type="button" class="btn btn-info waves-effect waves-light btn-sm m-b-5" onclick="FriendList()"> 申请列表 </button>
                         </h3>
                     </div>
                     <div class="panel-body">  
                         {foreach $friend as $fval}
-                        <div class="col-md-2 widget-user" style="min-height:72px;">
+                        <div class="col-md-3 widget-user" style="min-height:72px;">
                             <a href="{$fval[link]}" title="{$fval[info]}">
                                 <img src="/{$fval[linkimg]}" class="img-responsive img-circle" alt="{$fval[name]}" style="width:72px;height:72px;">
                                 <div class="wid-u-info">
                                     <h4 class="m-t-0 m-b-5">{$fval[name]}</h4>
                                     <p class="text-muted m-b-5 font-13" style="white-space:nowrap;text-overflow:ellipsis;overflow:hidden;width:100%;">{$fval[info]}</p>
-                                    <div class="text-success" style="white-space:nowrap;text-overflow:ellipsis;overflow:hidden;width:100%;"><b>{$fval[link]}</b></div>
+                                    <div class="text-success" style="white-space:nowrap;text-overflow:ellipsis;overflow:hidden;width:100%;"><b>{$users[$fval['adminid']]['nikename']}</b></div>
                                 </div>
                             </a>
                         </div>
@@ -136,6 +138,10 @@
         function ApplyFriend(){
             loading('show');
             window.location.href = "{:url('index/ApplyFriend')}";
+        }
+        function FriendList(){
+            loading('show');
+            window.location.href = "{:url('index/FriendList')}";
         }
     </script>
 {include file="public/footer" /}
