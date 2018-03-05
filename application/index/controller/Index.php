@@ -57,10 +57,11 @@ class Index extends Common
 
     # 申请友情链接
     public function ApplyFriend(){
-        
+
         if(!Session::get('login_id','forum_home')){
             $this->redirect('login/index');
         }
+        $data = array();
 
         return $this->view->fetch('ApplyFriend',$data);
     }
