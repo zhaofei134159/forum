@@ -116,8 +116,8 @@
                     <div class="panel-body">  
                         {foreach $friend as $fval}
                         <div class="col-md-2 widget-user" style="min-height:72px;">
-                            <a href="{$fval[link]}">
-                                <img src="/{$fval[linkimg]}" class="img-responsive img-circle" alt="user" style="width:72px;height:72px;">
+                            <a href="{$fval[link]}" title="{$fval[info]}">
+                                <img src="/{$fval[linkimg]}" class="img-responsive img-circle" alt="{$fval[name]}" style="width:72px;height:72px;">
                                 <div class="wid-u-info">
                                     <h4 class="m-t-0 m-b-5">{$fval[name]}</h4>
                                     <p class="text-muted m-b-5 font-13" style="white-space:nowrap;text-overflow:ellipsis;overflow:hidden;width:100%;">{$fval[info]}</p>
