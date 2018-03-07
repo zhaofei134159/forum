@@ -33,6 +33,10 @@
                 return false;
             }else{
                 loading('hide');
+	            toastr.options = {
+	              "positionClass": "toast-top-center",
+	            }
+	            var $toast = toastr['success']('发送私信成功！');
 				$('.close').click();
             }
         },'json');
