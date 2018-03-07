@@ -56,4 +56,30 @@ class Message extends Common
         $html = $this->view->fetch('findUser',$data);
 		return json(['flog'=>1,'msg'=>'success','data'=>$html]);
 	}
+
+	# 快捷发送信息
+	public function quickSend(){
+		$post = input('post.');
+		$uid = $post['uid'];
+		$message = $post['message'];
+
+		if(!$this->send_uid){
+			return json(['flog'=>0,'msg'=>'请先登录']);
+		}
+
+		$user = User::get(['id'=>$uid]);
+		if(empty($user)){
+			return json(['flog'=>0,'msg'=>'用户不存在']);
+		}
+
+		$insert = array();
+		$insert['send_uid'] = $this->send_uid;
+		$insert['receive_uid'] = $uid;
+		$insert['message'] = $message;
+		$insert['ctime'] = time();
+		$insert['is_see'] = 0;
+		$messageId = model_message::create($insert);
+
+		return json(['flog'=>1,'msg'=>'success']);
+	}
 }
