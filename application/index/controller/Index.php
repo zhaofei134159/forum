@@ -50,8 +50,7 @@ class Index extends Common
 
         $messages = array();
         if($this->uid){
-            $messages = Message::where(['receive_uid'=>$this->uid,'is_see'=>0])->group('send_uid')->order('ctime','desc')->select();
-            echo Message::getLastSql();
+            $messages = Message::where(['receive_uid'=>$this->uid,'is_see'=>0])->group('send_uid')->order('ctime','desc')->limit(6)->select();
             $messages = objToArray($messages);
         }
 
