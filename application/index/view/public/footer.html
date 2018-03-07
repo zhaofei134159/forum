@@ -20,7 +20,7 @@
                                     <a href="#">Help</a>
                                 </li>
                                 <li>
-                                    <a href="#">Contact</a>
+                                    <a href="javascript:void(0);" onclick="ApplyFriend()">申请友链</a>
                                 </li>
                             </ul>
                         </div>
@@ -30,7 +30,6 @@
             <!-- End Footer -->
         </div>
 
-        
         <!-- Right Sidebar -->
         <div class="side-bar right-bar">
             <a href="javascript:void(0);" class="right-bar-toggle">
@@ -108,6 +107,17 @@
     <script src="/resource/admin/js/admin.js"></script>
     <script src="/resource/js/home.js"></script>
     <script src="/resource/js/jquery.app.js"></script>
+    
+    <script type="text/javascript">
+        function ApplyFriend(){
+            loading('show');
+            window.location.href = "{:url('index/ApplyFriend')}";
+        }
+        function FriendList(){
+            loading('show');
+            window.location.href = "{:url('index/FriendList')}";
+        }
+    </script>
     
 </body>
 </html>
