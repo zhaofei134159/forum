@@ -248,6 +248,10 @@
         $.post("{:url('message/findUser')}",{'uid':uid},function(result){
             if(result.flog==0){
                 loading('hide');
+                
+                toastr.options = {
+                  "positionClass": "toast-top-center",
+                }
                 var $toast = toastr['error'](result.msg);
                 return false;
             }else{
