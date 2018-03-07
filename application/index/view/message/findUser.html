@@ -33,7 +33,7 @@
                 return false;
             }else{
                 loading('hide');
-                closeModal();
+				$('#myModal').removeClass('in').css('padding-right','').css('display','none');
             }
         },'json');
 
