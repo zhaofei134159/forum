@@ -243,10 +243,20 @@
     }
 
     // 发送消息
-    function sendMessage(){
+    function sendMessage(uid){
         loading('show');
-        alertFun('保存错误','结束工作月份请选择!',false);
-        
+        $,post("{:url('message/findUser')}",{'uid':uid},function(result){
+            if(result.flog==0){
+                loading('hide');
+                var $toast = toastr['error'](result.msg);
+                return false;
+            }else{
+                alertFun('保存错误','结束工作月份请选择!',false);
+                
+            }
+        },'json')
+
+
     }
 </script>
 {include file="public/footer" /}
