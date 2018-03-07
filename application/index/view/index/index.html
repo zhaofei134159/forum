@@ -109,10 +109,6 @@
                     <div class="panel-heading">
                         <h3 class="panel-title"> 
                             友情链接 
-                            &nbsp;&nbsp;&nbsp;
-                            <button type="button" class="btn btn-success waves-effect waves-light btn-sm m-b-5" onclick="ApplyFriend()">申请</button>
-                            &nbsp;&nbsp;&nbsp;
-                            <button type="button" class="btn btn-info waves-effect waves-light btn-sm m-b-5" onclick="FriendList()"> 申请列表 </button>
                         </h3>
                     </div>
                     <div class="panel-body">  
@@ -134,14 +130,4 @@
             </div>
         </div>
 
-    <script type="text/javascript">
-        function ApplyFriend(){
-            loading('show');
-            window.location.href = "{:url('index/ApplyFriend')}";
-        }
-        function FriendList(){
-            loading('show');
-            window.location.href = "{:url('index/FriendList')}";
-        }
-    </script>
 {include file="public/footer" /}
