@@ -11,13 +11,17 @@ use app\index\model\Plate;
 use app\index\model\Cart;
 use app\index\model\User;
 use app\index\model\Friend;
+use app\index\model\Message;
 
 
 
 class Index extends Common
 {
+    public $uid;
+
 	public function __construct(){
 		parent::__construct();
+        $this->uid = Session::get('login_id','forum_home');
 	}
 
 
@@ -44,6 +48,12 @@ class Index extends Common
 
         $friend = Friend::where(['is_del'=>0,'is_check'=>1])->order('ctime','desc')->limit(8)->select();
 
+        $message = array();
+        if($this->uid){
+            $message = Message::where(['receive_uid'=>$this->uid])->select();
+            $message = objToArray($message);
+        }
+
         $data = array(
         		'plates'=>$plates,
         		'cates'=>$cates,
@@ -51,6 +61,7 @@ class Index extends Common
         		'plateUser'=>$plateUser,
         		'users'=>$users,
                 'friend'=>$friend,
+                'message'=>$message,
         	);
         return $this->view->fetch('index',$data);
     }
