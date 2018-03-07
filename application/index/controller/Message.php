@@ -42,7 +42,7 @@ class Message extends Common
 		$post = input('post.');
 		$uid = $post['uid'];
 
-		if(!$send_uid){
+		if(!$this->send_uid){
 			return json(['flog'=>0,'msg'=>'请先登录']);
 		}
 
