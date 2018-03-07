@@ -28,9 +28,9 @@
         }
       });
 
-      $(".right-bar-toggle").click(function(){
-        $(".right-bar").toggle();
-        $('.wrapper').toggleClass('right-bar-enabled');
+      $(".left-bar-toggle").click(function(){
+        $(".left-bar").toggle();
+        $('.wrapper').toggleClass('left-bar-enabled');
       });
     },
     //init
