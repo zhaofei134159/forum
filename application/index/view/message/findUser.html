@@ -9,14 +9,11 @@
 			<label> 内容: </label>
 			<textarea class="form-control" name="message" id="message_content" rows="3" cols="" style="margin: 0px -5px 0px 0px;resize:none"></textarea>
 		</div>
-		<div class="form-group text-center">
-			<button type="button" class="btn btn-success w-md waves-effect waves-light m-b-10" onclick="send()"> 发信 </button>
-		</div>
 	</div>
 </div>
 <script type="text/javascript">
-	function send(){
-        loading('show');
+	$('#modelSave').click(function(){
+	  	loading('show');
 		var uid = $('input[name="uid"]').val();
 		var message = $('#message_content').val();
 		if(message==''){
@@ -36,8 +33,9 @@
                 return false;
             }else{
                 loading('hide');
-               	closeModal();
+                closeModal();
             }
         },'json');
-	}
+
+	})
 </script>
