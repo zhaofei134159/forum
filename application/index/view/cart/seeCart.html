@@ -103,7 +103,7 @@
                                     </div> 
                                 </div>
                                 <div class="SendMessage">
-                                    {if condition="$userid!={$cart.userid}"}
+                                    {if condition="$userid!=$cart.userid"}
                                     <button class="btn btn-custom btn-bordred waves-effect waves-light w-md m-b-5" onclick="sendMessage({$cart.userid})">
                                         <i class="ti-comment"></i> 
                                         &nbsp; 发消息
@@ -144,8 +144,8 @@
                                         </div> 
                                     </div>
                                     <div class="SendMessage">
-                                        {if condition="$userid!={$cart.userid}"}
-                                        <button class="btn btn-custom btn-bordred waves-effect waves-light w-md m-b-5" onclick="sendMessage({$cart.userid})">
+                                        {if condition="$userid!=$reply.userid"}
+                                        <button class="btn btn-custom btn-bordred waves-effect waves-light w-md m-b-5" onclick="sendMessage({$reply.userid})">
                                             <i class="ti-comment"></i> 
                                             &nbsp; 发消息
                                         </button>
