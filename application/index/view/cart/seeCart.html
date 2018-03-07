@@ -248,7 +248,6 @@
         $.post("{:url('message/findUser')}",{'uid':uid},function(result){
             if(result.flog==0){
                 loading('hide');
-                
                 toastr.options = {
                   "positionClass": "toast-top-center",
                 }
@@ -256,8 +255,7 @@
                 return false;
             }else{
                 loading('hide');
-                alertFun('保存错误','结束工作月份请选择!',false);
-
+                alertFun('私信',result.data);
             }
         },'json');
     }

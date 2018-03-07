@@ -50,6 +50,10 @@ class Message extends Common
 		if(empty($user)){
 			return json(['flog'=>0,'msg'=>'用户不存在']);
 		}
-		return json(['flog'=>1,'msg'=>'success','data'=>$user]);
+		$data = array(
+				'user'=>$user,
+        	);
+        $html = $this->view->fetch('findUser',$data);
+		return json(['flog'=>1,'msg'=>'success','data'=>$html]);
 	}
 }
