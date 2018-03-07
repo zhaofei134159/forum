@@ -48,10 +48,10 @@ class Index extends Common
 
         $friend = Friend::where(['is_del'=>0,'is_check'=>1])->order('ctime','desc')->limit(8)->select();
 
-        $message = array();
+        $messages = array();
         if($this->uid){
-            $message = Message::where(['receive_uid'=>$this->uid])->select();
-            $message = objToArray($message);
+            $messages = Message::where(['receive_uid'=>$this->uid,'is_see'=>0])->group('send_uid')->order('ctime','desc')->select();
+            $messages = objToArray($messages);
         }
 
         $data = array(
@@ -61,7 +61,7 @@ class Index extends Common
         		'plateUser'=>$plateUser,
         		'users'=>$users,
                 'friend'=>$friend,
-                'message'=>$message,
+                'messages'=>$messages,
         	);
         return $this->view->fetch('index',$data);
     }
