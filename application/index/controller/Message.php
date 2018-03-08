@@ -48,7 +48,7 @@ class Message extends Common
 
         $data = array(
         		'mid'=>$mid,
-        		'messages'=>$messages_list,
+        		'messages_list'=>$messages_list,
         		'users'=>$users,
         	);
         return $this->view->fetch('index',$data);
