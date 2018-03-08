@@ -50,10 +50,13 @@
                                 <img src="/resource/images/user.png" alt="{$users[$message.send_uid]['nikename']}" class="img-circle user-img" style="width:30px;height:30px;">
                                 {/if}
                             </div>
-                            <div class="user-desc">
+                            <div class="user-desc"  style="width:160px;">
                                 <span class="name" style="height:25px;line-height:25px;">{$users[$message.send_uid]['nikename']}</span>
                                 <span class="desc">{$message.message}</span>
                                 <span class="time">{:tranTime($message.ctime)}</span>
+                            </div>
+                            <div style="width:160px;">
+                                <span class="badge badge-danger">{$message.count}</span>
                             </div>
                         </a>
                     </li>
