@@ -48,12 +48,6 @@ class Index extends Common
 
         $friend = Friend::where(['is_del'=>0,'is_check'=>1])->order('ctime','desc')->limit(8)->select();
 
-        $messages = array();
-        if($this->uid){
-            $message_model = new Message();
-            $messages = $message_model->userMessage($this->uid);
-        }
-
         $data = array(
         		'plates'=>$plates,
         		'cates'=>$cates,
@@ -61,7 +55,6 @@ class Index extends Common
         		'plateUser'=>$plateUser,
         		'users'=>$users,
                 'friend'=>$friend,
-                'messages'=>$messages,
         	);
         return $this->view->fetch('index',$data);
     }
