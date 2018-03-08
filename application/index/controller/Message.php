@@ -34,10 +34,10 @@ class Message extends Common
 		$uid = $this->send_uid;
 		$mid = input('get.mid');
 		
-        $send_messages = Message::where('send_uid',$uid)->group('send_uid')->order('ctime','desc')->select();
+        $send_messages = model_message::where('send_uid',$uid)->group('send_uid')->order('ctime','desc')->select();
         $send_messages = objToArray($send_messages);
 
-        $receive_messages = Message::where('receive_uid',$uid)->group('receive_uid')->order('ctime','desc')->select();
+        $receive_messages = model_message::where('receive_uid',$uid)->group('receive_uid')->order('ctime','desc')->select();
         $receive_messages = objToArray($receive_messages);
 
         $messages = array_merge($send_messages,$receive_messages);
