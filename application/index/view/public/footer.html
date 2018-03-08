@@ -79,7 +79,7 @@
         $(document).click(function (e)
         {
             e = e || window.event;
-            if (e.target != $('.messages')[0])
+            if (e.target != $('.messages')[0] && e.target != $('.right-bar-toggle')[0])
             {
                 $('.wrapper').removeClass('right-bar-enabled');
             }
