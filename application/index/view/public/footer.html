@@ -81,6 +81,9 @@
             e = e || window.event;
             if (e.target != $('.messages')[0] && e.target != $('#bar_toggle')[0])
             {
+                console.log(e.target);
+                console.log($('#bar_toggle')[0]);
+                console.log($('.messages')[0]);
                 $('.wrapper').removeClass('right-bar-enabled');
             }
         });
