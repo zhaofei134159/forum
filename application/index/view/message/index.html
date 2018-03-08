@@ -33,7 +33,7 @@
 
                 <ul class="list-group m-b-0 user-list">
 
-                    {foreach $messages as $message}
+                    {foreach $messages_list as $message}
                     <li class="list-group-item">
                         <a href="#" class="user-list-item">
                             <div class="avatar">
@@ -44,7 +44,10 @@
                                 {/if}
                             </div>
                             <div class="user-desc">
-                                <span class="name" style="height:24px;line-height:24px;">{$users[$message.send_uid]['nikename']}</span>
+                                <span class="name" style="height:24px;line-height:24px;">
+                                    {$users[$message.send_uid]['nikename']}
+                                    <span class="badge badge-danger message-count">{$message.count}</span>
+                                </span>
                                 <span class="desc">{$message.message}</span>
                             </div>
                         </a>

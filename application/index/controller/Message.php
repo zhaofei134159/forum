@@ -33,11 +33,13 @@ class Message extends Common
 		// 登录人
 		$uid = $this->send_uid;
 		$mid = input('get.mid');
+
+		$message_model = new model_message();
 		
-        $send_messages = model_message::where('send_uid',$uid)->group('send_uid')->order('ctime','desc')->select();
+        $send_messages = $message_model->userMessage($uid);
         $send_messages = objToArray($send_messages);
 
-        $receive_messages = model_message::where('receive_uid',$uid)->group('receive_uid')->order('ctime','desc')->select();
+        $receive_messages = $message_model->userSendMessage($uid);
         $receive_messages = objToArray($receive_messages);
 
         $messages_list = array_merge($send_messages,$receive_messages);
