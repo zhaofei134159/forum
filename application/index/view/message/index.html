@@ -46,7 +46,9 @@
                             <div class="user-desc">
                                 <span class="name" style="height:24px;line-height:24px;">
                                     {$users[$message.send_uid]['nikename']}
+                                    {if condition="$message.msg=='receive'"}
                                     <span class="badge badge-danger message-count">{$message.count}</span>
+                                    {/if}
                                 </span>
                                 <span class="desc">{$message.message}</span>
                             </div>
