@@ -29,7 +29,7 @@ class Message extends Common
 
 
 	public function index(){
-
+		
 
         $data = array(
         	);
