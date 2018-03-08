@@ -41,7 +41,7 @@ array(
 		),
 	),
 	'Message'=>array(
-		'controller'=>'消息列表',
+		'controller'=>'私信列表',
 		'action'=>array(
 			'index'=>'',
 		),
