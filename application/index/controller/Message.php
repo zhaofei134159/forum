@@ -54,6 +54,14 @@ class Message extends Common
         return $this->view->fetch('index',$data);
 	}
 
+	# 回复
+	public function ReplyMessage(){
+		$post = input('post.');
+		$content = $post['content'];
+		var_dump($content);
+
+	}
+
 	# finduser
 	public function findUser(){
 		$post = input('post.');
