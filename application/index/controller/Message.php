@@ -29,6 +29,7 @@ class Message extends Common
 
 
 	public function index(){
+		$this->is_login();
 		// 登录人
 		$uid = $this->$send_uid;
 		$mid = input('get.mid');
@@ -41,7 +42,7 @@ class Message extends Common
 
         $messages = array_merge($send_messages,$receive_messages);
         array_multisort(array_column($messages,'ctime'),SORT_DESC,$messages);
-        
+
         var_dump($messages);
 
         $users = User::all(['is_del'=>0]);
