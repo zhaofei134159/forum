@@ -14,13 +14,11 @@ class Message extends Common
 	    	return $messages;
 	    }
 	    $messages = objToArray($messages);
-	    
+
 	    $messagesArr = array();
 	    foreach($messages as $key=>$val){
 	       	$count = $this->where(['receive_uid'=>$val['receive_uid'],'send_uid'=>$val['send_uid'],'is_see'=>0])->order('ctime','desc')->count();
-	       	$lastMessage = $this->get(function($query){
-			    $query->where('receive_uid',$val['receive_uid'])->where('send_uid',$val['send_uid'])->where('is_see',0)->order('ctime','desc');
-			});
+	       	$lastMessage = $this->where('receive_uid',$val['receive_uid'])->where('send_uid',$val['send_uid'])->where('is_see',0)->order('ctime','desc')->get();
 	       	var_dump($lastMessage);die;
 	       	$messagesArr[$lastMessage['id']] = $lastMessage;
 	       	$messagesArr[$lastMessage['id']]['count'] = $count;
