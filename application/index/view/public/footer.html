@@ -35,7 +35,7 @@
             <a href="javascript:void(0);" class="right-bar-toggle">
                 <i class="zmdi zmdi-close-circle-o"></i>
             </a>
-            <h4 class="message-title"> 私信 列表 </h4>
+            <h4 class="message-title" onclick="messageList()"> 私信 列表 </h4>
             <div class="notification-list nicescroll" style="overflow-y:auto">
                 <ul class="list-group list-no-border user-list">
                     {if condition="!empty($messages)"}
@@ -71,13 +71,17 @@
     <script src="/resource/js/home.js"></script>
     <script src="/resource/js/jquery.app.js"></script>
     <script type="text/javascript">
+        function messageList(){
+            loading('show');
+            window.location.href = "{:url('Message/index')}";
+        }
         function ApplyFriend(){
             loading('show');
-            window.location.href = "/index/index/applyfriend.html";
+            window.location.href =  "{:url('index/ApplyFriend')}";
         }
         function FriendList(){
             loading('show');
-            window.location.href = "/index/index/friendlist.html";
+            window.location.href = "{:url('index/FriendList')}";
         }
         $(document).click(function (e)
         {

@@ -119,17 +119,17 @@
                                 <!-- Notification -->
                                 <div class="notification-box">
                                     <ul class="list-inline m-b-0">
-                                        {if condition="!empty($messages)"}
                                         <li id="bar_toggle">
                                             <a href="javascript:void(0);" class="right-bar-toggle">
                                                 <i class="zmdi zmdi-notifications-none"></i>
                                             </a>
+                                            {if condition="!empty($messages)"}
                                             <div class="noti-dot">
                                                 <span class="dot"></span>
                                                 <span class="pulse"></span>
                                             </div>
+                                            {/if}
                                         </li>
-                                        {/if}
                                     </ul>
                                 </div>
                                 <!-- End Notification bar -->
