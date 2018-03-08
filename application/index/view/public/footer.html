@@ -42,7 +42,7 @@
                     {foreach $messages as $message}
                     <li class="list-group-item">
                         <a href="#" class="user-list-item">
-                            <div class="icon bg-info">
+                            <div class="avatar">
                                 <!-- <i class="zmdi zmdi-account"></i> -->
                                 {if condition="$users[$message.send_uid]['headimg']"}
                                 <img src="/{$users[$message.send_uid]['headimg']}" alt="{$users[$message.send_uid]['nikename']}" class="img-circle user-img" style="width:30px;height:30px;">
