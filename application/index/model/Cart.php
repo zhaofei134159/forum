@@ -84,6 +84,7 @@ class Cart extends Common
             $carts = $this->where($cartWhere)->order('is_elite,is_hot,is_top','desc')->limit(4)->select();
             $carts = objToArray($carts);
             if(empty($carts)){
+              unset($plates[$plateId]);
               continue;
             }
             foreach($carts as $cartId=>$cart){
