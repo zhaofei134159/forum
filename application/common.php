@@ -148,7 +148,7 @@ function uploadFile($file,$path){
 # 时间展示 
 function tranTime($time)
 {
-    $rtime = date("m-d H:i",$time);
+    $rtime = date("Y-m-d H:i",$time);
     $htime = date("H:i",$time);
           
     $time = time() - $time;
@@ -163,9 +163,9 @@ function tranTime($time)
     }elseif ($time < 60 * 60 * 24 * 3){
         $d = floor($time/(60*60*24));
         if($d==1){
-            $str = '昨天 '.$rtime;
+            $str = '昨天 '.$htime;
         }else{
-            $str = '前天 '.$rtime;
+            $str = '前天 '.$htime;
         }
     }else{
         $str = $rtime;
