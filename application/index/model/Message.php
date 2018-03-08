@@ -29,7 +29,7 @@ class Message extends Common
 	       	$messagesArr[$lastMessage['id']]['count'] = $count;
 	       	$messagesArr[$lastMessage['id']]['msg'] = 'receive';
 	    }
-	    	
+	    
     	return $messagesArr;
 	}
 
