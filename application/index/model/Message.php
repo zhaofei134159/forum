@@ -23,7 +23,6 @@ class Message extends Common
 	       						->where('is_see',0)
 	       						->order('ctime','desc')
 	       						->find();
-	    	$lastMessage = collection($lastMessage)->toArray();
 
 	       	$messagesArr[$lastMessage['id']] = $lastMessage;
 	       	$messagesArr[$lastMessage['id']]['count'] = $count;
@@ -50,7 +49,6 @@ class Message extends Common
 	       						->where('send_uid',$val['send_uid'])
 	       						->order('ctime','desc')
 	       						->find();
-	    	$lastMessage = collection($lastMessage)->toArray();
 
 	       	$messagesArr[$lastMessage['id']] = $lastMessage;
 	       	$messagesArr[$lastMessage['id']]['count'] = $count;
