@@ -43,8 +43,6 @@ class Message extends Common
         $messages = array_merge($send_messages,$receive_messages);
         array_multisort(array_column($messages,'ctime'),SORT_DESC,$messages);
 
-        var_dump($messages);
-
         $users = User::all(['is_del'=>0]);
         $users = objToArray($users);
 
