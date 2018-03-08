@@ -42,7 +42,7 @@
                     {foreach $messages as $message}
                     <li class="list-group-item">
                         <a href="{:url('message/index')}?mid={$message.id}" class="user-list-item">
-                            <div class="avatar" style="float:left;">
+                            <div class="avatar">
                                 <!-- <i class="zmdi zmdi-account"></i> -->
                                 {if condition="$users[$message.send_uid]['headimg']"}
                                 <img src="/{$users[$message.send_uid]['headimg']}" alt="{$users[$message.send_uid]['nikename']}" class="img-circle user-img" style="width:30px;height:30px;">
@@ -50,15 +50,14 @@
                                 <img src="/resource/images/user.png" alt="{$users[$message.send_uid]['nikename']}" class="img-circle user-img" style="width:30px;height:30px;">
                                 {/if}
                             </div>
-                            <div class="user-desc"  style="width:160px;float:left;">
-                                <span class="name" style="height:25px;line-height:25px;">{$users[$message.send_uid]['nikename']}</span>
+                            <div class="user-desc">
+                                <span class="name" style="height:25px;line-height:25px;">
+                                    {$users[$message.send_uid]['nikename']}
+                                    <span class="badge badge-danger">{$message.count}</span>
+                                </span>
                                 <span class="desc">{$message.message}</span>
                                 <span class="time">{:tranTime($message.ctime)}</span>
                             </div>
-                            <div style="width:20px;float:left;">
-                                <span class="badge badge-danger">{$message.count}</span>
-                            </div>
-                            <div class="clearfix"></div>
                         </a>
                     </li>
                     {/foreach}
