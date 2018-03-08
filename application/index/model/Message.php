@@ -23,8 +23,8 @@ class Message extends Common
 	       						->where('is_see',0)
 	       						->order('ctime','desc')
 	       						->find();
-	       						
-	       	var_dump($lastMessage);die;
+	    	$lastMessage = collection($lastMessage)->toArray();
+
 	       	$messagesArr[$lastMessage['id']] = $lastMessage;
 	       	$messagesArr[$lastMessage['id']]['count'] = $count;
 	       	$messagesArr[$lastMessage['id']]['msg'] = 'receive';
@@ -46,9 +46,11 @@ class Message extends Common
 	    $messagesArr = array();
 	    foreach($messages as $key=>$val){
 	       	$count = $this->where(['receive_uid'=>$val['receive_uid'],'send_uid'=>$val['send_uid']])->order('ctime','desc')->count();
-	       	$lastMessage = $this->get(function($query){
-			    $query->where('receive_uid',$val['receive_uid'])->where('send_uid',$val['send_uid'])->order('ctime','desc');
-			});
+			$lastMessage = $this->where('receive_uid',$val['receive_uid'])
+	       						->where('send_uid',$val['send_uid'])
+	       						->order('ctime','desc')
+	       						->find();
+	    	$lastMessage = collection($lastMessage)->toArray();
 
 	       	$messagesArr[$lastMessage['id']] = $lastMessage;
 	       	$messagesArr[$lastMessage['id']]['count'] = $count;
