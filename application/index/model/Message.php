@@ -9,14 +9,14 @@ class Message extends Common
 	public function userMessage($uid){
 
         $messages = $this->where(['receive_uid'=>$uid,'is_see'=>0])->group('send_uid')->order('ctime','desc')->select();
-	    $userMessage = objToArray($userMessage);
+	    $messages = objToArray($messages);
 
-	    foreach($userMessage as $key=>$val){
+	    foreach($messages as $key=>$val){
 	       	$count = $this->where(['receive_uid'=>$val['receive_uid'],'send_uid'=>$val['send_uid'],'is_see'=>0])->order('ctime','desc')->count();
 	       	
-	       	$userMessage[$key]['count'] = $count;
+	       	$messages[$key]['count'] = $count;
 	    }
 
-	    return $userMessage;
+	    return $messages;
 	}
 }
