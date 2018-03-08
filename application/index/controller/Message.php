@@ -40,15 +40,15 @@ class Message extends Common
         $receive_messages = model_message::where('receive_uid',$uid)->group('receive_uid')->order('ctime','desc')->select();
         $receive_messages = objToArray($receive_messages);
 
-        $messages = array_merge($send_messages,$receive_messages);
-        array_multisort(array_column($messages,'ctime'),SORT_DESC,$messages);
+        $messages_list = array_merge($send_messages,$receive_messages);
+        array_multisort(array_column($messages_list,'ctime'),SORT_DESC,$messages_list);
 
         $users = User::all(['is_del'=>0]);
         $users = objToArray($users);
 
         $data = array(
         		'mid'=>$mid,
-        		'messages'=>$messages,
+        		'messages'=>$messages_list,
         		'users'=>$users,
         	);
         return $this->view->fetch('index',$data);
