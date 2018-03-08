@@ -56,7 +56,7 @@ class Common extends Controller
             $this->assign('user',$account);
 
             $message_model = new Message();
-            $messages = $message_model->userMessage($this->uid);
+            $messages = $message_model->userMessage(Session::get('login_id','forum_home'));
         }
         $this->assign('messages',$messages);
 
