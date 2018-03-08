@@ -31,7 +31,7 @@ class Message extends Common
 	public function index(){
 		$this->is_login();
 		// 登录人
-		$uid = $this->$send_uid;
+		$uid = $this->send_uid;
 		$mid = input('get.mid');
 		
         $send_messages = Message::where('send_uid',$uid)->group('send_uid')->order('ctime','desc')->select();
