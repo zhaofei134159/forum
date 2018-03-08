@@ -40,6 +40,12 @@ array(
 			'seecart'=>'查看帖子',
 		),
 	),
+	'Message'=>array(
+		'controller'=>'消息列表',
+		'action'=>array(
+			'index'=>'',
+		),
+	),
 );
 
 
