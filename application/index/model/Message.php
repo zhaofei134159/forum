@@ -16,9 +16,9 @@ class Message extends Common
 	       	$count = $this->where(['receive_uid'=>$val['receive_uid'],'send_uid'=>$val['send_uid'],'is_see'=>0])->order('ctime','desc')->count();
 
 	       	$lastMessage = $this->get(['receive_uid'=>$val['receive_uid'],'send_uid'=>$val['send_uid'],'is_see'=>0])->order('ctime','desc');
-	       	
+
+	       	$messages[$key] = $lastMessage;
 	       	$messages[$key]['count'] = $count;
-	       	$messages[$key]['lastMessage'] = $lastMessage;
 	       	$messages[$key]['msg'] = 'receive';
 	    }
 
@@ -36,8 +36,8 @@ class Message extends Common
 	       	
 	       	$lastMessage = $this->get(['receive_uid'=>$val['receive_uid'],'send_uid'=>$val['send_uid']])->order('ctime','desc');
 
+	       	$messages[$key] = $lastMessage;
 	       	$messages[$key]['count'] = $count;
-	       	$messages[$key]['lastMessage'] = $lastMessage;
 	       	$messages[$key]['msg'] = 'send';
 	    }
 
