@@ -11,6 +11,7 @@ use app\index\model\Common as modelCommon;
 use app\index\model\Setting;
 use app\index\model\User;
 use app\index\model\Cate;
+use app\index\model\Message;
 
 class Common extends Controller
 {
@@ -47,14 +48,20 @@ class Common extends Controller
     //获取当前登录人的权限
     public function init($controller,$action){
         // $time = time();
+        $messages = array();
         if(Session::get('login_id','forum_home')){
 
             $account = User::get(['id' => Session::get('login_id','forum_home')]);
             
             $this->assign('user',$account);
-            
-        }
 
+            $message_model = new Message();
+            $messages = $message_model->userMessage($this->uid);
+        }
+        $this->assign('messages',$messages);
+
+
+        
         # 分类展示
         $topHeaderCates =  Cate::where(['is_del'=>0,'parent_id'=>0])->limit(6)->select();
         $topHeaderCates = objToArray($topHeaderCates);
