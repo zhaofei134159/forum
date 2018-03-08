@@ -15,19 +15,19 @@ class Message extends Common
 	    }
 	    $messages = objToArray($messages);
 	    
-
+	    $messagesArr = array();
 	    foreach($messages as $key=>$val){
 	       	$count = $this->where(['receive_uid'=>$val['receive_uid'],'send_uid'=>$val['send_uid'],'is_see'=>0])->order('ctime','desc')->count();
 	       	$lastMessage = $this->get(function($query){
 			    $query->where('receive_uid',$val['receive_uid'])->where('send_uid',$val['send_uid'])->where('is_see',0)->order('ctime','desc');
 			});
 
-	       	$messages[$lastMessage['id']] = $lastMessage;
-	       	$messages[$key]['count'] = $count;
-	       	$messages[$key]['msg'] = 'receive';
+	       	$messagesArr[$lastMessage['id']] = $lastMessage;
+	       	$messagesArr[$lastMessage['id']]['count'] = $count;
+	       	$messagesArr[$lastMessage['id']]['msg'] = 'receive';
 	    }
 	    	
-    	return $messages;
+    	return $messagesArr;
 	}
 
 	#  用户发出去的消息
@@ -40,17 +40,18 @@ class Message extends Common
 	    $messages = objToArray($messages);
 	    
 
+	    $messagesArr = array();
 	    foreach($messages as $key=>$val){
 	       	$count = $this->where(['receive_uid'=>$val['receive_uid'],'send_uid'=>$val['send_uid']])->order('ctime','desc')->count();
 	       	$lastMessage = $this->get(function($query){
 			    $query->where('receive_uid',$val['receive_uid'])->where('send_uid',$val['send_uid'])->order('ctime','desc');
 			});
-
-	       	$messages[$lastMessage['id']] = $lastMessage;
-	       	$messages[$key]['count'] = $count;
-	       	$messages[$key]['msg'] = 'send';
+	       	
+	       	$messagesArr[$lastMessage['id']] = $lastMessage;
+	       	$messagesArr[$lastMessage['id']]['count'] = $count;
+	       	$messagesArr[$lastMessage['id']]['msg'] = 'send';
 	    }
 
-	    return $messages;
+	    return $messagesArr;
 	}
 }
