@@ -79,9 +79,8 @@
         $(document).click(function (e)
         {
             e = e || window.event;
-            if (e.target != $ ('.wrapper')[0])
+            if (e.target != $('.messages')[0])
             {
-                $(".right-bar").toggle();
                 $('.wrapper').toggleClass('right-bar-enabled');
             }
         });
