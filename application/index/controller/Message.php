@@ -29,12 +29,30 @@ class Message extends Common
 
 
 	public function index(){
+		// 登录人
+		$uid = $this->$send_uid;
+		$mid = input('get.mid');
 		
+        $send_messages = Message::where('send_uid',$uid)->group('send_uid')->order('ctime','desc')->select();
+        $send_messages = objToArray($send_messages);
+
+        $receive_messages = Message::where('receive_uid',$uid)->group('receive_uid')->order('ctime','desc')->select();
+        $receive_messages = objToArray($receive_messages);
+
+        $messages = array_merge($send_messages,$receive_messages);
+        array_multisort(array_column($messages,'ctime'),SORT_DESC,$messages);
+        
+        var_dump($messages);
+
+        $users = User::all(['is_del'=>0]);
+        $users = objToArray($users);
 
         $data = array(
+        		'mid'=>$mid,
+        		'messages'=>$messages,
+        		'users'=>$users,
         	);
         return $this->view->fetch('index',$data);
-
 	}
 
 	# finduser
