@@ -58,7 +58,6 @@ class Common extends Controller
             $message_model = new Message();
             $messages = $message_model->userMessage(Session::get('login_id','forum_home'));
         }
-        var_dump($messages);die;
         $this->assign('messages',$messages);
 
 
