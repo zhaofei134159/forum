@@ -76,12 +76,9 @@
             loading('show');
             window.location.href = "/index/index/friendlist.html";
         }
-
-        window.onload = function () {
-            document.onclick = function (e) {
-                $("#messages").hide();
-            }
-        }
+        $(document).click(function(){   
+            $('#messages').hide();
+        });
     </script>
     
 </body>
