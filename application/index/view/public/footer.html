@@ -38,12 +38,17 @@
             <h4 class=""> 私信 列表 </h4>
             <div class="notification-list nicescroll">
                 <ul class="list-group list-no-border user-list">
-
+                    {if condition="!empty($messages)"}
                     {foreach $messages as $message}
                     <li class="list-group-item">
                         <a href="#" class="user-list-item">
                             <div class="icon bg-info">
-                                <i class="zmdi zmdi-account"></i>
+                                <!-- <i class="zmdi zmdi-account"></i> -->
+                                {if condition="$users[$message.send_uid]['headimg']"}
+                                <img src="/{$users[$message.send_uid]['headimg']}" alt="{$users[$message.send_uid]['nikename']}" class="img-circle user-img" style="width:30px;height:30px;">
+                                {else}
+                                <img src="/resource/images/user.png" alt="{$users[$message.send_uid]['nikename']}" class="img-circle user-img" style="width:30px;height:30px;">
+                                {/if}
                             </div>
                             <div class="user-desc">
                                 <span class="name" style="height:25px;line-height:25px;">{$users[$message.send_uid]['nikename']}</span>
@@ -53,7 +58,7 @@
                         </a>
                     </li>
                     {/foreach}
-                    
+                    {/if}
                 </ul>
             </div>
         </div>
