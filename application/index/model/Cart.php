@@ -83,6 +83,9 @@ class Cart extends Common
             $cartWhere['plateId'] = $plateId;
             $carts = $this->where($cartWhere)->order('is_elite,is_hot,is_top','desc')->limit(4)->select();
             $carts = objToArray($carts);
+            if(empty($carts)){
+              continue;
+            }
             foreach($carts as $cartId=>$cart){
               $reply = $this->where(['cartId'=>$cart['id'],'is_del'=>0])->count();
               $carts[$cartId]['reply'] = $reply;
