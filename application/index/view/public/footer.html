@@ -76,8 +76,14 @@
             loading('show');
             window.location.href = "/index/index/friendlist.html";
         }
-        $(document).click(function(){   
-            $('.wrapper').toggleClass('right-bar-enabled');
+        $(document).click(function (e)
+        {
+            e = e || window.event;
+            if (e.target != $ ('.wrapper')[0])
+            {
+                $(".right-bar").toggle();
+                $('.wrapper').toggleClass('right-bar-enabled');
+            }
         });
     </script>
     
