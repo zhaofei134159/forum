@@ -6,6 +6,7 @@ use app\index\model\Cate;
 use app\index\model\Plate;
 use app\index\model\Cart;
 use app\index\model\Message as model_message;
+use app\index\model\messageMember;
 
 use think\Session;
 use think\Config;
@@ -32,7 +33,24 @@ class Message extends Common
 		$this->is_login();
 		// 登录人
 		$uid = $this->send_uid;
-		$mid = input('get.mid');
+		$get = input('get.');
+
+		$mid = $get['mid'];
+
+		if(!empty($get['uid'])){
+			$memberWhere = array();
+			$memberWhere['member'] = array('like','#'.$this->send_uid.'#');
+			$memberWhere['member'] = array('like','#'.$get['uid'].'#');
+			$memberArr = messageMember::where($memberWhere)->find();
+			if(empty($memberArr)){
+				$member = array();
+				$member['member'] = $this->send_uid.','.$get['uid'];
+				$member['creator'] = $this->send_uid;
+				$member['ctime'] = time();
+				$messageEr = messageMember::create($member);
+			}
+		}
+
 
 		$message_model = new model_message();
 		
@@ -48,7 +66,7 @@ class Message extends Common
         $users = User::all(['is_del'=>0]);
         $users = objToArray($users);
 
-        
+
         $model_follow = new Follow();
         $follows = $model_follow->userCount();
 
@@ -68,7 +86,6 @@ class Message extends Common
 		$post = input('post.');
 		$content = $post['content'];
 		var_dump($content);
-
 	}
 
 	# finduser
@@ -106,7 +123,14 @@ class Message extends Common
 			return json(['flog'=>0,'msg'=>'用户不存在']);
 		}
 
+		$member = array();
+		$member['member'] = '#'.$this->send_uid.'#'.$uid.'#';
+		$member['creator'] = $this->send_uid;
+		$member['ctime'] = time();
+		$messageEr = messageMember::create($member);
+
 		$insert = array();
+		$insert['member_id'] = $messageEr->id;
 		$insert['send_uid'] = $this->send_uid;
 		$insert['receive_uid'] = $uid;
 		$insert['message'] = $message;
