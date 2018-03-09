@@ -263,8 +263,8 @@ class Cart extends Common
     # 关注好友
     public function followFriends(){
         $post = input('post.');
-        $uid = $post['uid'];
-        $cover_uid =  Session::get('login_id','forum_home');
+        $cover_uid = $post['uid'];
+        $uid =  Session::get('login_id','forum_home');
 
         $user = User::get(['is_del'=>0,'id'=>$uid]);
         if(empty($user)){
