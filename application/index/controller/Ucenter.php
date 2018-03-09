@@ -536,7 +536,7 @@ class Ucenter extends Common
     public function follow(){
         $this->is_login();
         $post = input('post.');
-        
+
         $uid = $this->uid;
         $cover_uid = $post['uid'];
         if(empty($cover_uid)){
@@ -548,7 +548,7 @@ class Ucenter extends Common
 
             Follow::where('id',$follow['id'])->delete();
            
-            return json(['flog'=>1,'msg'=>'取关成功']);
+            return json(['flog'=>2,'msg'=>'取关成功']);
 
         }else{
 

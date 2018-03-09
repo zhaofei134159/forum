@@ -12,7 +12,7 @@
     </div>
     <div class="text-left">
         <div class="text-center col-lg-4 col-md-4" >
-            <button type="button" class="btn btn-danger btn-trans waves-effect w-md waves-danger m-b-5" onclick="follow({$user.id})">
+            <button type="button" class="btn btn-danger btn-trans waves-effect w-md waves-danger m-b-5" onclick="follow({$user.id},$(this))">
                 {if condition="empty($follow)"}
                     <i class="ti-plus"></i>
                     关注 
@@ -41,7 +41,7 @@
         loading('show');
         window.location.href = "{:url('ucenter/index')}?uid="+uid;
     }
-    function follow(uid){
+    function follow(uid,res){
         loading('show');
 
         $.post("{:url('ucenter/follow')}",{uid:uid},function(result){
@@ -53,6 +53,15 @@
                 var $toast = toastr['error'](result.msg);
                 return false;
             }else{
+                var html = ''; 
+                if(result.flog==1){
+                    html += '<i class="ti-minus"></i>'
+                    html += '取关';
+                }else{
+                    html += '<i class="ti-plus"></i>'
+                    html += '关注';
+                }
+                res.html(html);
                 loading('hide');
                 toastr.options = {
                   "positionClass": "toast-top-center",
