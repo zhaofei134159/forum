@@ -7,7 +7,7 @@
                     <div>
                         <img src="/{$plateU.headimg}" class="img-responsive img-circle" style="width:72px;height:72px;" alt="头像">
                         <div class="wid-u-info">
-                            <h4 class="m-t-0 m-b-5">板块名：{$plateU.name}</h4>
+                            <h4 class="m-t-0 m-b-5"><a href="{:url('Cart/index')}?plateId={$plateU.id}">板块名：{$plateU.name}</a></h4>
                             <p class="text-muted m-b-5 font-13"><a href="{:url('ucenter/index')}?uid={$plateU.userid}">{$users[$plateU.userid]['nikename']}</a></p>
                             <small class="text-info"><b>版主</b></small>
                         </div>
@@ -36,9 +36,9 @@
                                 <thead>
                                     <tr>
                                         <th class="name"> 
-                                            板块 ：{$plate.name}  
+                                            板块 ：<a href="{:url('Cart/index')}?plateId={$plate.id}">{$plate.name}</a>  
                                             &nbsp;&nbsp;&nbsp; 
-                                            分类：{$cates[$plate.cateid]['name']} 
+                                            分类：<a href="{:url('Forum/catePlate')}?cateId={$plate.cateid}">{$cates[$plate.cateid]['name']}</a>
                                         </th>
                                         <th class="operation"></th>
                                         <th class="author">作者</th>
