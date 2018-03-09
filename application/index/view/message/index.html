@@ -53,6 +53,24 @@
                         </div>
                     </li>
                     {/foreach}
+                    
+                    {foreach $follows as $follow}
+                    <li class="list-group-item" onclick="messageView({$})">
+                        <div class="avatar">
+                            {if condition="$users[$follow.cover_follow_uid]['headimg']"}
+                            <img src="/{$users[$follow.cover_follow_uid]['headimg']}" alt="{$users[$follow.cover_follow_uid]['nikename']}" class="img-circle user-img" style="width:30px;height:30px;">
+                            {else}
+                            <img src="/resource/images/user.png" alt="{$users[$follow.cover_follow_uid]['nikename']}" class="img-circle user-img" style="width:30px;height:30px;">
+                            {/if}
+                        </div>
+                        <div class="user-desc">
+                            <span class="name" style="height:24px;line-height:24px;">
+                                {$users[$follow.cover_follow_uid]['nikename']}
+                            </span>
+                            <span class="desc"> {$users[$follow.cover_follow_uid]['info']}</span>
+                        </div>
+                    </li>
+                    {/foreach}
 
                    
                 </ul>
