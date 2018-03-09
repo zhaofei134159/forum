@@ -33,8 +33,9 @@
                             {/if}
                         </p>
                     </div>
+                    <div class="clearfix"></div>
                     <div class="userInfo">
-                        <div class="text-center col-lg-4 col-md-4" >
+                        <div class="text-center col-lg-6 col-md-6" >
                             <button type="button" class="btn btn-danger btn-trans waves-effect w-md waves-danger m-b-5" onclick="follow({$user.id},$(this))">
                                 {if condition="empty($follow)"}
                                     <i class="ti-plus"></i>
@@ -45,7 +46,7 @@
                                 {/if}
                             </button>
                         </div>
-                        <div class="text-center col-lg-4 col-md-4" >
+                        <div class="text-center col-lg-6 col-md-6" >
                             <button type="button" class="btn btn-success btn-trans waves-effect w-md waves-danger m-b-5" onclick="message({$user.id})">
                                 <i class="ti-comment-alt"></i>
                                 私信
