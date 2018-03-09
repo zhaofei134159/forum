@@ -65,7 +65,9 @@
             <div class="col-lg-12">
                 <div class="card-box widget-user">
                     <div class="text-center col-lg-4 col-md-4">
+                        {if condition="$user.id==$userid"}
                         <a href="{:url('Message/index')}">
+                        {/if}
                             <h2 class="text-custom" data-plugin="counterup">
                                 {if condition="$follows[$user.id]['count']"}
                                     {$follows[$user.id]['count']}
@@ -74,13 +76,19 @@
                                 {/if}
                             </h2>
                             <h5>关注</h5>
+                        {if condition="$user.id==$userid"}
                         </a>
+                        {/if}
                     </div>
                     <div class="text-center col-lg-4 col-md-4 ">
-                        <a href="{:url('forum/myPlateList')}">
+                        {if condition="$user.id==$userid"}
+                        <a href="{:url('forum/myPlateList')}?uid={$user.id}">
+                        {/if}
                             <h2 class="text-custom" data-plugin="counterup">{$plateCount}</h2>
                             <h5>板块</h5>
+                        {if condition="$user.id==$userid"}
                         </a>
+                        {/if}
                     </div>
                     <div class="text-center col-lg-4 col-md-4 ">
                         <h2 class="text-custom" data-plugin="counterup">{$cartCount}</h2>
