@@ -7,6 +7,7 @@ use app\index\model\Plate;
 use app\index\model\Cart;
 use app\index\model\Message as model_message;
 use app\index\model\messageMember;
+use app\index\model\Follow;
 
 use think\Session;
 use think\Config;
