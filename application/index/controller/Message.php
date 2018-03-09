@@ -53,16 +53,9 @@ class Message extends Common
 		}
 
 
-		$message_model = new model_message();
-		
-        $send_messages = $message_model->userMessage($uid);
-        $send_messages = objToArray($send_messages);
-
-        $receive_messages = $message_model->userSendMessage($uid);
-        $receive_messages = objToArray($receive_messages);
-
-        $messages_list = array_merge($send_messages,$receive_messages);
-        array_multisort(array_column($messages_list,'ctime'),SORT_DESC,$messages_list);
+		$message_model = new messageMember();
+		$memberArr = $message_model->messageList($uid);
+       
 
         $users = User::all(['is_del'=>0]);
         $users = objToArray($users);
