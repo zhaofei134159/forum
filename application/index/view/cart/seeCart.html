@@ -85,7 +85,7 @@
                         </tr>
                         <tr class="user-mar">
                             <td class="users">
-                                <div class="headimg" onclick="followFriends({$cart.userid})">
+                                <div class="headimg" style="cursor:pointer;" {if condition="$cart.userid!=$userid"}onclick="followFriends({$cart.userid})"{/if}>
                                     {if condition="$users[$cart.userid]['headimg']"}
                                     <img src="/{$users[$cart.userid]['headimg']}" class="thumb-xl img-thumbnail m-b-10" alt="头像">
                                     {else}
@@ -126,7 +126,7 @@
                             </tr>
                             <tr class="user-mar">
                                 <td class="users">
-                                    <div class="headimg">
+                                    <div class="headimg" style="cursor:pointer;" {if condition="$reply.userid!=$userid"}onclick="followFriends({$reply.userid})"{/if}>
                                         {if condition="$users[$reply.userid]['headimg']"}
                                         <img src="/{$users[$reply.userid]['headimg']}" class="thumb-xl img-thumbnail m-b-10" alt="头像">
                                         {else}
