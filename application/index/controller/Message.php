@@ -69,13 +69,13 @@ class Message extends Common
 
         # 关注的人
         $follows = Follow::where(['follow_uid'=>$uid])->select();
-
+        var_dump($follows);die;
 
         $data = array(
         		'mid'=>$mid,
         		'messages_list'=>$messages_list,
         		'users'=>$users,
-        		'follows'=>$follows
+        		'follows'=>$follows,
         	);
         return $this->view->fetch('index',$data);
 	}
