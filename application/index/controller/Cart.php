@@ -173,7 +173,7 @@ class Cart extends Common
             ]);        
         $page = $replys->render();
         
-        $follows = Follow::group('follow_uid')->count();
+        $follows = Follow::group('follow_uid')->field('follow_uid,count(1)');
         var_dump($follows);die;
 
         $data = array(
