@@ -269,6 +269,9 @@ class Cart extends Common
             return json(['flog'=>0,'msg'=>'找不到对应用户']);
         }
 
+        $data = array(
+                'user'=>$user,
+            );
         $html = $this->view->fetch('followFriends',$data);
 
         return json(['flog'=>1,'msg'=>'成功','data'=>$html]);
