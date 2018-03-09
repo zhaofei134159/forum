@@ -41,7 +41,7 @@
                     {if condition="!empty($messages)"}
                     {foreach $messages as $message}
                     <li class="list-group-item">
-                        <a href="{:url('message/index')}?mid={$message.id}" class="user-list-item">
+                        <a href="{:url('message/index')}?uid={$message.send_uid}" class="user-list-item">
                             <div class="avatar">
                                 <!-- <i class="zmdi zmdi-account"></i> -->
                                 {if condition="$users[$message.send_uid]['headimg']"}
