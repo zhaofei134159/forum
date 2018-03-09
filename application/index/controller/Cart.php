@@ -5,6 +5,7 @@ use app\index\model\User;
 use app\index\model\Cate;
 use app\index\model\Plate;
 use app\index\model\Cart as model_cart;
+use app\index\model\Follow;
 
 use think\Session;
 use think\Config;
@@ -263,14 +264,18 @@ class Cart extends Common
     public function followFriends(){
         $post = input('post.');
         $uid = $post['uid'];
+        $cover_uid =  Session::get('login_id','forum_home');
 
         $user = User::get(['is_del'=>0,'id'=>$uid]);
         if(empty($user)){
             return json(['flog'=>0,'msg'=>'找不到对应用户']);
         }
 
+        $follow = Follow::get(['cover_follow_uid'=>$cover_uid,'follow_uid'=>$uid]);
+
         $data = array(
                 'user'=>$user,
+                'follow'=>$follow,
             );
         $html = $this->view->fetch('followFriends',$data);
 

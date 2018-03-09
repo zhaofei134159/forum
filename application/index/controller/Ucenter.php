@@ -8,6 +8,7 @@ use app\index\model\City;
 use app\index\model\Area;
 use app\index\model\Plate;
 use app\index\model\Cart;
+use app\index\model\Follow;
 
 
 use think\Session;
@@ -529,6 +530,35 @@ class Ucenter extends Common
         Userinfo::where('uid', $uid)->update($data); 
 
         return json(['flog'=>1, 'msg'=>'删除成功']);
+    }
+
+    # 关注
+    public function follow(){
+        $this->is_login();
+        $uid = $this->uid;
+        $cover_uid = $post['uid'];
+        if(empty($cover_uid)){
+            return json(['flog'=>0,'msg'=>'找不到 被关注用户']);
+        }
+
+        $follow = Follow::get(['cover_follow_uid'=>$cover_uid,'follow_uid'=>$uid]);
+        if(!empty($follow)){
+
+            Follow::where('id',$follow['id'])->delete();
+           
+            return json(['flog'=>1,'msg'=>'取关成功']);
+            
+        }else{
+
+            $insert = array();
+            $insert['cover_follow_uid'] = $cover_uid; 
+            $insert['follow_uid'] = $uid; 
+            $insert['ctime'] = time(); 
+            Follow::create($insert);
+
+            return json(['flog'=>1,'msg'=>'关注成功']);
+        }
+
     }
 
 }
