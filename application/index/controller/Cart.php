@@ -270,7 +270,8 @@ class Cart extends Common
         if(empty($user)){
             return json(['flog'=>0,'msg'=>'找不到对应用户']);
         }
-
+        var_dump($cover_uid);
+        var_dump($uid);die;
         $follow = Follow::get(['cover_follow_uid'=>$cover_uid,'follow_uid'=>$uid]);
 
         $data = array(
