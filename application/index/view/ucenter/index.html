@@ -33,6 +33,25 @@
                             {/if}
                         </p>
                     </div>
+                    <div class="userInfo">
+                        <div class="text-center col-lg-4 col-md-4" >
+                            <button type="button" class="btn btn-danger btn-trans waves-effect w-md waves-danger m-b-5" onclick="follow({$user.id},$(this))">
+                                {if condition="empty($follow)"}
+                                    <i class="ti-plus"></i>
+                                    关注 
+                                {else}
+                                    <i class="ti-minus"></i>
+                                    取关
+                                {/if}
+                            </button>
+                        </div>
+                        <div class="text-center col-lg-4 col-md-4" >
+                            <button type="button" class="btn btn-success btn-trans waves-effect w-md waves-danger m-b-5" onclick="message({$user.id})">
+                                <i class="ti-comment-alt"></i>
+                                私信
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -43,7 +62,13 @@
             <div class="col-lg-12">
                 <div class="card-box widget-user">
                     <div class="text-center col-lg-4 col-md-4">
-                        <h2 class="text-custom" data-plugin="counterup">38</h2>
+                        <h2 class="text-custom" data-plugin="counterup">
+                            {if condition="$follows[$userid]['count']"}
+                                {$follows[$userid]['count']}
+                            {else}
+                                0
+                            {/if}
+                        </h2>
                         <h5>关注</h5>
                     </div>
                     <div class="text-center col-lg-4 col-md-4 ">

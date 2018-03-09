@@ -81,6 +81,14 @@ class Ucenter extends Common
         $cartCount = Cart::where(['is_del'=>0,'cartId'=>0,'userid'=>$uid])->count();
 
         $plateCount = Plate::where(['is_del'=>0,'is_check'=>1,'userid'=>$uid])->count();
+
+        $follow = Follow::get(['cover_follow_uid'=>$cover_uid,'follow_uid'=>$uid]);
+
+        $model_follow = new Follow();
+        $follows = $model_follow->userCount();
+
+        $model_cart = new model_cart();
+        $userCarts = $model_cart->userCount();
         
     	$data = array(
     			'user'=>$user,
@@ -93,6 +101,9 @@ class Ucenter extends Common
                 'page'=>$result['page'],
                 'cartCount'=>$cartCount,
                 'plateCount'=>$plateCount,
+                'follows'=>$follows,
+                'userCarts'=>$userCarts,
+                'follow'=>$follow,
     		);
         return $this->view->fetch('index',$data);
     }

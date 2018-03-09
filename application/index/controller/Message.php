@@ -48,6 +48,13 @@ class Message extends Common
         $users = User::all(['is_del'=>0]);
         $users = objToArray($users);
 
+        
+        $model_follow = new Follow();
+        $follows = $model_follow->userCount();
+
+        $model_cart = new model_cart();
+        $userCarts = $model_cart->userCount();
+
         $data = array(
         		'mid'=>$mid,
         		'messages_list'=>$messages_list,
