@@ -35,43 +35,26 @@
 
                     {foreach $messages_list as $message}
                     <li class="list-group-item" onclick="messageView({$})">
-                        <div class="avatar">
-                            {if condition="$users[$message.send_uid]['headimg']"}
-                            <img src="/{$users[$message.send_uid]['headimg']}" alt="{$users[$message.send_uid]['nikename']}" class="img-circle user-img" style="width:30px;height:30px;">
-                            {else}
-                            <img src="/resource/images/user.png" alt="{$users[$message.send_uid]['nikename']}" class="img-circle user-img" style="width:30px;height:30px;">
-                            {/if}
-                        </div>
-                        <div class="user-desc">
-                            <span class="name" style="height:24px;line-height:24px;">
-                                {$users[$message.send_uid]['nikename']}
-                                {if condition="$message.msg=='receive'"}
-                                <span class="badge badge-danger message-count">{$message.count}</span>
+                        <a href="javascript::void(0);" class="user-list-item">
+                            <div class="avatar">
+                                {if condition="$users[$message.send_uid]['headimg']"}
+                                <img src="/{$users[$message.send_uid]['headimg']}" alt="{$users[$message.send_uid]['nikename']}" class="img-circle user-img" style="width:30px;height:30px;">
+                                {else}
+                                <img src="/resource/images/user.png" alt="{$users[$message.send_uid]['nikename']}" class="img-circle user-img" style="width:30px;height:30px;">
                                 {/if}
-                            </span>
-                            <span class="desc">{$message.message}</span>
-                        </div>
+                            </div>
+                            <div class="user-desc">
+                                <span class="name" style="height:24px;line-height:24px;">
+                                    {$users[$message.send_uid]['nikename']}
+                                    {if condition="$message.msg=='receive'"}
+                                    <span class="badge badge-danger message-count">{$message.count}</span>
+                                    {/if}
+                                </span>
+                                <span class="desc">{$message.message}</span>
+                            </div>
+                        </a>
                     </li>
                     {/foreach}
-                    
-                    {foreach $follows as $follow}
-                    <li class="list-group-item" onclick="messageView({$})">
-                        <div class="avatar">
-                            {if condition="$users[$follow.cover_follow_uid]['headimg']"}
-                            <img src="/{$users[$follow.cover_follow_uid]['headimg']}" alt="{$users[$follow.cover_follow_uid]['nikename']}" class="img-circle user-img" style="width:30px;height:30px;">
-                            {else}
-                            <img src="/resource/images/user.png" alt="{$users[$follow.cover_follow_uid]['nikename']}" class="img-circle user-img" style="width:30px;height:30px;">
-                            {/if}
-                        </div>
-                        <div class="user-desc">
-                            <span class="name" style="height:24px;line-height:24px;">
-                                {$users[$follow.cover_follow_uid]['nikename']}
-                            </span>
-                            <span class="desc"> {$users[$follow.cover_follow_uid]['info']}</span>
-                        </div>
-                    </li>
-                    {/foreach}
-
                    
                 </ul>
             </div>
@@ -121,19 +104,21 @@
 
                     {foreach $follows as $follow}
                     <li class="list-group-item" onclick="messageView({$})">
-                        <div class="avatar">
-                            {if condition="$users[$follow.cover_follow_uid]['headimg']"}
-                            <img src="/{$users[$follow.cover_follow_uid]['headimg']}" alt="{$users[$follow.cover_follow_uid]['nikename']}" class="img-circle user-img" style="width:30px;height:30px;">
-                            {else}
-                            <img src="/resource/images/user.png" alt="{$users[$follow.cover_follow_uid]['nikename']}" class="img-circle user-img" style="width:30px;height:30px;">
-                            {/if}
-                        </div>
-                        <div class="user-desc">
-                            <span class="name" style="height:24px;line-height:24px;">
-                                {$users[$follow.cover_follow_uid]['nikename']}
-                            </span>
-                            <span class="desc"> {$users[$follow.cover_follow_uid]['info']}</span>
-                        </div>
+                        <a href="javascript::void(0);" class="user-list-item">
+                            <div class="avatar">
+                                {if condition="$users[$follow.cover_follow_uid]['headimg']"}
+                                <img src="/{$users[$follow.cover_follow_uid]['headimg']}" alt="{$users[$follow.cover_follow_uid]['nikename']}" class="img-circle user-img" style="width:30px;height:30px;">
+                                {else}
+                                <img src="/resource/images/user.png" alt="{$users[$follow.cover_follow_uid]['nikename']}" class="img-circle user-img" style="width:30px;height:30px;">
+                                {/if}
+                            </div>
+                            <div class="user-desc">
+                                <span class="name" style="height:24px;line-height:24px;">
+                                    {$users[$follow.cover_follow_uid]['nikename']}
+                                </span>
+                                <span class="desc"> {$users[$follow.cover_follow_uid]['info']}</span>
+                            </div>
+                        </a>
                     </li>
                     {/foreach}
 
