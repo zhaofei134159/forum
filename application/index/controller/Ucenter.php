@@ -64,7 +64,7 @@ class Ucenter extends Common
         $infoRate = round($infoRate);
         
         $cart_model = new Cart();
-        $cartResults = $cart_model->userSendCartPlate($uid);
+        $cartResults = $cart_model->userSendCartPlate($user['id']);
         
         $first_pid = $plateId;
         if(empty($first_pid)&&!empty($cartResults['Plates'])){
@@ -75,14 +75,14 @@ class Ucenter extends Common
         $users = User::all(['is_del'=>0]);
         $users = objToArray($users);
 
-        $result = $this->userPlateCart($first_pid,$uid);
+        $result = $this->userPlateCart($first_pid,$user['id']);
 
         # 该用户发帖数
-        $cartCount = Cart::where(['is_del'=>0,'cartId'=>0,'userid'=>$uid])->count();
+        $cartCount = Cart::where(['is_del'=>0,'cartId'=>0,'userid'=>$user['id']])->count();
 
-        $plateCount = Plate::where(['is_del'=>0,'is_check'=>1,'userid'=>$uid])->count();
+        $plateCount = Plate::where(['is_del'=>0,'is_check'=>1,'userid'=>$user['id']])->count();
 
-        $follow = Follow::get(['cover_follow_uid'=>$user['id'],'follow_uid'=>$uid]);
+        $follow = Follow::get(['cover_follow_uid'=>$user['id'],'follow_uid'=>$user['id']]);
 
         $model_follow = new Follow();
         $follows = $model_follow->userCount();
