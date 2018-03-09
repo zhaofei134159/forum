@@ -104,7 +104,7 @@
 
                     {foreach $follows as $follow}
                     <li class="list-group-item" onclick="messageView({$})">
-                        <a href="javascript::void(0);" class="user-list-item">
+                        <a href="{:url('Message/index')}?uid={$follow.cover_follow_uid}" class="user-list-item" >
                             <div class="avatar">
                                 {if condition="$users[$follow.cover_follow_uid]['headimg']"}
                                 <img src="/{$users[$follow.cover_follow_uid]['headimg']}" alt="{$users[$follow.cover_follow_uid]['nikename']}" class="img-circle user-img" style="width:30px;height:30px;">
