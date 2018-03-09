@@ -94,7 +94,14 @@
                                 </div>
                                 <div class="userinfo">
                                     <div class="num">
-                                        <strong> 关注:</strong> <a href="">{$follows[$cart.userid]['count']}</a>
+                                        <strong> 关注:</strong> 
+                                        <a href="">
+                                            {if condition="$follows[$cart.userid]['count']"}
+                                                {$follows[$cart.userid]['count']}
+                                            {else}
+                                                0
+                                            {/if}
+                                        </a>
                                         <span class="m-r-15"></span>
                                         <strong> 帖子:</strong> <a href="">33</a>
                                     </div>
@@ -135,7 +142,14 @@
                                     </div>
                                     <div class="userinfo">
                                         <div class="num">
-                                            <strong> 关注:</strong> <a href="">{$follows[$reply.userid]['count']}</a>
+                                            <strong> 关注:</strong> 
+                                            <a href="">
+                                                {if condition="$follows[$reply.userid]['count']"}
+                                                    {$follows[$reply.userid]['count']}
+                                                {else}
+                                                    0
+                                                {/if}
+                                            </a>
                                             <span class="m-r-15"></span>
                                             <strong> 帖子:</strong> <a href="">33</a>
                                         </div>
