@@ -152,10 +152,6 @@ class Cart extends Common
 
         $cart = model_cart::create($data);
 
-        $follows = Follow::group('follow_uid')->count();
-        var_dump($follows);die;
-
-
         $this->redirect('cart/seeCart',['cartId'=>$cart['id'],'plateId'=>$plateId]);
 	}
 
@@ -177,6 +173,9 @@ class Cart extends Common
             ]);        
         $page = $replys->render();
         
+        $follows = Follow::group('follow_uid')->count();
+        var_dump($follows);die;
+
         $data = array(
                 'plateId'=>$plateId,
                 'cart'=>$cart,
