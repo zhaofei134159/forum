@@ -8,6 +8,7 @@ class Follow extends Common
 	# 分用户统计
 	public function userCount(){
 		$followCount = $this::get_query("SELECT follow_uid,count(1) FROM forum_follow group by follow_uid");
-		var_dump($followCount);
+     	$followCount = objToArray($followCount,'follow_uid');
+		return $followCount;
 	}
 }
