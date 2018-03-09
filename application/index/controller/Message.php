@@ -67,12 +67,9 @@ class Message extends Common
         $users = User::all(['is_del'=>0]);
         $users = objToArray($users);
 
+        # 关注的人
+        $follows = Follow::where(['follow_uid'=>$uid]);
 
-        $model_follow = new Follow();
-        $follows = $model_follow->userCount();
-
-        $model_cart = new Cart();
-        $userCarts = $model_cart->userCount();
 
         $data = array(
         		'mid'=>$mid,
