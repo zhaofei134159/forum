@@ -82,7 +82,7 @@ class Ucenter extends Common
 
         $plateCount = Plate::where(['is_del'=>0,'is_check'=>1,'userid'=>$user['id']])->count();
 
-        $follow = Follow::get(['cover_follow_uid'=>$user['id'],'follow_uid'=>$user['id']]);
+        $follow = Follow::get(['cover_follow_uid'=>$user['id'],'follow_uid'=>$this->uid]);
 
         $model_follow = new Follow();
         $follows = $model_follow->userCount();
