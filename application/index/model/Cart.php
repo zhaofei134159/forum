@@ -98,7 +98,7 @@ class Cart extends Common
   }
 
   public function userCount(){
-    $userCartCount = $this::get_query("SELECT userid,count(1) as count FROM forum_cart group by userid");
+    $userCartCount = $this::get_query("SELECT userid,count(1) as count FROM forum_cart where cartId=0 and is_del=0 group by userid");
     $userCartCount = objToArray($userCartCount,'userid');
     return $userCartCount;
   }
