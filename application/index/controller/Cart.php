@@ -151,9 +151,10 @@ class Cart extends Common
         $data['utime'] = time();
 
         $cart = model_cart::create($data);
-        
+
         $follows = Follow::group('follow_uid')->count();
         var_dump($follows);die;
+
 
         $this->redirect('cart/seeCart',['cartId'=>$cart['id'],'plateId'=>$plateId]);
 	}
