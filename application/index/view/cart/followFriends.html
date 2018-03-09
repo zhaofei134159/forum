@@ -1,5 +1,5 @@
 <div class="panel-body">
-    <div class="text-center card-box">
+    <div class="text-center card-box" style="padding:none;">
         {if condition="$user.headimg"}
         <img src="/{$user.headimg}" class="img-circle thumb-xl img-thumbnail m-b-10" alt="头像">
         {else}
@@ -7,18 +7,26 @@
         {/if}
 
         <p class="text-muted font-13 m-b-30" style="white-space:nowrap;text-overflow:ellipsis;overflow:hidden;text-align:center;width:100%;">
-            {$user.info}
+            {$user.nikename}
         </p>
     </div>
     <div class="text-left">
         <div class="text-center col-lg-4 col-md-4" style="border-left:solid 1px gray;border-right:solid 1px gray;">
-            <h5>关注</h5>
+            <button type="button" class="btn btn-danger btn-trans waves-effect w-md waves-danger m-b-5">
+                <i class="ti-plus"></i> 关注 
+            </button>
         </div>
         <div class="text-center col-lg-4 col-md-4" style="border-left:solid 1px gray;border-right:solid 1px gray;">
-            <h5><a href="#">主页</a></h5>
+            <button type="button" class="btn btn-info btn-trans waves-effect w-md waves-danger m-b-5">
+                <i class="ti-home"></i>
+                主页
+            </button>
         </div>
         <div class="text-center col-lg-4 col-md-4" style="border-left:solid 1px gray;border-right:solid 1px gray;">
-            <h5>私聊</h5>
+            <button type="button" class="btn btn-success btn-trans waves-effect w-md waves-danger m-b-5">
+                <i class="ti-comment-alt"></i>
+                私聊
+            </button>
         </div>
     </div>
 </div>
