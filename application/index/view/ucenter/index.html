@@ -66,8 +66,8 @@
                 <div class="card-box widget-user">
                     <div class="text-center col-lg-4 col-md-4">
                         <h2 class="text-custom" data-plugin="counterup">
-                            {if condition="$follows[$userid]['count']"}
-                                {$follows[$userid]['count']}
+                            {if condition="$follows[$user.id]['count']"}
+                                {$follows[$user.id]['count']}
                             {else}
                                 0
                             {/if}
