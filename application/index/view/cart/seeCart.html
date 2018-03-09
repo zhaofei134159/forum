@@ -85,7 +85,7 @@
                         </tr>
                         <tr class="user-mar">
                             <td class="users">
-                                <div class="headimg">
+                                <div class="headimg" onclick="followFriends({$cart.userid})">
                                     {if condition="$users[$cart.userid]['headimg']"}
                                     <img src="/{$users[$cart.userid]['headimg']}" class="thumb-xl img-thumbnail m-b-10" alt="头像">
                                     {else}
@@ -260,6 +260,24 @@
             }else{
                 loading('hide');
                 alertFun('私信',result.data,1);
+            }
+        },'json');
+    }
+
+    // 用户弹框
+    function followFriends(uid){
+        loading('show');
+        $.post("{:url('cart/followFriends')}",{'uid':uid},function(result){
+            if(result.flog==0){
+                loading('hide');
+                toastr.options = {
+                  "positionClass": "toast-top-center",
+                }
+                var $toast = toastr['error'](result.msg);
+                return false;
+            }else{
+                loading('hide');
+                alertFun('用户',result.data,1);
             }
         },'json');
     }

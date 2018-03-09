@@ -258,4 +258,19 @@ class Cart extends Common
 
         return json(['flog'=>1,'msg'=>'成功','data'=>$html]);
     }
+
+    # 关注好友
+    public function followFriends(){
+        $post = input('post.');
+        $uid = $post['uid'];
+
+        $user = User::get(['is_del'=>0,'id'=>$uid]);
+        if(empty($user)){
+            return json(['flog'=>0,'msg'=>'找不到对应用户']);
+        }
+
+        $html = $this->view->fetch('followFriends',$data);
+
+        return json(['flog'=>1,'msg'=>'成功','data'=>$html]);
+    }
 }
