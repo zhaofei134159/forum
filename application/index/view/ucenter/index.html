@@ -65,18 +65,22 @@
             <div class="col-lg-12">
                 <div class="card-box widget-user">
                     <div class="text-center col-lg-4 col-md-4">
-                        <h2 class="text-custom" data-plugin="counterup">
-                            {if condition="$follows[$user.id]['count']"}
-                                {$follows[$user.id]['count']}
-                            {else}
-                                0
-                            {/if}
-                        </h2>
-                        <h5>关注</h5>
+                        <a href="{:url('Message/index')}">
+                            <h2 class="text-custom" data-plugin="counterup">
+                                {if condition="$follows[$user.id]['count']"}
+                                    {$follows[$user.id]['count']}
+                                {else}
+                                    0
+                                {/if}
+                            </h2>
+                            <h5>关注</h5>
+                        </a>
                     </div>
                     <div class="text-center col-lg-4 col-md-4 ">
-                        <h2 class="text-custom" data-plugin="counterup">{$plateCount}</h2>
-                        <h5><a href="{:url('forum/myPlateList')}">板块</a></h5>
+                        <a href="{:url('forum/myPlateList')}">
+                            <h2 class="text-custom" data-plugin="counterup">{$plateCount}</h2>
+                            <h5>板块</h5>
+                        </a>
                     </div>
                     <div class="text-center col-lg-4 col-md-4 ">
                         <h2 class="text-custom" data-plugin="counterup">{$cartCount}</h2>
