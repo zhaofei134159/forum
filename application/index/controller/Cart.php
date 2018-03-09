@@ -176,6 +176,9 @@ class Cart extends Common
         $model_follow = new Follow();
         $follows = $model_follow->userCount();
 
+        $model_cart = new model_cart();
+        $userCarts = $model_cart->userCount();
+
         $data = array(
                 'plateId'=>$plateId,
                 'cart'=>$cart,
@@ -183,6 +186,7 @@ class Cart extends Common
                 'replys'=>$replys,
                 'page'=>$page,
                 'follows'=>$follows,
+                'userCarts'=>$userCarts,
             );
         return $this->view->fetch('seeCart',$data);
     }
