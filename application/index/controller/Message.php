@@ -33,15 +33,22 @@ class Message extends Common
 		$this->is_login();
 		// 登录人
 		$uid = $this->send_uid;
-		$mid = input('get.mid');
-
 		$get = input('get.');
+
+		$mid = $get['mid'];
+
 		if(!empty($get['uid'])){
-			$member = array();
-			$member['member'] = $this->send_uid.','.$get['uid'];
-			$member['creator'] = $this->send_uid;
-			$member['ctime'] = time();
-			$messageEr = messageMember::create($member);
+			$memberWhere = array();
+			$memberWhere['member'] = array('like','#'.$this->send_uid.'#');
+			$memberWhere['member'] = array('like','#'.$get['uid'].'#');
+			$memberArr = messageMember::where($memberWhere)->find();
+			if(empty($memberArr)){
+				$member = array();
+				$member['member'] = $this->send_uid.','.$get['uid'];
+				$member['creator'] = $this->send_uid;
+				$member['ctime'] = time();
+				$messageEr = messageMember::create($member);
+			}
 		}
 
 
@@ -117,7 +124,7 @@ class Message extends Common
 		}
 
 		$member = array();
-		$member['member'] = $this->send_uid.','.$uid;
+		$member['member'] = '#'.$this->send_uid.'#'.$uid.'#';
 		$member['creator'] = $this->send_uid;
 		$member['ctime'] = time();
 		$messageEr = messageMember::create($member);
