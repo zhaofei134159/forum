@@ -103,7 +103,14 @@
                                             {/if}
                                         </a>
                                         <span class="m-r-15"></span>
-                                        <strong> 帖子:</strong> <a href="">33</a>
+                                        <strong> 帖子:</strong> 
+                                        <a href="">
+                                            {if condition="$userCarts[$cart.userid]['count']"}
+                                                {$userCarts[$cart.userid]['count']}
+                                            {else}
+                                                0
+                                            {/if}
+                                        </a>
                                     </div>
                                     <div class="info">
                                         {$users[$cart.userid]['info']}
@@ -151,7 +158,14 @@
                                                 {/if}
                                             </a>
                                             <span class="m-r-15"></span>
-                                            <strong> 帖子:</strong> <a href="">33</a>
+                                            <strong> 帖子:</strong> 
+                                            <a href="">
+                                                {if condition="$userCarts[$cart.userid]['count']"}
+                                                    {$userCarts[$cart.userid]['count']}
+                                                {else}
+                                                    0
+                                                {/if}
+                                            </a>
                                         </div>
                                         <div class="info">
                                             {$users[$reply.userid]['info']}
