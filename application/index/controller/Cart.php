@@ -266,12 +266,11 @@ class Cart extends Common
         $cover_uid = $post['uid'];
         $uid =  Session::get('login_id','forum_home');
 
-        $user = User::get(['is_del'=>0,'id'=>$uid]);
+        $user = User::get(['is_del'=>0,'id'=>$cover_uid]);
         if(empty($user)){
             return json(['flog'=>0,'msg'=>'找不到对应用户']);
         }
-        var_dump($cover_uid);
-        var_dump($uid);die;
+        
         $follow = Follow::get(['cover_follow_uid'=>$cover_uid,'follow_uid'=>$uid]);
 
         $data = array(
