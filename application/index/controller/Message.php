@@ -68,7 +68,7 @@ class Message extends Common
         $users = objToArray($users);
 
         # 关注的人
-        $follows = Follow::where(['follow_uid'=>$uid]);
+        $follows = Follow::where(['follow_uid'=>$uid])->select();
 
 
         $data = array(
