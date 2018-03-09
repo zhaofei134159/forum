@@ -1,0 +1,26 @@
+<div class="panel-body">
+    <table class="table table table-hover m-0">
+        <tr>
+            <td colspan="3">
+                <div class="headimg">
+                    {if condition="$users[$reply.userid]['headimg']"}
+                    <img src="/{$users[$reply.userid]['headimg']}" class="thumb-xl img-thumbnail m-b-10" alt="头像">
+                    {else}
+                    <img src="/resource/images/user.png" class=" thumb-xl img-thumbnail m-b-10" alt="头像">
+                    {/if}
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                关注
+            </td>
+            <td>
+                主页
+            </td>
+            <td>
+                私聊
+            </td>
+        </tr>
+    </table>
+</div>
