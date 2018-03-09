@@ -75,6 +75,7 @@ class Message extends Common
         		'mid'=>$mid,
         		'messages_list'=>$messages_list,
         		'users'=>$users,
+        		'follows'=>$follows
         	);
         return $this->view->fetch('index',$data);
 	}
