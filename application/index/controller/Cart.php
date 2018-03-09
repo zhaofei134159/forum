@@ -66,6 +66,8 @@ class Cart extends Common
         $users = User::all(['is_del'=>0]);
         $users = objToArray($users);
 
+        $follows = Follow::group('follow_uid')->count();
+        var_dump($follows);die;
         $data = array(
                 'topCarts'=>$topCarts,
         		'carts'=>$carts,
