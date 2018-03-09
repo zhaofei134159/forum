@@ -71,7 +71,7 @@ class Message extends Common
         $model_follow = new Follow();
         $follows = $model_follow->userCount();
 
-        $model_cart = new model_cart();
+        $model_cart = new Cart();
         $userCarts = $model_cart->userCount();
 
         $data = array(
