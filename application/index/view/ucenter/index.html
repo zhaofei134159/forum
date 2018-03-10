@@ -161,7 +161,7 @@
                                         <th class="name">
                                             <div class="portfolioFilter">
                                                 {foreach $Plates as $plate}
-                                                    <a href="javascript:void(0);" data-filter="" class="waves-effect waves-custom" onclick="plateCart('{$plate.pid}','{$plate.userid}')" id="pname_{$plate.pid}" {if condition="$plate.pid==$first_pid"}style="color:#71b6f9;"{/if}>{$plate.name}</a>
+                                                    <a href="javascript:void(0);" data-filter="" class="waves-effect waves-custom" onclick="plateCart('{$plate.pid}','{$uid}')" id="pname_{$plate.pid}" {if condition="$plate.pid==$first_pid"}style="color:#71b6f9;"{/if}>{$plate.name}</a>
                                                 {/foreach}
                                             </div>
                                         </th>
