@@ -244,7 +244,7 @@
             loading('show');
             $('#pname_'+plateId).siblings().removeAttr('style');
             $('#pname_'+plateId).attr('style','color:#71b6f9;');
-            window.location.href = "{:url('ucenter/index')}?plateId="+plateId;
+            window.location.href = "{:url('ucenter/index')}?uid="+uid+"&plateId="+plateId;
         }
         function follow(uid,res){
             loading('show');
