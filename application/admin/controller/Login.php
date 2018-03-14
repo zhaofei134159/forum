@@ -4,7 +4,7 @@ namespace app\admin\controller;
 use app\admin\model\Admin;
 use think\Session;
 use think\Config;
-use smtp;
+use app\smtp\stmp;
 
 
 class Login extends Common
