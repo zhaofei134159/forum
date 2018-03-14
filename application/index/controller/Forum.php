@@ -114,7 +114,7 @@ class Forum extends Common
         return json(['flog'=>1, 'msg'=>'没有存在相同名称的版块']);
     } 
 
-    # 申请版主 保存
+    # 申请版快 保存
     public function saveApplyPlate(){
         if(!Session::get('login_id','forum_home')){
             $this->redirect('login/index');
@@ -126,11 +126,12 @@ class Forum extends Common
         $post = input('post.');
         $headimg = request()->file('headimg');
         $backimg = request()->file('backimg');
-
+        # 版块 标示图保存
         if($headimg){
             $saveHeadPath = 'uploads'.DS.'forum'.DS.'headimg';
             $data['headimg'] = uploadFile($headimg,$saveHeadPath);
         }
+        # 版块背景图保存
         if($backimg){
             $saveBackPath = 'uploads'.DS.'forum'.DS.'backimg';
             $data['backimg'] = uploadFile($backimg,$saveBackPath);
@@ -142,8 +143,9 @@ class Forum extends Common
         $data['ctime'] = time();
         $data['utime'] = time();
 
+        # 存入数据库
         Plate::create($data);
-
+        # 跳转到板块列表页
         $this->redirect('forum/myPlateList');
     }
 
