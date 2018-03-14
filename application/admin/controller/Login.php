@@ -4,7 +4,6 @@ namespace app\admin\controller;
 use app\admin\model\Admin;
 use think\Session;
 use think\Config;
-include(EXTEND_PATH . 'smtp.php');
 
 class Login extends Common
 {	
