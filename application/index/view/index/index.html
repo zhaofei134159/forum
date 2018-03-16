@@ -37,12 +37,18 @@
                             
                             <div class="conbox" id="BoxUl">
                                 <ul style="width: 1525px; left: 0px;">
-                                    <li class="cur"><img src="./1.jpg" alt=""></li><li class="cur"><img src="./2.jpg" alt=""></li><li class="cur"><img src="./3.jpg" alt=""></li><li class="cur"><img src="./4.jpg" alt=""></li><li class="cur"><img src="./5.jpg" alt=""></li>
+                                    {foreach $plateUser as $plateU}
+                                    <li class="cur">
+                                        <img src="/{$plateU.headimg}" alt="">
+                                    </li>
+                                    {/foreach}
                                 </ul>
                             </div>
-                            
-                            <p class="BoxSwitch" id="BoxSwitch"><span class="cur"></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span></p>
-                            
+                            <p class="BoxSwitch" id="BoxSwitch">
+                                {foreach $plateUser as $plateU}
+                                    <span class=""></span>
+                                {/foreach}
+                            </p>
                         </div>
                     </div>
                 </div>
