@@ -41,7 +41,6 @@ class Index extends Common
 
         # 版主
         $plateHome = Plate::where(['is_del'=>0,'is_check'=>1,'is_home'=>1])->limit(5)->select(); 
-        $plateHome = objToArray($plateHome);
 
         $users = User::all(['is_del'=>0]);
         $users = objToArray($users);
