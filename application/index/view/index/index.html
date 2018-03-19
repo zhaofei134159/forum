@@ -33,19 +33,21 @@
                 <div class="row">
                     <div id="focusImage" class="slide">
                         <ul class="">
-                            
+                            {foreach $plateHome as $plateH}
                             <li class="current">
-                                <div class="image"><a href="#"><img src="./uploads/forum/headimg/20180314/b4868b1cc6f63f958d30e23b3e7fee85.jpg" width="400" height="282"></a></div>
+                                <div class="image"><img src="/{$plateH.headimg}" width="400" height="282"></div>
                                 <div class="text">
-                                    <span class="title"><a href="#">小水管哭了！《战争机器4》总容量已超100GB</a></span>
-                                    <p>《战争机器4》在刚推出之时，在Win10平台上的容量就已经达到了惊人的73GB，这次让《战争机器4》总容量超过100GB的更新文件，是来自情人节期间的新内容。</p>
+                                    <span class="title">板块名：<a href="{:url('Cart/index')}?plateId={$plateH.id}"> {$plateH.name} </a></span>
+                                    <p> {$plateH.info} </p>
                                 </div>
                             </li>
-                            
+                            {/foreach}
                         </ul>
                         
                         <div class="triggers">
-                            <a href="javascript:;" class="cur" style="display: none;"><img src="./1.jpg" width="58" height="38"></a>
+                            {foreach $plateHome as $plateH}
+                            <a href="javascript:;" class="cur" style="display: none;"><img src="/{$plateH.headimg}" width="58" height="38"></a>
+                            {/foreach}
                         </div>
                         
                     </div>
@@ -53,23 +55,6 @@
             </div>
         </div>
 
-
-        <div class="row">
-            {foreach $plateUser as $plateU}
-            <div class="col-lg-3 col-md-6">
-                <div class="card-box widget-user">
-                    <div>
-                        <img src="/{$plateU.headimg}" class="img-responsive img-circle" style="width:72px;height:72px;" alt="头像">
-                        <div class="wid-u-info">
-                            <h4 class="m-t-0 m-b-5"><a href="{:url('Cart/index')}?plateId={$plateU.id}">板块名：{$plateU.name}</a></h4>
-                            <p class="text-muted m-b-5 font-13"><a href="{:url('ucenter/index')}?uid={$plateU.userid}">{$users[$plateU.userid]['nikename']}</a></p>
-                            <small class="text-info"><b>版主</b></small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {/foreach}
-        </div>
         <!-- end row -->
         <style type="text/css">
             .table>tbody>tr>td, .table>tbody>tr>th{border-bottom:1px solid #ddd;}
