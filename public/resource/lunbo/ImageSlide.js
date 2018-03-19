@@ -96,8 +96,7 @@ ImageSlide.prototype.stop = function() {
     this.timer && clearInterval(this.timer)
 },
 ImageSlide.prototype.show = function(e) {
-    console.log(e);
     this.tigger && this.tigger.addClass && this.tigger.removeClass("current").item(e).addClass("current"),
     this.dot && this.dot.addClass && this.dot.removeClass("current").item(e).addClass("current"),
-    this.content && this.content.addClass && (this.content.filter(".current").removeClass("current"), this.content.item(e).addClass("current"),)
+    this.content && this.content.addClass && (this.content.filter(".current").removeClass("current"), this.content.item(e).addClass("current"))
 };
