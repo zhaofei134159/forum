@@ -34,7 +34,7 @@
                     <div id="focusImage" class="slide">
                         <ul class="">
                             {foreach $plateHome as $key=>$plateH}
-                            <li class="{if condition='$key==0'}current{/if}">
+                            <li class="{if condition='$key==0'}current{/if}" key="{$key}">
                                 <div class="image"><img src="/{$plateH.headimg}1" width="400" height="282"></div>
                                 <div class="text">
                                     <span class="title">板块名：<a href="{:url('Cart/index')}?plateId={$plateH.id}"> {$plateH.name} </a></span>
