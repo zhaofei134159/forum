@@ -5,7 +5,7 @@
 .slide{overflow:hidden;border:1px #ededed solid;position:relative;}
 .slide li{position:absolute;overflow:hidden;display:none;}
 .slide li.current{display:block;}
-.slide li .image{position:absolute;}
+.slide li .image{position:absolute;top:-2px;left:-2px;}
 .slide li .text{bottom:0;overflow:hidden;background-color:rgba(0,0,0,0.6);width:148px;float:left;position:relative;height:auto;background:0;filter:none;text-indent:0;margin:15px 10px 0 0;padding:6px 0;}
 .slide li .text a{color:#fff;font-size:14px;line-height:17px;float:left;}
 .slide li img{width:400px;height:282px;}
