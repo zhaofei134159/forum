@@ -19,10 +19,10 @@
 .slide .triggers a.current img{border:2px #2fac00 solid;opacity:1;}
 
 .slide .icon-dot{display:inline-block;position:absolute;bottom:20px;right:43px;}
-.slide .icon-dot a{width:9px;height:9px;display:inline-block;background-image:url(../images/nav.png);background-repeat:no-repeat;background-position:-1px -1px;overflow:hidden;margin:0 2px;}
+.slide .icon-dot a{width:9px;height:9px;display:inline-block;background-repeat:no-repeat;background-position:-1px -1px;overflow:hidden;margin:0 2px;}
 .slide .icon-dot a.current{background-position:-1px -12px;}
 
-.slide .link-watch{width:30px;height:44px;display:none;position:absolute;top:110px;background:url(../images/arrow.png) no-repeat 0 -57px;filter:alpha(opacity=60);cursor:pointer;}
+.slide .link-watch{width:30px;height:44px;display:none;position:absolute;top:110px;filter:alpha(opacity=60);cursor:pointer;}
 .slide .link-watch.pre{left:0;}
 .slide .link-watch.next{left:368px;right:0;background-position:right -57px;}
 .slide .link-watch.down{background-position-y:-2px;}
