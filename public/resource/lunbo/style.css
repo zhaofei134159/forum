@@ -8,7 +8,6 @@
     overflow:hidden;
 }
 .swipe li div, .swipe div div div {
-  padding:50px 10px;
   background:#1db1ff;
   font-weight:bold;
   color:#fff;
