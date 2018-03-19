@@ -35,7 +35,7 @@
                         <ul class="">
                             {foreach $plateHome as $plateH}
                             <li class="current">
-                                <div class="image"><img src="/{$plateH.headimg}" width="400" height="282"></div>
+                                <div class="image"><img src="/{$plateH.headimg}1" width="400" height="282"></div>
                                 <div class="text">
                                     <span class="title">板块名：<a href="{:url('Cart/index')}?plateId={$plateH.id}"> {$plateH.name} </a></span>
                                     <p> {$plateH.info} </p>
@@ -53,7 +53,7 @@
                         
                         <div class="triggers">
                             {foreach $plateHome as $plateH}
-                            <a href="javascript:;" class="cur" style="display: none;"><img src="/{$plateH.headimg}" width="58" height="38"></a>
+                            <a href="javascript:;" class="cur" style="display: none;"><img src="/{$plateH.headimg}1" width="58" height="38"></a>
                             <a href="javascript:;" class="cur" style="display: none;"><img src="/{$plateH.headimg}" width="58" height="38"></a>
                             {/foreach}
                         </div>
