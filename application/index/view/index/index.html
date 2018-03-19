@@ -1,4 +1,7 @@
 {include file="public/header" /}
+
+        <script type="text/javascript" src="/resource/lunbo/prototype.js"></script>
+
         <div class="row">
             <div class="col-lg-3 col-md-6">
                 <div class="card-box">
@@ -22,8 +25,65 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-lg-9">
+            
+            <div class="col-lg-8">
+                <div class="row">
+                    <div id="focusImage" class="slide">
+                        <ul class="contents">
+                            <li class="">
+                                <div class="image"><a href="http://www.jq22.com/demo/jQuery360newsjdt201702170951/#"><img src="./1.jpg" width="400" height="282"></a></div>
+                                <div class="text">
+                                    <span class="title"><a href="http://www.jq22.com/demo/jQuery360newsjdt201702170951/#">小水管哭了！《战争机器4》总容量已超100GB</a></span>
+                                    <p>《战争机器4》在刚推出之时，在Win10平台上的容量就已经达到了惊人的73GB，这次让《战争机器4》总容量超过100GB的更新文件，是来自情人节期间的新内容。</p>
+                                </div>
+                            </li>
+                            <li class="">
+                                <div class="image"><a href="http://www.jq22.com/demo/jQuery360newsjdt201702170951/#"><img src="./2.jpg" width="400" height="282"></a></div>
+                                <div class="text">
+                                    <span class="title"><a href="http://www.jq22.com/demo/jQuery360newsjdt201702170951/#">《无冬OL》5月19日停运 主机版不受影响</a></span>
+                                    <p>近日，完美宣布《无冬OL》将于2017年5月19日正式停运，在关闭服务器后，官方会将玩家的充值返还到完美钱包或银行账户中。同时，官方强调称本次的停服针对中国区的服务器，主机版不受影响。</p>
+                                </div>
+                            </li>
+                            <li class="">
+                                <div class="image"><a href="http://www.jq22.com/demo/jQuery360newsjdt201702170951/#"><img src="./3.jpg" width="400" height="282"></a></div>
+                                <div class="text">
+                                    <span class="title"><a href="http://www.jq22.com/demo/jQuery360newsjdt201702170951/#">《丧尸围城4》评价不佳？卡普空：上手度太低</a></span>
+                                    <p>与迄今为止的系列相比，《丧尸围城4》让更多的玩家能够轻松上手，但新游戏收到的意见更加宽泛。在未来Capcom打算通过发布额外的数字下载内容来持续增加游戏销量。</p>
+                                </div>
+                            </li>
+                            <li class="current">
+                                <div class="image"><a href="http://www.jq22.com/demo/jQuery360newsjdt201702170951/#"><img src="./4.jpg" width="400" height="282"></a></div>
+                                <div class="text">
+                                    <span class="title"><a href="http://www.jq22.com/demo/jQuery360newsjdt201702170951/#">国外暴雪玩家3D打印《星际争霸2》虫族单位</a></span>
+                                    <p>近日，暴雪游戏死忠粉3D打印设计师Francesco Orrù通过建模软件ZBrush与3D打印，完成自己的《星际争霸2》3D打印作品新作，让我们来一同鉴赏。</p>
+                                </div>
+                            </li>
+                            <li class="">
+                                <div class="image"><a href="http://www.jq22.com/demo/jQuery360newsjdt201702170951/#"><img src="./5.jpg" width="400" height="282"></a> </div>
+                                <div class="text">
+                                    <span class="title"><a href="http://www.jq22.com/demo/jQuery360newsjdt201702170951/#">索尼：希望推出《地平线：黎明时刻》续作</a></span>
+                                    <p>距离《地平线：黎明时刻》的发售还有不到2周时间，但索尼似乎正在找寻为其推出续作的可能，并希望其能成为一款旗下代表性系列作品，对于这部作品报以高期待。</p>
+                                </div>
+                            </li>
+                        </ul>
+                        
+                        <div class="triggers">
+                            <a href="javascript:;" class="cur" style="display: none;"><img src="./1.jpg" width="58" height="38"></a>
+                            <a href="javascript:;" class="" style="display: none;"><img src="./2.jpg" width="58" height="38"></a>
+                            <a href="javascript:;" class="" style="display: none;"><img src="./3.jpg" width="58" height="38"></a>
+                            <a href="javascript:;" class="current" style="display: none;"><img src="./4.jpg" width="58" height="38"></a>
+                            <a href="javascript:;" class="" style="display: none;"><img src="./5.jpg" width="58" height="38"></a>
+                        </div>
 
+                        <div class="icon-dot">
+                            <a href="javascript:;" class="cur"></a>
+                            <a href="javascript:;" class=""></a>
+                            <a href="javascript:;" class=""></a>
+                            <a href="javascript:;" class="current"></a>
+                            <a href="javascript:;" class=""></a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -159,9 +219,15 @@
         </div>
 
         <script type="text/javascript">
-       
-            var t1=new TouchSlider('slider',{duration:800, interval:3000, direction:0, autoplay:true, align:'center', mousewheel:false, mouse:true, fullsize:false});
-       
+        new ImageSlide({
+            project:"#focusImage",
+            content:".contents li",
+            tigger:".triggers a",
+            dot:".icon-dot a",
+            watch:".link-watch",
+            auto:!0,
+            hide:!0
+        })
         </script>
 
 
