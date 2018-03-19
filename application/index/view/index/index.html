@@ -1,6 +1,18 @@
 {include file="public/header" /}
+        <link href="/resource/lunbo/style.css" rel="stylesheet">
+        <script type="text/javascript" src="/resource/lunbo/touchslider.js"></script>
 
-        
+        <div class="row">
+            <div class="swipe" style="margin:10px;">
+                <ul id="slider" style="position: relative; transition: none; width: 1666px; left: -611.5px;">
+                    <li style="display: inline; float: left;"><div>1</div></li>
+                    <li style="float: left; display: inline;"><div>2</div></li>
+                    <li style="float: left; display: inline;"><div>3</div></li>
+                    <li style="float: left; display: inline;"><div>4</div></li>
+                    <li style="float: left; display: inline;"><div>5</div></li>
+                </ul>
+            </div>
+        </div>
 
 
         <div class="row">
@@ -132,5 +144,12 @@
                 </div>
             </div>
         </div>
+
+        <script type="text/javascript">
+       
+            var t1=new TouchSlider('slider',{duration:800, interval:3000, direction:0, autoplay:true, align:'center', mousewheel:false, mouse:true, fullsize:false});
+       
+        </script>
+
 
 {include file="public/footer" /}
