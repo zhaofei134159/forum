@@ -34,14 +34,7 @@
                     <div id="focusImage" class="slide">
                         <ul class="contents">
                             {foreach $plateHome as $key=>$plateH}
-                            <li {if condition='$key==0'}class="current"{/if} key="{$key}">
-                                <div class="image"><img src="/uploads/linkimg/20180205/d9401913f743bb082872bd73ff71d422.jpg" width="400" height="282"></div>
-                                <div class="text">
-                                    <span class="title">板块名：<a href="{:url('Cart/index')}?plateId={$plateH.id}"> {$plateH.name} </a></span>
-                                    <p> {$plateH.info} </p>
-                                </div>
-                            </li>
-                            <li>
+                            <li {if condition='$key==0'}class="current"{/if}>
                                 <div class="image"><img src="/{$plateH.headimg}" width="400" height="282"></div>
                                 <div class="text">
                                     <span class="title">板块名：<a href="{:url('Cart/index')}?plateId={$plateH.id}"> {$plateH.name} </a></span>
@@ -53,14 +46,12 @@
                         
                         <div class="triggers">
                             {foreach $plateHome as $key=>$plateH}
-                            <a href="javascript:;" {if condition='$key==0'}class="cur current"{/if} style="display: none;"><img src="/uploads/linkimg/20180205/d9401913f743bb082872bd73ff71d422.jpg" width="58" height="38"></a>
-                            <a href="javascript:;"  style="display: none;"><img src="/{$plateH.headimg}" width="58" height="38"></a>
+                            <a href="javascript:;" {if condition='$key==0'}class="cur current"{/if} style="display: none;"><img src="/{$plateH.headimg}" width="58" height="38"></a>
                             {/foreach}
                         </div>
                         <div class="icon-dot">
                             {foreach $plateHome as $key=>$plateH}
                             <a href="javascript:;" {if condition='$key==0'}class="cur current"{/if}></a>
-                            <a href="javascript:;" ></a>
                             {/foreach}
                         </div>
                         
