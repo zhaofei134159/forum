@@ -29,32 +29,56 @@
                 </div>
             </div>
 
-            <div class="col-lg-6">
+            <div class="col-lg-9">
                 <div class="row">
-                    <div id="focusImage" class="slide">
-                        <ul class="contents">
-                            {foreach $plateHome as $key=>$plateH}
-                            <li {if condition='$key==0'}class="current"{/if}>
-                                <div class="image"><img src="/{$plateH.headimg}" width="400" height="282"></div>
-                                <div class="text">
-                                    <span class="title">板块名：<a href="{:url('Cart/index')}?plateId={$plateH.id}"> {$plateH.name} </a></span>
-                                    <p> {$plateH.info} </p>
-                                </div>
-                            </li>
-                            {/foreach}
-                        </ul>
-                        
-                        <div class="triggers">
-                            {foreach $plateHome as $key=>$plateH}
-                            <a href="javascript:;" {if condition='$key==0'}class="cur current"{/if} style="display: none;"><img src="/{$plateH.headimg}" width="58" height="38"></a>
-                            {/foreach}
+                    <div class="col-lg-6">
+                        <div id="focusImage" class="slide">
+                            <ul class="contents">
+                                {foreach $plateHome as $key=>$plateH}
+                                <li {if condition='$key==0'}class="current"{/if}>
+                                    <div class="image"><img src="/{$plateH.headimg}" width="400" height="282"></div>
+                                    <div class="text">
+                                        <span class="title">板块名：<a href="{:url('Cart/index')}?plateId={$plateH.id}"> {$plateH.name} </a></span>
+                                        <p> {$plateH.info} </p>
+                                    </div>
+                                </li>
+                                {/foreach}
+                            </ul>
+                            
+                            <div class="triggers">
+                                {foreach $plateHome as $key=>$plateH}
+                                <a href="javascript:;" {if condition='$key==0'}class="cur current"{/if} style="display: none;"><img src="/{$plateH.headimg}" width="58" height="38"></a>
+                                {/foreach}
+                            </div>
+                            <div class="icon-dot">
+                                {foreach $plateHome as $key=>$plateH}
+                                <a href="javascript:;" {if condition='$key==0'}class="cur current"{/if}></a>
+                                {/foreach}
+                            </div>
+                            
                         </div>
-                        <div class="icon-dot">
-                            {foreach $plateHome as $key=>$plateH}
-                            <a href="javascript:;" {if condition='$key==0'}class="cur current"{/if}></a>
-                            {/foreach}
+                    </div>
+                    <div class="col-lg-3">
+
+                        <div class="card-box">
+                            <h4 class="header-title m-t-0"><i cclass="ti-flickr m-r-5"></i> 公告板 </h4>
+                            <ul class="list-group m-b-0 user-list">
+
+                                <li class="list-group-item">
+                                    <a href="#" class="user-list-item">
+                                        <div class="avatar">
+                                            <img src="/resource/images/users/avatar-1.jpg" alt="">
+                                        </div>
+                                        <div class="user-desc">
+                                            <span class="name">Mat Helme</span>
+                                            <span class="desc">Manager</span>
+                                        </div>
+                                    </a>
+                                </li>
+
+                            </ul>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
