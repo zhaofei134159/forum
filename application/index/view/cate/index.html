@@ -32,8 +32,7 @@
                     <div class="panel-body">
                     	{foreach $topHeaderCates as $cId=>$cateData}
                     		{if condition="empty($CateId)"}
-                			<div class="card-box card-draggable ui-sortable-handle">
-		                    	<div class="panel-heading">
+		                    	<div class="">
 			                        <h5 class="panel-title"> 
 	                        			<a href="{:url('Cate/index')}?CateId={$cateData.id}" class="user-list-item">{$cateData.name}</a>
 			                        </h5>
@@ -46,16 +45,13 @@
 	                                    </a>  
 	                                {/foreach}
 	                       		</div>
-	                       	</div>
                        		{elseif condition="$CateId==$cId"}
-                       		
-                   			{foreach $cateData['son'] as $sonCateId=>$sonCateData}
-                                <a href="">
-                       				<button class="btn btn-default waves-effect waves-light btn-sm m-b-5">{$sonCateData.name}</button>
-                                   	&nbsp;&nbsp;&nbsp;&nbsp;
-                                </a>  
-                            {/foreach}
-
+                       			{foreach $cateData['son'] as $sonCateId=>$sonCateData}
+                                    <a href="">
+	                       				<button class="btn btn-default waves-effect waves-light btn-sm m-b-5">{$sonCateData.name}</button>
+	                                   	&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </a>  
+                                {/foreach}
                        		{/if}
                         {/foreach}
                     </div>
