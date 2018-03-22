@@ -28,6 +28,7 @@ class Cate extends Common
 
 
 		$data = array(
+				'CateId'=>$CateId,
 				'parentCates'=>$parentCates,
 			);
         return $this->view->fetch('index',$data);
