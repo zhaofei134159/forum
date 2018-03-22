@@ -32,7 +32,7 @@ class Notice extends Common
         if(isset($get['is_del'])&&$get['is_del']!='-1'){ 
             $where['is_del'] = $get['is_del']; 
         }
-        $where['cartId'] = 0;
+        $where['noticeId'] = 0;
         $notices = modelNotice::where($where)->order('ctime','desc')->paginate(10, false);
         $page = $notices->render();
 
