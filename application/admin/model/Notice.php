@@ -3,5 +3,5 @@ namespace app\admin\model;
 
 class Notice extends Common
 {
-	protected $table = 'friend_notice';
+	protected $table = 'forum_notice';
 }
