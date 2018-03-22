@@ -33,7 +33,7 @@
                     	{foreach $topHeaderCates as $cId=>$cateData}
                     		{if condition="empty($CateId)"}
                 			<div class="panel panel-border panel-custom">
-		                    	<div class="">
+		                    	<div class="panel-heading">
 			                        <h5 class="panel-title"> 
 	                        			<a href="{:url('Cate/index')}?CateId={$cateData.id}" class="user-list-item">{$cateData.name}</a>
 			                        </h5>
