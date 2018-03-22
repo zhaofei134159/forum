@@ -32,6 +32,7 @@
                     <div class="panel-body">
                     	{foreach $topHeaderCates as $cId=>$cateData}
                     		{if condition="empty($CateId)"}
+                			<div class="">
 		                    	<div class="">
 			                        <h5 class="panel-title"> 
 	                        			<a href="{:url('Cate/index')}?CateId={$cateData.id}" class="user-list-item">{$cateData.name}</a>
@@ -45,6 +46,7 @@
 	                                    </a>  
 	                                {/foreach}
 	                       		</div>
+	                       	</div>
                        		{elseif condition="$CateId==$cId"}
                        			{foreach $cateData['son'] as $sonCateId=>$sonCateData}
                                     <a href="">
