@@ -24,12 +24,18 @@ class Cate extends Common
         
         # 获取所有分类
 		$parentCates = model_cate::where(['is_del'=>0,'parent_id'=>0])->select();
+        $parentCates = objToArray($parentCates);
 
-
+        $sonCate = array();
+        if(!empty($CateId)){
+			$sonCate = model_cate::where(['is_del'=>0,'parent_id'=>$CateId])->select();
+        	$sonCate = objToArray($sonCate);
+		}
 
 		$data = array(
 				'CateId'=>$CateId,
 				'parentCates'=>$parentCates,
+				'sonCate'=>$sonCate,
 			);
         return $this->view->fetch('index',$data);
 

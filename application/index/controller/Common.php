@@ -63,10 +63,10 @@ class Common extends Controller
 
         
         # 分类展示
-        $topHeaderCates =  Cate::where(['is_del'=>0,'parent_id'=>0])->limit(6)->select();
+        $topHeaderCates =  Cate::where(['is_del'=>0,'parent_id'=>0])->select();
         $topHeaderCates = objToArray($topHeaderCates);
         foreach($topHeaderCates as $cateId=>$cate){
-            $sonCate = Cate::where(['is_del'=>0,'parent_id'=>$cateId])->limit(10)->select();
+            $sonCate = Cate::where(['is_del'=>0,'parent_id'=>$cateId])->select();
             $sonCate = objToArray($sonCate);
             $topHeaderCates[$cateId]['son'] = $sonCate;
         }
