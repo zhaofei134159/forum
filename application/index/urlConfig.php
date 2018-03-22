@@ -17,6 +17,7 @@ array(
 		'controller'=>'论坛分类',
 		'action'=>array(
 			'index'=>'分类首页',
+			'CatePlate'=>'分类版块',
 		),
 	),
 	'Ucenter'=>array(
