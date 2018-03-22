@@ -2,7 +2,7 @@
 namespace app\index\controller;
 
 use app\index\model\User;
-use app\index\model\Cate;
+use app\index\model\Cate as model_cate;
 use app\index\model\Plate;
 use app\index\model\Cart as model_cart;
 use app\index\model\Follow;
@@ -23,7 +23,7 @@ class Cate extends Common
 		$CateId = input('get.CateId');
         
         # 获取所有分类
-		$parentCates = Cate::where(['is_del'=>0,'parent_id'=>0])->select();
+		$parentCates = model_cate::where(['is_del'=>0,'parent_id'=>0])->select();
 
 
 
