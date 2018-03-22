@@ -7,7 +7,7 @@
                     <h4 class="header-title m-t-0"><i cclass="ti-flickr m-r-5"></i> <a href="{:url('Cate/index')}"> 版块分类 </a> </h4>
                     <ul class="list-group m-b-0 user-list">
                         {foreach $parentCates as $parentCate}
-                        <li class="list-group-item {if condition='$cateData.id==$CateId'} active {/lf}">
+                        <li class="list-group-item {if condition='$cateData.id==$CateId'} active {/if}">
                             <a href="{:url('Cate/index')}?CateId={$cateData.id}" class="user-list-item">
                                 <div class="user-desc" style="margin-left:0px;">
                                     <span style="height:30px;line-height:30px;">{$parentCate.name}</span>
