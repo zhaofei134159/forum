@@ -13,45 +13,27 @@
                 </div>
             </div>
             <div class="col-lg-9 col-md-6">
-                <div class="panel panel-border {if condition='!empty($CateId)'} panel-custom {/if}">
-                    <div class="panel-heading">
-                        <h3 class="panel-title"> 
-                           	{if condition="empty($CateId)"}
-                           		全部分类
-                           	{else}
-                           		{$parentCates[$CateId]['name']}
-                           	{/if}
-                        </h3>
-                    </div>
-                    <div class="panel-body">
-                    	{foreach $topHeaderCates as $cId=>$cateData}
-                    		{if condition="empty($CateId)"}
-                			<div class="panel panel-border panel-custom">
-		                    	<div class="panel-heading">
-			                        <h5 class="panel-title"> 
-	                        			<a href="{:url('Cate/index')}?CateId={$cateData.id}" class="user-list-item">{$cateData.name}</a>
-			                        </h5>
+               	<div class="row">
+
+               		{foreach $plateList as $plate}
+               		<div class="col-lg-6">
+			            <div class="bg-picture card-box">
+			                <div class="profile-info-name">
+			                    <img src="/{$plate.headimg}" class="img-thumbnail" alt="profile-image">
+
+			                    <div class="profile-info-detail">
+			                        <h3 class="m-t-0 m-b-0">{$plate.name}</h3>
+			                        <p class="text-muted m-b-20"> 版主: <i> {$users[$plate.userid]['nikename']} </i></p>
+			                        <p>{$plate.info}</p>
 			                    </div>
-	                       		<div class="panel-body">
-	                       			{foreach $cateData['son'] as $sonCateId=>$sonCateData}
-	                                    <a href="{:url('Cate/CatePlate')}?CateId={$sonCateId}&parentId={$cId}">
-		                       				<button class="btn btn-default waves-effect waves-light btn-sm m-b-5">{$sonCateData.name}</button>
-		                                   	&nbsp;&nbsp;&nbsp;&nbsp;
-	                                    </a>
-	                                {/foreach}
-	                       		</div>
-	                       	</div>
-                       		{elseif condition="$CateId==$cId"}
-                       			{foreach $cateData['son'] as $sonCateId=>$sonCateData}
-                                    <a href="{:url('Cate/CatePlate')}?CateId={$sonCateId}&parentId={$cId}">
-	                       				<button class="btn btn-default waves-effect waves-light btn-sm m-b-5">{$sonCateData.name}</button>
-	                                   	&nbsp;&nbsp;&nbsp;&nbsp;
-                                    </a>  
-                                {/foreach}
-                       		{/if}
-                        {/foreach}
-                    </div>
-                </div>
+
+			                    <div class="clearfix"></div>
+			                </div>
+			            </div>
+               		</div>
+               		{/foreach}
+
+               	</div>
             </div>
         </div>
 
