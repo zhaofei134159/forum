@@ -13,6 +13,12 @@ array(
 			'do_bind'=>'绑定邮箱',
 		),
 	),
+	'Cate'=>array(
+		'controller'=>'论坛分类',
+		'action'=>array(
+			'index'=>'分类首页',
+		),
+	),
 	'Ucenter'=>array(
 		'controller'=>'个人资料',
 		'action'=>array(
