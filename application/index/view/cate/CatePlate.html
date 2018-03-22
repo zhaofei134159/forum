@@ -5,8 +5,8 @@
                 <div class="card-box">
                     <h4 class="header-title m-b-30"><i cclass="ti-flickr m-r-5"></i> <a href="{:url('Cate/index')}"> {$parentCate.name} </a> </h4>
                     {foreach $sonCates as $sonCate}
-                    <a href="{:url('Cate/CatePlate')}?CateId={$sonCate.id}&parentId={$parentCate.id}" {if condition="$sonCate.id==$CateId"}class="active"{/if}>
-           				<button class="btn btn-default waves-effect waves-light btn-sm m-b-5">{$sonCate.name}</button>
+                    <a href="{:url('Cate/CatePlate')}?CateId={$sonCate.id}&parentId={$parentCate.id}">
+           				<button class="btn {if condition='$sonCate.id==$CateId'}btn-info{else}btn-default{/if} waves-effect waves-light btn-sm m-b-5">{$sonCate.name}</button>
                        	&nbsp;&nbsp;&nbsp;&nbsp;
                     </a>
                     {/foreach}
