@@ -51,13 +51,20 @@ class Cate extends Common
 
 		$parentCate = model_cate::get(['is_del'=>0,'id'=>$parentId]);
 		$sonCates = model_cate::where(['is_del'=>0,'parent_id'=>$parentId])->select();
-	
+		
+		# 版块
+		$plateList = Plate::where(['cateid'=>$CateId,'is_check'=>'1','is_del'=>0])->select();
+
+        $users = User::all(['is_del'=>0]);
+        $users = objToArray($users);
 
 		$data = array(
 				'CateId'=>$CateId,
 				'parentId'=>$parentId,
 				'parentCate'=>$parentCate,
 				'sonCates'=>$sonCates,
+				'plateList'=>$plateList,
+				'users'=>$users,
 			);
         return $this->view->fetch('CatePlate',$data);
 
