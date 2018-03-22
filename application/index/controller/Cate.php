@@ -40,4 +40,26 @@ class Cate extends Common
         return $this->view->fetch('index',$data);
 
     }
+
+    # 某个分类下的版块
+    public function CatePlate(){
+    	$CateId = input('get.CateId');
+    	$parentId = input('get.parentId');
+    	if(empty($CateId)||empty($parentId)){
+        	$this->redirect('Cate/index');
+    	}
+
+		$parentCate = model_cate::get(['is_del'=>0,'id'=>$parentId]);
+		$sonCates = model_cate::where(['is_del'=>0,'parent_id'=>$parentId])->select();
+	
+
+		$data = array(
+				'CateId'=>$CateId,
+				'parentId'=>$parentId,
+				'parentCate'=>$parentCate,
+				'sonCates'=>$sonCates,
+			);
+        return $this->view->fetch('CatePlate',$data);
+
+    }
 }

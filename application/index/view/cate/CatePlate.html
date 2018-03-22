@@ -1,21 +1,15 @@
 {include file="public/header" /}
-	
 
         <div class="row">
             <div class="col-lg-3 col-md-6">
                 <div class="card-box">
-                    <h4 class="header-title m-t-0"><i cclass="ti-flickr m-r-5"></i> <a href="{:url('Cate/index')}"> 版块分类 </a> </h4>
-                    <ul class="list-group m-b-0 user-list">
-                        {foreach $parentCates as $parentCate}
-                        <li class="list-group-item {if condition='$parentCate.id==$CateId'} active {/if}">
-                            <a href="{:url('Cate/index')}?CateId={$parentCate.id}" class="user-list-item">
-                                <div class="user-desc" style="margin-left:0px;">
-                                    <span style="height:30px;line-height:30px;">{$parentCate.name}</span>
-                                </div>
-                            </a>
-                        </li>
-                        {/foreach}
-                    </ul>
+                    <h4 class="header-title m-t-0"><i cclass="ti-flickr m-r-5"></i> <a href="{:url('Cate/index')}"> {$parentCate.name} </a> </h4>
+                    {foreach $sonCates as $sonCate}
+                    <a href="{:url('Cate/CatePlate')}?CateId={$sonCate.id}&parentId={$parentCate.id}" {if condition="$sonCate.id==$CateId"}class="active"{/if}>
+           				<button class="btn btn-default waves-effect waves-light btn-sm m-b-5">{$sonCate.name}</button>
+                       	&nbsp;&nbsp;&nbsp;&nbsp;
+                    </a>
+                    {/foreach}
                 </div>
             </div>
             <div class="col-lg-9 col-md-6">
@@ -60,6 +54,7 @@
                 </div>
             </div>
         </div>
+
 
 
 {include file="public/footer" /}
