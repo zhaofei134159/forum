@@ -23,7 +23,14 @@ class Cate extends Common
 		$CateId = input('get.CateId');
         
         # 获取所有分类
+		$parentCates = Cate::where(['is_del'=>0,'parent_id'=>0])->select();
 
+
+
+		$data = array(
+				'parentCates'=>$parentCates,
+			);
+        return $this->view->fetch('index',$data);
 
     }
 }
