@@ -38,7 +38,15 @@
                                         <input class="form-control" name="title" id="title" value="{$notice.title}" placeholder="公告名" >
                                         <p class="help-block"></p>
                                     </div>
-
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>公告标示图：</label>
+                                        <input type="file" class="dropify" name="headimg" data-default-file="/{$notice.headimg}" />
+                                        <p class="help-block"></p>
+                                    </div>
+                                </div>
+                                <div clss="col-lg-12">
                                     <div class="form-group">
                                         <label>内容：</label>
                                         <div id="layout" style="height: 2000px;background: #f6f6f6;">
@@ -46,13 +54,6 @@
                                                 <textarea style="display:none;"></textarea>
                                             </div>
                                         </div> 
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label>公告标示图：</label>
-                                        <input type="file" class="dropify" name="headimg" data-default-file="/{$notice.headimg}" />
-                                        <p class="help-block"></p>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
