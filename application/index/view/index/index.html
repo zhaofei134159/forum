@@ -67,11 +67,10 @@
                                 <li class="list-group-item">
                                     <a href="#" class="user-list-item">
                                         <div class="avatar">
-                                            <img src="/{$notice.headimg}" alt="">
+                                            <img src="/{$notice.headimg}"  style="width:35px;height:35px;" alt="">
                                         </div>
                                         <div class="user-desc">
-                                            <span class="">{$notice.title}</span>
-                                            <span class="desc">{$users[$notice.userid]['nikename']}</span>
+                                            <div class="" style="white-space:nowrap;text-overflow:ellipsis;overflow:hidden;height:35px;line-height:35px;">{$notice.title}</div>
                                         </div>
                                     </a>
                                 </li>
