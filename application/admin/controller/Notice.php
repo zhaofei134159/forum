@@ -131,6 +131,7 @@ class Notice extends Common
             $saveCartPath = 'uploads'.DS.'notice'.DS.'head';
             $link = uploadFile($file,$saveCartPath);
         }
-        return json(['link'=>'/'.$link]);
+        
+        return json(['success'=>1,'message'=>'成功1','url'=>'/'.$link]);
     }
 }
