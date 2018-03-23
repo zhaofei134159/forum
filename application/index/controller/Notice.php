@@ -20,13 +20,13 @@ class Notice extends Common
 	}
 
     
-    public function list(){
+    public function NoticeList(){
     	$where = array();
         $notices = modelNotice::where($where)->select();
 
         $data = array(
         		'notices'=>$notices
         	);
-        return $this->view->fetch('list',$data);
+        return $this->view->fetch('NoticeList',$data);
     }
 }
