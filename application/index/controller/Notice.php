@@ -27,9 +27,13 @@ class Notice extends Common
 		$notices = modelNotice::where($where)->order('ctime','desc')->paginate(20, false);        
         $page = $notices->render();
 
+        $users = User::all(['is_del'=>0]);
+        $users = objToArray($users);
+
         $data = array(
         		'notices'=>$notices,
         		'page'=>$page,
+        		'users'=>$users,
         	);
         return $this->view->fetch('NoticeList',$data);
     }
