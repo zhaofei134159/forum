@@ -150,7 +150,7 @@
                     var submitHandler = function() {
 
                         var uploadIframe = document.getElementById(iframeName);
-
+                        console.log(uploadIframe);
                         uploadIframe.onload = function() {
 
                             loading(false);
