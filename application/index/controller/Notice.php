@@ -22,9 +22,9 @@ class Notice extends Common
     
     public function NoticeList(){
     	$where = array();
-        $notices = modelNotice::where($where)->select();
-
-		$notices = model_cart::where($where)->order('ctime','desc')->paginate(20, false);        
+    	$where['is_del'] = 0;
+    	$where['noticeId'] = 0;
+		$notices = modelNotice::where($where)->order('ctime','desc')->paginate(20, false);        
         $page = $notices->render();
 
         $data = array(
