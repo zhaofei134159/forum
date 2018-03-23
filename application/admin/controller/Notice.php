@@ -126,7 +126,7 @@ class Notice extends Common
     }
 
     public function upload(){
-        $file = request()->file('file');
+        $file = request()->file('editormd-image-file');
         if($file){
             $saveCartPath = 'uploads'.DS.'notice'.DS.'head';
             $link = uploadFile($file,$saveCartPath);
