@@ -124,11 +124,11 @@ class Notice extends Common
 
         $this->redirect('Notice/index');
     }
-    
+
     public function upload(){
         $file = request()->file('file');
         if($file){
-            $saveCartPath = 'uploads'.DS.'forum'.DS.'cart';
+            $saveCartPath = 'uploads'.DS.'notice'.DS.'head';
             $link = uploadFile($file,$saveCartPath);
         }
         return json(['link'=>'/'.$link]);
