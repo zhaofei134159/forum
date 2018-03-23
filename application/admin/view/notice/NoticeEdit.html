@@ -51,7 +51,7 @@
                                         <label>内容：</label>
                                         <div id="layout" style="background: #f6f6f6;">
                                             <div id="test-editormd">
-                                                <textarea style="display:none;"></textarea>
+                                                <textarea style="display:none;" name="content"></textarea>
                                             </div>
                                         </div> 
                                     </div>
@@ -103,17 +103,17 @@
             });
         });
 
-        // $('.dropify').dropify({
-        //     messages: {
-        //         'default': 'Drag and drop a file here or click',
-        //         'replace': 'Drag and drop or click to replace',
-        //         'remove': 'Remove',
-        //         'error': 'Ooops, something wrong appended.'
-        //     },
-        //     error: {
-        //         'fileSize': 'The file size is too big (1M max).'
-        //     }
-        // });
+        $('.dropify').dropify({
+            messages: {
+                'default': 'Drag and drop a file here or click',
+                'replace': 'Drag and drop or click to replace',
+                'remove': 'Remove',
+                'error': 'Ooops, something wrong appended.'
+            },
+            error: {
+                'fileSize': 'The file size is too big (1M max).'
+            }
+        });
 
         // 修改信息
         function EditForm(res){

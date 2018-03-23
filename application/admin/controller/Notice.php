@@ -92,7 +92,7 @@ class Notice extends Common
 
             $data = array();
             $data['title'] = $post['title'];
-            $data['info'] = $post['info'];
+            $data['content'] = $post['content'];
             $data['userid'] = 1;
             $data['is_del'] = 0;
             $data['ctime'] = time();
@@ -116,7 +116,7 @@ class Notice extends Common
             }
           
             $data['title'] = $post['title'];
-            $data['info'] = $post['info'];
+            $data['content'] = $post['content'];
             $data['utime'] = time();
 
             $place = modelNotice::where('id', $noticeId)->update($data); 
