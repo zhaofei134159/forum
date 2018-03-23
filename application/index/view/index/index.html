@@ -63,19 +63,19 @@
                         <div class="card-box">
                             <h4 class="header-title m-t-0"><i cclass="ti-flickr m-r-5"></i> 公告板 </h4>
                             <ul class="list-group m-b-0 user-list">
-
+                                {foreach $notices as $notice}
                                 <li class="list-group-item">
                                     <a href="#" class="user-list-item">
                                         <div class="avatar">
-                                            <img src="/resource/images/users/avatar-1.jpg" alt="">
+                                            <img src="/{$notice.headimg}" alt="">
                                         </div>
                                         <div class="user-desc">
-                                            <span class="">Mat Helme</span>
-                                            <span class="desc">Manager</span>
+                                            <span class="">{$notice.title}</span>
+                                            <span class="desc">{$users[$notice.userid]['nikename']}</span>
                                         </div>
                                     </a>
                                 </li>
-
+                                {/foreach}
                             </ul>
                         </div>
 

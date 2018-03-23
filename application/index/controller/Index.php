@@ -12,6 +12,7 @@ use app\index\model\Cart;
 use app\index\model\User;
 use app\index\model\Friend;
 use app\index\model\Message;
+use app\index\model\Notice;
 
 
 
@@ -47,6 +48,9 @@ class Index extends Common
 
         $friend = Friend::where(['is_del'=>0,'is_check'=>1])->order('ctime','desc')->limit(8)->select();
 
+        # 公告
+        $notices = Notice::where(['is_del'=>0,'noticeId'=>0])->order('see','desc')->select();
+
         $data = array(
         		'plates'=>$plates,
         		'cates'=>$cates,
@@ -54,6 +58,7 @@ class Index extends Common
         		'plateHome'=>$plateHome,
         		'users'=>$users,
                 'friend'=>$friend,
+                'notices'=>$notices,
         	);
         return $this->view->fetch('index',$data);
     }
