@@ -47,6 +47,13 @@ array(
 			'seecart'=>'查看帖子',
 		),
 	),
+	'Notice'=>array(
+		'controller'=>'系统公告',
+		'action'=>array(
+			'list'=>'公告列表',
+			'seecart'=>'查看公告',
+		),
+	),
 	'Message'=>array(
 		'controller'=>'私信列表',
 		'action'=>array(

@@ -1,0 +1,164 @@
+{include file="public/header" /}
+   
+   
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="">  
+                <div class="panel panel-custom panel-border card-draggable ui-sortable-handle">
+                    <div class="panel-heading" >
+                        <table class="table table table-hover m-0">
+                            <thead>
+                                <tr>
+                                    <th colspan="5" class="text-left"> 
+                                        <h4> 公告列表 </h4>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th class="name">
+                                        <button 
+                                        class="btn {if condition='$type=="all"'}btn-default{else}btn-info{/if} waves-effect waves-light btn-sm m-b-5" 
+                                        id="allCart" 
+                                        onclick="seeCart({$plateId},'all')"> 全部 </button>
+                                        <button 
+                                        class="btn {if condition='$type=="new"'}btn-default{else}btn-success{/if} waves-effect waves-light btn-sm m-b-5" 
+                                        id="newCart" 
+                                        onclick="seeCart({$plateId},'new')"> 最新 </button>
+                                        <button 
+                                        class="btn {if condition='$type=="hot"'}btn-default{else}btn-custom{/if} waves-effect waves-light btn-sm m-b-5" 
+                                        id="hotCart" 
+                                        onclick="seeCart({$plateId},'hot')"> 热门 </button>
+                                        <button 
+                                        class="btn {if condition='$type=="elite"'}btn-default{else}btn-primary{/if} waves-effect waves-light btn-sm m-b-5" 
+                                        id="eliteCart" 
+                                        onclick="seeCart({$plateId},'elite')"> 精华 </button>
+                                    </th>
+                                    <th class="handle"></th>
+                                    <th class="operation"></th>
+                                    <th class="author">作者</th>
+                                    <th class="commit">回复/查看</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    
+                    <div class="panel-body icon-list-demo">
+                        <div class="clearfix">
+                            <table class="table table table-hover m-0">
+                                {foreach $carts as $cart}
+                                <tr>
+                                    <td class="name" style="height:30px;line-height:41px;">
+                                        {if condition="time()-$cart.ctime<=3600"}
+                                        <img src="/resource/images/cart/folder_new.gif" style="margin-right:5px;">
+                                        {else}
+                                        <img src="/resource/images/cart/folder_common.gif" style="margin-right:5px;">
+                                        {/if}
+                                        <a href="{:url('Cart/seeCart',['cartId'=>$cart.id,'plateId'=>$plateId])}">
+                                            {$cart.title}
+                                        </a>
+                                    </td>
+                                    <td class="handle" style="height:30px;line-height:41px;">
+                                        {if condition="$userid==$plate.userid"}
+                                            <button class="btn btn-success waves-effect waves-light btn-xs m-b-5" onclick="addCart('top',{$cart.id},{$plateId})">
+                                                添加置顶
+                                            </button>
+                                            {if condition="$cart.is_hot==1"}
+                                            <button class="btn btn-danger waves-effect waves-light btn-xs m-b-5"onclick="removeCart('hot',{$cart.id},{$plateId})">
+                                                移除热门
+                                            </button>
+                                            {else}
+                                            <button class="btn btn-success waves-effect waves-light btn-xs m-b-5"onclick="addCart('hot',{$cart.id},{$plateId})">
+                                                填加热门
+                                            </button>
+                                            {/if}
+                                            {if condition="$cart.is_elite==1"}
+                                            <button class="btn btn-danger waves-effect waves-light btn-xs m-b-5"onclick="removeCart('elite',{$cart.id},{$plateId})">
+                                                移除精华
+                                            </button>
+                                            {else}
+                                            <button class="btn btn-success waves-effect waves-light btn-xs m-b-5"
+                                            onclick="addCart('elite',{$cart.id},{$plateId})">
+                                                填加精华
+                                            </button>
+                                            {/if}
+                                        {/if}
+                                    </td>
+                                    <td class="operation" style="height:30px;line-height:41px;">
+                                        {if condition="time()-$cart.ctime<=3600"}
+                                        <img src="/resource/images/cart/new.png" style="width:32px;margin-right:5px;">
+                                        {/if}
+                                        {if condition="$cart.is_hot==1"}
+                                        <img src="/resource/images/cart/hot_1.gif" style="width:27px;margin-right:5px;">
+                                        {/if}
+                                        {if condition="$cart.is_elite==1"}
+                                        <img src="/resource/images/cart/digest_3.gif" style="width:27px;margin-right:5px;">
+                                        {/if}
+                                    </td>
+                                    <td class="author"> 
+                                        <a href="{:url('ucenter/index')}?uid={$cart.userid}"> {$users[$cart.userid]['name']}</a>
+                                        <br>
+                                        {:tranTime($cart.ctime)}
+                                    </td>
+                                    <td class="commit">
+                                        <a href="{:url('Cart/seeCart',['cartId'=>$cart.id,'plateId'=>$plateId])}"> {$cart.reply} </a> 
+                                        <br>
+                                        {$cart.see}
+                                    </td>
+                                </tr>
+                                {/foreach}
+                            </table>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12 text-right">
+                            {$page}
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<script type="text/javascript">
+    function sendCart(plateId){
+        loading('show');
+        window.location.href = "{:url('cart/sendCart')}?plateId="+plateId;
+    }
+
+    function seeCart(plateId,type){
+        loading('show');
+        $('#'+type+'Cart').addClass('btn-default');
+        window.location.href = "{:url('cart/index')}?plateId="+plateId+"&type="+type;
+    }
+    function removeCart(str,cartId,plateId){
+        loading('show');
+        $.post("{:url('cart/removeCart')}",{'cartId':cartId,'str':str},function(result){
+            if(result.flog==0){
+                loading('hide');
+                alertFun('帖子',result.msg,false);
+                return false;
+            }else{
+                window.location.href =  window.location.href;
+            }
+        },'json');
+    }
+
+    function addCart(str,cartId,plateId){
+        loading('show');
+        $.post("{:url('cart/addCart')}",{'cartId':cartId,'str':str},function(result){
+            if(result.flog==0){
+                loading('hide');
+                alertFun('帖子',result.msg,false);
+                return false;
+            }else{
+                window.location.href =  window.location.href;
+            }
+        },'json');
+    }
+</script>
+{include file="public/footer" /}
