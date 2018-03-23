@@ -49,7 +49,7 @@ class Index extends Common
         $friend = Friend::where(['is_del'=>0,'is_check'=>1])->order('ctime','desc')->limit(8)->select();
 
         # 公告
-        $notices = Notice::where(['is_del'=>0,'noticeId'=>0])->order('see','desc')->select();
+        $notices = Notice::where(['is_del'=>0,'noticeId'=>0])->order('see','desc')->limit(4)->select();
 
         $data = array(
         		'plates'=>$plates,
