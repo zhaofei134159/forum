@@ -66,9 +66,11 @@
                                 {foreach $notices as $notice}
                                 <li class="list-group-item">
                                     <a href="{:url('Notice/Noticedetail')}?noticeId={$notice.id}" class="user-list-item">
+                                        {if condition="!empty($notice.headimg)"}
                                         <div class="avatar">
                                             <img src="/{$notice.headimg}"  style="width:35px;height:35px;" alt="">
                                         </div>
+                                        {/if}
                                         <div class="user-desc">
                                             <div class="" style="white-space:nowrap;text-overflow:ellipsis;overflow:hidden;height:35px;line-height:35px;">{$notice.title}</div>
                                         </div>

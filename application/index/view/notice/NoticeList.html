@@ -36,12 +36,14 @@
                                                 </span>
                                             </td>
                                         </tr>
+                                        {if condition="!empty($notice.headimg)"}
                                         <tr>
                                             <th  style="border-top:none;"></th>
                                             <th style="border-top:none;" colspan="5" >
                                                 <img src="/{$notice.headimg}" style="width:175px;">
                                             </th>
                                         </tr>
+                                        {/if}
                                     </thead>
                                 {/foreach}
                             </table>
