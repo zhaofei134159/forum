@@ -74,7 +74,7 @@
 
     <script src="/resource/plugins/fileuploads/js/dropify.min.js"></script>
     <script type="text/javascript" src="/resource/admin/js/admin.js"></script>
-    <script src="/resource/text-edit2/examples/js/jquery.min.js"></script>
+    <!--<script src="/resource/text-edit2/examples/js/jquery.min.js"></script>-->
     <script src="/resource/text-edit2/editormd.js"></script>
     <script type="text/javascript">
         $(function() {                
@@ -103,17 +103,17 @@
             });
         });
 
-        $('.dropify').dropify({
-            messages: {
-                'default': 'Drag and drop a file here or click',
-                'replace': 'Drag and drop or click to replace',
-                'remove': 'Remove',
-                'error': 'Ooops, something wrong appended.'
-            },
-            error: {
-                'fileSize': 'The file size is too big (1M max).'
-            }
-        });
+        // $('.dropify').dropify({
+        //     messages: {
+        //         'default': 'Drag and drop a file here or click',
+        //         'replace': 'Drag and drop or click to replace',
+        //         'remove': 'Remove',
+        //         'error': 'Ooops, something wrong appended.'
+        //     },
+        //     error: {
+        //         'fileSize': 'The file size is too big (1M max).'
+        //     }
+        // });
 
         // 修改信息
         function EditForm(res){
