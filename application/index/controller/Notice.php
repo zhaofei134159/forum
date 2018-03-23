@@ -24,8 +24,12 @@ class Notice extends Common
     	$where = array();
         $notices = modelNotice::where($where)->select();
 
+		$notices = model_cart::where($where)->order('ctime','desc')->paginate(20, false);        
+        $page = $notices->render();
+
         $data = array(
-        		'notices'=>$notices
+        		'notices'=>$notices,
+        		'page'=>$page,
         	);
         return $this->view->fetch('NoticeList',$data);
     }
