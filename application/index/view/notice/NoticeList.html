@@ -25,7 +25,17 @@
                     <div class="panel-body icon-list-demo">
                         <div class="clearfix">
                             <table class="table table table-hover m-0">
-                               
+                                {foreach $notices as $notice}
+                                    <tr>
+                                        <td>{$notice.title}</td>
+                                        <td style="width:20%;">{$users[$notice.userid]['nikename']}</td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="5" >
+                                            <img src="{$notice.headimg}" style="width:100px;">
+                                        </th>
+                                    </tr>
+                                {/foreach}
                             </table>
                         </div>
 
