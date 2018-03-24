@@ -147,7 +147,7 @@ class Notice extends Common
 
     # 公告回复
     public function reply(){
-        $get = input('get'); 
+        $get = input('get.'); 
         $where = array();
         if(!empty($get['noticeId'])){
             $where['notice_id'] = $get['noticeId'];
