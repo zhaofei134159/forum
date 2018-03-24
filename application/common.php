@@ -105,14 +105,11 @@ function objToArray($obj,$str='id'){
     $arr = array();
     if(!empty($str)){
 	    foreach($obj as $key=>$val){
-	    	var_dump($val);
-	    	var_dump($val[$str]);
 	    	$arr[$val[$str]] = $val;
 	    }
     }else{
     	$arr = $obj;
     }
-    var_dump($arr);die;
     return $arr;
 }
 
