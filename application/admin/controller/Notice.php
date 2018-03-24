@@ -188,6 +188,7 @@ class Notice extends Common
             foreach($replys as $reply){
                 $notice[] = $reply['notice_id']; 
             }
+            var_dump($notice);die;
             $noticeReply = modelNotice::get_query("Select id,title as count from forum_notice where id in(".implode(',',$notice).")");
             $noticeReply = objToArray($noticeReply);
         }
