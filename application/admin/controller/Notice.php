@@ -155,7 +155,6 @@ class Notice extends Common
             $notice = modelNotice::get(['id'=>$get['noticeId']]);
             $get['title'] = $notice['title'];
         }
-        var_dump($get);die;
         if(isset($get['is_del'])&&$get['is_del']!='-1'){ 
             $where['is_del'] = $get['is_del']; 
         }
@@ -193,6 +192,8 @@ class Notice extends Common
             $noticeReply = modelNotice::get_query("Select id,title from forum_notice where id in(".implode(',',$notice).")");
             $noticeReply = objToArray($noticeReply);
         }
+        var_dump($get);die;
+        
 
         $users = Home_user::all(['is_del'=>0]);
         $users = objToArray($users);
