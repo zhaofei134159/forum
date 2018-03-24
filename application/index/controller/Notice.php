@@ -33,10 +33,17 @@ class Notice extends Common
         $users = User::all(['is_del'=>0]);
         $users = objToArray($users);
 
+        $noticeFabulous = NoticeReply::get_query('select article_id,count(1) as count from forum_fabulous where type=1 group by article_id');
+        $noticeFabulous = objToArray($noticeFabulous,'article_id');
+        $noticeReply = NoticeReply::get_query('select notice_id,count(1) as count from forum_notice_reply where is_del=0 group by notice_id');
+        $noticeReply = objToArray($noticeReply,'notice_id');
+
         $data = array(
         		'notices'=>$notices,
         		'page'=>$page,
         		'users'=>$users,
+                'noticeReply'=>$noticeReply,
+                'noticeFabulous'=>$noticeFabulous,
         	);
         return $this->view->fetch('index',$data);
     }
