@@ -65,7 +65,7 @@
                             <ul class="list-group m-b-0 user-list">
                                 {foreach $notices as $notice}
                                 <li class="list-group-item">
-                                    <a href="{:url('Notice/Noticedetail')}?noticeId={$notice.id}" class="user-list-item">
+                                    <a href="{:url('Notice/NoticeDetail')}?noticeId={$notice.id}" class="user-list-item">
                                         {if condition="!empty($notice.headimg)"}
                                         <div class="avatar">
                                             <img src="/{$notice.headimg}"  style="width:35px;height:35px;" alt="">

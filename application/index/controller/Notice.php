@@ -37,4 +37,16 @@ class Notice extends Common
         	);
         return $this->view->fetch('NoticeList',$data);
     }
+
+    public function NoticeDetail(){
+        $get = input('get.');
+        $noticeId = $get['noticeId'];
+
+        $notice = modelNotice::get(['id'=>$noticeId]);
+
+        $data = array(
+                'notice'=>$notice,
+            );
+        return $this->view->fetch('NoticeDetail',$data);
+    }
 }
