@@ -50,8 +50,8 @@ array(
 	'Notice'=>array(
 		'controller'=>'系统公告',
 		'action'=>array(
-			'NoticeList'=>'公告列表',
-			'NoticeDetail'=>'公告详情',
+			'noticelist'=>'公告列表',
+			'noticedetail'=>'公告详情',
 		),
 	),
 	'Message'=>array(
