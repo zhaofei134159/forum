@@ -97,7 +97,7 @@
             $.post("{:url('Notice/SeeReply')}",{'replyId':replyId},function(result){
                 loading('hide');
                 console.log(result);
-                adminAlert(result.data,'公告回复',1);
+                adminAlert(result.data,'公告回复');
             },'json');
     	}
 

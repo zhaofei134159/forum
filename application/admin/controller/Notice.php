@@ -189,8 +189,10 @@ class Notice extends Common
             foreach($replys as $reply){
                 $notice[$reply['notice_id']] = $reply['notice_id']; 
             }
-            $noticeReply = modelNotice::get_query("Select id,title from forum_notice where id in(".implode(',',$notice).")");
-            $noticeReply = objToArray($noticeReply);
+            if(!empty($notice)){
+                $noticeReply = modelNotice::get_query("Select id,title from forum_notice where id in(".implode(',',$notice).")");
+                $noticeReply = objToArray($noticeReply);
+            }
         }
 
         $users = Home_user::all(['is_del'=>0]);
