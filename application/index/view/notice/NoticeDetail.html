@@ -109,6 +109,7 @@ function Fabulous(noticeId){
             }
             var $toast = toastr['success']('点赞成功！');
             $('#diazan').remove();
+            loading('hide');
             return false;
         }
     },'json');
