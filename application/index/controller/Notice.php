@@ -47,9 +47,13 @@ class Notice extends Common
 
         $notice_reply = NoticeReply::where(['notice_id'=>$noticeId,'is_del'=>0])->order('ctime','asc')->select();
 
+        $users = User::all(['is_del'=>0]);
+        $users = objToArray($users);
+
         $data = array(
                 'notice'=>$notice,
                 'notice_reply'=>$notice_reply,
+                'users'=>$users,
             );
         return $this->view->fetch('NoticeDetail',$data);
     }
