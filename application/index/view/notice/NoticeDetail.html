@@ -14,10 +14,11 @@
                             {$notice.content}
                         </p>
                     </div>
-
-                    <div class="diancan" style="text-align: center; width: 100px;margin:50px auto 0px;" onclick="">
+                    {if condition="empty($fabulous)"}
+                    <div id="diazan" style="text-align: center; width: 100px;margin:50px auto 0px;" onclick="Fabulous({$notice.id})">
                         <img src="/resource/images/zan.png" style="width:100px;">
                     </div>
+                    {/if}
 
                     <div class="clearfix"></div>
                 </div>
@@ -93,10 +94,24 @@ function doReply(){
         toastr.options = {
           "positionClass": "toast-top-center",
         }
-        var $toast = toastr['error']('回复内容不能为空');
+        var $toast = toastr['error']('回复内容不能为空！');
         return false;
     }
     $('#ReplyNotice').submit();
+}
+
+function Fabulous(noticeId){
+    loading('show');
+    $.post("{:url('Notice/FabulousNotice')}",{'noticeId':noticeId},function(result){
+        if(result.flog==1){
+            toastr.options = {
+              "positionClass": "toast-top-center",
+            }
+            var $toast = toastr['success']('点赞成功！');
+            $('#diazan').remove();
+            return false;
+        }
+    },'json');
 }
 </script>
 {include file="public/footer" /}

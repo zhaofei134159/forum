@@ -6,6 +6,7 @@ use app\index\model\Cate;
 use app\index\model\Plate;
 use app\index\model\Notice as modelNotice;
 use app\index\model\NoticeReply;
+use app\index\model\Fabulous;
 
 use think\Session;
 use think\Config;
@@ -51,10 +52,13 @@ class Notice extends Common
         $users = User::all(['is_del'=>0]);
         $users = objToArray($users);
 
+        $fabulous = Fabulous::get(['userid'=>$this->uid,'article_id'=>$noticeId,'type'=>1])
+
         $data = array(
                 'notice'=>$notice,
                 'notice_reply'=>$notice_reply,
                 'users'=>$users,
+                'fabulous'=>$fabulous,
             );
         return $this->view->fetch('NoticeDetail',$data);
     }
@@ -71,5 +75,21 @@ class Notice extends Common
         $notice = NoticeReply::create($insert);
 
         header('location:/index/Notice/NoticeDetail.html?noticeId='.$post['noticeId'].';');
+    }
+
+    public function FabulousNotice(){
+        $post = input('post.');
+        $noticeId = $post['noticeId'];
+
+
+        $insert = array();
+        $insert['article_id'] = $noticeId;
+        $insert['userid'] = $this->uid;
+        $insert['type'] = 1;
+        $insert['ctime'] = time();
+
+        $Fabulous = Fabulous::create($insert);
+
+        return json(['flog'=>1,'msg'=>'success']);
     }
 }
