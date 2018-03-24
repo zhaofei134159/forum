@@ -53,10 +53,10 @@
         </div>
 
 
+        {if condition="!empty($notice_reply)"}
         <div class="col-sm-12">
             <div class="card-box">
 
-                {if condition="!empty($notice_reply)"}
                 {foreach $notice_reply as $reply}
                 <div class="comment">
                     <img src="/{$user[$reply.userid]['headimg']}" alt="" class="comment-avatar">
@@ -75,10 +75,10 @@
                     </div>
                 </div>
                 {/foreach}
-                {/if}
 
             </div>
         </div>
+        {/if}
 
     </div>
 
@@ -88,6 +88,7 @@
 
 function doReply(){
     var content =$('#content').html();
+    console.log(content);
     if(content==''){
         toastr.options = {
           "positionClass": "toast-top-center",
