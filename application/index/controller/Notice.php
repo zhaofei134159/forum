@@ -5,6 +5,7 @@ use app\index\model\User;
 use app\index\model\Cate;
 use app\index\model\Plate;
 use app\index\model\Notice as modelNotice;
+use app\index\model\NoticeReply;
 
 use think\Session;
 use think\Config;
@@ -44,8 +45,11 @@ class Notice extends Common
 
         $notice = modelNotice::get(['id'=>$noticeId]);
 
+        $notice_reply = NoticeReply::where(['notice_id'=>$noticeId,'is_del'=>0])->order('ctime','asc')->select();
+
         $data = array(
                 'notice'=>$notice,
+                'notice_reply'=>$notice_reply,
             );
         return $this->view->fetch('NoticeDetail',$data);
     }
