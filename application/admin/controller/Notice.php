@@ -144,4 +144,9 @@ class Notice extends Common
         
         return json(['success'=>1,'message'=>'成功1','url'=>'/'.$link]);
     }
+
+    # 公告回复
+    public function reply(){
+        
+    }
 }

@@ -43,6 +43,8 @@
                                     <th>公告标题</th>
                                     <th>发表用户</th>
                                     <th>查看次数</th>
+                                    <th>回复数量</th>
+                                    <th>点赞数量</th>
                                     <th>是否删除</th>
                                     <th>创建时间</th>
                                     <th>操作</th>
@@ -55,7 +57,9 @@
 	                                    <td><img src="/{$notice.headimg}" width="40" height="40"></td>
 	                                    <td><div style="white-space:nowrap;text-overflow:ellipsis;overflow:hidden;text-align:center;width:140px;margin:0 auto;">{$notice.title}</div></td>
 	                                    <td>{$users[$notice.userid][nikename]}</td>
-	                                    <td>{$notice.see}</td>
+                                        <td>{$notice.see}</td>
+                                        <td>{$noticeReply[$notice.id]['count']}</td>
+	                                    <td>{$noticeFabulous[$notice.id]['count']}</td>
 	                                    <td>
 	                                    	{if condition="$notice.is_del==1"}
 	                                    		<span class="btn btn-outline btn-danger" onclick="isDel({$notice.id},$(this))">是</span>
@@ -66,7 +70,7 @@
 	                                    <td>{$notice.ctime|date="Y-m-d H:i",###}</td>
 	                                    <td>
 	                                    	<a href="javascript:void(0);" onclick="NoticeEdit({$notice.id})" class="btn btn-outline btn-warning">编辑</a>
-	                                    	<a href="javascript:void(0);" onclick="SeeNotice({$notice.id})" class="btn btn-outline btn-info">查看</a>
+	                                    	<a href="javascript:void(0);" onclick="SeeNotice({$notice.id})" class="btn btn-outline btn-info">回复</a>
 	                                    </td>
 	                                </tr>
 								{/foreach}
