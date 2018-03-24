@@ -3,20 +3,6 @@
    
     <div class="row">
         <div class="col-md-12">
-<!-- 
-            <div class="panel panel-custom panel-border card-draggable ui-sortable-handle">
-                <div class="panel-heading">
-                    <h3 class="panel-title">{$notice.title}</h3>
-                </div>
-                <div class="panel-body">
-                    <p style="width:100%;text-align:center;">
-                        <img src="/{$notice.headimg}" style="max-width:580px;">
-                    </p>
-                    <p>
-                        {$notice.content}
-                    </p>
-                </div>
-            </div> -->
 
             <div class="bg-picture card-box">
                 <div class="profile-info-name">
@@ -25,7 +11,9 @@
                     <div class="profile-info-detail">
                         <h3 class="m-t-0 m-b-0">{$notice.title}</h3>
                         <p class="text-muted m-b-20"><i>{$users[$notice.userid]['nikename']}</i></p>
-                        <p>{$notice.content}</p>
+                        <p>
+                            {$notice.content}
+                        </p>
 
                     </div>
 
@@ -56,7 +44,7 @@
                             </form>
                             {else}
                                 <div style="min-height:200px;text-align:center;width:100%;line-height:200px;">
-                                    您需要登录后才可以回帖  <a href="">登录</a> | <b>注册</b>
+                                    您需要登录后才可以回复  <a href="">登录</a> | <b>注册</b>
                                 </div>
                             {/if}
                         </th>
