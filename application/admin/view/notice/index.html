@@ -70,7 +70,7 @@
 	                                    <td>{$notice.ctime|date="Y-m-d H:i",###}</td>
 	                                    <td>
 	                                    	<a href="javascript:void(0);" onclick="NoticeEdit({$notice.id})" class="btn btn-outline btn-warning">编辑</a>
-	                                    	<a href="javascript:void(0);" onclick="SeeNotice({$notice.id})" class="btn btn-outline btn-info">回复</a>
+	                                    	<a href="javascript:void(0);" onclick="SeeReplys({$notice.id})" class="btn btn-outline btn-info">回复</a>
 	                                    </td>
 	                                </tr>
 								{/foreach}
@@ -97,9 +97,9 @@
     	}
 
 
-    	function SeeNotice(noticeId){
+    	function SeeReplys(noticeId){
 			loading('show');
-    		var url = "{:url('Notice/SeeNotice')}";
+    		var url = "{:url('Notice/reply')}";
     		if(noticeId!=undefined){
     			url += "?noticeId="+noticeId;
     		}
