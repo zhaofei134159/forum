@@ -103,10 +103,10 @@ function objToArray($obj,$str='id'){
         $obj = collection($obj)->toArray();
     }
     $arr = array();
-    var_dump($obj);
-    var_dump($str);
     if(!empty($str)){
 	    foreach($obj as $key=>$val){
+	    	var_dump($val);
+	    	var_dump($val[$str]);
 	    	$arr[$val[$str]] = $val;
 	    }
     }else{
