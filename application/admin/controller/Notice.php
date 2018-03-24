@@ -192,8 +192,6 @@ class Notice extends Common
             $noticeReply = modelNotice::get_query("Select id,title from forum_notice where id in(".implode(',',$notice).")");
             $noticeReply = objToArray($noticeReply);
         }
-        var_dump($get);die;
-        
 
         $users = Home_user::all(['is_del'=>0]);
         $users = objToArray($users);
