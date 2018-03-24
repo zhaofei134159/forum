@@ -183,18 +183,15 @@ class Notice extends Common
         $page = $replys->render();
 
         $noticeReply = array();
-        echo 12312;
         if(!empty($replys)){
             $notice = array();
             foreach($replys as $reply){
-                $notice[] = $reply['notice_id']; 
+                $notice[$reply['notice_id']] = $reply['notice_id']; 
             }
-            var_dump($notice);
-            $noticeReply = modelNotice::get_query("Select id,title as count from forum_notice where id in(".implode(',',$notice).")");
+            $noticeReply = modelNotice::get_query("Select id,title from forum_notice where id in(".implode(',',$notice).")");
             $noticeReply = objToArray($noticeReply);
         }
-        var_dump($noticeReply);die;
-        
+
         $users = Home_user::all(['is_del'=>0]);
         $users = objToArray($users);
 
