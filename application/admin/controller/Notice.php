@@ -149,9 +149,9 @@ class Notice extends Common
     public function reply(){
         $get = input('get'); 
         $where = array();
-        if(!empty($get['NoticeId'])){
-            $where['notice_id'] = $get['NoticeId'];
-            $notice = modelNotice::get(['id'=>$get['NoticeId']]);
+        if(!empty($get['noticeId'])){
+            $where['notice_id'] = $get['noticeId'];
+            $notice = modelNotice::get(['id'=>$get['noticeId']]);
             $get['title'] = $notice['title'];
         }
         if(isset($get['is_del'])&&$get['is_del']!='-1'){ 
