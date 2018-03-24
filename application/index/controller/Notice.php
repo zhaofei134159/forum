@@ -14,10 +14,11 @@ use smtp;
 
 class Notice extends Common
 {	
+    public $uid;
 
 	public function __construct(){
 		parent::__construct();
-		
+        $this->uid = Session::get('login_id','forum_home');
 	}
 
     
@@ -56,5 +57,17 @@ class Notice extends Common
                 'users'=>$users,
             );
         return $this->view->fetch('NoticeDetail',$data);
+    }
+
+    public function ReplyNotice(){
+        $post = input('post.');
+
+        $insert = array();
+        $insert['notice_id'] = $post['noticeId'];
+        $insert['userid'] = $this->uid;
+        $insert['content'] = $post['content'];
+        $insert['ctime'] = time();
+
+        $notice = NoticeReply::create($insert);
     }
 }

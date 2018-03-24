@@ -15,8 +15,8 @@
                         </p>
                     </div>
 
-                    <div class="diancan" style="text-align: center; width: 100px;margin:50px auto 0px;">
-                        <img src="/resource/images/zan.png" width="330">
+                    <div class="diancan" style="text-align: center; width: 100px;margin:50px auto 0px;" onclick="">
+                        <img src="/resource/images/zan.png" style="width:100px;">
                     </div>
 
                     <div class="clearfix"></div>
@@ -55,39 +55,27 @@
 
         <div class="col-sm-12">
             <div class="card-box">
+
+                {if condition="!empty($notice_reply)"}
+                {foreach $notice_reply as $reply}
                 <div class="comment">
-                    <img src="assets/images/users/avatar-1.jpg" alt="" class="comment-avatar">
+                    <img src="/{$user[$reply.userid]['headimg']}" alt="" class="comment-avatar">
                     <div class="comment-body">
                         <div class="comment-text">
                             <div class="comment-header">
-                                <a href="#" title="">Kim Ryder</a><span>about 4 hours ago</span>
+                                <a href="#" title="">{$user[$reply.userid]['nikename']}</a><span>{:tranTime($reply.ctime)}</span>
                             </div>
-                            i'm in the middle of a timelapse animation myself! (Very different
-                            though.) Awesome stuff.
+                            {$reply.content}
                         </div>
-                        <div class="comment-footer">
+                        <!-- <div class="comment-footer">
                             <a href="#"><i class="fa fa-thumbs-o-up"></i></a>
                             <a href="#"><i class="fa fa-thumbs-o-down"></i></a>
                             <a href="#">Reply</a>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
-                <div class="comment">
-                    <img src="assets/images/users/avatar-7.jpg" alt="" class="comment-avatar">
-                    <div class="comment-body">
-                        <div class="comment-text">
-                            <div class="comment-header">
-                                <a href="#" title="">Nicolai Larson</a><span>10 hours ago</span>
-                            </div>
-                            the parallax is a little odd but O.o that house build is awesome!!
-                        </div>
-                        <div class="comment-footer">
-                            <a href="#"><i class="fa fa-thumbs-o-up"></i></a>
-                            <a href="#"><i class="fa fa-thumbs-o-down"></i></a>
-                            <a href="#">Reply</a>
-                        </div>
-                    </div>
-                </div>
+                {/foreach}
+                {/if}
 
             </div>
         </div>
@@ -97,5 +85,17 @@
 
 </div>
 <script type="text/javascript">
+
+function doReply(){
+    var content =$('#content').html();
+    if(content==''){
+        toastr.options = {
+          "positionClass": "toast-top-center",
+        }
+        var $toast = toastr['error']('回复内容不能为空');
+        return false;
+    }
+    $('#ReplyNotice').submit();
+}
 </script>
 {include file="public/footer" /}
