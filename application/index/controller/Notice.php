@@ -45,7 +45,10 @@ class Notice extends Common
         $get = input('get.');
         $noticeId = $get['noticeId'];
 
+
         $notice = modelNotice::get(['id'=>$noticeId]);
+
+        modelNotice::where('id',$noticeId)->update(['see'=>intval($notice['see'])+1]);
 
         $notice_reply = NoticeReply::where(['notice_id'=>$noticeId,'is_del'=>0])->order('ctime','asc')->select();
 
