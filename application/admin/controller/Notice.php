@@ -194,7 +194,7 @@ class Notice extends Common
 
         $users = Home_user::all(['is_del'=>0]);
         $users = objToArray($users);
-
+        var_dump($get);die;
         $data = array(
                 'replys'=>$replys,
                 'page'=>$page,

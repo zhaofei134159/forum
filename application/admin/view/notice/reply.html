@@ -54,7 +54,7 @@
 								{foreach $replys as $reply}
 	                                <tr>
 	                                    <td>{$reply.id}</td>
-	                                    <td><div style="white-space:nowrap;text-overflow:ellipsis;overflow:hidden;text-align:center;width:140px;margin:0 auto;">{$noticeReply[$reply.notice_id]['title']}</div></td>
+	                                    <td><div style="white-space:nowrap;text-overflow:ellipsis;overflow:hidden;width:248px;">{$noticeReply[$reply.notice_id]['title']}</div></td>
 	                                    <td>{$users[$reply.userid]['nikename']}</td>
 	                                    <td>
 	                                    	{if condition="$reply.is_del==1"}
@@ -96,7 +96,8 @@
             loading('show');
             $.post("{:url('Notice/SeeReply')}",{'replyId':replyId},function(data){
                 loading('hide');
-                
+                console.log(result);
+                adminAlert(result.data,'公告回复',1);
             },'json');
     	}
 
