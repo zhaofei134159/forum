@@ -8,6 +8,9 @@ use app\admin\model\User as Home_user;
 use app\admin\model\Common as modelCommon;
 use app\admin\model\Admin;
 use app\admin\model\Notice as modelNotice;
+use app\index\model\NoticeReply;
+use app\index\model\Fabulous;
+
 use think\Loader;
 use think\Config;
 
@@ -36,12 +39,19 @@ class Notice extends Common
         $notices = modelNotice::where($where)->order('ctime','desc')->paginate(10, false);
         $page = $notices->render();
 
+        $noticeFabulous = NoticeReply::get_query('select article_id,count(1) as count from forum_fabulous where type=1 group by article_id');
+        $noticeFabulous = objToArray($noticeFabulous,'article_id');
+        $noticeReply = NoticeReply::get_query('select notice_id,count(1) as count from forum_notice_reply where is_del=0 group by notice_id');
+        $noticeReply = objToArray($noticeReply,'notice_id');
+
         $users = Home_user::all(['is_del'=>0]);
         $users = objToArray($users);
 
         $data = array(
                 'notices'=>$notices,
                 'page'=>$page,
+                'noticeFabulous'=>$noticeFabulous,
+                'noticeReply'=>$noticeReply,
                 'users'=>$users,
                 'get'=>$get,
             );
