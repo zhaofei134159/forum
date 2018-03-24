@@ -9,6 +9,7 @@
                     <h3 class="panel-title">{$notice.title}</h3>
                 </div>
                 <div class="panel-body">
+                    <img src="/{$notice.headimg}" width="100%">
                     <p>
                         {$notice.content}
                     </p>
@@ -16,6 +17,38 @@
             </div>
 
         </div>
+    </div>
+
+    <div class="row">
+        
+
+        <div class="col-sm-12">
+            <div class="card-box">
+                <table class="table table-bordered m-0" id="replies">
+                    <tr class="user-mar">
+                        <th class="see" style="vertical-align:inherit;">
+                            
+                        </th>
+                        <th class="title" style="padding-left:30px;vertical-align:inherit;">
+                            {if condition="$userid"}
+                            <form action="{:url('Notice/ReplyNotice')}" method="post" enctype="multipart/form-data" data-parsley-validate novalidate id="ReplyNotice">
+                                <div style="display:none;width:100%;">
+                                    <textarea name="content" id="content"></textarea>
+                                </div>
+                                <input type="hidden" name="noticeId" value="{$notice.id}">
+                                <button type="button" class="btn btn-info w-md waves-effect waves-light m-b-10" onclick="doReply()"> 发表回复 </button>
+                            </form>
+                            {else}
+                                <div style="min-height:200px;text-align:center;width:100%;line-height:200px;">
+                                    您需要登录后才可以回帖  <a href="">登录</a> | <b>注册</b>
+                                </div>
+                            {/if}
+                        </th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
     </div>
 
 
