@@ -70,6 +70,6 @@ class Notice extends Common
 
         $notice = NoticeReply::create($insert);
 
-        $this->redirect('Notice/NoticeDetail?noticeId='.$post['noticeId']);
+        header('location:/index/Notice/NoticeDetail.html?noticeId='.$post['noticeId'].';');
     }
 }
