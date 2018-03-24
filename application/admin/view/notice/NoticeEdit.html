@@ -141,7 +141,9 @@
             loading('show');
 
             var html = $('.note-editable').html();
-          
+            console.log(html);
+            return false;
+
             $('.note-codable').html(html);
 
             $('#NoticeEdit').submit();
