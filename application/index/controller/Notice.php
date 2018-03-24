@@ -23,7 +23,7 @@ class Notice extends Common
 	}
 
     
-    public function NoticeList(){
+    public function index(){
     	$where = array();
     	$where['is_del'] = 0;
     	$where['noticeId'] = 0;
@@ -38,7 +38,7 @@ class Notice extends Common
         		'page'=>$page,
         		'users'=>$users,
         	);
-        return $this->view->fetch('NoticeList',$data);
+        return $this->view->fetch('index',$data);
     }
 
     public function NoticeDetail(){
