@@ -52,7 +52,7 @@ class Notice extends Common
         $users = User::all(['is_del'=>0]);
         $users = objToArray($users);
 
-        $fabulous = Fabulous::get(['userid'=>$this->uid,'article_id'=>$noticeId,'type'=>1])
+        $fabulous = Fabulous::get(['userid'=>$this->uid,'article_id'=>$noticeId,'type'=>1]);
 
         $data = array(
                 'notice'=>$notice,
