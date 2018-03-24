@@ -94,7 +94,7 @@
 
     	function SeeReply(replyId){
             loading('show');
-            $.post("{:url('Notice/SeeReply')}",{'replyId':replyId},function(data){
+            $.post("{:url('Notice/SeeReply')}",{'replyId':replyId},function(result){
                 loading('hide');
                 console.log(result);
                 adminAlert(result.data,'公告回复',1);
