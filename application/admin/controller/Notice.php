@@ -147,7 +147,9 @@ class Notice extends Common
 
     # 公告回复
     public function reply(){
-        $get = input('get.'); 
+        $get = input('get.');
+        var_dump($get);die;
+        
         $where = array();
         if(!empty($get['noticeId'])){
             $where['notice_id'] = $get['noticeId'];
@@ -194,7 +196,7 @@ class Notice extends Common
 
         $users = Home_user::all(['is_del'=>0]);
         $users = objToArray($users);
-        var_dump($get);die;
+
         $data = array(
                 'replys'=>$replys,
                 'page'=>$page,
