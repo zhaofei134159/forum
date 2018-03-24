@@ -95,7 +95,7 @@
     <script src="/resource/plugins/fileuploads/js/dropify.min.js"></script>
     <script type="text/javascript" src="/resource/admin/js/admin.js"></script>
     <!--<script src="/resource/text-edit2/examples/js/jquery.min.js"></script>-->
-    <script src="/resource/text-edit2/editormd.js"></script>
+    <!-- <script src="/resource/text-edit2/editormd.js"></script> -->
     <script type="text/javascript">
         $(function() {                
             var testEditor = editormd("test-editormd", {
@@ -144,6 +144,7 @@
             console.log(html);
 
             $('.note-codable').html(html).attr('name','content');
+            return false;
 
             $('#NoticeEdit').submit();
         }
