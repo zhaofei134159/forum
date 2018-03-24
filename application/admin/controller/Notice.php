@@ -148,14 +148,14 @@ class Notice extends Common
     # 公告回复
     public function reply(){
         $get = input('get.');
-        var_dump($get);die;
-        
+
         $where = array();
         if(!empty($get['noticeId'])){
             $where['notice_id'] = $get['noticeId'];
             $notice = modelNotice::get(['id'=>$get['noticeId']]);
             $get['title'] = $notice['title'];
         }
+        var_dump($get);die;
         if(isset($get['is_del'])&&$get['is_del']!='-1'){ 
             $where['is_del'] = $get['is_del']; 
         }
