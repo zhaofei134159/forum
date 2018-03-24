@@ -81,6 +81,10 @@ class Notice extends Common
         $post = input('post.');
         $noticeId = $post['noticeId'];
 
+        $fabulous = Fabulous::get(['userid'=>$this->uid,'article_id'=>$noticeId,'type'=>1]);
+        if(!empty($fabulous)){
+            return json(['flog'=>0,'msg'=>'已经赞过了']);
+        }
 
         $insert = array();
         $insert['article_id'] = $noticeId;
@@ -90,6 +94,6 @@ class Notice extends Common
 
         $Fabulous = Fabulous::create($insert);
 
-        return json(['flog'=>1,'msg'=>'success']);
+        return json(['flog'=>1,'msg'=>'点赞成功！']);
     }
 }
