@@ -14,11 +14,9 @@
                             {$notice.content}
                         </p>
                     </div>
-                    {if condition="empty($fabulous)"}
                     <div id="diazan" style="text-align: center; width: 100px;margin:50px auto 0px;" onclick="Fabulous({$notice.id})">
                         <img src="/resource/images/zan.png" style="width:100px;">
                     </div>
-                    {/if}
 
                     <div class="clearfix"></div>
                 </div>
@@ -103,15 +101,12 @@ function doReply(){
 function Fabulous(noticeId){
     loading('show');
     $.post("{:url('Notice/FabulousNotice')}",{'noticeId':noticeId},function(result){
-        if(result.flog==1){
-            toastr.options = {
-              "positionClass": "toast-top-center",
-            }
-            var $toast = toastr['success']('点赞成功！');
-            $('#diazan').remove();
-            loading('hide');
-            return false;
+        toastr.options = {
+          "positionClass": "toast-top-center",
         }
+        var $toast = toastr['success'](result.msg);
+        loading('hide');
+        return false;
     },'json');
 }
 </script>
