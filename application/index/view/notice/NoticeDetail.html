@@ -59,11 +59,11 @@
 
                 {foreach $notice_reply as $reply}
                 <div class="comment">
-                    <img src="/{$user[$reply.userid]['headimg']}" alt="" class="comment-avatar">
+                    <img src="/{$users[$reply.userid]['headimg']}" alt="" class="comment-avatar">
                     <div class="comment-body">
                         <div class="comment-text">
                             <div class="comment-header">
-                                <a href="#" title="">{$user[$reply.userid]['nikename']}</a><span>{:tranTime($reply.ctime)}</span>
+                                <a href="#" title="">{$users[$reply.userid]['nikename']}</a><span>{:tranTime($reply.ctime)}</span>
                             </div>
                             {$reply.content}
                         </div>
