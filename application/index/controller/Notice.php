@@ -69,5 +69,7 @@ class Notice extends Common
         $insert['ctime'] = time();
 
         $notice = NoticeReply::create($insert);
+
+        $this->redirect('Notice/NoticeDetail?noticeId='.$post['noticeId']);
     }
 }
