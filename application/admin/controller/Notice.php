@@ -147,6 +147,95 @@ class Notice extends Common
 
     # 公告回复
     public function reply(){
-        
+        $get = input('get'); 
+        $where = array();
+        $where['type'] = 1;
+        if(!empty($get['NoticeId'])){
+            $where['notice_id'] = $get['NoticeId'];
+            $notice = modelNotice::get(['id'=>$get['NoticeId']]);
+            $get['title'] = $notice['title'];
+        }
+        if(isset($get['is_del'])&&$get['is_del']!='-1'){ 
+            $where['is_del'] = $get['is_del']; 
+        }
+
+        # 公告标题
+        if(!empty($get['title'])){
+            $title = array('like','%'.$get['title'].'%'); 
+            $notice = modelNotice::get(['title'=>$title]);
+            $where['notice_id'] = $notice['id'];
+        }
+
+        # 用户邮箱
+        if(!empty($get['email'])){
+            $email = array('like','%'.$get['email'].'%'); 
+            $user = Home_user::get(['email'=>$email]);
+            $where['userid'] = $user['id'];
+        }
+
+        # 用户昵称
+        if(!empty($get['nikename'])){
+            $nikename = array('like','%'.$get['nikename'].'%'); 
+            $user = Home_user::get(['nikename'=>$nikename]);
+            $where['userid'] = $user['id'];
+        }
+
+        $replys = NoticeReply::where($where)->order('ctime','desc')->paginate(10, false);
+        $page = $replys->render();
+
+        $noticeId = objToArray($replys,'notice_id');
+
+        $noticeReply = modelNotice::get_query("Select id,title as count from forum_notice where id in(".implode(',',array_keys($noticeId)).")");
+        $noticeReply = objToArray($noticeReply);
+
+        $users = Home_user::all(['is_del'=>0]);
+        $users = objToArray($users);
+
+        $data = array(
+                'replys'=>$replys,
+                'page'=>$page,
+                'get'=>$get,
+                'noticeReply'=>$noticeReply,
+                'users'=>$users,
+            );
+        return $this->view->fetch('reply',$data);
+    }
+
+    public function isDelReply(){
+        $post = input('post.');
+        $id = $post['id'];
+
+        $reply = NoticeReply::get(['id'=>$id]);
+        $update = array();
+        if(empty($reply['is_del'])){
+            $update['is_del'] = 1;
+        }else if($reply['is_del']==1){
+           $update['is_del'] = 0;
+        }
+        NoticeReply::where('id', $id)->update($update);
+
+        return json(['flog'=>1, 'msg'=>$update['is_del']]);
+    }
+
+
+    public function SeeReply(){
+        $post = input('post.');
+        $replyId = $post['replyId'];
+
+        $reply = NoticeReply::get(['id'=>$replyId]);
+
+        $notice = modelNotice::get(['id'=>$reply['notice_id']]);
+
+        $users = Home_user::all(['is_del'=>0]);
+        $users = objToArray($users);
+
+        $data = array(
+                'reply'=>$reply,
+                'notice'=>$notice,
+                'users'=>$users,
+            );
+        $html = $this->view->fetch('SeeReply',$data);
+
+        return json(['flog'=>1, 'msg'=>'成功','data'=>$html]);
     }
 }
