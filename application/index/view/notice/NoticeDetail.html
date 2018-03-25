@@ -38,7 +38,7 @@
                                     <textarea name="content" id="content" rows="6" style="width: 100%;border-radius: 10px;resize: none;"></textarea>
                                 </div>
                                 <input type="hidden" name="noticeId" value="{$notice.id}">
-                                <button type="button" class="btn btn-info w-md waves-effect waves-light m-b-10" onclick="doReply()"> 回复 </button>
+                                <button type="button" class="btn btn-info w-md waves-effect waves-light m-b-10" onclick="doReply()"> 评论 </button>
                             </form>
                             {else}
                                 <div style="min-height:200px;text-align:center;width:100%;line-height:200px;">
@@ -92,7 +92,7 @@ function doReply(){
         toastr.options = {
           "positionClass": "toast-top-center",
         }
-        var $toast = toastr['error']('回复内容不能为空！');
+        var $toast = toastr['error']('评论内容不能为空！');
         return false;
     }
     $('#ReplyNotice').submit();
