@@ -142,9 +142,6 @@ class Index extends Common
         $carts = Cart::where(['is_del'=>0,'cartId'=>0])->where('title|content','like','%'.$searchText.'%')->paginate(20, false);        
         $page = $carts->render();
 
-        echo Cart::getLastSql();
-        var_dump($carts);die;
-
         $users = User::all(['is_del'=>0]);
         $users = objToArray($users);
 
