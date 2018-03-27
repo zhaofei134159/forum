@@ -71,7 +71,7 @@
                                             <img src="/{$notice.headimg}"  style="width:35px;height:35px;" alt="">
                                         </div>
                                         {/if}
-                                        <div class="user-desc" {if condition="!empty($notice.headimg)"} style="margin-left:0px;" {/if}>
+                                        <div class="user-desc" {if condition="empty($notice.headimg)"} style="margin-left:0px;" {/if}>
                                             <div class="" style="white-space:nowrap;text-overflow:ellipsis;overflow:hidden;height:35px;line-height:35px;">{$notice.title}</div>
                                         </div>
                                     </a>
