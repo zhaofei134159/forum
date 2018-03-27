@@ -102,7 +102,7 @@
                                         {/if}
                                     </td>
                                     <td class="author"> 
-                                        <a href="{:url('ucenter/index')}?uid={$cart.userid}"> {$users[$cart.userid]['name']}</a>
+                                        <a href="{:url('ucenter/index')}?uid={$cart.userid}"> {$users[$cart.userid]['nikename']}</a>
                                         <br>
                                         {:tranTime($cart.ctime)}
                                     </td>
@@ -114,6 +114,12 @@
                                 </tr>
                                 {/foreach}
                             </table>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12 text-right">
+                            {$page}
                         </div>
                     </div>
                 </div>
