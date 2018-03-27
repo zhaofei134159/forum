@@ -24,6 +24,16 @@
 
                     <div class="row">
                         <form class="form-horizontal">
+                            <div class="col-lg-4">
+                                <div class="p-20">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">日期：</label>
+                                        <div class="col-lg-8">
+                                            <input class="form-control input-daterange-datepicker" type="text" name="datetime" value="01/01/2015 - 01/31/2015"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-lg-3">
                                 <div class="p-20">
                                     <div class="form-group">
@@ -44,21 +54,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4">
-                                <div class="p-20">
-                                    <div class="form-group">
-                                        <label class="col-lg-4 control-label">日期：</label>
-                                        <div class="col-lg-8">
-                                            <input class="form-control input-daterange-datepicker" type="text" name="datetime" value="01/01/2015 - 01/31/2015"/>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="col-lg-2">
                                 <div class="p-20">
                                     <div class="form-group">
                                         <div class="col-lg-8">
-                                            <input  class="form-control" name="searchText" value="{$get['searchText']}">
+                                            <button type="button" class="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5">提交</button>
                                         </div>
                                     </div>
                                 </div>
