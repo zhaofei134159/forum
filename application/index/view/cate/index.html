@@ -48,7 +48,7 @@
 	                       		</div>
 	                       	</div>
                        		{elseif condition="$CateId==$cId"}
-                       			{foreach $cateData['son'] as $sonCateId=>$sonCateData}
+                       			{foreach $sonCate as $sonCateId=>$sonCateData}
                                     <a href="{:url('Cate/CatePlate')}?CateId={$sonCateId}&parentId={$cId}">
 	                       				<button class="btn btn-default waves-effect waves-light btn-sm m-b-5">{$sonCateData.name}</button>
 	                                   	&nbsp;&nbsp;&nbsp;&nbsp;

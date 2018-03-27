@@ -31,7 +31,6 @@ class Cate extends Common
 			$sonCate = model_cate::where(['is_del'=>0,'parent_id'=>$CateId])->select();
         	$sonCate = objToArray($sonCate);
 		}
-		var_dump($sonCate);
 
 		$data = array(
 				'CateId'=>$CateId,
