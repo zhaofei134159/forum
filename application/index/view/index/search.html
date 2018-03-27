@@ -1,0 +1,54 @@
+{include file="public/header" /}
+
+        <!-- 友情链接 -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card-box">
+                    <div class="dropdown pull-right">
+                        <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
+                            <i class="zmdi zmdi-more-vert"></i>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                        </ul>
+                    </div>
+
+                    <h4 class="header-title m-t-0 m-b-30">搜索 帖子</h4>
+
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <div class="p-20">
+                                <form class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Date Range Pick</label>
+                                        <div class="col-lg-8">
+                                            <input class="form-control input-daterange-datepicker" type="text" name="daterange" value="01/01/2015 - 01/31/2015"/>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+
+                        </div><!-- end col -->
+
+                    </div><!-- end row -->
+                </div>
+            </div><!-- end col -->
+        </div>
+
+        <script src="/resource/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+        <script type="text/javascript">
+            //Date range picker
+            $('.input-daterange-datepicker').daterangepicker({
+                buttonClasses: ['btn', 'btn-sm'],
+                applyClass: 'btn-default',
+                cancelClass: 'btn-primary'
+            });
+        </script>
+
+
+{include file="public/footer" /}

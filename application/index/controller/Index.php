@@ -132,4 +132,22 @@ class Index extends Common
         
         $this->redirect('index/index');
     }
+
+
+    public function search(){
+        $get = input('get.');
+        $searchText = $get['searchText'];
+
+        # 帖子
+        $carts = Cart::where(['is_del'=>0,'cartId'=>0])->where('title|content','like','%'.$searchText.'%')->paginate(20, false);        
+        $page = $carts->render();
+
+
+        $data = array(
+                'cates'=>$cates,
+                'page'=>$page,
+            );
+        return $this->view->fetch('search',$data);
+
+    }
 }
