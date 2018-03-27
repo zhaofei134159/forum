@@ -91,7 +91,7 @@ class Notice extends Common
         $post = input('post.');
         $noticeId = $post['noticeId'];
         if(!$this->uid){
-            return json(['flog'=>0,'msg'=>'请先登录账号！']);
+            return json(['flog'=>2,'msg'=>'请先登录账号！']);
         }
 
         $fabulous = Fabulous::get(['userid'=>$this->uid,'article_id'=>$noticeId,'type'=>1]);
