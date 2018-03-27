@@ -118,14 +118,14 @@
                                     function searchSub(){
                                         loading('show');
                                         var searchText = $('#searchText').val();
-                                        if(searchText==''){
-                                            toastr.options = {
-                                              "positionClass": "toast-top-center",
-                                            }
-                                            var $toast = toastr['error']('搜索内容不能为空！');
-                                            loading('hide');
-                                            return false;
-                                        }
+                                        // if(searchText==''){
+                                        //     toastr.options = {
+                                        //       "positionClass": "toast-top-center",
+                                        //     }
+                                        //     var $toast = toastr['error']('搜索内容不能为空！');
+                                        //     loading('hide');
+                                        //     return false;
+                                        // }
                                         window.location.href = "{:url('index/search')}?searchText="+searchText;
                                     }
                                 </script>
