@@ -5,8 +5,9 @@
 
             <div class="bg-picture card-box">
                 <div class="profile-info-name">
+                    {if condition="!empty($notice.headimg)"}
                     <img src="/{$notice.headimg}" class="img-thumbnail" alt="profile-image">
-
+                    {/if}
                     <div class="profile-info-detail">
                         <h3 class="m-t-0 m-b-0">{$notice.title}</h3>
                         <p class="text-muted m-b-20"><i>{$users[$notice.userid]['nikename']}</i></p>
