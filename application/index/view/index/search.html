@@ -23,7 +23,7 @@
                     <h4 class="header-title m-t-0 m-b-30">搜索 帖子</h4>
 
                     <div class="row">
-                        <form class="form-horizontal">
+                        <form class="form-horizontal" action="{:url('index/search')}" method="get">
                             <div class="col-lg-4">
                                 <div class="p-20">
                                     <div class="form-group">
@@ -69,6 +69,14 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <table class="table table table-hover m-0">
+                                 <thead>
+                                    <tr>
+                                        <th class="name">帖子标题</th>
+                                        <th class="operation"></th>
+                                        <th class="author">作者</th>
+                                        <th class="commit">回复/查看</th>
+                                    </tr>
+                                </thead>
                                 {foreach $carts as $cart}
                                 <tr>
                                     <td class="name" style="height:30px;line-height:41px;">
@@ -80,9 +88,6 @@
                                         <a href="{:url('Cart/seeCart',['cartId'=>$cart.id,'plateId'=>$plateId])}">
                                             {$cart.title}
                                         </a>
-                                    </td>
-                                    <td class="handle" style="height:30px;line-height:41px;">
-                                       
                                     </td>
                                     <td class="operation" style="height:30px;line-height:41px;">
                                         <img src="/resource/images/cart/agree.gif" style="width:22px;margin-right:5px;" onclick="" >
