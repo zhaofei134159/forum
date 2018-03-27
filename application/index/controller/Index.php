@@ -137,7 +137,7 @@ class Index extends Common
     public function search(){
         $get = input('get.');
         $searchText = $get['searchText'];
-
+        var_dump($get);
         # 帖子
         $carts = Cart::where(['is_del'=>0,'cartId'=>0])->where('title|content','like','%'.$searchText.'%')->paginate(20, false);        
         foreach($carts as $key=>$cart){
