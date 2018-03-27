@@ -143,9 +143,13 @@ class Index extends Common
         $page = $carts->render();
 
 
+        $users = User::all(['is_del'=>0]);
+        $users = objToArray($users);
+
         $data = array(
                 'cates'=>$cates,
                 'page'=>$page,
+                'users'=>$users,
                 'get'=>$get,
             );
         return $this->view->fetch('search',$data);
