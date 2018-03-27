@@ -54,7 +54,11 @@
 								{foreach $notices as $notice}
 	                                <tr>
 	                                    <td>{$notice.id}</td>
-	                                    <td><img src="/{$notice.headimg}" width="40" height="40"></td>
+	                                    <td>
+                                            {if condition="!empty($notice.headimg)"}
+                                                <img src="/{$notice.headimg}" width="40" height="40">
+                                            {/if}
+                                        </td>
 	                                    <td><div style="white-space:nowrap;text-overflow:ellipsis;overflow:hidden;text-align:center;width:140px;margin:0 auto;">{$notice.title}</div></td>
 	                                    <td>{$users[$notice.userid][nikename]}</td>
                                         <td>{$notice.see}</td>

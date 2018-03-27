@@ -70,9 +70,10 @@
                                             <!-- <div id="test-editormd">
                                                 <textarea style="display:none;" name="content" >{$notice.content}</textarea>
                                             </div> -->
-                                            <div class="m">     
+                                            <div class="m" id="content">     
                                                 <div class="summernote">{$notice.content}</div>
                                             </div>
+                                            <p class="help-block"></p>
                                         </div> 
                                     </div>
                                 </div>
@@ -139,9 +140,23 @@
         function EditForm(res){
             
             loading('show');
+            var title = $('#title').val();
+            if(title==''){
+                loading('hide');
+                $('#title').parent().addClass("has-error");  
+                $('#title').next('p').html('标题不能为空！');
+                return false;
+            }
+
 
             var html = $('.note-editable').html();
             console.log(html);
+            if(html==''){
+                loading('hide');
+                $('#content').parent().addClass("has-error");  
+                $('#content').next('p').html('内容不能为空！');
+                return false;
+            }
 
             $('.note-codable').html(html).attr('name','content');
 
