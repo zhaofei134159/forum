@@ -137,13 +137,34 @@ class Index extends Common
     public function search(){
         $get = input('get.');
         $searchText = $get['searchText'];
-        var_dump($get);
+        $get['datetime'] = !empty($get['datetime'])?$get['datetime']:date('m/d/Y').' - '.date('m/d/Y');
+        $username = $get['userNikename'];
+
+        $where = array();
+        $where['is_del'] = 0;
+        $where['cartId'] = 0;
+        if(!empty($get['datetime'])){
+            $dateS = explode(' - ',$$get['datetime']);
+            $timestart = strtotime($dateS[0]);
+            $timeend = strtotime($dateS[1])+86400-1;
+            $where['ctime'] = ['>=',$timestart];
+            $where['ctime'] = ['<=',$timeend];
+        }
+        if(!empty($username)){
+            $user = User::where('nikename','like','%'.$username.'%')->find();
+            $where['userid'] = $user['id'];
+        }
+        if(!empty($searchText)){
+            $where['title|content'] = ['like','%'.$searchText.'%'];
+        }
         # 帖子
-        $carts = Cart::where(['is_del'=>0,'cartId'=>0])->where('title|content','like','%'.$searchText.'%')->paginate(20, false);        
+        $carts = Cart::where($where)->paginate(20, false);
+        echo Cart::getLastSql();
         foreach($carts as $key=>$cart){
               $reply = Cart::where(['cartId'=>$cart['id'],'is_del'=>0])->count();
               $carts[$key]['reply'] = $reply;
-        }  
+        } 
+
         $page = $carts->render();
 
         # 用户名
