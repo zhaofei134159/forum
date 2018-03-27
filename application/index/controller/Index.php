@@ -150,6 +150,7 @@ class Index extends Common
             $where['ctime'] = ['>=',$timestart];
             $where['ctime'] = ['<=',$timeend];
         }
+        echo 123123;
         var_dump($get['datetime']);
         if(!empty($username)){
             $user = User::where('nikename','like','%'.$username.'%')->find();
