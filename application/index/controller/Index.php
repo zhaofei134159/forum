@@ -145,6 +145,7 @@ class Index extends Common
         $where['cartId'] = 0;
         if(!empty($get['datetime'])){
             $dateS = explode(' - ',$$get['datetime']);
+            var_dump($dateS);
             $timestart = strtotime($dateS[0]);
             $timeend = strtotime($dateS[1])+86400-1;
             $where['ctime'] = ['>=',$timestart];
