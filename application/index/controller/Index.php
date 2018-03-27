@@ -140,8 +140,13 @@ class Index extends Common
 
         # 帖子
         $carts = Cart::where(['is_del'=>0,'cartId'=>0])->where('title|content','like','%'.$searchText.'%')->paginate(20, false);        
+        foreach($carts as $key=>$cart){
+              $reply = model_cart::where(['cartId'=>$cart['id'],'is_del'=>0])->count();
+              $carts[$key]['reply'] = $reply;
+        }  
         $page = $carts->render();
 
+        # 用户名
         $users = User::all(['is_del'=>0]);
         $users = objToArray($users);
 
