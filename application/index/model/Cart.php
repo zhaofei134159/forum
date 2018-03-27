@@ -72,7 +72,7 @@ class Cart extends Common
         $plateWhere = array();
         $plateWhere['is_del'] = 0;
         $plateWhere['is_check'] = 1;
-        $plateWhere['is_home'] = 1;
+        // $plateWhere['is_home'] = 1;
         $plates = Plate::where($plateWhere)->order('ctime','desc')->limit(6)->select();
         $plates = objToArray($plates);
 
