@@ -34,7 +34,7 @@ class Cart extends Common
         $topWhere['cartId'] = 0;
         $topWhere['plateId'] = $plateId;
         $topWhere['is_top'] = 1;
-        $topCarts = model_cart::where($topWhere)->order('see','desc')->select();
+        $topCarts = model_cart::where($topWhere)->order('cast(see as UNSIGNED INTEGER)','desc')->select();
         foreach($topCarts as $key=>$top){
               $reply = model_cart::where(['cartId'=>$top['id'],'is_del'=>0])->count();
               $topCarts[$key]['reply'] = $reply;
@@ -53,7 +53,7 @@ class Cart extends Common
         }else if($type=='elite'){
             $where['is_elite'] = 1;
         }
-		$carts = model_cart::where($where)->order('see','desc')->paginate(20, false,[
+		$carts = model_cart::where($where)->order('cast(see as UNSIGNED INTEGER)','desc')->paginate(20, false,[
                 'query'=>['plateId'=>$plateId],
             ]);        
         $page = $carts->render();
