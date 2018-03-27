@@ -105,7 +105,11 @@ function Fabulous(noticeId){
         toastr.options = {
           "positionClass": "toast-top-center",
         }
-        var $toast = toastr['success'](result.msg);
+        if(result.flog==2){
+            var $toast = toastr['error'](result.msg);
+        }else{
+            var $toast = toastr['success'](result.msg);
+        }
         loading('hide');
         return false;
     },'json');
