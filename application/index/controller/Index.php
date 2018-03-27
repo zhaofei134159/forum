@@ -146,6 +146,7 @@ class Index extends Common
         $data = array(
                 'cates'=>$cates,
                 'page'=>$page,
+                'get'=>$get,
             );
         return $this->view->fetch('search',$data);
 
