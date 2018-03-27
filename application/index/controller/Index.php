@@ -147,7 +147,7 @@ class Index extends Common
         $users = objToArray($users);
 
         $data = array(
-                'cates'=>$cates,
+                'carts'=>$carts,
                 'page'=>$page,
                 'users'=>$users,
                 'get'=>$get,
