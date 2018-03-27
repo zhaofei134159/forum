@@ -137,15 +137,14 @@ class Index extends Common
     public function search(){
         $get = input('get.');
         $searchText = $get['searchText'];
-        $get['datetime'] = !empty($get['datetime'])?$get['datetime']:date('m/d/Y').' - '.date('m/d/Y');
+        $get['datetime'] = !empty($get['datetime'])?$get['datetime']:'';
         $username = $get['userNikename'];
 
         $where = array();
         $where['is_del'] = 0;
         $where['cartId'] = 0;
         if(!empty($get['datetime'])){
-            $dateS = explode(' - ',$$get['datetime']);
-            var_dump($dateS);
+            $dateS = explode(' - ',$get['datetime']);
             $timestart = strtotime($dateS[0]);
             $timeend = strtotime($dateS[1])+86400-1;
             $where['ctime'] = ['>=',$timestart];
@@ -160,7 +159,7 @@ class Index extends Common
         }
         # 帖子
         $carts = Cart::where($where)->paginate(20, false);
-        echo Cart::getLastSql();
+        // echo Cart::getLastSql();
         foreach($carts as $key=>$cart){
               $reply = Cart::where(['cartId'=>$cart['id'],'is_del'=>0])->count();
               $carts[$key]['reply'] = $reply;
