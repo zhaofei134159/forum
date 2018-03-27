@@ -30,7 +30,7 @@
                         </h3>
                     </div>
                     <div class="panel-body">
-                   		{if condition="empty($sonCate)"}
+                   		{if condition="!empty($sonCate)"}
                    			{foreach $sonCate as $sonCateId=>$sonCateData}
                                 <a href="{:url('Cate/CatePlate')}?CateId={$sonCateId}&parentId={$sonCateData.parent_id}">
                        				<button class="btn btn-default waves-effect waves-light btn-sm m-b-5">{$sonCateData.name}</button>
