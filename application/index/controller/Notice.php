@@ -90,6 +90,9 @@ class Notice extends Common
     public function FabulousNotice(){
         $post = input('post.');
         $noticeId = $post['noticeId'];
+        if(!$this->uid){
+            return json(['flog'=>0,'msg'=>'请先登录账号！']);
+        }
 
         $fabulous = Fabulous::get(['userid'=>$this->uid,'article_id'=>$noticeId,'type'=>1]);
         if(!empty($fabulous)){
