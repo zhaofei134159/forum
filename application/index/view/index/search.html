@@ -109,7 +109,7 @@
                                     <td class="commit">
                                         <a href="{:url('Cart/seeCart',['cartId'=>$cart.id,'plateId'=>$plateId])}"> {$cart.reply}  </a> 
                                         <br>
-                                        {$cart.see}
+                                        <a href="{:url('Cart/seeCart',['cartId'=>$cart.id,'plateId'=>$plateId])}"> {$cart.see} </a> 
                                     </td>
                                 </tr>
                                 {/foreach}
