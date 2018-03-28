@@ -73,7 +73,7 @@ class Cart extends Common
         $plateWhere['is_del'] = 0;
         $plateWhere['is_check'] = 1;
         // $plateWhere['is_home'] = 1;
-        $plates = Plate::where($plateWhere)->order('ctime','desc')->limit(6)->select();
+        $plates = Plate::where($plateWhere)->order('ctime','desc')->limit(10)->select();
         $plates = objToArray($plates);
 
         foreach($plates as $plateId=>$plate){
@@ -81,7 +81,7 @@ class Cart extends Common
             $cartWhere['is_del'] = 0;
             $cartWhere['cartId'] = 0;
             $cartWhere['plateId'] = $plateId;
-            $carts = $this->where($cartWhere)->order('is_elite,is_hot,is_top','desc')->limit(4)->select();
+            $carts = $this->where($cartWhere)->order('cast(fabulous as UNSIGNED INTEGER)','desc')->limit(4)->select();
             $carts = objToArray($carts);
             if(empty($carts)){
               unset($plates[$plateId]);
