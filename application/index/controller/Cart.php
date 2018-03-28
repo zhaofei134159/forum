@@ -37,7 +37,7 @@ class Cart extends Common
         $topWhere['cartId'] = 0;
         $topWhere['plateId'] = $plateId;
         $topWhere['is_top'] = 1;
-        $topCarts = model_cart::where($topWhere)->order('cast(see as UNSIGNED INTEGER)','desc')->select();
+        $topCarts = model_cart::where($topWhere)->order('cast(fabulous as UNSIGNED INTEGER)','desc')->select();
         foreach($topCarts as $key=>$top){
               $reply = model_cart::where(['cartId'=>$top['id'],'is_del'=>0])->count();
               $topCarts[$key]['reply'] = $reply;
@@ -56,7 +56,7 @@ class Cart extends Common
         }else if($type=='elite'){
             $where['is_elite'] = 1;
         }
-		$carts = model_cart::where($where)->order('cast(see as UNSIGNED INTEGER)','desc')->paginate(20, false,[
+		$carts = model_cart::where($where)->order('cast(fabulous as UNSIGNED INTEGER)','desc')->paginate(20, false,[
                 'query'=>['plateId'=>$plateId],
             ]);        
         $page = $carts->render();
@@ -308,13 +308,16 @@ class Cart extends Common
             return json(['flog'=>0,'msg'=>'已经赞过了']);
         }
 
+
         $insert = array();
         $insert['article_id'] = $cartId;
         $insert['userid'] = $this->uid;
         $insert['type'] = 2;
         $insert['ctime'] = time();
-
         $Fabulous = Fabulous::create($insert);
+        
+        $cart = model_cart::get(['id'=>$cartId]);
+        model_cart::where('id',$cartId)->update(['fabulous'=>intval($cart['fabulous'])+1]);
 
         return json(['flog'=>1,'msg'=>'点赞成功！']);
     }

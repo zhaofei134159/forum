@@ -158,7 +158,7 @@ class Index extends Common
             $where['title|content'] = ['like','%'.$searchText.'%'];
         }
         # 帖子
-        $carts = Cart::where($where)->order('cast(see as UNSIGNED INTEGER)','desc')->paginate(10, false);
+        $carts = Cart::where($where)->order('cast(fabulous as UNSIGNED INTEGER)','desc')->paginate(10, false);
         // echo Cart::getLastSql();
         foreach($carts as $key=>$cart){
               $reply = Cart::where(['cartId'=>$cart['id'],'is_del'=>0])->count();
