@@ -6,6 +6,7 @@ use app\index\model\Cate;
 use app\index\model\Plate;
 use app\index\model\Cart as model_cart;
 use app\index\model\Follow;
+use app\index\model\Fabulous;
 
 use think\Session;
 use think\Config;
@@ -14,9 +15,11 @@ use smtp;
 # 帖子
 class Cart extends Common
 {	
-
+    public $uid;
 	public function __construct(){
 		parent::__construct();	
+
+        $this->uid = Session::get('login_id','forum_home');
 	}
 
 	public function index(){
@@ -291,5 +294,28 @@ class Cart extends Common
         $html = $this->view->fetch('followFriends',$data);
 
         return json(['flog'=>1,'msg'=>'成功','data'=>$html]);
+    }
+
+    public function FabulousCart(){
+        $post = input('post.');
+        $cartId = $post['cartId'];
+        if(!$this->uid){
+            return json(['flog'=>2,'msg'=>'请先登录账号！']);
+        }
+
+        $fabulous = Fabulous::get(['userid'=>$this->uid,'article_id'=>$cartId,'type'=>2]);
+        if(!empty($fabulous)){
+            return json(['flog'=>0,'msg'=>'已经赞过了']);
+        }
+
+        $insert = array();
+        $insert['article_id'] = $cartId;
+        $insert['userid'] = $this->uid;
+        $insert['type'] = 2;
+        $insert['ctime'] = time();
+
+        $Fabulous = Fabulous::create($insert);
+
+        return json(['flog'=>1,'msg'=>'点赞成功！']);
     }
 }
