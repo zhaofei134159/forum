@@ -151,7 +151,7 @@
 
             var html = $('.note-editable').html();
             console.log(html);
-            if(html==''){
+            if(html=='<p><br></p>'){
                 loading('hide');
                 $('#content').parent().addClass("has-error");  
                 $('#content').next('p').html('内容不能为空！');
