@@ -150,10 +150,15 @@ class Ucenter extends Common
         }
 
         $post = input('post.');
+        $url = $post['url'];
 
         $update = array();
-        $update['nikename'] = $post['nikename'];
-        $update['info'] = $post['info'];
+        if(!empty($post['nikename'])){
+            $update['nikename'] = $post['nikename'];
+        }
+        if(!empty($['info'])){
+            $update['info'] = $post['info'];
+        }
 
         $file = request()->file('headimg');
         if($file){
@@ -167,8 +172,11 @@ class Ucenter extends Common
         }
 
         User::where('id', $uid)->update($update); 
-
-        $this->redirect('ucenter/editUser');
+        if(!empty($url)&&$url=='uIndex'){
+            $this->redirect('ucenter/index');
+        }else{
+            $this->redirect('ucenter/editUser');
+        }
     }
 
     # 基本资料
