@@ -33,7 +33,7 @@
                    		{if condition="!empty($sonCate)"}
                    			{foreach $sonCate as $sonCateId=>$sonCateData}
                               <a href="{:url('Cate/CatePlate')}?CateId={$sonCateId}&parentId={$sonCateData.parent_id}">
-                       				     <button class="btn btn-default waves-effect waves-light btn-sm m-b-5" style="width: 100px;height: 40px;">{$sonCateData.name}</button>
+                       				     <button class="btn btn-default waves-effect waves-light btn-sm m-b-5" style="height: 40px;">{$sonCateData.name}</button>
                                    	&nbsp;&nbsp;&nbsp;&nbsp;
                               </a>  
                             {/foreach}
