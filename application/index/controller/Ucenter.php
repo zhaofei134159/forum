@@ -156,7 +156,7 @@ class Ucenter extends Common
         if(!empty($post['nikename'])){
             $update['nikename'] = $post['nikename'];
         }
-        if(!empty($['info'])){
+        if(!empty($post['info'])){
             $update['info'] = $post['info'];
         }
 
