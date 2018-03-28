@@ -129,7 +129,7 @@
                                 {$cart.content}
 
 
-                                <div id="diazan" style="text-align: center; width: 100%;margin:50px auto 0px;cursor:pointer;" onclick="Fabulous({$notice.id})">
+                                <div id="diazan" style="text-align: center; width: 100%;margin:50px auto 0px;cursor:pointer;" onclick="Fabulous({$cart.id})">
                                     <img src="/resource/images/zan.png" style="width:100px;">
                                 </div>
                             </td>
@@ -252,6 +252,23 @@
   $(function(){
       $('#edit').editable({inlineMode: false, alwaysBlank: true})
   });
+
+  // 点赞
+  function Fabulous(cartId){
+    loading('show');
+    $.post("{:url('Cart/FabulousCart')}",{'cartId':cartId},function(result){
+        toastr.options = {
+          "positionClass": "toast-top-center",
+        }
+        if(result.flog==2){
+            var $toast = toastr['error'](result.msg);
+        }else{
+            var $toast = toastr['success'](result.msg);
+        }
+        loading('hide');
+        return false;
+    },'json');
+}
 </script>
 <script type="text/javascript">
     function doReply(){
