@@ -49,6 +49,7 @@
                                     <th>帖子板块</th>
                                     <th>发帖用户</th>
                                     <th>查看次数</th>
+                                    <th>点赞次数</th>
                                     <th>是否删除</th>
                                     <th>是否热门</th>
                                     <th>是否精华</th>
@@ -65,6 +66,7 @@
 	                                    <td>{$plates[$cart.plateId]['name']}</td>
 	                                    <td>{$users[$cart.userid][nikename]}</td>
 	                                    <td>{$cart.see}</td>
+	                                    <td>{$cart.fabulous}</td>
 	                                    <td>
 	                                    	{if condition="$cart.is_del==1"}
 	                                    		<span class="btn btn-outline btn-danger" onclick="isDel({$cart.id},$(this))">是</span>
