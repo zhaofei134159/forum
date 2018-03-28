@@ -22,7 +22,7 @@
                     <img src="/resource/images/user.png" class="img-circle thumb-xl img-thumbnail m-b-10" alt="头像">
                     {/if}
                     <div style="text-align: center;margin: 0 auto;width: 300px;">
-                        <h3 class="text-muted m-b-30" onclick="nikename($(this))">{if condition="$user->nikename"}{$user->nikename}{else}{$user.name}{/if}</h3>
+                        <h3 class="text-muted m-b-30" onclick="nikename($(this))" style="cursor:pointer;">{if condition="$user->nikename"}{$user->nikename}{else}{$user.name}{/if}</h3>
                     </div>
 
                     <div class="userInfo">
