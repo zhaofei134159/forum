@@ -27,7 +27,12 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">
-                    公告 编辑 
+                    公告 
+                    {if condition="!empty($noticeId)"}
+                    修改
+                    {else}
+                    添加
+                    {/if}
                     <button type="button" class="btn btn-outline btn-info" style="float:right;" onclick="back()">
                         <i class="glyphicon glyphicon-arrow-left"></i> 返回 
                     </button>
@@ -39,11 +44,6 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        {if condition="!empty($noticeId)"}
-                        修改
-                        {else}
-                        添加
-                        {/if}
                     </div>
                     <div class="panel-body">
                         <div class="row">
