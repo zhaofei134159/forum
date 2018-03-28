@@ -556,7 +556,7 @@ class Loader
  */
 function __include_file($file)
 {
-    return include $file;
+    return include_once $file;
 }
 
 function __require_file($file)
