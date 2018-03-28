@@ -244,6 +244,7 @@
         function nikename(res){
             var html = "<form action='{:url('ucenter/saveUserHeadimg')}' method='post'  id='headForm' class='m-b-30'>";
                 html += '<input type="text" required="" name="nikename" class="form-control" id="nikename" find="0" placeholder="昵称" style="width:300px;" onblur="seveName($(this).val())" value="'+res.html()+'">';
+                html += '<input type="hidden" name="url" value="uIndex">';
                 html += "</form>"
             res.parent().html(html);
         }
