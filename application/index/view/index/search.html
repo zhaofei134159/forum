@@ -74,7 +74,7 @@
                                         <th class="name">帖子标题</th>
                                         <th class="operation"></th>
                                         <th class="author">作者</th>
-                                        <th class="commit">回复/查看</th>
+                                        <th class="commit">回复/查看/点赞</th>
                                     </tr>
                                 </thead>
                                 {foreach $carts as $cart}
@@ -85,7 +85,7 @@
                                         {else}
                                         <img src="/resource/images/cart/folder_common.gif" style="margin-right:5px;">
                                         {/if}
-                                        <a href="{:url('Cart/seeCart',['cartId'=>$cart.id,'plateId'=>$plateId])}">
+                                        <a href="{:url('Cart/seeCart',['cartId'=>$cart.id,'plateId'=>$cart.plateId])}">
                                             {$cart.title}
                                         </a>
                                     </td>
@@ -107,9 +107,11 @@
                                         {:tranTime($cart.ctime)}
                                     </td>
                                     <td class="commit">
-                                        <a href="{:url('Cart/seeCart',['cartId'=>$cart.id,'plateId'=>$plateId])}"> {$cart.reply}  </a> 
-                                        <br>
-                                        <a href="{:url('Cart/seeCart',['cartId'=>$cart.id,'plateId'=>$plateId])}"> {$cart.see} </a> 
+                                        <a href="{:url('Cart/seeCart',['cartId'=>$cart.id,'plateId'=>$cart.plateId])}"> {$cart.reply}  </a> 
+                                        /
+                                        <a href="{:url('Cart/seeCart',['cartId'=>$cart.id,'plateId'=>$cart.plateId])}"> {$cart.see} </a> 
+                                        /
+                                        <a href="{:url('Cart/seeCart',['cartId'=>$cart.id,'plateId'=>$cart.plateId])}"> {$cart.fabulous} </a> 
                                     </td>
                                 </tr>
                                 {/foreach}
