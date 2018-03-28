@@ -341,7 +341,7 @@ class Loader
         } else {
             $filename = $baseUrl . $class . $ext;
         }
-        var_dump($filename);die;
+        var_dump($filename);
         if (!empty($filename) && is_file($filename)) {
             // 开启调试模式Win环境严格区分大小写
             if (IS_WIN && pathinfo($filename, PATHINFO_FILENAME) != pathinfo(realpath($filename), PATHINFO_FILENAME)) {
