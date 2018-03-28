@@ -233,7 +233,7 @@
             {if condition="$user && (empty($user->email) || !$user->is_activate)"} 
             <div class="navbar-custom">
                 <div class="container">
-                    <div class="alert alert-success alert-dismissable">
+                    <div class="alert alert-success alert-dismissable" style="margin-top:20px;">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                         {if condition="empty($user->email)"}
                             请先  <a href="{:url('login/binEmail')}"> 绑定邮箱 </a> 。
