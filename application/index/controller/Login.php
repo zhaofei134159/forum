@@ -91,6 +91,7 @@ class Login extends Common
 		return json(['flog'=>1, 'msg'=>'注册成功']);
     }
 
+
     # 绑定邮箱
     public function binEmail(){
     
@@ -622,5 +623,12 @@ class Login extends Common
 		return_json($data);	
     }
 
+
+
+    # 忘记密码
+    public function forgetPass(){
+        
+        return $this->view->fetch('forgetPass');
+    }
 
 }
