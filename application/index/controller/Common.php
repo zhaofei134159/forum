@@ -61,8 +61,10 @@ class Common extends Controller
             $messages = $message_model->userMessage(Session::get('login_id','forum_home'));
 
             # 密保
-            $security = Security::get(['uid'=>Session::get('login_id','forum_home')]);
-            $security = objToArray($security);
+            $securityData = Security::get(['uid'=>Session::get('login_id','forum_home')]);
+            if(!empty($securityData)){
+                $security = objToArray($securityData);
+            }
         }
         $this->assign('messages',$messages);
         $this->assign('security',$security);
