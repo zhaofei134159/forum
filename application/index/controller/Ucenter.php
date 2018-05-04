@@ -582,4 +582,16 @@ class Ucenter extends Common
 
     }
 
+    # 填写密保
+    public function fillSecurity(){
+        $this->is_login();
+
+        $
+
+        $data = array(
+
+            );
+        return $this->view->fetch('fillSecurity',$data); 
+    }
+
 }
