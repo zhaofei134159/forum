@@ -230,7 +230,7 @@
             </div> -->
 
             
-            {if condition="$user && (empty($user->email) || !$user->is_activate)"} 
+            {if condition="$user && (empty($user->email) || !$user->is_activate || empty($security))"} 
             <div class="navbar-custom">
                 <div class="container">
                     <div class="alert alert-success alert-dismissable" style="margin-top:20px;">
