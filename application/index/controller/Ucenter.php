@@ -9,6 +9,7 @@ use app\index\model\Area;
 use app\index\model\Plate;
 use app\index\model\Cart;
 use app\index\model\Follow;
+use app\index\model\Security;
 
 
 use think\Session;
@@ -586,10 +587,11 @@ class Ucenter extends Common
     public function fillSecurity(){
         $this->is_login();
 
-        $
+        
+        $security = Security::get(['uid'=>$this->uid]);
 
         $data = array(
-
+                'security'=>$security,
             );
         return $this->view->fetch('fillSecurity',$data); 
     }
