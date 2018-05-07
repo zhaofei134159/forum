@@ -1,0 +1,67 @@
+{include file="public/header" /}
+	
+
+	<div class="row">
+
+        <div class="col-lg-2 col-md-2">
+            <div class="card-box text-center">
+                {include file="public/userinfoleft" /}
+            </div>
+        </div>
+
+        <div class="col-lg-10 col-md-10">
+            <div class="card-box">
+                <h3 class="header-title m-t-0 m-b-30"> 密保信息 </h3>
+                <hr>
+                <form action="{:url('ucenter/saveDetailUser')}" method="post" enctype="multipart/form-data" data-parsley-validate novalidate id="basicFrom">
+                    <div class="form-group" >
+                        <label for="userName"> 婚姻状况：</label>
+                        <select class="form-control select2" name="maritalStatus" id="maritalStatus" style="width:200px;">
+                            <option value="0">请选择</option>
+                            {foreach $conf['security'] as $security_key => $security_val} 
+                            <option value="{$security_key}" {if condition="0"}selected{/if}>{$security_val}</option>
+                            {/foreach}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="emailAddress"> 答案：</label>
+                        <div>
+                            <input type="text" name="answer">
+                        </div>
+                    </div>
+                    
+
+                    <div class="form-group text-right m-b-0">
+                        <button class="btn btn-primary waves-effect waves-light" type="button" onclick="basicSubmit()">
+                           提交
+                        </button>
+                        <button type="reset" class="btn btn-default waves-effect waves-light m-l-5">
+                            取消
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div><!-- end col -->
+
+	</div>
+
+
+
+</div>
+<script type="text/javascript">
+    function basicSubmit(){
+    	loading('show');
+        //手机号正则
+        var phoneReg = /(^1[3|4|5|7|8]\d{9}$)|(^09\d{8}$)/;  
+        //电话
+        var phone = $.trim($('#phone').val());
+        if (!phoneReg.test(phone)) {
+            loading('hide');
+            var $toast = toastr['error']('请输入有效的手机号码！');
+            return ;
+        }
+
+    	$('#basicFrom').submit();
+    }
+</script>
+{include file="public/footer" /}

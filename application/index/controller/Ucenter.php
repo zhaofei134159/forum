@@ -9,6 +9,7 @@ use app\index\model\Area;
 use app\index\model\Plate;
 use app\index\model\Cart;
 use app\index\model\Follow;
+use app\index\model\Security;
 
 
 use think\Session;
@@ -580,6 +581,22 @@ class Ucenter extends Common
             return json(['flog'=>1,'msg'=>'关注成功']);
         }
 
+    }
+
+    # 修改密保
+    function fillsecurity(){
+        $this->is_login();
+        
+        $uid = $this->uid;
+        $where = array();
+        $where['userid'] = $uid;
+        
+        $Security = Security::where($where)->select();
+       
+        $data = array(
+                'Security'=>$Security,
+            );
+        return $this->view->fetch('fillsecurity',$data); 
     }
 
 }

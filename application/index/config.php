@@ -75,4 +75,19 @@ $conf['smtp']['mailtype'] = "HTML";//邮件格式（HTML/TXT）,TXT为文本邮�
 	$conf['occupation']['19'] = '其他';
 
 
+# 密保问题
+	$conf['security']['1'] = '您目前的姓名是？';
+	$conf['security']['2'] = '您配偶的生日是？';
+	$conf['security']['3'] = '您的学号（或工号）是？';
+	$conf['security']['4'] = '您高中班主任的名字是？';
+	$conf['security']['5'] = '您父亲的姓名是？';
+	$conf['security']['6'] = '您小学班主任的名字是？';
+	$conf['security']['7'] = '您父亲的生日是？';
+	$conf['security']['8'] = '您配偶的姓名是？';
+	$conf['security']['9'] = '您初中班主任的名字是？';
+	$conf['security']['10'] = '您最熟悉的童年好友名字是？';
+	$conf['security']['11'] = '您最熟悉的学校宿舍舍友名字是？';
+	$conf['security']['12'] = '对您影响最大的人名字是？';
+	$conf['security']['13'] = '您母亲的生日是？';
+
 return $conf;
