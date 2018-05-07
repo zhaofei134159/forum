@@ -18,7 +18,7 @@
                         <label for="userName"> 密保问题 ：</label>
                         <select class="form-control select2" name="maritalStatus" id="maritalStatus" style="width:200px;">
                             <option value="0">请选择</option>
-                            {foreach $conf['security'] as $security_key => $security_val}
+                            {foreach $problem as $security_key => $security_val}
                             <option value="{$security_key}" {if condition="0"}selected{/if}>{$security_val}</option>
                             {/foreach}
                         </select>

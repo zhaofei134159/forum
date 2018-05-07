@@ -591,10 +591,13 @@ class Ucenter extends Common
         $where = array();
         $where['userid'] = $uid;
         
-        $Security = Security::where($where)->select();
+        $security = Security::where($where)->select();
+        # 问题
+        $problem = read_conf('security')['security'];
        
         $data = array(
-                'Security'=>$Security,
+                'security'=>$security,
+                'problem'=>$problem
             );
         return $this->view->fetch('fillsecurity',$data); 
     }
