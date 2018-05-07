@@ -83,16 +83,23 @@
 <script type="text/javascript">
     function basicSubmit(){
         loading('show');
-        //手机号正则
-        var phoneReg = /(^1[3|4|5|7|8]\d{9}$)|(^09\d{8}$)/;  
-        //电话
-        var phone = $.trim($('#phone').val());
-        if (!phoneReg.test(phone)) {
-            loading('hide');
-            var $toast = toastr['error']('请输入有效的手机号码！');
-            return ;
-        }
+        $('.content').each(function(i,index){
+            if(index.val()==0){
+                var j = i+1; 
+                alertFun('保存错误',('问题 '+j+' 错误!',false);
+                return false;
+            }
+        })
+        $('.answer').each(function(i,index){
+            if(index.val()==''){
+                var j = i+1; 
+                alertFun('保存错误',('答案 '+j+' 错误!',false);
+                return false;
+            }
+        })       
 
+
+        
         $('#basicFrom').submit();
     }
 </script>
