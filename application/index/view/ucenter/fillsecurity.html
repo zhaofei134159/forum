@@ -15,8 +15,8 @@
                 <hr>
                 <form action="{:url('ucenter/saveDetailUser')}" method="post" enctype="multipart/form-data" data-parsley-validate novalidate id="basicFrom">
                     <div class="form-group" >
-                        <label for="userName"> 密保问题 ：</label>
-                        <select class="form-control select2" name="maritalStatus" id="maritalStatus" style="width:200px;">
+                        <label for="userName"> 密保问题1 ：</label>
+                        <select class="form-control select2" name="content[]" class="content[]" style="width:300px;">
                             <option value="0">请选择</option>
                             {foreach $security = read_conf('security') as $security_key => $security_val}
                             <option value="{$security_key}" {if condition="0"}selected{/if}>{$security_val}</option>
@@ -24,9 +24,42 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="emailAddress"> 答案 ：</label>
+                        <label for="emailAddress"> 答案1 ：</label>
                         <div>
-                           <input type="text" name="answer">
+                           <input type="text" name="answer[]" class="answer[]" parsley-trigger="change" required
+                                    placeholder="答案1" class="form-control" value="">
+                        </div>
+                    </div>
+                    <div class="form-group" >
+                        <label for="userName"> 密保问题2 ：</label>
+                        <select class="form-control select2" name="content[]" class="content[]" style="width:300px;">
+                            <option value="0">请选择</option>
+                            {foreach $security = read_conf('security') as $security_key => $security_val}
+                            <option value="{$security_key}" {if condition="0"}selected{/if}>{$security_val}</option>
+                            {/foreach}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="emailAddress"> 答案2 ：</label>
+                        <div>
+                           <input type="text" name="answer[]" class="answer[]" parsley-trigger="change" required
+                                    placeholder="答案2" class="form-control" value="">
+                        </div>
+                    </div>
+                    <div class="form-group" >
+                        <label for="userName"> 密保问题3 ：</label>
+                        <select class="form-control select2" name="content[]" class="content[]" style="width:300px;">
+                            <option value="0">请选择</option>
+                            {foreach $security = read_conf('security') as $security_key => $security_val}
+                            <option value="{$security_key}" {if condition="0"}selected{/if}>{$security_val}</option>
+                            {/foreach}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="emailAddress"> 答案3 ：</label>
+                        <div>
+                           <input type="text" name="answer[]" class="answer[]" parsley-trigger="change" required
+                                    placeholder="答案3" class="form-control" value="">
                         </div>
                     </div>
                     
