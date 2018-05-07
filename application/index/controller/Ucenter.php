@@ -584,7 +584,7 @@ class Ucenter extends Common
     }
 
     # 修改密保
-    function fillsecurity(){
+    public function fillsecurity(){
         $this->is_login();
         
         $uid = $this->uid;
@@ -600,6 +600,12 @@ class Ucenter extends Common
                 'problem'=>$problem
             );
         return $this->view->fetch('fillsecurity',$data); 
+    }
+
+    # 保存密保信息
+    public function saveSecurity(){
+        $post = input('post.');
+        var_dump($post);
     }
 
 }
