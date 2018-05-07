@@ -87,7 +87,7 @@
         $('.content').each(function(i,index){
             console.log(i)
             console.log(index)
-            console.log(index.val())
+            console.log($('.content:eq('+i+') option::selected').val())
             
         })
 
