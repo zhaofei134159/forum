@@ -83,23 +83,13 @@
 <script type="text/javascript">
     function basicSubmit(){
         loading('show');
+
         $('.content').each(function(i,index){
-            if(index.val()==0){
-                var j = i+1; 
-                alertFun('保存错误',('问题 '+j+' 错误!',false);
-                return false;
-            }
+            console.log(i)
+            console.log(index)
+            
         })
-        $('.answer').each(function(i,index){
-            if(index.val()==''){
-                var j = i+1; 
-                alertFun('保存错误',('答案 '+j+' 错误!',false);
-                return false;
-            }
-        })       
-
-
-        
+       
         $('#basicFrom').submit();
     }
 </script>
