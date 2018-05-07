@@ -12,6 +12,7 @@ use app\index\model\Setting;
 use app\index\model\User;
 use app\index\model\Cate;
 use app\index\model\Message;
+use app\index\model\Security;
 
 class Common extends Controller
 {
@@ -49,6 +50,7 @@ class Common extends Controller
     public function init($controller,$action){
         // $time = time();
         $messages = array();
+        $security = array();
         if(Session::get('login_id','forum_home')){
 
             $account = User::get(['id' => Session::get('login_id','forum_home')]);
@@ -57,8 +59,15 @@ class Common extends Controller
 
             $message_model = new Message();
             $messages = $message_model->userMessage(Session::get('login_id','forum_home'));
+
+            # 密保
+            $securityData = Security::get(['uid'=>Session::get('login_id','forum_home')]);
+            if(!empty($securityData)){
+                $security = objToArray($securityData);
+            }
         }
         $this->assign('messages',$messages);
+        $this->assign('security',$security);
 
 
         
