@@ -100,7 +100,6 @@
         }
 
         $('.answer').each(function(i) {
-            console.log($(this).val());
             if($(this).val()==''){
                 loading('hide');
                 var j = i+1;
@@ -109,6 +108,7 @@
                 return false;
             }
         });
+        console.log(answer);
         return false;
 
         if(answer==0){
