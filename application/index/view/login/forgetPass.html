@@ -22,12 +22,12 @@
                             <div class="form-group" >
                                 <label for="userName"> 账号：</label>
                                 <div>
-                                   <input type="text" name="email" id="email" parsley-trigger="change" required placeholder="账号：" class="form-control answer" value="" style="width:300px;">
+                                   <input type="text" name="email" id="email" parsley-trigger="change" required placeholder="账号：" class="form-control answer" value="" style="width:600px;">
                                 </div>
                             </div>
                             <div class="form-group" >
                                 <label for="userName"> 密保问题1 ：</label>
-                                <select class="form-control select2 content" name="content[]" style="width:300px;">
+                                <select class="form-control select2 content" name="content[]" style="width:600px;">
                                     <option value="0">请选择</option>
                                     {foreach $security = read_conf('security') as $security_key => $security_val}
                                     <option value="{$security_key}">{$security_val}</option>
@@ -37,12 +37,12 @@
                             <div class="form-group">
                                 <label for="emailAddress"> 答案1 ：</label>
                                 <div>
-                                   <input type="text" name="answer[]" parsley-trigger="change" required placeholder="答案1" class="form-control answer" value="" style="width:300px;">
+                                   <input type="text" name="answer[]" parsley-trigger="change" required placeholder="答案1" class="form-control answer" value="" style="width:600px;">
                                 </div>
                             </div>
                             <div class="form-group" >
                                 <label for="userName"> 密保问题2 ：</label>
-                                <select class="form-control select2 content" name="content[]"  style="width:300px;">
+                                <select class="form-control select2 content" name="content[]"  style="width:600px;">
                                     <option value="0">请选择</option>
                                     {foreach $security = read_conf('security') as $security_key => $security_val}
                                     <option value="{$security_key}">{$security_val}</option>
@@ -52,12 +52,12 @@
                             <div class="form-group">
                                 <label for="emailAddress"> 答案2 ：</label>
                                 <div>
-                                   <input type="text" name="answer[]" parsley-trigger="change" required placeholder="答案2" class="form-control answer" value="" style="width:300px;">
+                                   <input type="text" name="answer[]" parsley-trigger="change" required placeholder="答案2" class="form-control answer" value="" style="width:600px;">
                                 </div>
                             </div>
                             <div class="form-group" >
                                 <label for="userName"> 密保问题3 ：</label>
-                                <select class="form-control select2 content" name="content[]" style="width:300px;">
+                                <select class="form-control select2 content" name="content[]" style="width:600px;">
                                     <option value="0">请选择</option>
                                     {foreach $security = read_conf('security') as $security_key => $security_val}
                                     <option value="{$security_key}" >{$security_val}</option>
@@ -67,7 +67,7 @@
                             <div class="form-group">
                                 <label for="emailAddress"> 答案3 ：</label>
                                 <div>
-                                   <input type="text" name="answer[]" parsley-trigger="change" required placeholder="答案3" class="form-control answer" value="" style="width:300px;">
+                                   <input type="text" name="answer[]" parsley-trigger="change" required placeholder="答案3" class="form-control answer" value="" style="width:600px;">
                                 </div>
                             </div>
                             <div class="form-group text-right m-b-0">
