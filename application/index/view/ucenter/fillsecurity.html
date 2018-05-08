@@ -84,13 +84,9 @@
 <script type="text/javascript">
     function basicSubmit(){
         loading('show');
-
-        $('.content').each(function(i,index){
-            console.log(i)
-            console.log(index)
-            console.log($('.content:eq('+i+') option::selected').val())
-            
-        })
+        $('.content option:selected').each(function() {
+            console.log($(this).val());
+        });
 
         return false;
        

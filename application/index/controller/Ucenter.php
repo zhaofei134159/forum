@@ -605,7 +605,6 @@ class Ucenter extends Common
     # 保存密保信息
     public function saveSecurity(){
         $post = input('post.');
-        var_dump($post);
     }
 
 }
