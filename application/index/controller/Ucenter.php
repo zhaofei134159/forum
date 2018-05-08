@@ -594,7 +594,6 @@ class Ucenter extends Common
         $security = Security::where($where)->select();
         var_dump($security);
         var_dump(!empty($security));
-        die;
         # 问题
         $problem = read_conf('security')['security'];
        
