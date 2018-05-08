@@ -616,6 +616,7 @@ class Ucenter extends Common
         if(!empty($security)){
             Security::where('userid',$uid)->delete();
         }
+        
 
         foreach($content as $key=>$content_val){
             $data = array();
