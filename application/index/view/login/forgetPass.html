@@ -11,7 +11,7 @@
 
                     <ul class="nav nav-tabs">
                         <li role="presentation" class="active">
-                            <a href="#home1" role="tab" data-toggle="tab">密保问题?</a>
+                            <a href="#home1" role="tab" data-toggle="tab">密保问题</a>
                         </li>
                         <!-- <li role="presentation">
                             <a href="#profile1" role="tab" data-toggle="tab">Profile</a>
@@ -22,7 +22,7 @@
                             <div class="form-group" >
                                 <label for="userName"> 账号：</label>
                                 <div>
-                                   <input type="text" name="email" id="email" parsley-trigger="change" required placeholder="账号：" class="form-control answer" value="" style="width:600px;">
+                                   <input type="text" name="email" id="email" parsley-trigger="change" required placeholder="邮箱" class="form-control answer" value="" style="width:600px;">
                                 </div>
                             </div>
                             <div class="form-group" >
@@ -70,8 +70,8 @@
                                    <input type="text" name="answer[]" parsley-trigger="change" required placeholder="答案3" class="form-control answer" value="" style="width:600px;">
                                 </div>
                             </div>
-                            <div class="form-group text-right m-b-0">
-                                <button class="btn btn-primary waves-effect waves-light" type="button" onclick="basicSubmit()">
+                            <div class="form-group m-b-0">
+                                <button class="btn btn-primary waves-effect waves-light" type="button" onclick="forgetSubmit()">
                                    提交
                                 </button>
                                 <button type="reset" class="btn btn-default waves-effect waves-light m-l-5">
@@ -100,5 +100,11 @@
         </div>
     </div>
  </div>
+ <script type="text/javascript">
+    function forgetSubmit(){
+        
+    }
+
+ </script>
 
 {include file="public/footer" /}

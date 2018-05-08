@@ -631,4 +631,8 @@ class Login extends Common
         return $this->view->fetch('forgetPass');
     }
 
+    public function saveForgetPass(){
+        
+    }
+
 }
