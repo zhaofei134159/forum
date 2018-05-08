@@ -99,6 +99,7 @@ function str_em($str,$title)
 
 # 对象转数组
 function objToArray($obj,$str='id'){
+	var_dump($obj);die;
 	if($obj) {
         $obj = collection($obj)->toArray();
     }
