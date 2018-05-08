@@ -84,8 +84,22 @@
 <script type="text/javascript">
     function basicSubmit(){
         loading('show');
-        $('.content option:selected').each(function() {
-            console.log($(this).val());
+        $('.content option:selected').each(function(i) {
+            if($(this).val()==0){
+                loading('hide');
+                var j = i+1;
+                var $toast = toastr['error']('请选择 密保问题'+j+'！');
+                return false;
+            }
+        });
+
+        $('.answer option:selected').each(function(i) {
+            if($(this).val()==''){
+                loading('hide');
+                var j = i+1;
+                var $toast = toastr['error']('请填写 密保答案'+j+'！');
+                return false;
+            }
         });
 
         return false;

@@ -82,7 +82,7 @@
         if (!phoneReg.test(phone)) {
             loading('hide');
             var $toast = toastr['error']('请输入有效的手机号码！');
-            return ;
+            return false;
         }
 
     	$('#basicFrom').submit();
