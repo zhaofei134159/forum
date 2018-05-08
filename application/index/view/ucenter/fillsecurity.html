@@ -84,23 +84,34 @@
 <script type="text/javascript">
     function basicSubmit(){
         loading('show');
+        var content = 1;
+        var answer = 1;
         $('.content option:selected').each(function(i) {
             if($(this).val()==0){
                 loading('hide');
                 var j = i+1;
                 var $toast = toastr['error']('请选择 密保问题'+j+'！');
+                content = 0;
                 return false;
             }
         });
+        if(content==0){
+            return false;
+        }
 
         $('.answer option:selected').each(function(i) {
             if($(this).val()==''){
                 loading('hide');
                 var j = i+1;
                 var $toast = toastr['error']('请填写 密保答案'+j+'！');
+                answer = 0;
                 return false;
             }
         });
+        if(answer==0){
+            return false;
+        }
+
 
         $('#basicFrom').submit();
     }
