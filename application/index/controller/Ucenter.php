@@ -592,8 +592,16 @@ class Ucenter extends Common
         $where['userid'] = $uid;
         
         $security = Security::where($where)->select();
-        $security = objToArray($security);
-       
+        $content = array(0=>0,1=>0,2=>0);
+        $answer = array(0=>'',1=>'',2=>'');
+        if(!empty($security)){
+            foreach($security as $key=>$security_val){
+                $content[$key] = $security_val['content'];
+                $answer[$key] = $security_val['answer'];
+            }
+        }
+        
+        
         # 问题
         $problem = read_conf('security')['security'];
        
@@ -616,7 +624,7 @@ class Ucenter extends Common
         if(!empty($security)){
             Security::where('userid',$uid)->delete();
         }
-        
+
 
         foreach($content as $key=>$content_val){
             $data = array();

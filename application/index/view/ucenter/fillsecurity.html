@@ -19,7 +19,7 @@
                         <select class="form-control select2 content" name="content[]" style="width:300px;">
                             <option value="0">请选择</option>
                             {foreach $security = read_conf('security') as $security_key => $security_val}
-                            <option value="{$security_key}" {if condition="!empty($security)"}{if condition="$security['0']['content']==$security_key"}selected{/if}{/if}>{$security_val}</option>
+                            <option value="{$security_key}" {if condition="$content['0']==$security_key"}selected{/if}>{$security_val}</option>
                             {/foreach}
                         </select>
                     </div>
@@ -27,7 +27,7 @@
                         <label for="emailAddress"> 答案1 ：</label>
                         <div>
                            <input type="text" name="answer[]" parsley-trigger="change" required
-                                    placeholder="答案1" class="form-control answer" value="{$security['0']['answer']}" style="width:300px;">
+                                    placeholder="答案1" class="form-control answer" value="{$answer['0']}" style="width:300px;">
                         </div>
                     </div>
                     <div class="form-group" >
@@ -35,7 +35,7 @@
                         <select class="form-control select2 content" name="content[]"  style="width:300px;">
                             <option value="0">请选择</option>
                             {foreach $security = read_conf('security') as $security_key => $security_val}
-                            <option value="{$security_key}" {if condition="!empty($security)"}{if condition="$security['1']['content']==$security_key"}selected{/if}{/if}>{$security_val}</option>
+                            <option value="{$security_key}" {if condition="$content['1']==$security_key"}selected{/if}>{$security_val}</option>
                             {/foreach}
                         </select>
                     </div>
@@ -43,7 +43,7 @@
                         <label for="emailAddress"> 答案2 ：</label>
                         <div>
                            <input type="text" name="answer[]" parsley-trigger="change" required
-                                    placeholder="答案2" class="form-control answer" value="{$security['1']['answer']}" style="width:300px;">
+                                    placeholder="答案2" class="form-control answer" value="{$answer['1']}" style="width:300px;">
                         </div>
                     </div>
                     <div class="form-group" >
@@ -51,7 +51,7 @@
                         <select class="form-control select2 content" name="content[]" style="width:300px;">
                             <option value="0">请选择</option>
                             {foreach $security = read_conf('security') as $security_key => $security_val}
-                            <option value="{$security_key}" {if condition="!empty($security)"}{if condition="$security['2']['content']==$security_key"}selected{/if}{/if}>{$security_val}</option>
+                            <option value="{$security_key}" {if condition="$content['2']==$security_key"}selected{/if}>{$security_val}</option>
                             {/foreach}
                         </select>
                     </div>
@@ -59,7 +59,7 @@
                         <label for="emailAddress"> 答案3 ：</label>
                         <div>
                            <input type="text" name="answer[]" parsley-trigger="change" required
-                                    placeholder="答案3" class="form-control answer" value="{$security['2']['answer']}" style="width:300px;">
+                                    placeholder="答案3" class="form-control answer" value="{$answer['2']}" style="width:300px;">
                         </div>
                     </div>
                     
