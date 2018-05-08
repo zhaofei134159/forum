@@ -19,7 +19,7 @@
                         <select class="form-control select2 content" name="content[]" style="width:300px;">
                             <option value="0">请选择</option>
                             {foreach $security = read_conf('security') as $security_key => $security_val}
-                            <option value="{$security_key}" aa="{$content['0']}" {if condition="$content['0']==$security_key"}selected{/if}>{$security_val}</option>
+                            <option value="{$security_key}" {if condition="$content['0']==$security_key"}selected{/if}>{$security_val}</option>
                             {/foreach}
                         </select>
                     </div>

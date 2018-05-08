@@ -601,12 +601,10 @@ class Ucenter extends Common
             }
         }
 
-        # 问题
-        $problem = read_conf('security')['security'];
        
         $data = array(
-                'security'=>$security,
-                'problem'=>$problem
+                'content'=>$content,
+                'answer'=>$answer,
             );
         return $this->view->fetch('fillsecurity',$data); 
     }
