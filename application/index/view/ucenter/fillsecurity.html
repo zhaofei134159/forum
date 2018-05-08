@@ -19,7 +19,7 @@
                         <select class="form-control select2 content" name="content[]" style="width:300px;">
                             <option value="0">请选择</option>
                             {foreach $security = read_conf('security') as $security_key => $security_val}
-                            <option value="{$security_key}" {if condition="$security['0']['content']==$security_key"}selected{/if}>{$security_val}</option>
+                            <option value="{$security_key}" {if condition="!empty($security)&&$security['0']['content']==$security_key"}selected{/if}>{$security_val}</option>
                             {/foreach}
                         </select>
                     </div>
@@ -35,7 +35,7 @@
                         <select class="form-control select2 content" name="content[]"  style="width:300px;">
                             <option value="0">请选择</option>
                             {foreach $security = read_conf('security') as $security_key => $security_val}
-                            <option value="{$security_key}" {if condition="$security['1']['content']==$security_key"}selected{/if}>{$security_val}</option>
+                            <option value="{$security_key}" {if condition="!empty($security)&&$security['1']['content']==$security_key"}selected{/if}>{$security_val}</option>
                             {/foreach}
                         </select>
                     </div>
@@ -51,7 +51,7 @@
                         <select class="form-control select2 content" name="content[]" style="width:300px;">
                             <option value="0">请选择</option>
                             {foreach $security = read_conf('security') as $security_key => $security_val}
-                            <option value="{$security_key}" {if condition="$security['2']['content']==$security_key"}selected{/if}>{$security_val}</option>
+                            <option value="{$security_key}" {if condition="!empty($security)&&$security['2']['content']==$security_key"}selected{/if}>{$security_val}</option>
                             {/foreach}
                         </select>
                     </div>
