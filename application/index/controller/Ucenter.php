@@ -591,8 +591,7 @@ class Ucenter extends Common
         $where = array();
         $where['userid'] = $uid;
         
-        $security = Security::where($where)->select();
-        var_dump($security);
+        $security = Security::all($where);
         $content = array(0=>0,1=>0,2=>0);
         $answer = array(0=>'',1=>'',2=>'');
         if(!empty($security)){
@@ -601,9 +600,6 @@ class Ucenter extends Common
                 $answer[$key] = $security_val['answer'];
             }
         }
-        var_dump($content);
-        var_dump($answer);die;
-
         
         # 问题
         $problem = read_conf('security')['security'];
