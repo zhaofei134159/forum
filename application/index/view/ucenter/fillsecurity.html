@@ -99,7 +99,7 @@
             return false;
         }
 
-        $('.answer option:selected').each(function(i) {
+        $('.answer').each(function(i) {
             if($(this).val()==''){
                 loading('hide');
                 var j = i+1;
@@ -108,6 +108,7 @@
                 return false;
             }
         });
+        
         if(answer==0){
             return false;
         }
