@@ -595,7 +595,6 @@ class Ucenter extends Common
         $content = array(0=>0,1=>0,2=>0);
         $answer = array(0=>'',1=>'',2=>'');
         if(!empty($security)){
-            $security = objToArray($security);
             foreach($security as $key=>$security_val){
                 $content[$key] = $security_val['content'];
                 $answer[$key] = $security_val['answer'];
