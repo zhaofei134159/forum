@@ -605,7 +605,29 @@ class Ucenter extends Common
     # 保存密保信息
     public function saveSecurity(){
         $post = input('post.');
-        var_dump($post);
+        $content = $post['content'];
+        $answer = $post['answer'];
+
+        $uid = $this->uid;
+
+        $security = Security::where(['userid'=>$uid])->select();
+        if(!empty($security)){
+            Security::where('userid',$uid)->delete();
+        }
+
+        foreach($content as $key=>$content_val){
+            $data = array();
+            $data['userid'] = $uid;
+            $data['content'] = $content_val;
+            $data['answer'] = $answer[$key];
+            $data['ctime'] = time();
+            $data['utime'] = time();
+
+            Security::create($data);
+        }
+
+
+        $this->redirect('ucenter/fillsecurity');
     }
 
 }
