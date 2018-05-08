@@ -600,8 +600,6 @@ class Ucenter extends Common
                 $answer[$key] = $security_val['answer'];
             }
         }
-        var_dump($content);
-        var_dump($answer);die;
 
         # 问题
         $problem = read_conf('security')['security'];
@@ -621,7 +619,7 @@ class Ucenter extends Common
 
         $uid = $this->uid;
 
-        $security = Security::where(['userid'=>$uid])->select();
+        $security = Security::all(['userid'=>$uid]);
         if(!empty($security)){
             Security::where('userid',$uid)->delete();
         }
