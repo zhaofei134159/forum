@@ -592,6 +592,7 @@ class Ucenter extends Common
         $where['userid'] = $uid;
         
         $security = Security::where($where)->select();
+        var_dump($security);
         # 问题
         $problem = read_conf('security')['security'];
        
