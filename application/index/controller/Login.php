@@ -664,6 +664,8 @@ class Login extends Common
 
         // 给邮箱验证发邮件
         $this->verifi_email($post['email']);
+
+        return json(['flog'=>1, 'msg'=>'请查收邮件！']);
     }
     
     // 验证邮箱
