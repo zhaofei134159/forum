@@ -95,7 +95,7 @@
                                 <div class="form-group" >
                                     <label for="userName"> 账号：</label>
                                     <div>
-                                       <input type="text" name="email" id="email" parsley-trigger="change" required placeholder="邮箱" class="form-control" value="">
+                                       <input type="text" name="email1" id="email1" parsley-trigger="change" required placeholder="邮箱" class="form-control" value="">
                                     </div>
                                 </div>
                             </div>
@@ -187,7 +187,7 @@
     }
     function emailForgetSubmit(){
         loading('show');
-        var email = $('#email').val();
+        var email = $('#email1').val();
         if(email==''){
             loading('hide');
             var $toast = toastr['error']('登录邮箱不能为空！');
