@@ -1,0 +1,98 @@
+{include file="public/header" /}
+ 
+    <style type="text/css">
+        .header-title{font-size:30px;text-align:center;}
+    </style>
+    <div class="row">
+        <div class="col-lg-6 col-md-offset-3">
+            <div class="login-panel panel text-center panel-default">
+                <div class="panel-heading">
+                    <h4 class="header-title"> 修改密码 </h4>
+                </div>
+
+                <div class="panel-body">
+                    <div class="form-horizontal" role="form" data-parsley-validate novalidate>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-4 control-label">邮箱*</label>
+                            <div class="col-sm-7">
+                                <input type="hidden" name="email" id="email" value="{$email}">
+                                {$email}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="hori-pass1" class="col-sm-4 control-label">密码*</label>
+                            <div class="col-sm-7">
+                                <input id="hori-pass1" type="password" name="password" placeholder="Password" required
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="hori-pass2" class="col-sm-4 control-label">确认 密码
+                                *</label>
+                            <div class="col-sm-7">
+                                <input data-parsley-equalto="#hori-pass1" type="password" name="reg_password" required
+                                       placeholder="Password" class="form-control" id="hori-pass2">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <button type="submit" class="btn btn-success waves-effect waves-light" onclick="modifyPass()">
+                                    修改密码
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- end col -->
+
+    </div>
+
+    <script type="text/javascript">
+        //注册
+        function modifyPass(){
+            loading('show');
+            var email = $('input[name="email"]').val();
+            var password = $('input[name="password"]').val();
+            var re_password = $('input[name="reg_password"]').val();
+
+            console.log(email);
+            console.log(password);
+            console.log(re_password);
+
+            if(password==''){
+                loading('hide');
+                var $toast = toastr['error']('密码不能为空！');
+                return false; 
+            }
+
+            if(password!=re_password){
+                loading('hide');
+                var $toast = toastr['error']('两次输入密码不一致！');
+                return false; 
+            }
+
+            $.ajax({
+                 type: "POST",
+                 url: "{:url('login/saveModifyPass')}",
+                 async: false,
+                 data: {'email':email,'password':password,'re_password':re_password},
+                 dataType: "json",
+                 success: function(res){
+                    if(res.flog!=1){
+                        loading('hide');
+                        var $toast = toastr['error'](res.msg);
+
+                        return false;
+                    }else{
+                        var $toast = toastr['success'](res.msg);
+                        window.location.href = "{:url('login/index')}";
+                    }
+                 }
+            });
+
+        }
+    </script>
+
+{include file="public/footer" /}

@@ -178,6 +178,7 @@
                     var $toast = toastr['error'](res.msg);
                     return false;
                 }else{
+                    var $toast = toastr['success'](res.msg);
                     window.location.href = "{:url('login/modifyPass')}?email="+res.data;
                 }
              }

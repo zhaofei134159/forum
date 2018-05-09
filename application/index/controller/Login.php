@@ -663,4 +663,25 @@ class Login extends Common
         return $this->view->fetch('modifyPass',$data);
     }
 
+    public function saveModifyPass(){
+        $post = input('post.');
+        $email = $post['email'];
+        $password = $post['password'];
+        $re_password = $post['re_password'];
+
+        $user = User::get(['email'=>$email]);
+        if(empty($user)){
+            return json(['flog'=>0, 'msg'=>'该账户不存在！']);
+        }
+
+        $login_salt = $user['login_salt'];
+        $password = md5(md5($password) . $login_salt);
+
+        $data = array();
+        $data['password'] = $password;
+        User::where('email', $email)->update($data);
+
+        return json(['flog'=>1, 'msg'=>'修改密码成功！']);
+    }
+
 }
