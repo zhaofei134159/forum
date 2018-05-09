@@ -642,9 +642,11 @@ class Login extends Common
         if(empty($user)){
             return json(['flog'=>0, 'msg'=>'该账户没有注册！']);
         }
-
+        
+        var_dump($user['id']);
         foreach($content as $key=>$cont_val){
             $security = Security::get(['userid'=>$user['id'],'content'=>$cont_val,'answer'=>$answer[$key]]);
+            var_dump($security);
             if(empty($security)){
                 var_dump($key);
                 var_dump($cont_val);
