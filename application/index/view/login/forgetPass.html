@@ -11,11 +11,11 @@
 
                     <ul class="nav nav-tabs">
                         <li role="presentation" class="active">
-                            <a href="#home1" role="tab" data-toggle="tab">密保问题</a>
+                            <a href="#home1" role="tab" data-toggle="tab">密保验证</a>
                         </li>
-                        <!-- <li role="presentation">
-                            <a href="#profile1" role="tab" data-toggle="tab">Profile</a>
-                        </li> -->
+                        <li role="presentation">
+                            <a href="#profile1" role="tab" data-toggle="tab">邮箱验证</a>
+                        </li>
                     </ul>
                     <div class="tab-content"  style="border:none;">
                         <div role="tabpanel" class="tab-pane fade in active" id="home1">
@@ -87,26 +87,26 @@
                                     <button class="btn btn-primary waves-effect waves-light" type="button" onclick="forgetSubmit()">
                                        提交
                                     </button>
-                                    <button type="reset" class="btn btn-default waves-effect waves-light m-l-5">
-                                        取消
+                                </div>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="profile1">
+                            <div class="col-lg-6">
+                                <div class="form-group" >
+                                    <label for="userName"> 账号：</label>
+                                    <div>
+                                       <input type="text" name="email" id="email" parsley-trigger="change" required placeholder="邮箱" class="form-control" value="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group m-b-0">
+                                    <button class="btn btn-primary waves-effect waves-light" type="button" onclick="emailForgetSubmit()">
+                                       提交
                                     </button>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- <div role="tabpanel" class="tab-pane fade" id="profile1"><p>Food truck fixie locavore,
-                            accusamus mcsweeney's marfa nulla single-origin coffee squid.
-                            Exercitation +1 labore velit, blog sartorial PBR leggings next level
-                            wes anderson artisan four loko farm-to-table craft beer twee. Qui
-                            photo booth letterpress, commodo enim craft beer mlkshk aliquip jean
-                            shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda
-                            labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia
-                            yr, vero magna velit sapiente labore stumptown. Vegan fanny pack
-                            odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY
-                            ethical culpa terry richardson biodiesel. Art party scenester
-                            stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed
-                            echo park.</p>
-                        </div> -->
                     </div>
                 </div><!-- end col -->
 
@@ -184,6 +184,39 @@
              }
         });
 
+    }
+    function emailForgetSubmit(){
+        loading('show');
+        var email = $('#email').val();
+        if(email==''){
+            loading('hide');
+            var $toast = toastr['error']('登录邮箱不能为空！');
+            return false; 
+        }
+        var myema =  /^[_\.0-9a-z-]+@([0-9a-z][0-9a-z-]+\.){1,4}[a-z]{2,3}$/i;
+        if(!myema.test(email)) 
+        { 
+            loading('hide');
+            var $toast = toastr['error']('登录邮箱格式错误！');
+            return false; 
+        }
+
+        $.ajax({
+             type: "POST",
+             url: "{:url('login/emailConfirm')}",
+             async: false,
+             data: {'email':email},
+             dataType: "json",
+             success: function(res){
+                if(res.flog!=1){
+                    loading('hide');
+                    var $toast = toastr['error'](res.msg);
+                    return false;
+                }else{
+                    var $toast = toastr['success'](res.msg);
+                }
+             }
+        });
     }
 
  </script>

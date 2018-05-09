@@ -653,6 +653,12 @@ class Login extends Common
         return json(['flog'=>1, 'msg'=>'密保正确！','data'=>$email]);
     }
 
+    # 邮箱验证
+    public function emailConfirm(){
+        $post = input('post.'); 
+        var_dump($post);
+    }
+
     # 修改密码
     public function modifyPass(){
         $email = input('get.email');
