@@ -102,7 +102,74 @@
  </div>
  <script type="text/javascript">
     function forgetSubmit(){
-        
+        loading('show');
+        var content = 1;
+        var answer = 1;
+        var contentArr = new Array();
+        var answerArr = new Array();
+
+        $('.content option:selected').each(function(i) {
+            if($(this).val()==0){
+                loading('hide');
+                var j = i+1;
+                var $toast = toastr['error']('请选择 密保问题'+j+'！');
+                content = 0;
+                return false;
+            }else{
+                contentArr[i] = $(this).val(); 
+            }
+        });
+        if(content==0){
+            return false;
+        }
+
+        $('.answer').each(function(i) {
+            if($(this).val()==''){
+                loading('hide');
+                var j = i+1;
+                var $toast = toastr['error']('请填写 密保答案'+j+'！');
+                answer = 0;
+                return false;
+            }else{
+                answerArr[i] = $(this).val(); 
+            }
+        });
+        if(answer==0){
+            return false;
+        }
+
+        var email = $('#email').val();
+        if(email==''){
+            loading('hide');
+            var $toast = toastr['error']('登录邮箱不能为空！');
+            return false; 
+        }
+        var myema =  /^[_\.0-9a-z-]+@([0-9a-z][0-9a-z-]+\.){1,4}[a-z]{2,3}$/i;
+        if(!myema.test(email)) 
+        { 
+            loading('hide');
+            var $toast = toastr['error']('登录邮箱格式错误！');
+            return false; 
+        }
+
+
+        $.ajax({
+             type: "POST",
+             url: "{:url('login/saveForgetPass')}",
+             async: false,
+             data: {'email':email,'answer':answerArr,'content':contentArr},
+             dataType: "json",
+             success: function(res){
+                if(res.flog!=1){
+                    loading('hide');
+                    var $toast = toastr['error'](res.msg);
+                    return false;
+                }else{
+                    // window.location.href = '/';
+                }
+             }
+        });
+
     }
 
  </script>

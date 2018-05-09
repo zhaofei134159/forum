@@ -632,7 +632,8 @@ class Login extends Common
     }
 
     public function saveForgetPass(){
-        
+        $post = input('post.');
+        var_dump($post);
     }
 
 }
