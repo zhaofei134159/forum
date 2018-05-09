@@ -19,64 +19,70 @@
                     </ul>
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane fade in active" id="home1">
-                            <div class="form-group" >
-                                <label for="userName"> 账号：</label>
-                                <div>
-                                   <input type="text" name="email" id="email" parsley-trigger="change" required placeholder="邮箱" class="form-control answer" value="" style="width:600px;">
+                            <div class="col-lg-6">
+                                <div class="form-group" >
+                                    <label for="userName"> 账号：</label>
+                                    <div>
+                                       <input type="text" name="email" id="email" parsley-trigger="change" required placeholder="邮箱" class="form-control answer" value="">
+                                    </div>
+                                </div>
+                                <div class="form-group" >
+                                    <label for="userName"> 密保问题1 ：</label>
+                                    <select class="form-control select2 content" name="content[]">
+                                        <option value="0">请选择</option>
+                                        {foreach $security = read_conf('security') as $security_key => $security_val}
+                                        <option value="{$security_key}">{$security_val}</option>
+                                        {/foreach}
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="emailAddress"> 答案1 ：</label>
+                                    <div>
+                                       <input type="text" name="answer[]" parsley-trigger="change" required placeholder="答案1" class="form-control answer" value="">
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group" >
-                                <label for="userName"> 密保问题1 ：</label>
-                                <select class="form-control select2 content" name="content[]" style="width:600px;">
-                                    <option value="0">请选择</option>
-                                    {foreach $security = read_conf('security') as $security_key => $security_val}
-                                    <option value="{$security_key}">{$security_val}</option>
-                                    {/foreach}
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="emailAddress"> 答案1 ：</label>
-                                <div>
-                                   <input type="text" name="answer[]" parsley-trigger="change" required placeholder="答案1" class="form-control answer" value="" style="width:600px;">
+                            <div class="col-lg-6">
+                                <div class="form-group" >
+                                    <label for="userName"> 密保问题2 ：</label>
+                                    <select class="form-control select2 content" name="content[]" >
+                                        <option value="0">请选择</option>
+                                        {foreach $security = read_conf('security') as $security_key => $security_val}
+                                        <option value="{$security_key}">{$security_val}</option>
+                                        {/foreach}
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="emailAddress"> 答案2 ：</label>
+                                    <div>
+                                       <input type="text" name="answer[]" parsley-trigger="change" required placeholder="答案2" class="form-control answer" value="">
+                                    </div>
+                                </div>
+                                <div class="form-group" >
+                                    <label for="userName"> 密保问题3 ：</label>
+                                    <select class="form-control select2 content" name="content[]">
+                                        <option value="0">请选择</option>
+                                        {foreach $security = read_conf('security') as $security_key => $security_val}
+                                        <option value="{$security_key}" >{$security_val}</option>
+                                        {/foreach}
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="emailAddress"> 答案3 ：</label>
+                                    <div>
+                                       <input type="text" name="answer[]" parsley-trigger="change" required placeholder="答案3" class="form-control answer" value="">
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group" >
-                                <label for="userName"> 密保问题2 ：</label>
-                                <select class="form-control select2 content" name="content[]"  style="width:600px;">
-                                    <option value="0">请选择</option>
-                                    {foreach $security = read_conf('security') as $security_key => $security_val}
-                                    <option value="{$security_key}">{$security_val}</option>
-                                    {/foreach}
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="emailAddress"> 答案2 ：</label>
-                                <div>
-                                   <input type="text" name="answer[]" parsley-trigger="change" required placeholder="答案2" class="form-control answer" value="" style="width:600px;">
+                            <div class="col-lg-12">
+                                <div class="form-group m-b-0">
+                                    <button class="btn btn-primary waves-effect waves-light" type="button" onclick="forgetSubmit()">
+                                       提交
+                                    </button>
+                                    <button type="reset" class="btn btn-default waves-effect waves-light m-l-5">
+                                        取消
+                                    </button>
                                 </div>
-                            </div>
-                            <div class="form-group" >
-                                <label for="userName"> 密保问题3 ：</label>
-                                <select class="form-control select2 content" name="content[]" style="width:600px;">
-                                    <option value="0">请选择</option>
-                                    {foreach $security = read_conf('security') as $security_key => $security_val}
-                                    <option value="{$security_key}" >{$security_val}</option>
-                                    {/foreach}
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="emailAddress"> 答案3 ：</label>
-                                <div>
-                                   <input type="text" name="answer[]" parsley-trigger="change" required placeholder="答案3" class="form-control answer" value="" style="width:600px;">
-                                </div>
-                            </div>
-                            <div class="form-group m-b-0">
-                                <button class="btn btn-primary waves-effect waves-light" type="button" onclick="forgetSubmit()">
-                                   提交
-                                </button>
-                                <button type="reset" class="btn btn-default waves-effect waves-light m-l-5">
-                                    取消
-                                </button>
                             </div>
                         </div>
 
@@ -108,6 +114,20 @@
         var contentArr = new Array();
         var answerArr = new Array();
 
+        var email = $('#email').val();
+        if(email==''){
+            loading('hide');
+            var $toast = toastr['error']('登录邮箱不能为空！');
+            return false; 
+        }
+        var myema =  /^[_\.0-9a-z-]+@([0-9a-z][0-9a-z-]+\.){1,4}[a-z]{2,3}$/i;
+        if(!myema.test(email)) 
+        { 
+            loading('hide');
+            var $toast = toastr['error']('登录邮箱格式错误！');
+            return false; 
+        }
+
         $('.content option:selected').each(function(i) {
             if($(this).val()==0){
                 loading('hide');
@@ -137,21 +157,6 @@
         if(answer==0){
             return false;
         }
-
-        var email = $('#email').val();
-        if(email==''){
-            loading('hide');
-            var $toast = toastr['error']('登录邮箱不能为空！');
-            return false; 
-        }
-        var myema =  /^[_\.0-9a-z-]+@([0-9a-z][0-9a-z-]+\.){1,4}[a-z]{2,3}$/i;
-        if(!myema.test(email)) 
-        { 
-            loading('hide');
-            var $toast = toastr['error']('登录邮箱格式错误！');
-            return false; 
-        }
-
 
         $.ajax({
              type: "POST",
