@@ -35,14 +35,6 @@
                                         {/foreach}
                                     </select>
                                 </div>
-                                <div class="form-group">
-                                    <label for="emailAddress"> 答案1 ：</label>
-                                    <div>
-                                       <input type="text" name="answer[]" parsley-trigger="change" required placeholder="答案1" class="form-control answer" value="">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
                                 <div class="form-group" >
                                     <label for="userName"> 密保问题2 ：</label>
                                     <select class="form-control select2 content" name="content[]" >
@@ -52,12 +44,7 @@
                                         {/foreach}
                                     </select>
                                 </div>
-                                <div class="form-group">
-                                    <label for="emailAddress"> 答案2 ：</label>
-                                    <div>
-                                       <input type="text" name="answer[]" parsley-trigger="change" required placeholder="答案2" class="form-control answer" value="">
-                                    </div>
-                                </div>
+                                
                                 <div class="form-group" >
                                     <label for="userName"> 密保问题3 ：</label>
                                     <select class="form-control select2 content" name="content[]">
@@ -66,6 +53,27 @@
                                         <option value="{$security_key}" >{$security_val}</option>
                                         {/foreach}
                                     </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="emailAddress"></label>
+                                    <div>
+                                       <input type="hidden"  parsley-trigger="change"  class="form-control" >
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="emailAddress"> 答案1 ：</label>
+                                    <div>
+                                       <input type="text" name="answer[]" parsley-trigger="change" required placeholder="答案1" class="form-control answer" value="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="emailAddress"> 答案2 ：</label>
+                                    <div>
+                                       <input type="text" name="answer[]" parsley-trigger="change" required placeholder="答案2" class="form-control answer" value="">
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="emailAddress"> 答案3 ：</label>
