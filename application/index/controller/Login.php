@@ -674,8 +674,8 @@ class Login extends Common
             return json(['flog'=>0, 'msg'=>'该账户不存在！']);
         }
 
-        $login_salt = $user['login_salt'];
-        $password = md5(md5($password) . $login_salt);
+        $login_stat = $user['login_stat'];
+        $password = md5(md5($password) . $login_stat);
 
         $data = array();
         $data['password'] = $password;
