@@ -2,6 +2,7 @@
 namespace app\index\controller;
 
 use app\index\model\User;
+use app\index\model\Security;
 
 
 use think\Session;
@@ -633,7 +634,33 @@ class Login extends Common
 
     public function saveForgetPass(){
         $post = input('post.');
-        var_dump($post);
+        $email = $post['email'];
+        $content = $post['content'];
+        $answer = $post['answer'];
+
+        $user = User::get(['email'=>$email]);
+        if(empty($user)){
+            return json(['flog'=>0, 'msg'=>'该账户没有注册！']);
+        }
+
+        foreach($content as $key=>$cont_val){
+            $security = Security::get(['userid'=>$user['id'],'content'=>$cont_val,'answer'=>$answer[$key]]);
+            if(empty($security)){
+                return json(['flog'=>0, 'msg'=>'问题'.($key+1).' 或者 答案'.($key+1).' 错误！']);
+            }
+        }
+
+        return json(['flog'=>1, 'msg'=>'密保正确！','data'=>$email]);
+    }
+
+    # 修改密码
+    public function modifyPass(){
+        $email = input('get.email');
+
+        $data = array(
+                'email'=>$email,
+            );
+        return $this->view->fetch('modifyPass',$data);
     }
 
 }

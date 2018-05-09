@@ -178,7 +178,7 @@
                     var $toast = toastr['error'](res.msg);
                     return false;
                 }else{
-                    // window.location.href = '/';
+                    window.location.href = "{:url('login/modifyPass')}?email="+res.data;
                 }
              }
         });
