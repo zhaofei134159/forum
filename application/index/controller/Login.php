@@ -646,6 +646,9 @@ class Login extends Common
         foreach($content as $key=>$cont_val){
             $security = Security::get(['userid'=>$user['id'],'content'=>$cont_val,'answer'=>$answer[$key]]);
             if(empty($security)){
+                var_dump($key);
+                var_dump($cont_val);
+                var_dump($answer[$key]);
                 return json(['flog'=>0, 'msg'=>'问题'.($key+1).' 或者 答案'.($key+1).' 错误！']);
             }
         }
