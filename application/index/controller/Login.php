@@ -655,13 +655,59 @@ class Login extends Common
 
     # 邮箱验证
     public function emailConfirm(){
-        $post = input('post.'); 
-        var_dump($post);
+        $post = input('post.');
+        $email = $post['email'];
+        $user = User::get(['email'=>$email]);
+        if(empty($user)){
+            return json(['flog'=>0, 'msg'=>'该账户不存在！']);
+        }
+
+        // 给邮箱验证发邮件
+        $this->verifi_email($post['email']);
+    }
+    
+    // 验证邮箱
+    public function verifi_email($email){
+       
+        // 配置信息
+        $smtp = read_conf('smtp');
+
+        $smtpserver = $smtp['smtpserver'];
+        $smtpserverport = $smtp['smtpserverport'];
+        $smtpusermail = $smtp['smtpusermail'];
+        $smtpuser = $smtp['smtpuser'];
+        $smtppass = $smtp['smtppass'];
+        $mailtype = $smtp['mailtype'];
+        
+
+        $smtpemailto = $email;//发送给谁
+        $mailtitle = read_conf('website')['web_name'].' , 修改密码！';//邮件主题
+        //邮件内容
+        $mailcontent = "<h2> ".read_conf('website')['web_name']." , 修改密码</h2>";
+        $mailcontent .= "<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击 <a href='http://".read_conf('website')['email_callback']."/index/login/modifyPass?addr=".base64_encode($email)."&start=".base64_encode('forum')."&token=".base64_encode($email.'zhaofei')."'>验证链接</a> 确认邮箱，修改密码。（如果不是本人操作，请忽略本条信息）</h3>";
+        
+        //************************ 配置信息 ****************************
+        Loader::import('smtp', ROOT_PATH.'extend'.DS);
+        
+        $smtp = new \smtp($smtpserver,$smtpserverport,true,$smtpuser,$smtppass);//这里面的一个true是表示使用身份验证,否则不使用身份验证.
+        $smtp->debug = false;//是否显示发送的调试信息
+        $state = @$smtp->sendmail($smtpemailto, $smtpusermail, $mailtitle, $mailcontent, $mailtype);
+
+        //这儿 默认都发送成功了  没有记录没发成功的状态 以后再说
     }
 
     # 修改密码
     public function modifyPass(){
         $email = input('get.email');
+        $addr = input('get.addr');
+
+        if(empty($email)){
+            if(!empty($addr)){
+                $email = base64_decode($addr);
+            }else{
+                $this->error('链接错误 ......');
+            }
+        }
 
         $data = array(
                 'email'=>$email,

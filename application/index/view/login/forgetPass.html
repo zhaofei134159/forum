@@ -213,6 +213,7 @@
                     var $toast = toastr['error'](res.msg);
                     return false;
                 }else{
+                    loading('hide');
                     var $toast = toastr['success'](res.msg);
                 }
              }
