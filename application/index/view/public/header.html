@@ -343,7 +343,7 @@
                         <h4 class="page-title">
                             <a href="/"><i class="zmdi zmdi-home"></i> 首 页</a>
                             {if condition="$controller!='Index'"}    
-                                / <a href="{:url($controller.'/index')}">{:url_read_conf('home_url')[$controller]['controller']}</a>
+                                / <a href="{:url($controller.'/index')}{if condition='$controller=="Forum"'}?plateId=57{/if}">{:url_read_conf('home_url')[$controller]['controller']}</a>
                             {/if}
 
                             {if condition="$controller!='Index' && $action!='index'"}    
