@@ -75,7 +75,7 @@ class Cart extends Common
 
         $data = array(
                 'topCarts'=>$topCarts,
-                'plateAdmin'=>$plateAdmin
+                'plateAdmin'=>$plateAdmin,
         		'carts'=>$carts,
         		'page'=>$page,
                 'users'=>$users,
