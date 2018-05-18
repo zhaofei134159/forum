@@ -31,8 +31,8 @@ class Cart extends Common
 
         $plate = Plate::get(['id'=>$plateId]);
         $plateAdmin = array();
-        if(!empty($plate['adminid'])){
-            $plateAdmin = explode(',',$plate['adminid']);
+        if(!empty($plate['adminids'])){
+            $plateAdmin = explode(',',$plate['adminids']);
         }
 
         # 置顶的一些帖子 
