@@ -343,11 +343,15 @@
                         <h4 class="page-title">
                             <a href="/"><i class="zmdi zmdi-home"></i> 首 页</a>
                             {if condition="$controller!='Index'"}    
-                                / <a href="{:url($controller.'/index')}{if condition='$controller=="Forum"'}?plateId=57{/if}">{:url_read_conf('home_url')[$controller]['controller']}</a>
+                                / <a href="{:url($controller.'/index')}{if condition='$controller=="Cart"'}?plateId={$plateId}{/if}">{:url_read_conf('home_url')[$controller]['controller']}</a>
                             {/if}
 
                             {if condition="$controller!='Index' && $action!='index'"}    
+                                {if condition='$controller=="Cart"&&$action=="seecart"'}
+                                / <a href="{:url($controller.'/'.$action,['cartId'=>$cartId,'plateId'=>$plateId])}">{:url_read_conf('home_url')[$controller]['action'][$action]}</a>
+                                {else}
                                 / <a href="{:url($controller.'/'.$action)}">{:url_read_conf('home_url')[$controller]['action'][$action]}</a>
+                                {/if}
                             {/if}
                         </h4>
                     </div>
