@@ -348,7 +348,7 @@
 
                             {if condition="$controller!='Index' && $action!='index'"}    
                                 {if condition='$controller=="Cart"&&$action=="seecart"'}
-                                / <a href="{:url($controller.'/'.$action,['cartId'=>$cartId,'plateId'=>$plateId])}">{:url_read_conf('home_url')[$controller]['action'][$action]}</a>
+                                / <a href="{:url($controller.'/'.$action,['cartId'=>$cart['id'],'plateId'=>$plateId])}">{:url_read_conf('home_url')[$controller]['action'][$action]}</a>
                                 {else}
                                 / <a href="{:url($controller.'/'.$action)}">{:url_read_conf('home_url')[$controller]['action'][$action]}</a>
                                 {/if}
