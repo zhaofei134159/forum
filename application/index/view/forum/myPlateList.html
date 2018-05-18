@@ -6,8 +6,8 @@
     </div>
     <div class="row">
         {foreach $myPlate as $plate}
-        <div class="col-md-4" style="margin: 0px 0px 50px 0px;">
-            <div class="text-center card-box">
+        <div class="col-md-4">
+            <div class="text-center card-box" style="">
 
                 <div>
                     <img src="/{$plate.headimg}" class="img-circle thumb-xl img-thumbnail m-b-10" alt="{$plate.name}">
@@ -45,10 +45,10 @@
                         </p>
                     </div>
 
-                    <div class="project-members m-b-20 text-left">
+                    <div class="project-members m-b-20 text-left" style="height:80px;">
                         <span class="m-r-5 font-600">管理员 :</span>
                         <div class="files-list">
-                            <div style="float:left;" id="adminids">
+                            <div style="float:left;" id="adminids_{$plate['id']}">
                             {foreach $users as $user}
                                 {if condition="in_array($user.id,explode(',',$plate.adminids))"}
                                 <div class="file-box" style="text-align:center;float:left;">
@@ -160,7 +160,7 @@
                     html += '<p class="font-13 m-b-5 text-muted"><small>'+index.nikename+'</small></p>';
                     html += '</div>';
                 })
-                $('#adminids').html(html);
+                $('#adminids_'+plateId).html(html);
                 $('.close').click();
             }
         },'json')
