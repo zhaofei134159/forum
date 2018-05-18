@@ -35,7 +35,7 @@
                         </p>
                         {if condition="$user.id!=$userid"}
                         <div class="row">
-                            <div class="text-center col-lg-3 col-md-3 col-md-offset-3" >
+                            <div class="text-center col-lg-4 col-md-4 col-md-offset-4" >
                                 <button type="button" class="btn btn-danger waves-effect w-md waves-light m-b-5" onclick="follow({$user.id},$(this))">
                                     {if condition="empty($follow)"}
                                         <i class="ti-plus"></i>
@@ -46,12 +46,12 @@
                                     {/if}
                                 </button>
                             </div>
-                            <div class="text-center col-lg-3 col-md-3" >
-                                <button type="button" class="btn btn-success waves-effect w-md waves-light m-b-5" onclick="message({$user.id})">
-                                    <i class="ti-comment-alt"></i>
-                                    私信
-                                </button>
-                            </div>
+                         <!--    <div class="text-center col-lg-3 col-md-3" >
+                             <button type="button" class="btn btn-success waves-effect w-md waves-light m-b-5" onclick="message({$user.id})">
+                                 <i class="ti-comment-alt"></i>
+                                 私信
+                             </button>
+                         </div> -->
                         </div>
                         {/if}
                     </div>
