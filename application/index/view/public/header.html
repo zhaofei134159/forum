@@ -238,7 +238,7 @@
                         {if condition="empty($user->email)"}
                             请先  <a href="{:url('login/binEmail')}"> 绑定邮箱 </a> 。
                         {elseif condition="!$user->is_activate"}
-                            已发送邮件到注册邮箱中 , 请激活邮箱 。
+                            <!-- 已发送邮件到注册邮箱中 , 请激活邮箱 。 -->
                         {elseif condition="empty($security)"}
                             请  <a href="{:url('Ucenter/fillSecurity')}"> 填写密保 </a> 信息 。
                         {/if}
