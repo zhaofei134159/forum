@@ -635,7 +635,7 @@ class Ucenter extends Common
         }
 
 
-        $this->redirect('ucenter/fillsecurity');
+        $this->redirect('ucenter/index');
     }
 
 }
