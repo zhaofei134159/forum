@@ -30,6 +30,10 @@ class Cart extends Common
         }
 
         $plate = Plate::get(['id'=>$plateId]);
+        $plateAdmin = array();
+        if(!empty($plate['adminid'])){
+            $plateAdmin = explode(',',$plate['adminid']);
+        }
 
         # 置顶的一些帖子 
         $topWhere = array();
@@ -71,6 +75,7 @@ class Cart extends Common
 
         $data = array(
                 'topCarts'=>$topCarts,
+                'plateAdmin'=>$plateAdmin
         		'carts'=>$carts,
         		'page'=>$page,
                 'users'=>$users,

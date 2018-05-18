@@ -70,7 +70,7 @@
                                         </a>
                                     </td>
                                     <td class="handle" style="height:30px;line-height:41px;">
-                                        {if condition="$userid==$plate.userid"}
+                                        {if condition="$userid==$plate.userid||in_array($userid,$plateAdmin)"}
                                             <button class="btn btn-danger waves-effect waves-light btn-xs m-b-5" onclick="removeCart('top',{$topCart.id},{$plateId})">
                                                 移除置顶
                                             </button>
@@ -139,7 +139,7 @@
                                         </a>
                                     </td>
                                     <td class="handle" style="height:30px;line-height:41px;">
-                                        {if condition="$userid==$plate.userid"}
+                                        {if condition="$userid==$plate.userid||in_array($userid,$plateAdmin)"}
                                             <button class="btn btn-success waves-effect waves-light btn-xs m-b-5" onclick="addCart('top',{$cart.id},{$plateId})">
                                                 添加置顶
                                             </button>
