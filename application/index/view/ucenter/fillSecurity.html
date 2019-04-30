@@ -1,0 +1,121 @@
+{include file="public/header" /}
+    
+    <div class="row">
+        <div class="col-lg-2 col-md-2">
+            <div class="card-box text-center">
+                {include file="public/userinfoleft" /}
+            </div>
+        </div>
+        <div class="col-lg-10 col-md-10">
+            <div class="card-box" style="height:380px;">
+                <h3 class="header-title m-t-0 m-b-30"> 密保信息 </h3>
+                <hr>
+                <form action="{:url('ucenter/saveSecurity')}" method="post" enctype="multipart/form-data" data-parsley-validate novalidate id="basicFrom">
+                    <div class="col-lg-6">
+                        <div class="form-group" >
+                            <label for="userName"> 密保问题1 ：</label>
+                            <select class="form-control select2 content" name="content[]" style="width:300px;">
+                                <option value="0">请选择</option>
+                                {foreach $security = read_conf('security') as $security_key => $security_val}
+                                <option value="{$security_key}" {if condition="$content['0']==$security_key"}selected{/if}>{$security_val}</option>
+                                {/foreach}
+                            </select>
+                        </div>
+                        <div class="form-group" >
+                            <label for="userName"> 密保问题2 ：</label>
+                            <select class="form-control select2 content" name="content[]"  style="width:300px;">
+                                <option value="0">请选择</option>
+                                {foreach $security = read_conf('security') as $security_key => $security_val}
+                                <option value="{$security_key}" {if condition="$content['1']==$security_key"}selected{/if}>{$security_val}</option>
+                                {/foreach}
+                            </select>
+                        </div>
+                        <div class="form-group" >
+                            <label for="userName"> 密保问题3 ：</label>
+                            <select class="form-control select2 content" name="content[]" style="width:300px;">
+                                <option value="0">请选择</option>
+                                {foreach $security = read_conf('security') as $security_key => $security_val}
+                                <option value="{$security_key}" {if condition="$content['2']==$security_key"}selected{/if}>{$security_val}</option>
+                                {/foreach}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="emailAddress"> 答案1 ：</label>
+                            <div>
+                               <input type="text" name="answer[]" parsley-trigger="change" required
+                                        placeholder="答案1" class="form-control answer" value="{$answer['0']}" style="width:300px;">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="emailAddress"> 答案2 ：</label>
+                            <div>
+                               <input type="text" name="answer[]" parsley-trigger="change" required
+                                        placeholder="答案2" class="form-control answer" value="{$answer['1']}" style="width:300px;">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="emailAddress"> 答案3 ：</label>
+                            <div>
+                               <input type="text" name="answer[]" parsley-trigger="change" required
+                                        placeholder="答案3" class="form-control answer" value="{$answer['2']}" style="width:300px;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group text-right m-b-0">
+                            <button class="btn btn-primary waves-effect waves-light" type="button" onclick="basicSubmit()">
+                               提交
+                            </button>
+                            <button type="reset" class="btn btn-default waves-effect waves-light m-l-5">
+                                取消
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div><!-- end col -->
+
+    </div>
+
+
+
+
+</div>
+<script type="text/javascript">
+    function basicSubmit(){
+        loading('show');
+        var content = 1;
+        var answer = 1;
+        $('.content option:selected').each(function(i) {
+            if($(this).val()==0){
+                loading('hide');
+                var j = i+1;
+                var $toast = toastr['error']('请选择 密保问题'+j+'！');
+                content = 0;
+                return false;
+            }
+        });
+        if(content==0){
+            return false;
+        }
+
+        $('.answer').each(function(i) {
+            if($(this).val()==''){
+                loading('hide');
+                var j = i+1;
+                var $toast = toastr['error']('请填写 密保答案'+j+'！');
+                answer = 0;
+                return false;
+            }
+        });
+
+        if(answer==0){
+            return false;
+        }
+
+        $('#basicFrom').submit();
+    }
+</script>
+{include file="public/footer" /}

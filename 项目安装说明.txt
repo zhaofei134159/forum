@@ -1,0 +1,52 @@
+论文和软件及其安装运行说明统一打包成压缩包
+
+需要软件: wamp环境、Navicat 安装包
+
+1. 安装navicat 和 wamp  
+
+2. 因为wamp 中有mysql，当你安装好wamp时，mysql已安装上。
+   其中 账号默认为root  密码为空  端口为3306   连接地址为:127.0.0.1 或者 localhost
+   使用navicat 链接数据库 新增数据库 数据库名为forum   并导入 数据库文件。
+
+3. 在wamp 中有一个www的目录  这个目录是默认放置 网站 的位置，将项目放入到www目录中，
+   并修改项目中 application/database.php 
+   改为:  
+    // 服务器地址
+    'hostname'        => 'localhost',
+    // 数据库名
+    'database'        => 'forum',
+    // 用户名
+    'username'        => 'root',
+    // 密码
+    'password'        => '',
+    // 端口
+    'hostport'        => '3306',
+
+4.  因为网站要用域名访问   所以还需要修改下wamp的一个配置
+
+  （1）.  路径为：wamp/bin/apache/apache2.4.9/conf/httpd.conf
+       将  Include conf/extra/httpd-vhosts.conf  前面的 井号(#) 删除  
+
+  （2）. 路径为:  wamp/bin/apache/apache2.4.9/conf/extra/httpd-vhosts.conf
+       在这个文件中添加代码：
+	<VirtualHost *:80> 
+             DocumentRoot 项目路径/public
+             ServerName 域名
+             <Directory "项目路径/public"> 
+                Options Indexes FollowSymLinks 
+                AllowOverride all 
+                Order allow,deny 
+                Allow from all 
+             </Directory> 
+        </VirtualHost>
+
+5. 最后一步 需要修改  C:\Windows\System32\drivers\etc  目录下  hosts  文件  使用记事本打开  
+   添加一条记录  
+   127.0.0.1   域名（此处域名为4中添加的）
+
+
+
+上述操作完成之后就可以去浏览器  输入4中填写的域名 然后进行访问了。
+   
+
+  
